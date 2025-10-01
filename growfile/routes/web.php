@@ -17,4 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/growfile', function () {
+    return view('professional_profile.show');
+})->middleware(['auth', 'verified'])->name('growfile');
+
 require __DIR__.'/auth.php';
