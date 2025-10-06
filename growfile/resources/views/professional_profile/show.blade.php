@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="max-w-xl">
                     <x-section>
-                        @include('professional_profile.partials.study-records')
+                        @include('professional_profile.partials.study-records-section')
                         @include('professional_profile.partials.study-record-modal')
                     </x-section>
                 </div>
