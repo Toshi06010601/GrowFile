@@ -1,4 +1,4 @@
-<x-prof-profile-section.layout sectionTitle="Study Records" modalName="edit-study-record">
+<x-profile-section.layout sectionTitle="Study Records" modalName="edit-study-record">
 
     <ul class="flex flex-col max-h-96 pr-5 overflow-y-scroll">
         <li class="flex flex-col p-3 gap-1 border shadow-md rounded-md">
@@ -12,13 +12,13 @@
                 <div class="flex flex-row justify-between">
                     <ul>
                         <li>
-                            <x-prof-profile-section.partials.tag>Figma</x-prof-profile-section.partials.tag>
+                            <x-profile-section.partials.tag>Figma</x-profile-section.partials.tag>
                         </li>
                     </ul>
-                    <x-prof-profile-section.partials.edit-icon modalName="edit-study-record"></x-prof-profile-section.partials.edit-icon>
+                    <x-profile-section.partials.edit-icon modalName="edit-study-record"></x-profile-section.partials.edit-icon>
                 </div>
             </div>
         </li>
     </ul>
 
-</x-prof-profile-section.layout>
+</x-profile-section.layout>

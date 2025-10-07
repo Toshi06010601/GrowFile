@@ -6,8 +6,8 @@
     </h2>
 
     {{-- button to add a new record --}}
-    <x-prof-profile-section.partials.add-icon :modalName="$modalName">
-    </x-prof-profile-section.partials.add-icon>
+    <x-profile-section.partials.add-icon :modalName="$modalName">
+    </x-profile-section.partials.add-icon>
 </header>
 
 <div>

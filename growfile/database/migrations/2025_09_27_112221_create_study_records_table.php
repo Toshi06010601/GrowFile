@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('title');
-            $table->text('content');
-            $table->date('studied_on');
-            $table->integer('duration_minutes');
+            $table->text('description');
+            $table->dateTime('start_datetime');
+            $table->dateTime('end_datetime');
             $table->timestamps();
             $table->softDeletes();
         });
