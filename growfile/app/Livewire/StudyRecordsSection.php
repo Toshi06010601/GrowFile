@@ -9,6 +9,7 @@ class StudyRecordsSection extends Component
 {
     public $userId  = '';
     public $records = [];
+    public ?StudyRecord $studyRecord;
 
     // form fields
     #[Validate('required|string|max:255')]
@@ -34,6 +35,16 @@ class StudyRecordsSection extends Component
         $this->records = StudyRecord::where('user_id', $this->userId)
             ->orderByDesc('start_datetime')
             ->get();
+    }
+
+    public function setStudyRecord(StudyRecord $studyRecord) {
+        $this->studyRecord = $studyRecord;
+        $this->title = $studyRecord->title;
+        $this->description = $studyRecord->description;
+        $this->start_datetime = $studyRecord->start_datetime;
+        $this->end_datetime = $studyRecord->end_datetime;
+
+        $this->dispatch('open-modal', 'edit-study-record');
     }
 
     public function save()

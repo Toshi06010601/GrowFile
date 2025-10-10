@@ -24,7 +24,7 @@
                                 <x-section.partials.tag>Figma</x-section.partials.tag>
                             </li>
                         </ul>
-                        <x-section.partials.edit-icon modalName="edit-study-record" />
+                        <x-section.partials.edit-icon :wireAction="'setStudyRecord(' . $record . ')'" />
                     </div>
                 </div>
             </li>
@@ -60,16 +60,14 @@
             </div>
 
 
-            <x-modal.partials.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime"
-            />
+            <x-modal.partials.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />
             <div>
                 @error('start_datetime')
                     <span>{{ $message }}</span>
                 @enderror
             </div>
 
-            <x-modal.partials.input-datetime label="End DateTime" id="end-datetime" name="end_datetime"
-             />
+            <x-modal.partials.input-datetime label="End DateTime" id="end-datetime" name="end_datetime" />
             <div>
                 @error('end_datetime')
                     <span>{{ $message }}</span>
