@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfessionalProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,8 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/growfile', function () {
-    return view('professional_profile.show');
-})->middleware(['auth', 'verified'])->name('growfile');
+Route::get('/professional_profile', [ProfessionalProfileController::class, 'show']
+)->middleware(['auth', 'verified'])->name('professional_profile.show');
 
 require __DIR__.'/auth.php';

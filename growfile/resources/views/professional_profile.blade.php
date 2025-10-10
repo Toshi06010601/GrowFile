@@ -7,12 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="max-w-xl">
-                    <x-section>
-                        @include('professional_profile.partials.study-records-section')
-                        @include('professional_profile.partials.study-record-modal')
-                    </x-section>
-                </div>
+            <div class="max-w-xl">
+                <livewire:StudyRecordsSection userId={{ $userId }} />
+            </div>
         </div>
     </div>
 </x-app-layout>
