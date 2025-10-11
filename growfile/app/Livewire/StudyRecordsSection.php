@@ -1,28 +1,18 @@
 <?php
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\StudyRecord;
-use Livewire\Attributes\Validate; 
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class StudyRecordsSection extends Component
 {
-    public $userId  = '';
+    /*
+    Public variables and functions for the section area
+    */
+    public $userId = '';
     public $records = [];
     public ?StudyRecord $studyRecord;
-
-    // form fields
-    #[Validate('required|string|max:255')]
-    public $title = '';
-
-    #[Validate('string')]
-    public $description = '';
-
-    #[Validate('required|date')]
-    public $start_datetime = null;
-
-    #[Validate('required|date')]
-    public $end_datetime = null;
 
     public function mount($userId)
     {
@@ -37,14 +27,58 @@ class StudyRecordsSection extends Component
             ->get();
     }
 
-    public function setStudyRecord(StudyRecord $studyRecord) {
-        $this->studyRecord = $studyRecord;
-        $this->title = $studyRecord->title;
-        $this->description = $studyRecord->description;
-        $this->start_datetime = $studyRecord->start_datetime;
-        $this->end_datetime = $studyRecord->end_datetime;
+    /*
+    Public variables and functions for the modal form
+    */
+    #[Validate('required|string|max:255')]
+    public $title = '';
+
+    #[Validate('string')]
+    public $description = '';
+
+    #[Validate('required|date')]
+    public $start_datetime = null;
+
+    #[Validate('required|date')]
+    public $end_datetime = null;
+
+    public function setStudyRecord(StudyRecord $studyRecord)
+    {
+        $this->studyRecord    = $studyRecord;
+        $this->title          = $studyRecord->title;
+        $this->description    = $studyRecord->description;
+        $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
+        $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
 
         $this->dispatch('open-modal', 'edit-study-record');
+    }
+
+    public function update()
+    {
+        $this->authorize('update', $this->studyRecord);
+
+        $validateDate = $this->validate();
+
+        $this->studyRecord->update($validateDate);
+
+        $this->reset(['studyRecord', 'title', 'description', 'start_datetime', 'end_datetime']);
+
+        $this->loadResult();
+
+        $this->dispatch('close-modal', 'edit-study-record');
+    }
+
+    public function delete()
+    {
+        $this->authorize('delete', $this->studyRecord);
+
+        $this->studyRecord->delete();
+
+        $this->reset(['studyRecord', 'title', 'description', 'start_datetime', 'end_datetime']);
+
+        $this->loadResult();
+
+        $this->dispatch('close-modal', 'edit-study-record');
     }
 
     public function save()
@@ -55,9 +89,11 @@ class StudyRecordsSection extends Component
 
         StudyRecord::create($validatedData);
 
-        $this->reset(['title', 'description', 'start_datetime', 'end_datetime']);
+        $this->reset(['studyRecord', 'title', 'description', 'start_datetime', 'end_datetime']);
 
         $this->loadResult();
+
+        $this->dispatch('close-modal', 'edit-study-record');
 
     }
 

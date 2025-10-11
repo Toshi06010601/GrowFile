@@ -7,7 +7,7 @@
             <li wire:key="{{ $record->id }}" class="flex flex-col p-3 gap-1 border shadow-md rounded-md">
                 <div class="flex justify-between">
                     <h2>
-                        {{-- Display today if it's posted today --}}
+                        {{-- Display study date --}}
                         {{ $record->start_datetime->isToday() ? 'Today' : $record->start_datetime->toDateString() }}
                     </h2>
                     <h2>
@@ -37,7 +37,7 @@
         {{-- below are html specifically for learning record modal --}}
         <x-modal.partials.icon-close />
 
-        <form wire:submit="save" class="px-6 pt-14 pb-6">
+        <form wire:submit="{{ $studyRecord ? "update" : "save" }}" class="px-6 pt-14 pb-6">
 
             <x-modal.partials.header-title>
                 Edit study record
@@ -45,36 +45,15 @@
 
             <x-modal.partials.input-text label="Project Name" id="project-name" name="title"
                 placeholder="Project Name" />
-            <div>
-                @error('title')
-                    <span>{{ $message }}</span>
-                @enderror
-            </div>
 
             <x-modal.partials.input-text label="Description" id="description" name="description"
                 placeholder="What have you worked on?" />
-            <div>
-                @error('description')
-                    <span>{{ $message }}</span>
-                @enderror
-            </div>
-
 
             <x-modal.partials.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />
-            <div>
-                @error('start_datetime')
-                    <span>{{ $message }}</span>
-                @enderror
-            </div>
 
             <x-modal.partials.input-datetime label="End DateTime" id="end-datetime" name="end_datetime" />
-            <div>
-                @error('end_datetime')
-                    <span>{{ $message }}</span>
-                @enderror
-            </div>
 
-            <x-modal.partials.submit-button />
+            <x-modal.partials.submit-buttons :name="$studyRecord ? 'update' : 'save'"/>
         </form>
 
     </x-modal>
