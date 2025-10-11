@@ -10,7 +10,7 @@ class StudyRecordsSection extends Component
     /*
     Public variables and functions for the section area
     */
-    public $userId = '';
+    public $userId  = '';
     public $records = [];
     public ?StudyRecord $studyRecord;
 
@@ -31,10 +31,10 @@ class StudyRecordsSection extends Component
     Public variables and functions for the modal form
     */
     #[Validate('required|string|max:255')]
-    public $title = '';
+    public $category = '';
 
     #[Validate('string')]
-    public $description = '';
+    public $activity = '';
 
     #[Validate('required|date')]
     public $start_datetime = null;
@@ -45,8 +45,8 @@ class StudyRecordsSection extends Component
     public function setStudyRecord(StudyRecord $studyRecord)
     {
         $this->studyRecord    = $studyRecord;
-        $this->title          = $studyRecord->title;
-        $this->description    = $studyRecord->description;
+        $this->category       = $studyRecord->category;
+        $this->activity       = $studyRecord->activity;
         $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
         $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
 
@@ -61,7 +61,7 @@ class StudyRecordsSection extends Component
 
         $this->studyRecord->update($validateDate);
 
-        $this->reset(['studyRecord', 'title', 'description', 'start_datetime', 'end_datetime']);
+        $this->reset(['studyRecord', 'category', 'activity', 'start_datetime', 'end_datetime']);
 
         $this->loadResult();
 
@@ -74,7 +74,7 @@ class StudyRecordsSection extends Component
 
         $this->studyRecord->delete();
 
-        $this->reset(['studyRecord', 'title', 'description', 'start_datetime', 'end_datetime']);
+        $this->reset(['studyRecord', 'category', 'activity', 'start_datetime', 'end_datetime']);
 
         $this->loadResult();
 
@@ -89,7 +89,7 @@ class StudyRecordsSection extends Component
 
         StudyRecord::create($validatedData);
 
-        $this->reset(['studyRecord', 'title', 'description', 'start_datetime', 'end_datetime']);
+        $this->reset(['studyRecord', 'category', 'activity', 'start_datetime', 'end_datetime']);
 
         $this->loadResult();
 

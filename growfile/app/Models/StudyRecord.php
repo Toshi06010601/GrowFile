@@ -8,8 +8,8 @@ class StudyRecord extends Model
 {
        protected $fillable = [
         'user_id',
-        'title',
-        'description',
+        'category',
+        'activity',
         'start_datetime',
         'end_datetime'
     ];

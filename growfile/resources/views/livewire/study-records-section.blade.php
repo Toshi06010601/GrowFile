@@ -17,7 +17,7 @@
                 </div>
                 <hr class="h-0.5 border-none bg-gray-500">
                 <div class="flex flex-col gap-1">
-                    <p>{{ $record->title }}</p>
+                    <p><strong>{{ $record->category }}</strong>: {{ $record->activity }}</p>
                     <div class="flex flex-row justify-between">
                         <ul>
                             <li>
@@ -43,10 +43,10 @@
                 Edit study record
             </x-modal.partials.header-title>
 
-            <x-modal.partials.input-text label="Project Name" id="project-name" name="title"
-                placeholder="Project Name" />
+            <x-modal.partials.input-text label="Category" id="project-name" name="category"
+                placeholder="Category or Project Name" />
 
-            <x-modal.partials.input-text label="Description" id="description" name="description"
+            <x-modal.partials.input-text label="Activity" id="activity" name="activity"
                 placeholder="What have you worked on?" />
 
             <x-modal.partials.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />

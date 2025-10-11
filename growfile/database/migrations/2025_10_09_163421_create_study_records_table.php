@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('study_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('title');
-            $table->text('description');
+            $table->string('category');
+            $table->text('activity');
             $table->dateTime('start_datetime');
             $table->dateTime('end_datetime');
             $table->timestamps();
