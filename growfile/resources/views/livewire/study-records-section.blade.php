@@ -1,5 +1,5 @@
 {{-- Study records section --}}
-<x-section.layout sectionTitle="Study Records" modalName="edit-study-record">
+<x-section sectionTitle="Study Records" modalName="edit-study-record">
 
     {{-- each study record below --}}
     <ul class="flex flex-col max-h-96 pr-5 overflow-y-scroll">
@@ -17,45 +17,18 @@
                 </div>
                 <hr class="h-0.5 border-none bg-gray-500">
                 <div class="flex flex-col gap-1">
-                    <p><strong>{{ $record->category }}</strong>: {{ $record->activity }}</p>
+                    <p><strong class="bg-red">{{ $record->category }}</strong>: {{ $record->activity }}</p>
                     <div class="flex flex-row justify-between">
                         <ul>
                             <li>
                                 <x-section.partials.tag>Figma</x-section.partials.tag>
                             </li>
                         </ul>
-                        <x-section.partials.edit-icon :wireAction="'setStudyRecord(' . $record . ')'" />
+                        <x-section.partials.edit-icon  @click="$dispatch('set-study-record', { id: {{ $record->id }} })"/>
                     </div>
                 </div>
             </li>
         @endforeach
     </ul>
 
-    {{-- modal  --}}
-    <x-modal name="edit-study-record" :show="$errors->userDeletion->isNotEmpty()" focusable>
-
-        {{-- below are html specifically for learning record modal --}}
-        <x-modal.partials.icon-close />
-
-        <form wire:submit="{{ $studyRecord ? "update" : "save" }}" class="px-6 pt-14 pb-6">
-
-            <x-modal.partials.header-title>
-                Edit study record
-            </x-modal.partials.header-title>
-
-            <x-modal.partials.input-text label="Category" id="project-name" name="category"
-                placeholder="Category or Project Name" />
-
-            <x-modal.partials.input-text label="Activity" id="activity" name="activity"
-                placeholder="What have you worked on?" />
-
-            <x-modal.partials.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />
-
-            <x-modal.partials.input-datetime label="End DateTime" id="end-datetime" name="end_datetime" />
-
-            <x-modal.partials.submit-buttons :name="$studyRecord ? 'update' : 'save'"/>
-        </form>
-
-    </x-modal>
-
-</x-section.layout>
+</x-section>

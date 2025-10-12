@@ -1,4 +1,4 @@
-@props(['sectionTitle', 'modalName'])
+{{-- @props(['sectionTitle', 'modalName'])
 
 <x-section>
     <header class="flex flex-row justify-between">
@@ -6,11 +6,11 @@
             {{ __($sectionTitle) }}
         </h2>
 
-        {{-- button to add a new record --}}
+       
         <x-section.partials.add-icon :modalName="$modalName" />
     </header>
 
     <div>
         {{ $slot }}
     </div>
-</x-section>
+</x-section> --}}
