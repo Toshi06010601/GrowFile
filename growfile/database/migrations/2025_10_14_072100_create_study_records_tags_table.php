@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('study_records', function (Blueprint $table) {
+        Schema::create('study_records_tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('category');
-            $table->text('activity');
-            $table->dateTime('start_datetime');
-            $table->dateTime('end_datetime');
+            $table->foreignId('study_record_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
+
+            $table->unique(['study_record_id', 'tag_id']);
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('study_records');
+        Schema::dropIfExists('study_records_tags');
     }
 };

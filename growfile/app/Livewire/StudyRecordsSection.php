@@ -2,15 +2,12 @@
 namespace App\Livewire;
 
 use App\Models\StudyRecord;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 class StudyRecordsSection extends Component
 {
-    /*
-    Public variables for the section area
-    */
     public $records = [];
 
     /*
@@ -21,10 +18,11 @@ class StudyRecordsSection extends Component
         $this->loadResult();
     }
 
-    #[On('load-study-records')] 
+    #[On('load-study-records')]
     public function loadResult()
     {
-        $this->records = StudyRecord::where('user_id', Auth::id())
+        $this->records = StudyRecord::with('tags')
+            ->where('user_id', Auth::id())
             ->orderByDesc('start_datetime')
             ->get();
     }
