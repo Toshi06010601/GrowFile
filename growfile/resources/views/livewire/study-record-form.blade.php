@@ -15,6 +15,9 @@
         <x-modal.partials.input-text label="Activity" id="activity" name="activity"
             placeholder="What have you worked on?" />
 
+        <x-modal.partials.input-text label="Tag" id="tag" name="tag"
+            placeholder="Search for tag" />
+
         <x-modal.partials.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />
 
         <x-modal.partials.input-datetime label="End DateTime" id="end-datetime" name="end_datetime" />
