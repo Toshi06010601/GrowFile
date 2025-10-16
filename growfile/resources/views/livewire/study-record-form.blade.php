@@ -15,8 +15,7 @@
         <x-modal.partials.input-text label="Activity" id="activity" name="activity"
             placeholder="What have you worked on?" />
 
-        <x-modal.partials.input-text label="Tag" id="tag" name="tag"
-            placeholder="Search for tag" />
+         <livewire:TagSelector wire:model="selectedTags"/>
 
         <x-modal.partials.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />
 

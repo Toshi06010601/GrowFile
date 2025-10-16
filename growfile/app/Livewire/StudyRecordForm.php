@@ -1,17 +1,17 @@
 <?php
 namespace App\Livewire;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use App\Models\StudyRecord;
 use App\Livewire\StudyRecordsSection;
-use Livewire\Attributes\Validate;
+use App\Models\StudyRecord;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
-
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class StudyRecordForm extends Component
 {
     public ?StudyRecord $studyRecord;
+    public $selectedTag = [];
 
     /*
     Public variables for the modal form
@@ -36,7 +36,7 @@ class StudyRecordForm extends Component
         $validatedData = $this->validate();
 
         $validatedData['user_id'] = Auth::id();
-        
+
         StudyRecord::create($validatedData);
 
         $this->reset();
@@ -50,12 +50,13 @@ class StudyRecordForm extends Component
     #[On('set-study-record')]
     public function setStudyRecord($id)
     {
-        $studyRecord = StudyRecord::findOrFail($id);
+        $studyRecord          = StudyRecord::findOrFail($id);
         $this->studyRecord    = $studyRecord;
         $this->category       = $studyRecord->category;
         $this->activity       = $studyRecord->activity;
         $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
         $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
+        $this->selectedTags   = $studyRecord->tags()->orderBy('created_at')->get();
 
         $this->dispatch('open-modal', 'edit-study-record');
     }
@@ -83,7 +84,7 @@ class StudyRecordForm extends Component
 
         $this->reset();
 
-       $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
+        $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
 
         $this->dispatch('close-modal', 'edit-study-record');
     }
