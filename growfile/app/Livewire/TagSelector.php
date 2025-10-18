@@ -3,15 +3,16 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Tag;
-use Livewire\Attributes\Modelable;
+// use Livewire\Attributes\Modelable;
+use Livewire\Attributes\On;
 
 class TagSelector extends Component
 {
     public $allTags;
 
+    // #[Modelable]
     public $selectedTagIds = [];
 
-    #[Modelable]
     public $selectedTags = [];
 
     /*
@@ -20,11 +21,18 @@ class TagSelector extends Component
     public function mount()
     {
         $this->loadAllTags();
+        // $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
+        // $this->selectedTagIds = array_column($this->selectedTags, 'id');
+        // $count = count($this->selectedTagIds);
+        // $this->js("console.log('Selected Tag Ids:', $count);");
     }
 
-    // public function booted()
-    // {
-    //     $this->js("console.log('Selected Tag Ids:', $this->selectedTagIds);");
+    // public function boot() {
+        // $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
+        //   $count = count($this->selectedTagIds);
+        //   $this->js("console.log('Selected Tag Ids:', $count);");
+        //     $count = count($this->selectedTags);
+        //   $this->js("console.log('Selected Tags:', $count);");
     // }
 
     public function loadAllTags()
@@ -32,17 +40,24 @@ class TagSelector extends Component
         $this->allTags = Tag::orderBy('name')->get();
     }
 
-    public function updatedSelectedTagIds()
+    #[On('set-selected-tags')]
+    public function setSelectedTags($tagIds = [])
     {
-        $this->selectedTags = $this->allTags->whereIn('id', $selectedTagIds);
+        // $this->js("console.log('Selected Tags:', $key, $value);");
+        // $this->js("console.log('fired');");
+        $this->selectedTagIds = $tagIds;
+        $this->selectedTags = $this->allTags->whereIn('id', $tagIds);
     }
 
-    public function showSelectedTagIds()
+
+    public function updateSelectedTags()
     {
-        $this->js("console.log('Selected Tags:', $this->selectedTags);");
+        // $this->js("console.log('Selected Tags:', $value);");
+        $this->js("console.log('fired');");
+        $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
     }
 
-    public function removeTags(int $id)
+    public function removeTag(int $id)
     {
         $this->selectedTagIds = collect($this->selectedTagIds)
         // 1. REJECT: Filter out (reject) the element whose value strictly matches the $id.
