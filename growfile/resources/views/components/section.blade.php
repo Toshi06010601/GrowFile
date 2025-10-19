@@ -13,8 +13,10 @@
         {{-- button to add a new record --}}
         <x-section.partials.add-icon 
             x-data=""
-            x-on:click="$dispatch('open-modal', '{{ $modalName }}')" 
-        />
+            x-on:click="
+                $dispatch('open-modal', '{{ $modalName }}');
+                $dispatch('set-selected-tags', { id: null });
+        " />
     </header>
 
     <div>

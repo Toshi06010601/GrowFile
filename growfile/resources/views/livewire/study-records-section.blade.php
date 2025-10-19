@@ -24,7 +24,7 @@
                     
                     <div class="flex flex-row justify-between">
                         {{-- Display all tags --}}
-                        <ul class="max-x-96 overflow-x-scroll">
+                        <ul class="max-x-96 overflow-x-scroll flex flex-row justify-start gap-1">
                             @foreach ($record->tags as $tag)
                                 <li wire:key="{{ $tag->id }}">
                                     <x-section.partials.tag>{{ $tag->name }}</x-section.partials.tag>
