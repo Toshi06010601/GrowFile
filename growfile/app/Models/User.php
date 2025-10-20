@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -47,11 +48,26 @@ class User extends Authenticatable
 
     public function studyRecords()
     {
-        return $this->hasMany(StudyRecords::class);
+        return $this->hasMany(StudyRecord::class);
     }
 
     public function tags()
     {
         return $this->hasMany(Tag::class);
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    public function profiles()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function skills (): BelongsToMany 
+    {
+        return $this->belongsToMany(Skill::class, 'user_skills');
     }
 }

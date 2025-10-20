@@ -3,17 +3,18 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Tag;
-// use Livewire\Attributes\Modelable;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class TagSelector extends Component
 {
     public $allTags;
 
-    // #[Modelable]
     public $selectedTagIds = [];
 
     public $selectedTags = [];
+
+    public $studyRecordId;
 
     /*
     Public function for the tag selector
@@ -25,7 +26,7 @@ class TagSelector extends Component
 
     public function loadAllTags()
     {
-        $this->allTags = Tag::orderBy('name')->get();
+        $this->allTags = Tag::where('user_id', auth()->id())->orderBy('name')->get();
     }
 
     #[On('set-selected-tags')]
@@ -39,6 +40,19 @@ class TagSelector extends Component
     {
         $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
     }
+
+    public function addTag($tagName)
+    {
+        if(!$this->selectedTags->contains('name', $tagName)) {
+            $newTag = Tag::create([
+                            'user_id' => Auth::id(),
+                            'name' => $tagName
+                        ]);
+            $this->selectedTagIds[] = $newTag->id;
+            $this->selectedTags[] = $newTag;
+        }
+    }
+
 
     public function render()
     {

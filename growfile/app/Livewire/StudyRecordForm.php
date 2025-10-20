@@ -11,6 +11,7 @@ use Livewire\Component;
 class StudyRecordForm extends Component
 {
     public ?StudyRecord $studyRecord;
+    public $studyRecordId;
 
     /*
     Public variables for the modal form
@@ -55,7 +56,7 @@ class StudyRecordForm extends Component
         $this->activity       = $studyRecord->activity;
         $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
         $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
-        $selectedTagIds       = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id');
+        $selectedTagIds       = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
         $this->dispatch('set-selected-tags', $selectedTagIds);
         // $this->js("console.log('Selected Tags:', $this->selectedTags);");
 
