@@ -48,9 +48,9 @@ class TagSelector extends Component
                             'user_id' => Auth::id(),
                             'name' => $tagName
                         ]);
-            $this->selectedTagIds[] = $newTag->id;
-            $this->selectedTags[] = $newTag;
         }
+
+        return $newTag;
     }
 
 
