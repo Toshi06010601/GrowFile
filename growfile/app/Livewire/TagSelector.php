@@ -36,10 +36,10 @@ class TagSelector extends Component
         $this->selectedTags = $this->allTags->whereIn('id', $tagIds);
     }
 
-    public function updateSelectedTags()
-    {
-        $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
-    }
+    // public function updateSelectedTags()
+    // {
+    //     $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
+    // }
 
     public function addTag($tagName)
     {

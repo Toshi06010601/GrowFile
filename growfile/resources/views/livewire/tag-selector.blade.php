@@ -50,7 +50,8 @@
             <li x-show="tag.show">
                 <label>
                     <input type="checkbox" :value="tag.id" :checked="tag.checked"
-                        x-on:click="updateCheckedStatus(tag.id)">
+                        x-on:click="updateCheckedStatus(tag.id)" 
+                        wire:model.defer="selectedTagIds">
                     <span x-text="tag.name"></span>
                 </label>
             </li>
