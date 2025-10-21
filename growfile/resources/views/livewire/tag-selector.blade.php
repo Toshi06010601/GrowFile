@@ -7,9 +7,13 @@
 
     //set initial checked status
     setCheckedStatus() {
+        this.tags = @js($allTags).map(tag => ({ ...tag, show: true, checked: false }));
+        this.tagNames = @js($allTags).map(tag => tag.name);
+        this.selectedTagIds = @js($selectedTagIds);
         this.tags.forEach(tag => {
             tag.checked = this.selectedTagIds.includes(tag.id);
         });
+        console.log('fired');
     },
 
     //update checked status
@@ -34,13 +38,13 @@
             tag.show = tag.name.toLowerCase().includes(keyword);
         });
     },
-}" x-init="setCheckedStatus()" @click.away="open = false">
+}" x-on:initialize-tags-status.window="setCheckedStatus()" @click.away="open = false">
 
     <x-input-label for="tag" value="Tag" class="text-lg mt-4" />
     <div class="flex flex-row gap-2">
         {{-- Invoke updateShow method on each input --}}
-        <input class="mt-1 block w-auto flex-1 rounded-md" x-model="search" placeholder="Search..."
-            @input="updateShow()" @focus="open = true" @keydown.escape.prevent="open = false">
+        <input class="mt-1 block w-auto flex-1 rounded-md" x-model="search" placeholder="Search..." @input="updateShow()"
+            @focus="open = true" @keydown.escape.prevent="open = false">
         <x-secondary-button x-on:click="addNewTag()" class="mt-1" ::disabled="tagNames.includes(search) && search != ''">Add</x-secondary-button>
     </div>
 
@@ -50,8 +54,7 @@
             <li x-show="tag.show">
                 <label>
                     <input type="checkbox" :value="tag.id" :checked="tag.checked"
-                        x-on:click="updateCheckedStatus(tag.id)" 
-                        wire:model.defer="selectedTagIds">
+                        x-on:click="updateCheckedStatus(tag.id)" wire:model.defer="selectedTagIds">
                     <span x-text="tag.name"></span>
                 </label>
             </li>
@@ -60,8 +63,7 @@
 
     <ul>
         <template x-for="tag in tags" :key="tag.id">
-            <li
-                class="inline-flex justify-around select-none min-w-12 align-middle px-1 py-1 m-1 rounded-md bg-black text-sm text-white cursor-pointer hover:bg-gray-700 transition-all duration-200" 
+            <li class="inline-flex justify-around select-none min-w-12 align-middle px-1 py-1 m-1 rounded-md bg-black text-sm text-white cursor-pointer hover:bg-gray-700 transition-all duration-200"
                 :style="!tag.checked && 'display:none'">
                 <span x-text="tag.name"></span>
                 <label class="font-bold ml-1 text-white bg-none border-none cursor-pointer text-sm leading-none"
@@ -75,7 +77,7 @@
 </div>
 
 
-    {{-- 
+{{-- 
 <div>
     <div x-data="{
         open: false,

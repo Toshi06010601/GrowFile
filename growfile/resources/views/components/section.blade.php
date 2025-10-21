@@ -15,7 +15,7 @@
             x-data=""
             x-on:click="
                 $dispatch('open-modal', '{{ $modalName }}');
-                $dispatch('set-selected-tags', { id: null });
+                $dispatch('initialize-tags-status');
         " />
     </header>
 

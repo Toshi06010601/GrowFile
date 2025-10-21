@@ -5,16 +5,13 @@ use Livewire\Component;
 use App\Models\Tag;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Modelable;
 
 class TagSelector extends Component
 {
     public $allTags;
-
     public $selectedTagIds = [];
-
     public $selectedTags = [];
-
-    public $studyRecordId;
 
     /*
     Public function for the tag selector
