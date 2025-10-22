@@ -36,10 +36,10 @@ class TagSelector extends Component
         $this->selectedTags = $this->allTags->whereIn('id', $tagIds);
     }
 
-    // public function updateSelectedTags()
-    // {
-    //     $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
-    // }
+    public function updateSelectedTags()
+    {
+        $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
+    }
 
     public function addTag($tagName)
     {
@@ -48,9 +48,9 @@ class TagSelector extends Component
                             'user_id' => Auth::id(),
                             'name' => $tagName
                         ]);
+            $this->selectedTagIds[] = $newTag->id;
+            $this->selectedTags[] = $newTag;
         }
-
-        return $newTag;
     }
 
 
@@ -59,3 +59,4 @@ class TagSelector extends Component
         return view('livewire.tag-selector');
     }
 }
+
