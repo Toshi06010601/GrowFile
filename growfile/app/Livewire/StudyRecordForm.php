@@ -6,12 +6,16 @@ use App\Models\StudyRecord;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
+use Livewire\Attributes\Modelable;
 use Livewire\Component;
 
 class StudyRecordForm extends Component
 {
     public ?StudyRecord $studyRecord;
     public $studyRecordId;
+
+    #[Modelable]
+    public $selectedTagIds = [];
 
     /*
     Public variables for the modal form
@@ -39,6 +43,8 @@ class StudyRecordForm extends Component
 
         StudyRecord::create($validatedData);
 
+        $this->studyRecord->tags()->sync($this->selectedTagIds);
+
         $this->reset();
 
         $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
@@ -56,9 +62,8 @@ class StudyRecordForm extends Component
         $this->activity       = $studyRecord->activity;
         $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
         $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
-        $selectedTagIds       = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
-        $this->dispatch('set-selected-tags', $selectedTagIds);
-        // $this->js("console.log('Selected Tags:', $this->selectedTags);");
+        $this->selectedTagIds = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
+        $this->dispatch('set-selected-tags', $this->selectedTagIds);
 
         $this->dispatch('open-modal', 'edit-study-record');
     }
@@ -70,6 +75,8 @@ class StudyRecordForm extends Component
         $validateDate = $this->validate();
 
         $this->studyRecord->update($validateDate);
+
+        $this->studyRecord->tags()->sync($this->selectedTagIds);
 
         $this->reset();
 
