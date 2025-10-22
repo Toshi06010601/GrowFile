@@ -10,6 +10,7 @@ use Livewire\Attributes\Modelable;
 class TagSelector extends Component
 {
     public $allTags;
+    #[Modelable]
     public $selectedTagIds = [];
     public $selectedTags = [];
 
@@ -29,6 +30,7 @@ class TagSelector extends Component
     #[On('set-selected-tags')]
     public function setSelectedTags($tagIds = [])
     {
+        $this->loadAllTags();
         $this->selectedTagIds = $tagIds;
         $this->selectedTags = $this->allTags->whereIn('id', $tagIds);
     }
@@ -53,6 +55,10 @@ class TagSelector extends Component
 
     public function render()
     {
-        return view('livewire.tag-selector');
+        return view('livewire.tag-selector')->with([
+            'selectedTagIds' => $this->selectedTagIds,
+            'allTags' => $this->allTags
+        ]);
+;
     }
 }

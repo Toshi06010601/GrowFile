@@ -11,7 +11,7 @@ use Livewire\Component;
 class StudyRecordForm extends Component
 {
     public ?StudyRecord $studyRecord;
-    // public $selectedTagIds = [];
+    public $selectedTagIds = [];
 
     /*
     Public variables for the modal form
@@ -39,6 +39,8 @@ class StudyRecordForm extends Component
 
         StudyRecord::create($validatedData);
 
+        $this->studyRecord->tags()->sync($this->selectedTagIds);
+
         $this->reset();
 
         $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
@@ -50,17 +52,22 @@ class StudyRecordForm extends Component
     #[On('set-study-record')]
     public function setStudyRecord($id)
     {
-        $studyRecord          = StudyRecord::findOrFail($id);
-        $this->studyRecord    = $studyRecord;
-        $this->category       = $studyRecord->category;
-        $this->activity       = $studyRecord->activity;
-        $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
-        $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
+        if($id) {
+            $studyRecord          = StudyRecord::findOrFail($id);
+            $this->studyRecord    = $studyRecord;
+            $this->category       = $studyRecord->category;
+            $this->activity       = $studyRecord->activity;
+            $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
+            $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
 
-        //Get the tagIds and share it with TagSelector component
-        $tagIds       = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
-        $this->dispatch('set-selected-tags', $tagIds);
+            //Get the tagIds and share it with TagSelector component
+            $this->selectedTagIds = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
+            $this->dispatch('set-selected-tags', $this->selectedTagIds);
+        } else {
+            $this->reset();
+        }
 
+        $this->resetValidation();
         $this->dispatch('initialize-tags-status');
         $this->dispatch('open-modal', 'edit-study-record');
     }
@@ -72,6 +79,8 @@ class StudyRecordForm extends Component
         $validateDate = $this->validate();
 
         $this->studyRecord->update($validateDate);
+
+        $this->studyRecord->tags()->sync($this->selectedTagIds);
 
         $this->reset();
 

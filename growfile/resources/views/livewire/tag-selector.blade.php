@@ -13,7 +13,7 @@
         this.tags.forEach(tag => {
             tag.checked = this.selectedTagIds.includes(tag.id);
         });
-        console.log('fired');
+        console.log(this.tagNames);
     },
 
     //update checked status

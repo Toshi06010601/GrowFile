@@ -15,7 +15,7 @@
             x-data=""
             x-on:click="
                 $dispatch('open-modal', '{{ $modalName }}');
-                $dispatch('initialize-tags-status');
+                $dispatch('set-study-record', { id: null });
         " />
     </header>
 
