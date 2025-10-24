@@ -52,6 +52,14 @@
         items: @js($allTags).map(tag => ({ ...tag, show: true })),
         tags: @js($allTags).map(tag => tag.name),
     
+        //create new Tag
+        async addNewTag() {
+            const newTag = await $wire.addTag(this.search);
+            this.tags.push({ ...newTag, show: true, checked: true });
+            this.search = '';
+            this.updateShow();
+        },
+    
         //update x-show to hide the items which don't match the search input
         updateShow() {
             const keyword = this.search.toLowerCase();
@@ -59,16 +67,14 @@
                 item.show = item.name.toLowerCase().includes(keyword);
             });
         },
-    }"
-    x-on:add-new-tag.window = "this.items.push({{ $newTag }})"
-    @click.away="open = false">
+    }" @click.away="open = false">
 
         <x-input-label for="tag" value="Tag" class="text-lg mt-4" />
         <div class="flex flex-row gap-2">
             {{-- Invoke updateShow method on each input --}}
             <input class="mt-1 block w-auto flex-1 rounded-md" x-model="search" placeholder="Search..."
                 @input="updateShow()" @focus="open = true" @keydown.escape.prevent="open = false">
-            <x-secondary-button wire:click="addTag(search)" class="mt-1" ::disabled="tags.includes(search) ? 'true' : 'false'">Add</x-secondary-button>
+            <x-secondary-button x-on:click="addNewTag()" class="mt-1" ::disabled="tags.includes(search)">Add</x-secondary-button>
         </div>
 
         <ul x-show="open" class="max-h-20 w-full overflow-y-auto">
@@ -76,10 +82,10 @@
                 {{-- Show items matching the search input --}}
                 <li x-show="item.show">
                     <label>
-                        
-                          {{-- Add the item into selectedTagIds array when ticked, remove it when unticked. 
+
+                        {{-- Add the item into selectedTagIds array when ticked, remove it when unticked. 
                           Update selectedTags array whenever ticked/unticked to keep selectedTags array in sync with selectedTagIds --}}
-                       
+
                         <input type="checkbox" :value="item.id" wire:model="selectedTagIds"
                             wire:click="updateSelectedTags">
                         <span x-text="item.name"></span>
@@ -95,7 +101,7 @@
             <span>{{ $tag->name }}</span>
             {{-- Untick checkbox for the tag to be removed from selectedTagIds array, 
                   then update selectedTags array to keep it in sync with selectedTagIds --}}
-                 
+
             <label class="font-bold ml-1 text-white bg-none border-none cursor-pointer text-sm leading-none"
                 wire:click="updateSelectedTags" for="selectedTag{{ $tag->id }}">
                 &times;
