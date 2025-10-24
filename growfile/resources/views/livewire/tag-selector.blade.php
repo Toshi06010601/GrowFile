@@ -55,7 +55,7 @@
         //create new Tag
         async addNewTag() {
             const newTag = await $wire.addTag(this.search);
-            this.tags.push({ ...newTag, show: true, checked: true });
+            this.items.push({ ...newTag, show: true, checked: true });
             this.search = '';
             this.updateShow();
         },

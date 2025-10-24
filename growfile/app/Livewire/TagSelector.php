@@ -50,6 +50,8 @@ class TagSelector extends Component
             $this->selectedTags[] = $newTag;
         }
         $this->loadAllTags();
+
+        return $newTag;
         // $this->js('console.log("test", allTags);');
 
     }
