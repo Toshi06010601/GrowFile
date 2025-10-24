@@ -56,15 +56,21 @@ class StudyRecordForm extends Component
     #[On('set-study-record')]
     public function setStudyRecord($id)
     {
-        $studyRecord          = StudyRecord::findOrFail($id);
-        $this->studyRecord    = $studyRecord;
-        $this->category       = $studyRecord->category;
-        $this->activity       = $studyRecord->activity;
-        $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
-        $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
-        $this->selectedTagIds = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
-        $this->dispatch('set-selected-tags', $this->selectedTagIds);
+        if($id) {
+            $studyRecord          = StudyRecord::findOrFail($id);
+            $this->studyRecord    = $studyRecord;
+            $this->category       = $studyRecord->category;
+            $this->activity       = $studyRecord->activity;
+            $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
+            $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
+            $this->selectedTagIds = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
+            $this->dispatch('set-selected-tags', $this->selectedTagIds);
+        } else {
+            $this->reset();
+            $this->dispatch('set-selected-tags', []);
+        }
 
+        $this->resetValidation();
         $this->dispatch('open-modal', 'edit-study-record');
     }
 

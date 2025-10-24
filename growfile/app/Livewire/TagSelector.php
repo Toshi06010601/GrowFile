@@ -14,8 +14,6 @@ class TagSelector extends Component
 
     public $selectedTags = [];
 
-    public $studyRecordId;
-
     /*
     Public function for the tag selector
     */
@@ -51,12 +49,19 @@ class TagSelector extends Component
             $this->selectedTagIds[] = $newTag->id;
             $this->selectedTags[] = $newTag;
         }
+        $this->loadAllTags();
+        // $this->js('console.log("test", allTags);');
+
     }
 
 
     public function render()
     {
         return view('livewire.tag-selector');
+        //         return view('livewire.tag-selector', [
+        //     'tags' => $this->allTags->toArray(),
+        // ]);
+;
     }
 }
 
