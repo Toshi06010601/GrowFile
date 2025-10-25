@@ -51,13 +51,16 @@
         search: '',
         items: @js($allTags).map(tag => ({ ...tag, show: true })),
         tags: @js($allTags).map(tag => tag.name),
+        selected: @entangle('selectedTagIds'),
     
         //create new Tag
         async addNewTag() {
             const newTag = await $wire.addTag(this.search);
-            this.items.push({ ...newTag, show: true, checked: true });
+            this.items.push({ ...newTag, show: true });
+            this.tags.push(newTag.name);
             this.search = '';
             this.updateShow();
+            console.log(this.items);
         },
     
         //update x-show to hide the items which don't match the search input
@@ -77,31 +80,20 @@
             <x-secondary-button x-on:click="addNewTag()" class="mt-1" ::disabled="tags.includes(search)">Add</x-secondary-button>
         </div>
 
-        <ul x-show="open" class="max-h-20 w-full overflow-y-auto">
-            <template x-for="item in items" :key="item.id">
-                {{-- Show items matching the search input --}}
-                <li x-show="item.show">
-                    <label>
-
-                        {{-- Add the item into selectedTagIds array when ticked, remove it when unticked. 
-                          Update selectedTags array whenever ticked/unticked to keep selectedTags array in sync with selectedTagIds --}}
-
-                        <input type="checkbox" :value="item.id" wire:model="selectedTagIds"
-                            wire:click="updateSelectedTags">
-                        <span x-text="item.name"></span>
-                    </label>
-                </li>
-            </template>
-        </ul>
+        {{-- Show items matching the search input --}}
+        <template x-for="item in items" :key="item.id" x-show="open" class="flex flex-col max-h-20 w-full overflow-y-auto">
+            <label x-show="item.show" class="block">
+                <input type="checkbox" :value="item.id" x-model="selected"
+                    x-on:click="$wire.updateSelectedTags">
+                <span x-text="item.name"></span>
+            </label>
+        </template>
     </div>
 
     @foreach ($selectedTags as $tag)
         <div
             class="inline-flex justify-around select-none min-w-12 align-middle px-1 py-1 m-1 rounded-md bg-black text-sm text-white cursor-pointer hover:bg-gray-700 transition-all duration-200">
             <span>{{ $tag->name }}</span>
-            {{-- Untick checkbox for the tag to be removed from selectedTagIds array, 
-                  then update selectedTags array to keep it in sync with selectedTagIds --}}
-
             <label class="font-bold ml-1 text-white bg-none border-none cursor-pointer text-sm leading-none"
                 wire:click="updateSelectedTags" for="selectedTag{{ $tag->id }}">
                 &times;
