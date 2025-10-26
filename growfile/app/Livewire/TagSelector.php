@@ -10,8 +10,6 @@ class TagSelector extends Component
 {
     public $allTags;
 
-    public $selectedTagIds = [];
-
     public $selectedTags = [];
 
     /*
@@ -30,29 +28,19 @@ class TagSelector extends Component
     #[On('set-selected-tags')]
     public function setSelectedTags($tagIds = [])
     {
-        $this->selectedTagIds = $tagIds;
-        $this->selectedTags = $this->allTags->whereIn('id', $tagIds);
-    }
-
-    public function updateSelectedTags()
-    {
-        $this->selectedTags = $this->allTags->whereIn('id', $this->selectedTagIds);
+        $this->selectedTags = $tagIds;
     }
 
     public function addTag($tagName)
     {
-        if(!$this->selectedTags->contains('name', $tagName)) {
-            $newTag = Tag::create([
-                            'user_id' => Auth::id(),
-                            'name' => $tagName
-                        ]);
-            $this->selectedTagIds[] = $newTag->id;
-            $this->selectedTags[] = $newTag;
-        }
+        $newTag = Tag::create([
+                        'user_id' => Auth::id(),
+                        'name' => $tagName
+                    ]);
+
         $this->loadAllTags();
 
-        return $newTag;
-        // $this->js('console.log("test", allTags);');
+        $this->dispatch('tag-added', tag: $newTag);
 
     }
 

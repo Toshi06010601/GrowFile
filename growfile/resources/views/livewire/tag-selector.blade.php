@@ -49,48 +49,51 @@
     <div x-data="{
         open: false,
         search: '',
-        items: @js($allTags).map(tag => ({ ...tag, show: true })),
-        tags: @js($allTags).map(tag => tag.name),
-        selected: @entangle('selectedTagIds'),
+        tags: @js($allTags).map(tag => ({ ...tag, show: true })),
+        selected: @entangle('selectedTags'),
     
-        //create new Tag
-        async addNewTag() {
-            const newTag = await $wire.addTag(this.search);
-            this.items.push({ ...newTag, show: true });
-            this.tags.push(newTag.name);
-            this.search = '';
-            this.updateShow();
-            console.log(this.items);
-        },
-    
-        //update x-show to hide the items which don't match the search input
-        updateShow() {
+        //update x-show to hide the tags which don't match the search input
+        updateSuggestion() {
             const keyword = this.search.toLowerCase();
-            this.items.forEach(item => {
-                item.show = item.name.toLowerCase().includes(keyword);
+            this.tags.forEach(tag => {
+                tag.show = tag.name.toLowerCase().includes(keyword);
             });
         },
-    }" @click.away="open = false">
+    }" 
+    x-on:tag-added.window="tags.push({...$event.detail.tag, show:true });console.log(tags);selected.push($event.detail.tag['id']);console.log(selected);"
+    x-on:click.away="open = false">
 
         <x-input-label for="tag" value="Tag" class="text-lg mt-4" />
         <div class="flex flex-row gap-2">
             {{-- Invoke updateShow method on each input --}}
             <input class="mt-1 block w-auto flex-1 rounded-md" x-model="search" placeholder="Search..."
-                @input="updateShow()" @focus="open = true" @keydown.escape.prevent="open = false">
-            <x-secondary-button x-on:click="addNewTag()" class="mt-1" ::disabled="tags.includes(search)">Add</x-secondary-button>
+                x-on:input="updateSuggestion()" x-on:focus="open = true" x-on:keydown.escape.prevent="open = false">
+            <x-secondary-button x-on:click="$wire.addTag(search)" class="mt-1" ::disabled="tags.some(tag => tag.name.toLowerCase() === search.toLowerCase())">Add</x-secondary-button>
         </div>
 
-        {{-- Show items matching the search input --}}
-        <template x-for="item in items" :key="item.id" x-show="open" class="flex flex-col max-h-20 w-full overflow-y-auto">
-            <label x-show="item.show" class="block">
-                <input type="checkbox" :value="item.id" x-model="selected"
-                    x-on:click="$wire.updateSelectedTags">
-                <span x-text="item.name"></span>
+        {{-- Show tags matching the search input --}}
+        <template x-for="tag in tags" :key="tag.id" x-show="open"
+            class="flex flex-col max-h-20 w-full overflow-y-auto">
+            <label x-show="tag.show" class="block">
+                <input type="checkbox" :value="tag.id" x-model="selected">
+                <span x-text="tag.name"></span>
             </label>
+        </template>
+
+         {{-- Show selected tags --}}
+        <template x-for="id in selected" :key="id" class="flex flex-col max-h-20 w-full overflow-y-auto">
+            <div
+                class="inline-flex justify-around select-none min-w-12 align-middle px-1 py-1 m-1 rounded-md bg-black text-sm text-white cursor-pointer hover:bg-gray-700 transition-all duration-200">
+                <span x-text="tags.find(t => t.id == id).name"></span>
+                <button class="font-bold ml-1 text-white bg-none border-none cursor-pointer text-sm leading-none"
+                    x-on:click.prevent="selected = selected.filter(s => s != id)">
+                    &times;
+                </button>
+            </div>
         </template>
     </div>
 
-    @foreach ($selectedTags as $tag)
+    {{-- @foreach ($selectedTags as $tag)
         <div
             class="inline-flex justify-around select-none min-w-12 align-middle px-1 py-1 m-1 rounded-md bg-black text-sm text-white cursor-pointer hover:bg-gray-700 transition-all duration-200">
             <span>{{ $tag->name }}</span>
@@ -101,6 +104,6 @@
             <input type="checkbox" class="hidden" wire:model="selectedTagIds" value={{ $tag->id }}
                 id="selectedTag{{ $tag->id }}">
         </div>
-    @endforeach
+    @endforeach --}}
 
 </div>
