@@ -38,9 +38,9 @@ class TagSelector extends Component
                         'name' => $tagName
                     ]);
 
+        $this->selectedTags[] = $newTag->id;
         $this->loadAllTags();
-
-        $this->dispatch('tag-added', tag: $newTag);
+        return $newTag;
 
     }
 
