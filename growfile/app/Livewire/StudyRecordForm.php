@@ -6,15 +6,12 @@ use App\Models\StudyRecord;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
-use Livewire\Attributes\Modelable;
 use Livewire\Component;
 
 class StudyRecordForm extends Component
 {
     public ?StudyRecord $studyRecord;
     public $studyRecordId;
-
-    #[Modelable]
     public $selectedTags = [];
 
     /*
@@ -35,24 +32,6 @@ class StudyRecordForm extends Component
     /*
     Public functions for the modal form
     */
-    public function save()
-    {
-        $validatedData = $this->validate();
-
-        $validatedData['user_id'] = Auth::id();
-
-        StudyRecord::create($validatedData);
-
-        $this->studyRecord->tags()->sync($this->selectedTags);
-
-        $this->reset();
-
-        $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
-
-        $this->dispatch('close-modal', 'edit-study-record');
-
-    }
-
     #[On('set-study-record')]
     public function setStudyRecord($id)
     {
@@ -64,43 +43,64 @@ class StudyRecordForm extends Component
             $this->start_datetime = $studyRecord->start_datetime->format('Y-m-d\TH:i');
             $this->end_datetime   = $studyRecord->end_datetime->format('Y-m-d\TH:i');
             $this->selectedTags = $studyRecord->tags()->orderBy('created_at')->get()->pluck('id')->toArray();
-            $this->dispatch('set-selected-tags', $this->selectedTags);
         } else {
             $this->reset();
-            $this->dispatch('set-selected-tags', []);
         }
 
         $this->resetValidation();
         $this->dispatch('open-modal', 'edit-study-record');
     }
 
-    public function update()
+    public function save()
     {
-        $this->authorize('update', $this->studyRecord);
+        //Validate and prepare the data
+        $validatedData = $this->validate();
+        $validatedData['user_id'] = Auth::id();
 
-        $validateDate = $this->validate();
-
-        $this->studyRecord->update($validateDate);
-
+        //Create new studyrecord and register associated tags
+        $this->studyRecord = StudyRecord::create($validatedData);
         $this->studyRecord->tags()->sync($this->selectedTags);
 
-        $this->reset();
-
+        //Reflect the updates in Study records section
         $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
 
+        //Clean up the modal form and close the modal
+        $this->reset();
+        $this->dispatch('close-modal', 'edit-study-record');
+
+    }
+
+    public function update()
+    {
+        //Authorize and validate the data
+        $this->authorize('update', $this->studyRecord);
+        $validateDate = $this->validate();
+
+        //Update the studyrecord and register associated tags
+        $this->studyRecord->update($validateDate);
+        $this->studyRecord->tags()->sync($this->selectedTags);
+
+        //Reflect the updates in Study records section
+        $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
+
+        //Clean up the modal form and close the modal
+        $this->reset();
         $this->dispatch('close-modal', 'edit-study-record');
     }
 
     public function delete()
     {
+        //Authorize the data
         $this->authorize('delete', $this->studyRecord);
 
+        //Delete the record
         $this->studyRecord->delete();
 
-        $this->reset();
-
+        //Reflect the updates in Study records section
         $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
 
+        //Clean up the modal form and close the modal
+        $this->reset();
         $this->dispatch('close-modal', 'edit-study-record');
     }
 

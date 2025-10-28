@@ -1,5 +1,19 @@
 {{-- Study records section --}}
-<x-section sectionTitle="Study Records" modalName="edit-study-record">
+<x-section>
+
+    <x-slot name="header">
+        <h2 class="text-2xl font-medium text-gray-900">
+            Study Records
+        </h2>
+
+        {{-- button to add a new record --}}
+        <x-section.partials.add-icon 
+            x-data=""
+            x-on:click="
+                $dispatch('open-modal', 'edit-study-record');
+                $dispatch('set-study-record', { id: null });" 
+        />
+    </x-slot>
 
     {{-- Display study records below --}}
     <ul class="flex flex-col max-h-96 pr-5 overflow-y-scroll">
@@ -21,7 +35,7 @@
                 <div class="flex flex-col gap-1">
                     {{-- Display category and activity --}}
                     <p><strong class="underline">{{ $record->category }}</strong>: {{ $record->activity }}</p>
-                    
+
                     <div class="flex flex-row justify-between">
                         {{-- Display all tags --}}
                         <ul class="max-x-96 overflow-x-scroll flex flex-row justify-start gap-1">
@@ -33,7 +47,7 @@
                         </ul>
                         {{-- Edit icon --}}
                         <x-section.partials.edit-icon
-                            @click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
+                            x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
                     </div>
                 </div>
             </li>
