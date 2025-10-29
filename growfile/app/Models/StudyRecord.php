@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class StudyRecord extends Model
 {
-       protected $fillable = [
+    protected $fillable = [
         'user_id',
         'category',
         'activity',

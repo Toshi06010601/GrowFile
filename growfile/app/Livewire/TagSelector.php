@@ -14,15 +14,14 @@ class TagSelector extends Component
     #[Modelable]
     public $selectedTags = [];
 
-    /*
-    Public function for the tag selector
-    */
     public function mount()
     {
         $this->loadAllTags();
     }
-
-    // Retrieve all the tags created by the users and store id and name into allTags
+    
+    /*
+    Retrieve all the tags created by the users and store id and name into allTags
+    */
     public function loadAllTags()
     {
         $this->allTags = Tag::where('user_id', auth()->id())
@@ -30,8 +29,10 @@ class TagSelector extends Component
                         ->get()
                         ->map(fn($tag) => ['id' => $tag->id, 'name' => $tag->name]);;
     }
-
-    // Create a new tag
+    
+    /*
+    Create a new tag
+    */
     public function addTag($tagName)
     {
         $newTag = Tag::firstOrCreate([
