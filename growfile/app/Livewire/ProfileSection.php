@@ -21,9 +21,7 @@ class ProfileSection extends Component
     #[On('load-profile')]
     public function loadResult()
     {
-        $this->records = StudyRecord::with('tags')
-            ->where('user_id', Auth::id())
-            ->orderByDesc('start_datetime')
+        $this->records = Profile::where('user_id', Auth::id())
             ->get();
     }
 
