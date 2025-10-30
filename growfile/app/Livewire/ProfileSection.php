@@ -4,11 +4,12 @@ namespace App\Livewire;
 use App\Models\Profile;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileSection extends Component
 {
 
-    public $profile = [];
+    public $profile;
 
     /*
     Public function for the section area
@@ -21,8 +22,11 @@ class ProfileSection extends Component
     #[On('load-profile')]
     public function loadResult()
     {
-        $this->records = Profile::where('user_id', Auth::id())
-            ->get();
+        $this->profile = Profile::where('user_id', Auth::id())
+            ->first();
+        if($this->profile->slug === "test_user.co") {
+            $this->js('console.log("profile exists");');
+        }
     }
 
     public function render()

@@ -5,17 +5,13 @@
         </h2>
     </x-slot>
 
-    <div class="py-5 grid grid-cols-3 gap-4 px-4">
-        <div class="col-span-2">
-            <div class="max-w-2xl">
+    <div class="py-5 grid grid-cols-8 gap-4 px-16 max-w-7xl mx-auto">
+        <div class="col-span-5">
                 <livewire:StudyRecordsSection />
                 <livewire:StudyRecordForm />
-            </div>
         </div>
-        <div class="col-span-1">
-            <div class="max-w-xl">
+        <div class="col-span-3">
                 <livewire:ProfileSection />
-            </div>
         </div>
     </div>
 </x-app-layout>
