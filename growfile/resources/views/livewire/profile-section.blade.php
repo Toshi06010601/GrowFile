@@ -1,24 +1,13 @@
-{{-- Profile section --}}
-<section class="space-y-2 p-8 bg-white shadow sm:rounded-lg">
-
+<div class="space-y-2">
+    {{-- Profile section --}}
     <header class="flex flex-row justify-end">
         <x-section.partials.edit-icon class="mr-10" x-data=""
             x-on:click="
-                $dispatch('open-modal', 'edit-profile');
-                $dispatch('set-profile', { id: null });" />
+                    $dispatch('open-modal', 'edit-profile');
+                    $dispatch('set-profile', { id: null });" />
     </header>
 
-    <div x-data="{
-        profile: @js($profile),
-        showProfile() {
-            console.log(this.profile)
-        },
-    
-    }" x-init="showProfile()">
-
-    </div>
-
-    {{-- Display study records below --}}
+    {{-- Display profile details below --}}
     <div class="flex flex-col justify-start">
         <div class="w-28 h-28 rounded-full overflow-hidden mx-auto">
             <img src="{{ $profile->profile_image }}" alt="profile image" class="w-full h-full object-cover">
@@ -30,7 +19,8 @@
             <p class="text-gray-600 leading-none">{{ $profile->headline }}</p>
         </div>
         <div class="mx-auto mt-2">
-            <div class="text-white bg-green-600 rounded-full py-1 px-2 text-center">{{ $profile->job_status }} to work</div>
+            <div class="text-white bg-green-600 rounded-full py-1 px-2 text-center">{{ $profile->job_status }} to
+                work</div>
         </div>
 
         <div class="mx-auto mt-2 flex flex-row gap-1">
@@ -58,5 +48,22 @@
         </div>
     </div>
 
+    {{-- About section --}}
+    <x-side-section>
+        <x-slot name="header">
+            <h2 class="text-xl font-medium text-gray-700">
+                About
+            </h2>
 
-</section>
+            {{-- button to add a new record --}}
+            <x-section.partials.edit-icon x-data=""
+                x-on:click="
+                    $dispatch('open-modal', 'edit-bio');
+                    $dispatch('set-bio', { id: null });" />
+        </x-slot>
+        <div>
+            <p>{{ $shortBio }}</p>
+        </div>
+    </x-side-section>
+
+</div>
