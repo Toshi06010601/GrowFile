@@ -7,7 +7,7 @@
         </h2>
 
         {{-- button to add a new record --}}
-        <x-section.partials.add-icon 
+        <x-section.add-icon 
             x-data=""
             x-on:click="
                 $dispatch('open-modal', 'edit-study-record');
@@ -41,12 +41,12 @@
                         <ul class="max-x-96 overflow-x-scroll flex flex-row justify-start gap-1">
                             @foreach ($record->tags as $tag)
                                 <li wire:key="{{ $tag->id }}">
-                                    <x-section.partials.tag>{{ $tag->name }}</x-section.partials.tag>
+                                    <x-section.tag>{{ $tag->name }}</x-section.tag>
                                 </li>
                             @endforeach
                         </ul>
                         {{-- Edit icon --}}
-                        <x-section.partials.edit-icon
+                        <x-section.edit-icon
                             x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
                     </div>
                 </div>

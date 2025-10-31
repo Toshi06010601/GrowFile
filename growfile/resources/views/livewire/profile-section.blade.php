@@ -1,7 +1,7 @@
 <div class="space-y-2">
     {{-- Profile section --}}
     <header class="flex flex-row justify-end">
-        <x-section.partials.edit-icon class="mr-10" x-data=""
+        <x-section.edit-icon class="mr-10" x-data=""
             x-on:click="
                     $dispatch('open-modal', 'edit-profile');
                     $dispatch('set-profile', { id: null });" />
@@ -54,12 +54,6 @@
             <h2 class="text-xl font-medium text-gray-700">
                 About
             </h2>
-
-            {{-- button to add a new record --}}
-            <x-section.partials.edit-icon x-data=""
-                x-on:click="
-                    $dispatch('open-modal', 'edit-bio');
-                    $dispatch('set-bio', { id: null });" />
         </x-slot>
         <div>
             <p>{{ $shortBio }}</p>
