@@ -35,7 +35,7 @@ class ProfileForm extends Component
     #[Validate('string')]
     public $bio = '';
 
-    #[Validate('string')]
+    #[Validate('in:open_to_work,not_looking,freelance,exploring')]
     public $job_status = '';
 
     #[Validate('boolean')]
@@ -44,10 +44,10 @@ class ProfileForm extends Component
     #[Validate('string|max:100')]
     public $location = '';
 
-    #[Validate('string|max:200')]
+    #[Validate('nullable|url|string|max:200')]
     public $github_link = '';
 
-    #[Validate('string|max:200')]
+    #[Validate('nullable|url|string|max:200')]
     public $linkedin_link = '';
 
     /*
