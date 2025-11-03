@@ -2,7 +2,7 @@
 
 <div>
     <x-input-label :for="$id" :value="$label" class="text-lg mt-4" />
-    <x-textarea-input :id="$id" :name="$name" rows="5" cols="33" class="mt-1 block w-full" :placeholder="$placeholder"
+    <x-textarea-input :id="$id" rows="5" cols="33" class="mt-1 block w-full" :placeholder="$placeholder"
         wire:model="{{ $name }}" />
     <div>
         @error($name)
