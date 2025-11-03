@@ -11,7 +11,7 @@
 
         <div class="w-28 h-28 rounded-full overflow-hidden mx-auto">
             {{-- Check if a new file has been selected --}}
-            @if ($profile_image)
+            @if ($profile_image && Str::startsWith($profile_image->getMimeType(), 'image/'))
                 <img src="{{ $profile_image->temporaryUrl() }}" alt="New profile image preview"
                     class="w-full h-full object-cover">
             @else
@@ -21,6 +21,11 @@
         </div>
 
         <input type="file" wire:model="profile_image">
+        <div>
+            @error('profile_image')
+                <x-input-error :messages="$message" class="mt-2" />
+            @enderror
+        </div>
 
         <x-modal.input-text label="Full Name" id="full-name" name="full_name" placeholder="Your full name" />
 

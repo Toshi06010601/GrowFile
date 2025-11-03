@@ -20,6 +20,10 @@ class Profile extends Model
         'linkedin_link'
     ];
 
+    protected $casts = [
+    'visibility' => 'boolean',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

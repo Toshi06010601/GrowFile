@@ -9,6 +9,9 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\WithFileUploads;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileForm extends Component
 {
@@ -20,8 +23,7 @@ class ProfileForm extends Component
     */
     #[Validate('required|string|max:100')]
     public $full_name = '';
- 
-    #[Validate('image|max:1024')]
+
     public $profile_image;       // Holds the temporary uploaded file object
 
     #[Validate('string|max:255')]
@@ -79,22 +81,36 @@ class ProfileForm extends Component
     {
         //Authorize and validate the data
         $this->authorize('update', $this->profile);
+
+        //Update profile_image_path if new profile image uploaded
+        if ($this->profile_image) {
+            //Store the old profile name
+            $oldFileName =  str_replace('storage/', '', $this->profile_image_path);
+
+            //Validate new image and Update profile_image_path
+            $this->validate(['profile_image' => 'image|max:1024']);
+            $newFileName = (string) Str::uuid() . '.' .  $this->profile_image->getClientOriginalExtension();
+            $this->profile_image_path = "storage/profile_photos/" . $newFileName;
+
+            //Save profile_image to the folder and delete the old image
+            $this->profile_image->storeAs(path: 'profile_photos', name: $newFileName);
+            Storage::disk('public')->delete($oldFileName);
+        }
+
+        //Validate all data and remove profile_image from $validatedData
         $validateData = $this->validate();
+        unset($validateData['profile_image']);
 
-        // $fileName = 'profile_image_' . Auth::id() . '.' . $this->profile_image->getClientOriginalExtension();
-        // $this->profile_image->storeAs(path: 'profile_photos', name: $fileName);
-        // $this->profile_image_path = "storage/profile_photos/" . $fileName;
-        // unset($validateData['profile_image']);
-
-        //Update the profile and register associated tags
+        //Update the profile
         $this->profile->update($validateData);
 
         //Reflect the updates in Profile section
         $this->dispatch('load-profile')->to(ProfileSection::class);
 
-        //Clean up the modal form and close the modal
+        //Clean up the modal form, close the modal and delete the old profile image
         $this->reset();
         $this->dispatch('close-modal', 'edit-profile');
+
     }
 
     public function render()
