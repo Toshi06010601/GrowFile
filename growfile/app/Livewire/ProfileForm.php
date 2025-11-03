@@ -7,19 +7,25 @@ use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
+use Livewire\WithFileUploads;
+use Illuminate\Http\UploadedFile;
 
 class ProfileForm extends Component
 {
+    use WithFileUploads;
     public ?Profile $profile;
 
     /*
     Public variables for the modal form
     */
     #[Validate('required|string|max:100')]
-    public $fullName = '';
+    public $full_name = '';
+ 
+    #[Validate('image|max:1024')]
+    public $profile_image;       // Holds the temporary uploaded file object
 
     #[Validate('string|max:255')]
-    public $profileImage = '';
+    public $profile_image_path = '';   // Holds the URL of the currently saved image
 
     #[Validate('string|max:100')]
     public $headline = '';
@@ -28,7 +34,7 @@ class ProfileForm extends Component
     public $bio = '';
 
     #[Validate('string')]
-    public $jobStatus = '';
+    public $job_status = '';
 
     #[Validate('boolean')]
     public $visibility;
@@ -37,10 +43,10 @@ class ProfileForm extends Component
     public $location = '';
 
     #[Validate('string|max:200')]
-    public $githubLink = '';
+    public $github_link = '';
 
     #[Validate('string|max:200')]
-    public $linkedIn = '';
+    public $linkedin_link = '';
 
     /*
     Public functions for the modal form
@@ -49,16 +55,18 @@ class ProfileForm extends Component
     public function setProfile($id)
     {
         if($id) {
-            $this->profile    = Profile::findOrFail($id);
-            $this->full_name       = $profile->full_name;
-            $this->profile_image       = $profile->profile_image;
-            $this->headline = $profile->headline->format('Y-m-d\TH:i');
-            $this->bio   = $profile->bio;
-            $this->job_status   = $profile->job_status;
-            $this->visibility   = $profile->visibility;
-            $this->location   = $profile->location;
-            $this->github_link   = $profile->github_link;
-            $this->linkedin_link   = $profile->linkedin_link;
+            $this->reset();
+            $profile    = Profile::findOrFail($id);
+            $this->profile        = $profile;
+            $this->full_name      = $profile->full_name;
+            $this->profile_image_path = $profile->profile_image_path;
+            $this->headline       = $profile->headline;
+            $this->bio            = $profile->bio;
+            $this->job_status     = $profile->job_status;
+            $this->visibility     = $profile->visibility;
+            $this->location       = $profile->location;
+            $this->github_link    = $profile->github_link;
+            $this->linkedin_link  = $profile->linkedin_link;
         } else {
             $this->reset();
         }
@@ -71,29 +79,18 @@ class ProfileForm extends Component
     {
         //Authorize and validate the data
         $this->authorize('update', $this->profile);
-        $validateDate = $this->validate();
+        $validateData = $this->validate();
+
+        // $fileName = 'profile_image_' . Auth::id() . '.' . $this->profile_image->getClientOriginalExtension();
+        // $this->profile_image->storeAs(path: 'profile_photos', name: $fileName);
+        // $this->profile_image_path = "storage/profile_photos/" . $fileName;
+        // unset($validateData['profile_image']);
 
         //Update the profile and register associated tags
-        $this->profile->update($validateDate);
+        $this->profile->update($validateData);
 
         //Reflect the updates in Profile section
-        $this->dispatch('load-profile')->to(ProfilesSection::class);
-
-        //Clean up the modal form and close the modal
-        $this->reset();
-        $this->dispatch('close-modal', 'edit-profile');
-    }
-
-    public function delete()
-    {
-        //Authorize the data
-        $this->authorize('delete', $this->profile);
-
-        //Delete the record
-        $this->profile->delete();
-
-        //Reflect the updates in Profile section
-        $this->dispatch('load-profile')->to(ProfilesSection::class);
+        $this->dispatch('load-profile')->to(ProfileSection::class);
 
         //Clean up the modal form and close the modal
         $this->reset();

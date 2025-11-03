@@ -10,7 +10,7 @@ class Profile extends Model
         'user_id',
         'slug',
         'full_name',
-        'profile_image',
+        'profile_image_path',
         'headline',
         'bio',
         'job_status',
