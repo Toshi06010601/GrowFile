@@ -54,7 +54,7 @@
 
         <x-modal.input-textarea label="Description" id="bio" name="bio" placeholder="Describe yourself" />
 
-        <x-modal.submit-buttons name="update" />
+        <x-modal.submit-buttons name="update profile" />
     </form>
 
 </x-modal>
