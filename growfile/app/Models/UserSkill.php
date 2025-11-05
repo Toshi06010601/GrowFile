@@ -8,6 +8,8 @@ class UserSkill extends Model
 {
     protected $fillable = [
         'level',
+        'skill_id',
+        'user_id'
     ];
 
     public function user()
