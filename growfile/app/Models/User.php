@@ -66,8 +66,8 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-    public function skills (): BelongsToMany 
+    public function userSkills ()
     {
-        return $this->belongsToMany(Skill::class, 'user_skills');
+        return $this->hasMany(UserSkill::class, 'user_id');
     }
 }

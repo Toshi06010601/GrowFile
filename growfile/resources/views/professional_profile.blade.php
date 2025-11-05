@@ -13,6 +13,8 @@
         <div class="col-span-3 space-y-2 p-3 bg-white shadow sm:rounded-lg">
             <livewire:ProfileSection />
             <livewire:ProfileForm />
+
+            <livewire:SkillSection />
         </div>
     </div>
 </x-app-layout>

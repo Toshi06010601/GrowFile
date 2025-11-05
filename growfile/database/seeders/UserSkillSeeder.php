@@ -15,8 +15,8 @@ class UserSkillSeeder extends Seeder
     {
         UserSkill::create([
             'user_id' => 1,
-            'skill_id' => 1,
-            'level' => 5,
+            'skill_id' => 2,
+            'level' => 3,
         ]);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Skill extends Model
 {
@@ -12,9 +11,9 @@ class Skill extends Model
         'category'
     ];
 
-    public function users (): BelongsToMany
+    public function userSkills ()
     {
-        return $this->belongsToMany(User::class, 'user_skills');
+        return $this->hasMany(UserSkill::class, 'skill_id');
     }
 
 }
