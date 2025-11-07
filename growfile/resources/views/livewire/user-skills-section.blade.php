@@ -24,12 +24,14 @@
                     @for ($i = 0; $i < $userSkill->level; $i++)
                         <img src="/images/icons/filled-drop.svg" alt="skill level" class="w-3">
                     @endfor
-                    @for ($i = 0; $i < (5 - $userSkill->level); $i++)
+                    @for ($i = 0; $i < 5 - $userSkill->level; $i++)
                         <img src="/images/icons/empty-drop.svg" alt="skill level" class="w-3">
                     @endfor
                 </div>
+                {{-- Edit icon --}}
+                <x-section.edit-icon class="w-5" x-on:click="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
             </li>
         @endforeach
     </ul>
 
-</x-section>
+    </x-section>

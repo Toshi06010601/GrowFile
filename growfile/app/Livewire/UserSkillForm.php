@@ -13,13 +13,6 @@ class UserSkillForm extends Component
     public ?UserSkill $userSkill;
 
     /*
-    Public variables for skill model
-    */
-    // public $name = '';
-
-    // public $category = '';
-
-    /*
     Public variables for user skill model
     */
     #[Validate('required|integer')]    
@@ -39,8 +32,6 @@ class UserSkillForm extends Component
             $this->userSkill    = $userSkill;
             $this->level        = $userSkill->level;
             $this->skill_id     = $userSkill->skill_id;
-            // $this->name         = $userSkill->skill->name;
-            // $this->category     = $userSkill->skill->category;
         } else {
             $this->reset();
         }

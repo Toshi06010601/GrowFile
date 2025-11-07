@@ -28,17 +28,6 @@ class SkillSelector extends Component
         $this->skills = Skill::all();
     }
 
-    // #[On('set-skills')]
-    // public function setSkills($id)
-    // {
-    //     if($id) {
-    //         $this->userSkill    = UserSkill::with('skill')->findOrFail($id);
-    //     } else {
-    //         $this->reset('userSkill');
-    //     }
-    //     $this->resetValidation();
-    // }
-
     public function render()
     {
         return view('livewire.skill-selector');
