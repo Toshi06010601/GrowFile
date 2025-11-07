@@ -9,16 +9,9 @@
             {{ $userSkill ? 'Edit' : 'Add' }} Skill
         </x-modal.header-title>
 
-        <x-modal.input-text label="Category" id="category" name="category"
-            placeholder="Choose Skill Category" />
+        <livewire:SkillSelector wire:model="skill_id" />
 
-        <x-modal.input-text label="Name" id="name" name="name"
-            placeholder="Choose Skill" />
-
-         {{-- <livewire:TagSelector wire:model="selectedTags"/> --}}
-
-        <x-modal.input-text label="Level" id="level" name="level"
-            placeholder="Enter Skill Level" />
+        <x-modal.input-text label="Level" id="level" name="level" placeholder="Enter Skill Level" />
 
         <x-modal.submit-buttons :name="$userSkill ? 'update' : 'save'" />
     </form>

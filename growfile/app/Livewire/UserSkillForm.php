@@ -15,9 +15,9 @@ class UserSkillForm extends Component
     /*
     Public variables for skill model
     */
-    public $name = '';
-    
-    public $category = '';
+    // public $name = '';
+
+    // public $category = '';
 
     /*
     Public variables for user skill model
@@ -39,8 +39,8 @@ class UserSkillForm extends Component
             $this->userSkill    = $userSkill;
             $this->level        = $userSkill->level;
             $this->skill_id     = $userSkill->skill_id;
-            $this->name         = $userSkill->skill->name;
-            $this->category     = $userSkill->skill->category;
+            // $this->name         = $userSkill->skill->name;
+            // $this->category     = $userSkill->skill->category;
         } else {
             $this->reset();
         }
