@@ -38,6 +38,9 @@ class UserSkillForm extends Component
 
         $this->resetValidation();
         $this->dispatch('open-modal', 'edit-user-skill');
+        $this->dispatch('trigger-category-init', [
+            'skillId' => $this->skill_id
+        ]);
     }
 
        public function save()
@@ -50,7 +53,7 @@ class UserSkillForm extends Component
         $this->userSkill = UserSkill::create($validatedData);
 
         //Reflect the updates in User Skill section
-        $this->dispatch('load-user-skills')->to(UserSkillSection::class);
+        $this->dispatch('load-user-skills')->to(UserSkillsSection::class);
 
         //Clean up the modal form and close the modal
         $this->reset();
@@ -71,7 +74,7 @@ class UserSkillForm extends Component
         $this->userSkill->update($validatedData);
 
         //Reflect the updates in User Skill section
-        $this->dispatch('load-user-skills')->to(UserSkillSection::class);
+        $this->dispatch('load-user-skills')->to(UserSkillsSection::class);
 
         //Clean up the modal form and close the modal
         $this->reset();

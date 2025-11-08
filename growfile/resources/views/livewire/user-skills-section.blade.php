@@ -9,8 +9,7 @@
         {{-- button to add a new skill --}}
         <x-section.add-icon x-data=""
             x-on:click="
-                $dispatch('open-modal', 'edit-user-skill');
-                $dispatch('set-skill', { id: null });" />
+                $dispatch('set-user-skill', { id: null });" />
     </x-slot>
 
     {{-- Display User Skills below --}}

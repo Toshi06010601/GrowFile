@@ -1,25 +1,30 @@
 <div x-data="{
     skills: @js($skills),
     id: @entangle('skill_id'),
-    selectedCategory: '',
     distinctCategories: [],
+    selectedCategory: '',
 
     getDistinctCategories() {
         this.distinctCategories = ['Choose category', ...new Set(this.skills.map(skill => skill.category))];
     },
 
-    initializeCategory() {
-        selectedSkill = this.skills.find(skill => skill.id == this.id);
-        this.selectedCategory = selectedSkill ? selectedSkill.category : null;
+    //Set the selected userSkill record's category
+    initializeCategory(skillId) {
+        const selectedSkill = this.skills.find(skill => skill.id == skillId);
+        this.selectedCategory = selectedSkill ? selectedSkill.category : 'Choose category';
     },
 
     //Update skill names to show by currently selected category
     filteredByCategory() {
-        return this.skills.filter(skill => skill.category == this.selectedCategory);
+        const filtered = this.skills.filter(skill => skill.category == this.selectedCategory);
+        return [{id:0, name: 'Choose Skill Name', category: 'Choose category'}, ...filtered];
     },
-}" 
+}"
     x-init="getDistinctCategories"
-    x-effect="initializeCategory"
+    {{-- Set the selected userSkill record's category --}}
+    @trigger-category-init.window="initializeCategory($event.detail[0].skillId)"
+    {{-- Initialize id to 0 whenever category has been changed --}}
+    x-effect="if (selectedCategory !== '') id = 0"
     >
 
     <x-input-label for="category" value="Skill Category" class="text-lg mt-4" />
