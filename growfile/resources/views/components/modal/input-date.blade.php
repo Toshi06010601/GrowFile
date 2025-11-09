@@ -2,7 +2,7 @@
 
 <div>
     <x-input-label :for="$id" :value="$label" class="text-lg" />
-    <x-text-input :id="$id" :name="$name" type="date" class="mt-1" />
+    <x-text-input :id="$id" type="date" class="mt-1" wire:model="{{ $name }}" />
     <div>
         @error($name)
             <x-input-error :messages="$message" class="mt-2" />
