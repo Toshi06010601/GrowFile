@@ -18,6 +18,8 @@
 
             <livewire:UserSkillsSection />
             <livewire:UserSkillForm />
+
+            <livewire:ExperiencesSection />
         </div>
     </div>
 </x-app-layout>

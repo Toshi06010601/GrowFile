@@ -2,7 +2,7 @@
 <x-side-section>
 
     <x-slot name="header">
-        <h2 class="text-2xl font-medium text-gray-900">
+        <h2 class="text-xl font-medium text-gray-700">
             Skills
         </h2>
 

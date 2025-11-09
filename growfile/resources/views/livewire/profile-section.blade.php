@@ -54,8 +54,8 @@
                 About
             </h2>
         </x-slot>
-        <div>
-            <p>{{ $shortBio }}</p>
+        <div class="text-gray-600">
+            <p>{{ Str::limit($profile->bio, 200) }}</p>
         </div>
     </x-side-section>
 

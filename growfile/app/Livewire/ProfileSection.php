@@ -12,7 +12,6 @@ class ProfileSection extends Component
 {
 
     public $profile;
-    public $shortBio;
 
     /*
     Public function for the section area
@@ -27,7 +26,6 @@ class ProfileSection extends Component
     {
         $this->profile = Profile::where('user_id', Auth::id())
             ->first();
-        $this->shortBio = Str::limit($this->profile->bio, 200, '...');
     }
 
     public function render()
