@@ -11,7 +11,13 @@
 
         <livewire:SkillSelector wire:model="skill_id" />
 
-        <x-modal.input-text label="Level" id="level" name="level" placeholder="Enter Skill Level" />
+        <x-modal.selectbox label="Level" id="level" name="level">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </x-modal.selectbox>
 
         <x-modal.submit-buttons :name="$userSkill ? 'update' : 'save'" />
     </form>
