@@ -52,9 +52,7 @@
         <x-modal.input-text label="Linkedin Link" id="linkedin-link" name="linkedin_link"
             placeholder="Your Linkedin link" />
 
-        <x-modal.input-textarea label="Description" id="bio" name="bio" placeholder="Describe yourself" />
-
-        <x-modal.submit-buttons name="update profile" />
+        <x-modal.submit-buttons name="update" :deletable="false" />
     </form>
 
 </x-modal>

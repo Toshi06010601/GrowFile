@@ -32,9 +32,6 @@ class ProfileForm extends Component
     #[Validate('string|max:100')]
     public $headline = '';
 
-    #[Validate('string')]
-    public $bio = '';
-
     #[Validate('in:open_to_work,not_looking,freelance,exploring')]
     public $job_status = '';
 
@@ -63,7 +60,6 @@ class ProfileForm extends Component
             $this->full_name      = $profile->full_name;
             $this->profile_image_path = $profile->profile_image_path;
             $this->headline       = $profile->headline;
-            $this->bio            = $profile->bio;
             $this->job_status     = $profile->job_status;
             $this->visibility     = $profile->visibility;
             $this->location       = $profile->location;

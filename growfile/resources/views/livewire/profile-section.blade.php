@@ -46,17 +46,4 @@
             </figure>
         </div>
     </div>
-
-    {{-- About section --}}
-    <x-side-section>
-        <x-slot name="header">
-            <h2 class="text-xl font-medium text-gray-700">
-                About
-            </h2>
-        </x-slot>
-        <div class="text-gray-600">
-            <p>{{ Str::limit($profile->bio, 200) }}</p>
-        </div>
-    </x-side-section>
-
 </div>

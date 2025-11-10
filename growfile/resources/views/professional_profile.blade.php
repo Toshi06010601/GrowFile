@@ -16,6 +16,9 @@
             <livewire:ProfileSection />
             <livewire:ProfileForm />
 
+            <livewire:BioSection />
+            <livewire:BioForm />
+
             <livewire:UserSkillsSection />
             <livewire:UserSkillForm />
 
