@@ -95,7 +95,6 @@ class ProfileForm extends Component
 
         //Validate all data and remove profile_image from $validatedData
         $validateData = $this->validate();
-        unset($validateData['profile_image']);
 
         //Update the profile
         $this->profile->update($validateData);
