@@ -18,6 +18,7 @@ class ProfileSeeder extends Seeder
         'slug' => 'test_user.com',
         'full_name' => 'Test User',
         'profile_image_path' => 'storage/profile_photos/default.jpg',
+        'background_image_path' => 'storage/background_photos/default.png',
         'headline' => 'RPA developer',
         'bio' => fake()->text(200),
         'job_status' => 'open_to_work',

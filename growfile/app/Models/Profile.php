@@ -11,6 +11,7 @@ class Profile extends Model
         'slug',
         'full_name',
         'profile_image_path',
+        'background_image_path',
         'headline',
         'bio',
         'job_status',

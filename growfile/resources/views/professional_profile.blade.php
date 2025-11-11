@@ -8,6 +8,9 @@
     <div class="py-5 grid grid-cols-8 gap-4 px-16 max-w-7xl mx-auto">
         {{-- Main section --}}
         <div class="col-span-5">
+            <livewire:BackgroundSection />
+            <livewire:BackgroundForm />
+
             <livewire:StudyRecordsSection />
             <livewire:StudyRecordForm />
         </div>
