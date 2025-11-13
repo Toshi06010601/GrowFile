@@ -101,6 +101,7 @@ class ProfileForm extends Component
 
         //Reflect the updates in Profile section
         $this->dispatch('load-profile')->to(ProfileSection::class);
+        $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile_image_path]);
 
         //Clean up the modal form, close the modal and delete the old profile image
         $this->reset();

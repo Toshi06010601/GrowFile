@@ -19,6 +19,7 @@ class ProfileSection extends Component
     public function mount()
     {
         $this->loadResult();
+        $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile->profile_image_path]);
     }
 
     #[On('load-profile')]
