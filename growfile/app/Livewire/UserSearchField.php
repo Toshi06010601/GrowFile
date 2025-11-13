@@ -25,6 +25,8 @@ class UserSearchField extends Component
 
     public function updatedSearch()
     {
+        $filtered = collect();
+
         if($this->search) {
             $filtered = $this->profiles
                         ->filter(function ($profile) {
