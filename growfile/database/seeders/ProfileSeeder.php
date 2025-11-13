@@ -14,14 +14,14 @@ class ProfileSeeder extends Seeder
     public function run(): void
     {
         Profile::create([
-        'user_id' => 1,
-        'slug' => 'test_user.com',
-        'full_name' => 'Test User',
-        'profile_image_path' => 'storage/profile_photos/default.jpg',
+        'user_id' => 3,
+        'slug' => 'minniemouse.com',
+        'full_name' => 'Minnie Mouse',
+        'profile_image_path' => 'storage/profile_photos/default.png',
         'background_image_path' => 'storage/background_photos/default.png',
-        'headline' => 'RPA developer',
+        'headline' => 'Software Engineer',
         'bio' => fake()->text(200),
-        'job_status' => 'open_to_work',
+        'job_status' => 'exploring',
         'visibility' => true,
         'location' => 'London, UK',
         'github_link' => 'test_user.com',
