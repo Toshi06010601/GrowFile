@@ -16,7 +16,7 @@
                     class="w-full h-full object-cover">
             @else
                 {{-- Fallback to the existing profile image URL --}}
-                <img src="{{ $profile_image_path }}" alt="Current profile image" class="w-full h-full object-cover">
+                <img src="/{{ $profile_image_path }}" alt="Current profile image" class="w-full h-full object-cover">
             @endif
         </div>
 

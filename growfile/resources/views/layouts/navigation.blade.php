@@ -49,8 +49,12 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('My Account') }}
                         </x-dropdown-link>
+
+                        {{-- <x-dropdown-link :href="route('professional_profile.edit')">
+                            {{ __('My Profile') }}
+                        </x-dropdown-link> --}}
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

@@ -7,9 +7,12 @@
         </h2>
 
         {{-- button to add a new skill --}}
-        <x-section.add-icon x-data=""
-            x-on:click="
+        @if ($isOwner)
+            <x-section.add-icon x-data=""
+                x-on:click="
                 $dispatch('set-experience', { id: null });" />
+        @endif
+
     </x-slot>
 
     {{-- Display User Skills below --}}
@@ -18,12 +21,14 @@
             <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0">
                 <div class="flex flex-row justify-between">
                     <h3 class="text-black">
-                            {{ $experience->company_name }}
+                        {{ $experience->company_name }}
                     </h3>
 
                     {{-- Edit icon --}}
-                    <x-section.edit-icon class="w-5"
-                        x-on:click="$dispatch('set-experience', { id: {{ $experience->id }} })" />
+                    @if ($isOwner)
+                        <x-section.edit-icon class="w-5"
+                            x-on:click="$dispatch('set-experience', { id: {{ $experience->id }} })" />
+                    @endif
                 </div>
                 <div class="mt-1 text-gray-700">
                     {{ $experience->start_month->format('M Y') }} - {{ $experience->end_month->format('M Y') }}

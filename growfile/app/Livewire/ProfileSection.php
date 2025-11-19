@@ -12,21 +12,30 @@ class ProfileSection extends Component
 {
 
     public $profile;
+    public $profileId;
 
     /*
     Public function for the section area
     */
-    public function mount()
+    public function mount($profileId)
     {
+        $this->profileId = $profileId;
+
         $this->loadResult();
+
+        // For debug
+        // $id = Auth::id();
+        // $this->js("console.log($id);");
+        // $user_id = $this->profile->user_id;
+        // $this->js("console.log($user_id);");
+        
         $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile->profile_image_path]);
     }
 
     #[On('load-profile')]
     public function loadResult()
     {
-        $this->profile = Profile::where('user_id', Auth::id())
-            ->first();
+        $this->profile = Profile::find($this->profileId);
     }
 
     public function render()

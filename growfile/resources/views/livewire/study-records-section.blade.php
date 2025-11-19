@@ -7,12 +7,11 @@
         </h2>
 
         {{-- button to add a new record --}}
-        <x-section.add-icon 
-            x-data=""
-            x-on:click="
-                $dispatch('open-modal', 'edit-study-record');
-                $dispatch('set-study-record', { id: null });" 
-        />
+        @if ($isOwner)
+            <x-section.add-icon x-data=""
+                x-on:click="
+                $dispatch('set-study-record', { id: null });" />
+        @endif
     </x-slot>
 
     {{-- Display study records below --}}
@@ -45,9 +44,11 @@
                                 </li>
                             @endforeach
                         </ul>
-                        {{-- Edit icon --}}
-                        <x-section.edit-icon
-                            x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
+                        @if ($isOwner)
+                            {{-- Edit icon --}}
+                            <x-section.edit-icon
+                                x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
+                        @endif
                     </div>
                 </div>
             </li>

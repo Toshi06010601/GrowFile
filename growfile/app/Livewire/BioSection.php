@@ -11,21 +11,27 @@ use Illuminate\Support\Str;
 class BioSection extends Component
 {
     public $profile;
+    public $profileId;
 
     /*
     Public function for the section area
     */
-    public function mount()
+    public function mount($profileId)
     {
+        $this->profileId = $profileId;
         $this->loadBio();
+            // For debug
+        // $id = Auth::id();
+        // $this->js("console.log($id);");
+        // $user_id = $this->profile->user_id;
+        // $this->js("console.log($user_id);");
     }
 
     #[On('load-bio')]
     public function loadBio()
     {
-        $this->profile = Profile::where('user_id', Auth::id())
-            ->select('id', 'bio')
-            ->first();
+        $this->profile = Profile::select('id', 'user_id', 'bio')
+                        ->find($this->profileId);
     }
 
     public function render()

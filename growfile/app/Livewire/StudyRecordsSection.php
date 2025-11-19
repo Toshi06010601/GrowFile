@@ -9,12 +9,16 @@ use Livewire\Component;
 class StudyRecordsSection extends Component
 {
     public $records = [];
+    public $userId;
+    public $isOwner;
 
     /*
     Public function for the section area
     */
-    public function mount()
+    public function mount($userId)
     {
+        $this->userId = $userId;
+        $this->isOwner = Auth::id() === $this->userId;
         $this->loadResult();
     }
 
@@ -22,7 +26,7 @@ class StudyRecordsSection extends Component
     public function loadResult()
     {
         $this->records = StudyRecord::with('tags')
-            ->where('user_id', Auth::id())
+            ->where('user_id', $this->userId)
             ->orderByDesc('start_datetime')
             ->get();
     }

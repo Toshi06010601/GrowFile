@@ -10,21 +10,22 @@ use Illuminate\Support\Facades\Auth;
 class BackgroundSection extends Component
 {
     public $profile;
+    public $profileId;
 
     /*
     Public function for the section area
     */
-    public function mount()
+    public function mount($profileId)
     {
+        $this->profileId = $profileId;
         $this->loadBackground();
     }
 
     #[On('load-background')]
     public function loadBackground()
     {
-        $this->profile = Profile::where('user_id', Auth::id())
-            ->select('id', 'background_image_path')
-            ->first();
+        $this->profile = Profile::select('id', 'background_image_path', 'user_id')
+                        ->find($this->profileId);
     }
 
     public function render()

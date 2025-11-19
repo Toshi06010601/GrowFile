@@ -24,7 +24,7 @@ class TagSelector extends Component
     */
     public function loadAllTags()
     {
-        $this->allTags = Tag::where('user_id', auth()->id())
+        $this->allTags = Tag::where('user_id', Auth::id())
                         ->orderBy('name')
                         ->get()
                         ->map(fn($tag) => ['id' => $tag->id, 'name' => $tag->name]);;

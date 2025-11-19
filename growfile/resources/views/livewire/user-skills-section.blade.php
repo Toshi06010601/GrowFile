@@ -7,9 +7,11 @@
         </h2>
 
         {{-- button to add a new skill --}}
-        <x-section.add-icon x-data=""
-            x-on:click="
+        @if ($isOwner)
+            <x-section.add-icon x-data=""
+                x-on:click="
                 $dispatch('set-user-skill', { id: null });" />
+        @endif
     </x-slot>
 
     {{-- Display User Skills below --}}
@@ -28,7 +30,10 @@
                     @endfor
                 </div>
                 {{-- Edit icon --}}
-                <x-section.edit-icon class="w-5" x-on:click="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
+                @if ($isOwner)
+                    <x-section.edit-icon class="w-5"
+                        x-on:click="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
+                @endif
             </li>
         @endforeach
     </ul>

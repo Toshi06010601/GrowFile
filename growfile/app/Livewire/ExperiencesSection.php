@@ -12,19 +12,23 @@ class ExperiencesSection extends Component
 {
 
     public $experiences;
+    public $userId;
+    public $isOwner;
 
     /*
     Public function for the section area
     */
-    public function mount()
+    public function mount($userId)
     {
+        $this->userId = $userId;
+        $this->isOwner = Auth::id() === $this->userId;
         $this->loadExperiences();
     }
 
     #[On('load-experiences')]
     public function loadExperiences()
     {
-        $this->experiences = Experience::where('user_id', Auth::id())
+        $this->experiences = Experience::where('user_id', $this->userId)
                             ->get();
     }
 

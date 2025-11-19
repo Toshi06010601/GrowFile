@@ -8,7 +8,7 @@
                 'border border-transparent'">
             @foreach ($suggestions as $suggestion)
                 <li wire:key={{ $suggestion->id }} class="relative first:mt-1  mb-1 pb-1 border-b border-dashed">
-                    <a href={{ $suggestion->slug }} class="flex flex-row justify-start items-center gap-3">
+                    <a href={{ route('profile.search', ['id' => $suggestion->id, 'slug' => $suggestion->slug]) }} class="flex flex-row justify-start items-center gap-3">
                         <div class="ml-1 w-7 h-7 rounded-full overflow-hidden border">
                             <img src="{{ $suggestion->profile_image_path }}" alt="profile image"
                                 class="w-full h-full object-cover">

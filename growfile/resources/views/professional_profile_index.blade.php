@@ -3,7 +3,7 @@
         <h1 class="text-3xl font-medium mb-3">Search Result</h1>
         <ul class="flex flex-row gap-2 flex-wrap">
             @foreach ($profiles as $profile)
-                <li wire:key="{{ $profile->id }}" class="relative w-38 bg-white border-2 border-gray-300 rounded-md">
+                <li wire:key="{{ $profile->id }}" class="relative w-38 min-h-50 bg-white border-2 border-gray-300 rounded-md">
                     <a href="" class="flex flex-col items-center">
                         <div class="w-full h-14 overflow-hidden border border-gray-600">
                             <img src="{{ $profile->background_image_path ? $profile->background_image_path : 'storage/background_photos/default.png' }}"
