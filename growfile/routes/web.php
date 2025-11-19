@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
 
 //Professional Profile Routes
-Route::get('professional_profile', [ProfessionalProfileController::class, 'index']
+Route::get('professional_profile/name={search}', [ProfessionalProfileController::class, 'index']
 )->name('professional_profile.index');
 
 Route::get('professional_profile/create', [ProfessionalProfileController::class, 'create'])

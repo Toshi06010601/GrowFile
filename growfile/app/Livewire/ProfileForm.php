@@ -90,7 +90,9 @@ class ProfileForm extends Component
 
             //Save profile_image to the folder and delete the old image
             $this->profile_image->storeAs(path: 'profile_photos', name: $newFileName);
-            Storage::disk('public')->delete($oldFileName);
+            if($oldFileName !== "storage/profile_photos/default.png") {
+                    Storage::disk('public')->delete($oldFileName);
+            }
         }
 
         //Validate all data and remove profile_image from $validatedData
@@ -101,7 +103,7 @@ class ProfileForm extends Component
 
         //Reflect the updates in Profile section
         $this->dispatch('load-profile')->to(ProfileSection::class);
-        $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile_image_path]);
+        $this->dispatch('set-profile-menu-icon', ['filePath' => "/" . $this->profile_image_path]);
 
         //Clean up the modal form, close the modal and delete the old profile image
         $this->reset();

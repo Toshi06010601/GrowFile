@@ -4,13 +4,13 @@
         <ul class="flex flex-row gap-2 flex-wrap">
             @foreach ($profiles as $profile)
                 <li wire:key="{{ $profile->id }}" class="relative w-38 min-h-50 bg-white border-2 border-gray-300 rounded-md">
-                    <a href="" class="flex flex-col items-center">
+                    <a href="{{ route('professional_profile.show', $profile->slug) }}" class="flex flex-col items-center">
                         <div class="w-full h-14 overflow-hidden border border-gray-600">
-                            <img src="{{ $profile->background_image_path ? $profile->background_image_path : 'storage/background_photos/default.png' }}"
+                            <img src="/{{ $profile->background_image_path ? $profile->background_image_path : 'storage/background_photos/default.png' }}"
                                 alt="background image" class="w-full h-full object-cover">
                         </div>
                         <div class="absolute top-3 z-10 w-20 h-20 rounded-full overflow-hidden border border-gray-300">
-                            <img src="{{ $profile->profile_image_path }}" alt="profile image"
+                            <img src="/{{ $profile->profile_image_path }}" alt="profile image"
                                 class="w-full h-full object-cover">
                         </div>
                         <div class="flex flex-col gap-0 p-1">

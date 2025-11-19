@@ -61,7 +61,9 @@ class BackgroundForm extends Component
 
             //Save background_image to the folder and delete the old image
             $this->background_image->storeAs(path: 'background_photos', name: $newFileName);
-            Storage::disk('public')->delete($oldFileName);
+            if($oldFileName !== "storage/background_photos/default.png") {
+                Storage::disk('public')->delete($oldFileName);
+            }
         }
 
         //Validate all data and remove background_image from $validatedData
