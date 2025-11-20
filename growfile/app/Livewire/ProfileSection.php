@@ -29,7 +29,7 @@ class ProfileSection extends Component
         // $user_id = $this->profile->user_id;
         // $this->js("console.log($user_id);");
         
-        $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile->profile_image_path]);
+        // $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile->profile_image_path]);
     }
 
     #[On('load-profile')]

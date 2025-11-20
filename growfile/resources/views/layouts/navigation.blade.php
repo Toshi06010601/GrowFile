@@ -1,6 +1,6 @@
 <nav x-data="{ 
     open: false,
-    profile_image_path: '',
+    profile_image_path: '/{{ $userProfile->profile_image_path }}',
  }" 
  @set-profile-menu-icon.window="profile_image_path = event.detail[0].filePath;"
  class="bg-white border-b border-gray-100 py-2">
@@ -52,9 +52,9 @@
                             {{ __('My Account') }}
                         </x-dropdown-link>
 
-                        {{-- <x-dropdown-link :href="route('professional_profile.edit')">
+                        <x-dropdown-link :href="route('professional_profile.edit', $userProfile->slug)">
                             {{ __('My Profile') }}
-                        </x-dropdown-link> --}}
+                        </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
