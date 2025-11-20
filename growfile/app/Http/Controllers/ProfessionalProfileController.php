@@ -14,9 +14,9 @@ class ProfessionalProfileController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index($search)
+    public function index(Request $request)
     {
-        $search = strtolower($search);
+        $search = strtolower($request->input('search', ''));
 
         $profiles = Profile::whereRaw('LOWER(full_name) LIKE ?', $search . '%')
                     ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug')

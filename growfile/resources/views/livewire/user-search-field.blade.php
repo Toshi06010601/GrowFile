@@ -19,13 +19,19 @@
                 </li>
             @endforeach
 
-            @unless(empty($suggestions))
+            @if(!empty($suggestions))
                 <li class="relative first:mt-1 mb-1 pb-1 border-b-0 border-dashed">
-                    <a href="{{ route('professional_profile.index', $search) }}" class="flex flex-row justify-start items-center ml-3">
+                    <a href="{{ route('professional_profile.index') }}?search={{ urlencode($search) }}" class="flex flex-row justify-start items-center ml-3">
                         <p class="text-blue-700 text-md">View All Results</p>
                     </a>
                 </li>
-            @endunless
+            @elseif(empty($suggestions) && $search !== "")
+                <li class="relative first:mt-1 mb-1 pb-1 border-b-0 border-dashed">
+                    <a href="{{ route('professional_profile.index') }}" class="flex flex-row justify-start items-center ml-3">
+                        <p class="text-blue-700 text-md">View All Profiles</p>
+                    </a>
+                </li>
+            @endif
 
         </ul>
     </div>
