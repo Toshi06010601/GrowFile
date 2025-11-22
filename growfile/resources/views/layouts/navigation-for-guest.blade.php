@@ -21,8 +21,8 @@
 
             <!-- Login menu -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 sm:gap-2">
-                 <x-primary-button :href="route('login')">Login</x-primary-button>
-                 <x-secondary-button :href="route('register')">Register</x-secondary-button>
+                 <x-secondary-button :href="route('login')">Login</x-secondary-button>
+                 <x-primary-button :href="route('register')">Register</x-primary-button>
             </div>
 
             <!-- Hamburger -->
