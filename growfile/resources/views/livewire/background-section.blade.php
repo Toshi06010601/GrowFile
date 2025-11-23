@@ -5,11 +5,11 @@
             alt="background image" class="w-full h-full object-cover">
 
         @can('update', $profile)
-            <x-section.edit-icon 
-                class="absolute z-10 bottom-1 right-1"
-                x-data=""
-                x-on:click="
+            <div class="absolute bg-white w-8 h-8 rounded-full z-10 bottom-1 right-1 flex justify-center items-center">
+                <x-section.edit-icon x-data=""
+                    x-on:click="
                         $dispatch('set-background', { id: {{ $profile->id }} });" />
+            </div>
         @endcan
     </div>
 </section>
