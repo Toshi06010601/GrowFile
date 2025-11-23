@@ -26,6 +26,9 @@
                 </li>
             @endforeach
         </ul>
+        <div class="mb-4">
+            {{ $profiles->links() }}
+        </div>
     </section>
 
 </x-app-layout>

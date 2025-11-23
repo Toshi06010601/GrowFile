@@ -22,7 +22,7 @@ class ProfessionalProfileController extends Controller
                     ->where('visibility', true)
                     ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug')
                     ->orderBy('full_name')
-                    ->get();
+                    ->paginate(20);
         return view('professional_profile_index', compact('profiles'));
     }
 
