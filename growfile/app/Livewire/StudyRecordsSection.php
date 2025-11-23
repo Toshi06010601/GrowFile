@@ -5,12 +5,16 @@ use App\Models\StudyRecord;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\Computed;
+use Livewire\WithPagination;
 
 class StudyRecordsSection extends Component
 {
-    public $records = [];
+    use WithPagination;
+
     public $userId;
     public $isOwner;
+    public $perPage;
 
     /*
     Public function for the section area
@@ -18,21 +22,28 @@ class StudyRecordsSection extends Component
     public function mount($userId)
     {
         $this->userId = $userId;
+        $this->perPage = 20;
         $this->isOwner = Auth::id() === $this->userId;
-        $this->loadResult();
     }
 
     #[On('load-study-records')]
-    public function loadResult()
+    public function refreshRecords()
     {
-        $this->records = StudyRecord::with('tags')
-            ->where('user_id', $this->userId)
-            ->orderByDesc('start_datetime')
-            ->get();
+        $this->resetPage();
+    }
+
+    public function loadMore()
+    {
+        $this->perPage += 20;
     }
 
     public function render()
     {
-        return view('livewire.study-records-section');
+        return view('livewire.study-records-section', [
+            'records' => StudyRecord::with('tags')
+            ->where('user_id', $this->userId)
+            ->orderByDesc('start_datetime')
+            ->Paginate($this->perPage)
+        ]);
     }
 }
