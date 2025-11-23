@@ -1,5 +1,5 @@
 {{-- modal  --}}
-<x-modal name="edit-profile" :show="$errors->userDeletion->isNotEmpty()" focusable>
+<x-modal name="edit-profile" :show="false" focusable>
 
     <x-modal.icon-close />
 

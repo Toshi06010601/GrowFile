@@ -1,5 +1,5 @@
 {{-- modal  --}}
-<x-modal name="edit-study-record" :show="$errors->userDeletion->isNotEmpty()" focusable>
+<x-modal name="edit-study-record" :show="false" focusable>
 
     <x-modal.icon-close />
 
