@@ -19,6 +19,7 @@ class ProfessionalProfileController extends Controller
         $search = strtolower($request->input('search', ''));
 
         $profiles = Profile::whereRaw('LOWER(full_name) LIKE ?', $search . '%')
+                    ->where('visibility', true)
                     ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug')
                     ->orderBy('full_name')
                     ->get();
@@ -60,7 +61,11 @@ class ProfessionalProfileController extends Controller
 
     public function show(Profile $slug)
     {
-        return view('professional_profile', ['profile' => $slug]);
+        if($slug->visibility) {
+            return view('professional_profile', ['profile' => $slug]);
+        } else {
+            return redirect(route('professional_profile.index'));
+        }
     }
 
     public function edit(Profile $slug)

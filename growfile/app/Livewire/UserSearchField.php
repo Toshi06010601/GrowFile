@@ -20,7 +20,10 @@ class UserSearchField extends Component
 
     public function loadProfiles()
     {
-        $this->profiles = Profile::select('id', 'full_name', 'profile_image_path', 'headline', 'slug')->orderBy('full_name')->get();
+        $this->profiles = Profile::select('id', 'full_name', 'profile_image_path', 'headline', 'slug')
+                            ->where('visibility', true)
+                            ->orderBy('full_name')
+                            ->get();
     }
 
     public function updatedSearch()
