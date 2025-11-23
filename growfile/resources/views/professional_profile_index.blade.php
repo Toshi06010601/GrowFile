@@ -13,7 +13,7 @@
                             <img src="/{{ $profile->profile_image_path }}" alt="profile image"
                                 class="w-full h-full object-cover">
                         </div>
-                        <div class="flex flex-col gap-0 p-1">
+                        <div class="flex flex-col gap-0 items-center p-1">
                             <p class="text-sm text-center mt-9"><strong>{{ $profile->full_name }}</strong></p>
                             <p class="text-sm text-center text-gray-500">{{ $profile->headline }}</p>
                             <p class="text-sm text-center text-gray-500">{{ $profile->location }}</p>
