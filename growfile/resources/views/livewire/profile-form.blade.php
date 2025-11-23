@@ -40,8 +40,8 @@
         </x-modal.selectbox>
 
         <x-modal.input-radio title="Visibility" name="visibility" :options="[
-            ['id' => 'visibility_true', 'label' => 'True', 'value' => true],
-            ['id' => 'visibility_false', 'label' => 'False', 'value' => false],
+            ['id' => 'visibility_true', 'label' => 'True', 'value' => 1],
+            ['id' => 'visibility_false', 'label' => 'False', 'value' => 0],
         ]" />
 
         <x-modal.input-text label="Location" id="location" name="location"
