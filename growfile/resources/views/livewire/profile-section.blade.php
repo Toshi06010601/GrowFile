@@ -30,7 +30,7 @@
 
         <div class="flex flex-row justify-center gap-3 mt-3">
             <figure class="flex flex-col">
-                <a href={{ $profile->github_link }}>
+                <a href={{ $profile->github_link }} target="_blank">
                     <img src={{ asset('images/icons/github.svg') }} alt="location pin" class="w-8 mx-auto">
                     <figcaption class="text-gray-600 leading-none mt-2">
                         Github
@@ -38,7 +38,7 @@
                 </a>
             </figure>
             <figure class="flex flex-col">
-                <a href={{ $profile->linkedin_link }}>
+                <a href={{ $profile->linkedin_link }} target="_blank">
                     <img src={{ asset('images/icons/linkedin.svg') }} alt="location pin" class="w-8 mx-auto">
                     <figcaption class="text-gray-600 leading-none mt-2">
                         Linkedin
