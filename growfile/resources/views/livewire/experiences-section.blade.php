@@ -31,7 +31,7 @@
                     @endif
                 </div>
                 <div class="mt-1 text-gray-700">
-                    {{ $experience->start_month->format('M Y') }} - {{ $experience->end_month->format('M Y') }}
+                    {{ $experience->start_month->format('M Y') }} - {{ $experience->end_month ? $experience->end_month->format('M Y') : "Present" }}
                 </div>
                 <div class="mt-1 text-gray-700">
                     {{ $experience->role }}
