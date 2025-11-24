@@ -16,7 +16,7 @@
 
     {{-- Display User Skills below --}}
     <ul class="flex flex-col max-h-96 overflow-y-scroll">
-        @foreach ($userSkills as $userSkill)
+        @foreach ($userSkills->take($numOfSkills) as $userSkill)
             <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between">
                 <p>
                     {{ $userSkill->skill->name }}
@@ -29,6 +29,7 @@
                         <img src="/images/icons/empty-drop.svg" alt="skill level" class="w-3">
                     @endfor
                 </div>
+
                 {{-- Edit icon --}}
                 @if ($isOwner)
                     <x-section.edit-icon class="w-5"
@@ -38,4 +39,20 @@
         @endforeach
     </ul>
 
+    {{-- Load More Button --}}
+    @if (count($userSkills) > 5)
+        @if ($numOfSkills === 5)
+            <div class="mt-3 flex flex-row justify-center">
+                <button wire:click="$set('numOfSkills', 1000)" class="text-neutral-500 text-md cursor-pointer">
+                    Show All
+                </button>
+            </div>
+        @else
+            <div class="mt-3 flex flex-row justify-center">
+                <button wire:click="$set('numOfSkills', 5)" class="text-neutral-500 text-md cursor-pointer">
+                    Show Less
+                </button>
+            </div>
+        @endif
+    @endif
     </x-section>

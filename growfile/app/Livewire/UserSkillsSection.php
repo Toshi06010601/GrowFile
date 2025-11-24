@@ -12,6 +12,7 @@ class UserSkillsSection extends Component
     public $userSkills;
     public $userId;
     public $isOwner;
+    public $numOfSkills = 5;
 
     /*
     Public function for the section area
