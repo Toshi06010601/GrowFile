@@ -10,6 +10,11 @@
         </x-modal.header-title>
 
         <livewire:SkillSelector wire:model="skill_id" />
+        <div>
+            @error('skill_id')
+                <x-input-error :messages="$message" class="mt-2" />
+            @enderror
+        </div>
 
         <x-modal.selectbox label="Level" id="level" name="level">
             <option value="1">1</option>

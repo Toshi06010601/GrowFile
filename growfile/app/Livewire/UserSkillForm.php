@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 
 class UserSkillForm extends Component
 {
@@ -15,15 +16,13 @@ class UserSkillForm extends Component
     /*
     Public variables for user skill model
     */
-    #[Validate('required|integer')]    
     public $skill_id;
 
-    #[Validate('required|integer')]
-    public $level = 0;
+    public $level = 1;
 
     /*
     Public functions for the modal form
-    */
+    */    
     #[On('set-user-skill')]
     public function setUserSkill($id)
     {
@@ -43,10 +42,24 @@ class UserSkillForm extends Component
         ]);
     }
 
-       public function save()
+    public function save()
     {
+
+        // dd($this->skill_id);
         //Validate the data
-        $validatedData = $this->validate();
+        $validatedData = $this->validate([
+            'skill_id' => [
+                'required',
+                'integer',
+                'min:1',
+                Rule::unique('user_skills', 'skill_id')
+                ->where('user_id', Auth::id())
+            ],
+            'level' => 'required|integer|min:1|max:5',
+        ], [
+            'skill_id.min' => 'Please choose both category and skill.',
+        ]);
+
         $validatedData['user_id'] = Auth::id();
 
         //Create new userskill
@@ -65,7 +78,19 @@ class UserSkillForm extends Component
     {
         //Authorize and validate the data
         $this->authorize('update', $this->userSkill);
-        $validatedData = $this->validate();
+        $validatedData = $this->validate([
+            'skill_id' => [
+                'required',
+                'integer',
+                'min:1',
+                Rule::unique('user_skills', 'skill_id')
+                ->where('user_id', Auth::id())
+                ->ignore($this->userSkill)
+            ],
+            'level' => 'required|integer|min:1|max:5',
+        ], [
+            'skill_id.min' => 'Please choose both category and skill.',
+        ]);
 
         //Add user id
         $validatedData['user_id'] = Auth::id();
