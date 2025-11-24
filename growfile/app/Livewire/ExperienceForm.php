@@ -41,7 +41,7 @@ class ExperienceForm extends Component
             $this->experience    = $experience;
             $this->company_name       = $experience->company_name;
             $this->start_month       = $experience->start_month->format('Y-m-d');
-            $this->end_month = $experience->end_month->format('Y-m-d');
+            $this->end_month = $experience->end_month ? $experience->end_month->format('Y-m-d') : null;
             $this->role   = $experience->role;
             $this->description   = $experience->description;
         } else {
