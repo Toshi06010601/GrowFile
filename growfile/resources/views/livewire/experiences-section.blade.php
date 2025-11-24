@@ -16,7 +16,7 @@
     </x-slot>
 
     {{-- Display User Skills below --}}
-    <ul class="flex flex-col max-h-96 overflow-y-scroll">
+    <ul class="flex flex-col">
         @foreach ($experiences as $experience)
             <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0">
                 <div class="flex flex-row justify-between">
@@ -31,13 +31,19 @@
                     @endif
                 </div>
                 <div class="mt-1 text-gray-700">
-                    {{ $experience->start_month->format('M Y') }} - {{ $experience->end_month ? $experience->end_month->format('M Y') : "Present" }}
+                    {{ $experience->start_month->format('M Y') }} -
+                    {{ $experience->end_month ? $experience->end_month->format('M Y') : 'Present' }}
                 </div>
                 <div class="mt-1 text-gray-700">
                     {{ $experience->role }}
                 </div>
                 <div class="mt-1 text-gray-600">
                     {{ Str::limit($experience->description, 100) }}
+                </div>
+                <div x-data="{ open: true }" class="mt-1 text-gray-600">
+                    <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button @click="open = false">...see
+                            more</button></p>
+                    <p x-show="!open">{{ $experience->description, 100 }} <button @click="open = true">...see less</button></p>
                 </div>
 
             </li>
