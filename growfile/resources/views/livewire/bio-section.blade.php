@@ -12,7 +12,10 @@
                         $dispatch('set-bio', { id: {{ $profile->id }} });" />
         @endcan
     </x-slot>
-    <div class="text-gray-600">
-        <p>{{ Str::limit($profile->bio, 200) }}</p>
+    <div
+        x-data="{ open: true }" 
+        class="text-gray-600">
+        <p x-show="open">{{ Str::limit($profile->bio, 200, '') }} <button @click="open = false">...see more</button></p>
+        <p x-show="!open">{{ $profile->bio }} <button @click="open = true">...see less</button></p>
     </div>
 </x-side-section>
