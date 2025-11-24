@@ -12,10 +12,14 @@
                         $dispatch('set-bio', { id: {{ $profile->id }} });" />
         @endcan
     </x-slot>
-    <div
-        x-data="{ open: true }" 
-        class="text-gray-600">
-        <p x-show="open">{{ Str::limit($profile->bio, 200, '') }} <button @click="open = false">...see more</button></p>
-        <p x-show="!open">{{ $profile->bio }} <button @click="open = true">...see less</button></p>
-    </div>
+    @if (Str::length($profile->bio) > 200)
+        <div
+            x-data="{ open: true }" 
+            class="text-gray-600">
+            <p x-show="open">{{ Str::limit($profile->bio, 200, '') }} <button @click="open = false">...see more</button></p>
+            <p x-show="!open">{{ $profile->bio }} <button @click="open = true">...see less</button></p>
+        </div>
+    @else
+        <p class="text-gray-600">{{ $profile->bio }}</p>
+    @endif
 </x-side-section>

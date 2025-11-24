@@ -37,14 +37,15 @@
                 <div class="mt-1 text-gray-700">
                     {{ $experience->role }}
                 </div>
-                <div class="mt-1 text-gray-600">
-                    {{ Str::limit($experience->description, 100) }}
-                </div>
-                <div x-data="{ open: true }" class="mt-1 text-gray-600">
-                    <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button @click="open = false">...see
-                            more</button></p>
-                    <p x-show="!open">{{ $experience->description, 100 }} <button @click="open = true">...see less</button></p>
-                </div>
+                @if (Str::length($experience->description) > 100)
+                    <div x-data="{ open: true }" class="mt-1 text-gray-600">
+                        <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button @click="open = false">...see
+                                more</button></p>
+                        <p x-show="!open">{{ $experience->description, 100 }} <button @click="open = true">...see less</button></p>
+                    </div>
+                @else
+                    <p class="text-gray-600">{{ $experience->description }}</p>
+                @endif
 
             </li>
         @endforeach
