@@ -44,8 +44,9 @@
                                 </li>
                             @endforeach
                         </ul>
+                        
+                        {{-- Show Edit icon for the owner --}}
                         @if ($isOwner)
-                            {{-- Edit icon --}}
                             <x-section.edit-icon
                                 x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
                         @endif

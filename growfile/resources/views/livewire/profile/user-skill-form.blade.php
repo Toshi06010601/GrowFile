@@ -1,21 +1,27 @@
 {{-- modal  --}}
 <x-modal name="edit-user-skill" :show="false" focusable>
 
+    {{-- Modal close button --}}
     <x-modal.icon-close />
 
+    {{-- Form to update user skill --}}
     <form wire:submit="{{ $userSkill ? 'update' : 'save' }}" class="px-6 pt-14 pb-6">
 
+        {{-- Form title --}}
         <x-modal.header-title>
             {{ $userSkill ? 'Edit' : 'Add' }} Skill
         </x-modal.header-title>
 
+        {{-- Skill selector --}}
         <livewire:Profile.SkillSelector wire:model="skill_id" />
+        {{-- Validation error for skill selector --}}
         <div>
             @error('skill_id')
                 <x-input-error :messages="$message" class="mt-2" />
             @enderror
         </div>
 
+        {{-- Skill level --}}
         <x-modal.selectbox label="Level" id="level" name="level">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -24,6 +30,7 @@
             <option value="5">5</option>
         </x-modal.selectbox>
 
+        {{-- Update/Save button --}}
         <x-modal.submit-buttons :name="$userSkill ? 'update' : 'save'" />
     </form>
 

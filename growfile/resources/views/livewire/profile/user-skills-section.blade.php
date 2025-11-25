@@ -30,7 +30,7 @@
                     @endfor
                 </div>
 
-                {{-- Edit icon --}}
+                {{-- Edit icon for the owner --}}
                 @if ($isOwner)
                     <x-section.edit-icon class="w-5"
                         x-on:click="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
@@ -39,7 +39,7 @@
         @endforeach
     </ul>
 
-    {{-- Load More Button --}}
+    {{-- Show All Button if more than 5 skills --}}
     @if (count($userSkills) > 5)
         @if ($numOfSkills === 5)
             <div class="mt-3 flex flex-row justify-center">

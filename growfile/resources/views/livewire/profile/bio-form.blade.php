@@ -1,8 +1,10 @@
 {{-- modal  --}}
 <x-modal name="edit-bio" :show="false" focusable>
 
+    {{-- modal close button --}}
     <x-modal.icon-close />
 
+    {{-- form to update bio --}}
     <form wire:submit="update" class="px-6 pt-14 pb-6">
 
         <x-modal.header-title>

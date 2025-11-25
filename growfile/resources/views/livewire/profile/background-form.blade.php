@@ -20,7 +20,10 @@
             @endif
         </div>
 
+        {{-- File input field --}}
         <input type="file" wire:model="background_image">
+
+        {{-- Display validation error --}}
         <div>
             @error('background_image')
                 <x-input-error :messages="$message" class="mt-2" />
