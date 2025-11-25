@@ -44,8 +44,6 @@ class UserSkillForm extends Component
 
     public function save()
     {
-
-        // dd($this->skill_id);
         //Validate the data
         $validatedData = $this->validate([
             'skill_id' => [
@@ -58,6 +56,7 @@ class UserSkillForm extends Component
             'level' => 'required|integer|min:1|max:5',
         ], [
             'skill_id.min' => 'Please choose both category and skill.',
+            'skill_id.unique' => 'You have existing record for this skill.',
         ]);
 
         $validatedData['user_id'] = Auth::id();
@@ -90,6 +89,7 @@ class UserSkillForm extends Component
             'level' => 'required|integer|min:1|max:5',
         ], [
             'skill_id.min' => 'Please choose both category and skill.',
+            'skill_id.unique' => 'You have existing record for this skill.',
         ]);
 
         //Add user id
