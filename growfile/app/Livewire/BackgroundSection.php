@@ -30,6 +30,6 @@ class BackgroundSection extends Component
 
     public function render()
     {
-        return view('livewire.background-section');
+        return view('livewire.profile.background-section');
     }
 }

@@ -105,6 +105,6 @@ class ExperienceForm extends Component
 
     public function render()
     {
-        return view('livewire.experience-form');
+        return view('livewire.profile.experience-form');
     }
 }

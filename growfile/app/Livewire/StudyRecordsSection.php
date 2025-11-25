@@ -39,7 +39,7 @@ class StudyRecordsSection extends Component
 
     public function render()
     {
-        return view('livewire.study-records-section', [
+        return view('livewire.profile.study-records-section', [
             'records' => StudyRecord::with('tags')
             ->where('user_id', $this->userId)
             ->orderByDesc('start_datetime')

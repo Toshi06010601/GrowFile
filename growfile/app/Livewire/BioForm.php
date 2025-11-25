@@ -60,6 +60,6 @@ class BioForm extends Component
 
     public function render()
     {
-        return view('livewire.bio-form');
+        return view('livewire.profile.bio-form');
     }
 }

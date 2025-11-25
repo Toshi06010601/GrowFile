@@ -124,6 +124,6 @@ class UserSkillForm extends Component
 
     public function render()
     {
-        return view('livewire.user-skill-form');
+        return view('livewire.profile.user-skill-form');
     }
 }

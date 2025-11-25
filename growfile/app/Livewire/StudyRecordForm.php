@@ -106,6 +106,6 @@ class StudyRecordForm extends Component
 
     public function render()
     {
-        return view('livewire.study-record-form');
+        return view('livewire.profile.study-record-form');
     }
 }

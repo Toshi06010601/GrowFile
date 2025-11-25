@@ -34,6 +34,6 @@ class ExperiencesSection extends Component
 
     public function render()
     {
-        return view('livewire.experiences-section');
+        return view('livewire.profile.experiences-section');
     }
 }

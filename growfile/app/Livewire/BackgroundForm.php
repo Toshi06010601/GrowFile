@@ -83,6 +83,6 @@ class BackgroundForm extends Component
 
     public function render()
     {
-        return view('livewire.background-form');
+        return view('livewire.profile.background-form');
     }
 }

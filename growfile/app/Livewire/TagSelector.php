@@ -52,7 +52,7 @@ class TagSelector extends Component
 
     public function render()
     {
-        return view('livewire.tag-selector');
+        return view('livewire.profile.tag-selector');
 ;
     }
 }

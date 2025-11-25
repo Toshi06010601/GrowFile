@@ -30,6 +30,6 @@ class SkillSelector extends Component
 
     public function render()
     {
-        return view('livewire.skill-selector');
+        return view('livewire.profile.skill-selector');
     }
 }

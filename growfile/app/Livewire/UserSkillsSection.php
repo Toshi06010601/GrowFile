@@ -34,6 +34,6 @@ class UserSkillsSection extends Component
 
     public function render()
     {
-        return view('livewire.user-skills-section');
+        return view('livewire.profile.user-skills-section');
     }
 }
