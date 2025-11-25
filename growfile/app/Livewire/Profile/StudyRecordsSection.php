@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire;
+namespace App\Livewire\Profile;
 
 use App\Models\StudyRecord;
 use Illuminate\Support\Facades\Auth;

@@ -17,7 +17,7 @@
 
                 <!-- Search Field -->
                 <div class="flex flex-col justify-center">
-                    <livewire:UserSearchField />
+                    <livewire:Navigation.UserSearchField />
                 </div>
             </div>
 

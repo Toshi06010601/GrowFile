@@ -13,7 +13,7 @@
                     </a>
                 </div>
 
-                <!-- Search Field -->
+                <!-- Search Field -->›
                 <div class="flex flex-col justify-center">
                     <livewire:UserSearchField />
                 </div>

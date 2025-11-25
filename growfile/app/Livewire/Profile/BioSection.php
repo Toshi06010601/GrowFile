@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Profile;
 
 use App\Models\Profile;
 use Livewire\Component;
@@ -20,11 +20,6 @@ class BioSection extends Component
     {
         $this->profileId = $profileId;
         $this->loadBio();
-            // For debug
-        // $id = Auth::id();
-        // $this->js("console.log($id);");
-        // $user_id = $this->profile->user_id;
-        // $this->js("console.log($user_id);");
     }
 
     #[On('load-bio')]

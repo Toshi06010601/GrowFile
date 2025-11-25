@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire;
+namespace App\Livewire\Profile;
 
 use Livewire\Component;
 use App\Models\Tag;

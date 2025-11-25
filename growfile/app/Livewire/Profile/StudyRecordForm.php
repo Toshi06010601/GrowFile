@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire;
+namespace App\Livewire\Profile;
 
 use App\Livewire\StudyRecordsSection;
 use App\Models\StudyRecord;

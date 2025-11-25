@@ -2,31 +2,31 @@
     <div class="py-5 grid grid-cols-8 gap-4 px-16 max-w-7xl mx-auto">
         {{-- Main section --}}
         <div class="col-span-5">
-            <livewire:BackgroundSection :profileId="$profile->id" />
+            <livewire:Profile.BackgroundSection :profileId="$profile->id" />
 
-            <livewire:StudyRecordsSection :userId="$profile->user_id" />
+            <livewire:Profile.StudyRecordsSection :userId="$profile->user_id" />
 
             @can('update', $profile)
-                <livewire:BackgroundForm />
-                <livewire:StudyRecordForm />
+                <livewire:Profile.BackgroundForm />
+                <livewire:Profile.StudyRecordForm />
             @endcan
         </div>
         {{-- Side bar --}}
         <div class="col-span-3 space-y-2 p-3 bg-white shadow sm:rounded-lg">
 
-            <livewire:ProfileSection :profileId="$profile->id" />
+            <livewire:Profile.ProfileSection :profileId="$profile->id" />
 
-            <livewire:BioSection :profileId="$profile->id" />
+            <livewire:Profile.BioSection :profileId="$profile->id" />
 
-            <livewire:UserSkillsSection :userId="$profile->user_id" />
+            <livewire:Profile.UserSkillsSection :userId="$profile->user_id" />
 
-            <livewire:ExperiencesSection :userId="$profile->user_id" />
+            <livewire:Profile.ExperiencesSection :userId="$profile->user_id" />
 
             @can('update', $profile)
-                <livewire:ProfileForm />
-                <livewire:BioForm />
-                <livewire:UserSkillForm />
-                <livewire:ExperienceForm />
+                <livewire:Profile.ProfileForm />
+                <livewire:Profile.BioForm />
+                <livewire:Profile.UserSkillForm />
+                <livewire:Profile.ExperienceForm />
             @endcan
 
         </div>
