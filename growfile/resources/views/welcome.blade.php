@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 mx-56">
+    <div class="py-12 mx-56 font-garamond">
         <section class="mt-8 max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-row gap-10">
             <div class="flex-1 flex flex-col justify-around">
                 <h2 class="text-4xl text-white font-semibold text-left">Grow your profile<br><span class="ml-20"></span>at every step your learn
