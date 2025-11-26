@@ -1,22 +1,20 @@
 <nav x-data="{ 
     open: false,
-    profile_image_path: '/{{ $userProfile->profile_image_path }}',
- }" 
- @set-profile-menu-icon.window="profile_image_path = event.detail[0].filePath;"
+ }"
  class="bg-white border-b border-gray-100 py-2">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex gap-8">
+            <div class="w-full flex gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('professional_profile.index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                     <a href="{{ route('professional_profile.index') }}">
+                        <x-application-logo class="block h-12 w-auto" />
                     </a>
                 </div>
 
                 <!-- Search Field -->
-                <div class="flex flex-col justify-center">
+                <div class="flex flex-row items-center flex-1">
                     <livewire:Navigation.UserSearchField />
                 </div>
             </div>
