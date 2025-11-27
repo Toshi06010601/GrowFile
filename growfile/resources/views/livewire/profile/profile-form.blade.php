@@ -25,7 +25,7 @@
             </div>
     
             {{-- profile image field --}}
-            <input type="file" wire:model="profile_image">
+            <input type="file" class="w-full" wire:model="profile_image">
     
             {{-- Show validation error --}}
             <div>

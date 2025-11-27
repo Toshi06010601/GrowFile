@@ -1,7 +1,7 @@
 <?php
 namespace App\Livewire\Profile;
 
-use App\Livewire\StudyRecordsSection;
+use App\Livewire\Profile\StudyRecordsSection;
 use App\Models\StudyRecord;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;

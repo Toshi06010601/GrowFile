@@ -3,7 +3,7 @@
 
     {{-- Header --}}
     <x-slot name="header" class="flex flex-row justify-between">
-        <h2 class="text-xl font-medium text-gray-700">
+        <h2 class="text-lg sm:text-xl font-medium text-gray-700">
             About
         </h2>
         
@@ -14,18 +14,18 @@
                 x-on:click="
                         $dispatch('set-bio', { id: {{ $profile->id }} });" />
         @endcan
-
     </x-slot>
 
     {{-- Bio (Shorten to 200 if longer) --}}
-    @if (Str::length($profile->bio) > 200)
-        <div
-            x-data="{ open: true }" 
-            class="text-gray-600">
-            <p x-show="open">{{ Str::limit($profile->bio, 200, '') }} <button @click="open = false">...see more</button></p>
-            <p x-show="!open">{{ $profile->bio }} <button @click="open = true">...see less</button></p>
-        </div>
-    @else
-        <p class="text-gray-600">{{ $profile->bio }}</p>
-    @endif
+    <div class="text-gray-600 text-md sm:text-lg">
+        @if (Str::length($profile->bio) > 200)
+            <div
+                x-data="{ open: true }">
+                <p x-show="open">{{ Str::limit($profile->bio, 200, 'aaa') }} <button @click="open = false">...see more</button></p>
+                <p x-show="!open">{{ $profile->bio }} <button @click="open = true">...see less</button></p>
+            </div>
+        @else
+            <p>{{ $profile->bio }}</p>
+        @endif
+    </div>
 </x-side-section>

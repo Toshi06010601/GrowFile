@@ -2,7 +2,7 @@
 <x-section>
 
     <x-slot name="header">
-        <h2 class="text-2xl font-medium text-gray-900">
+        <h2 class="text-xl sm:text-2xl font-medium text-gray-900">
             Study Records
         </h2>
 
@@ -15,7 +15,7 @@
     </x-slot>
 
     {{-- Display study records below --}}
-    <ul class="flex flex-col max-h-96 pr-5 overflow-y-scroll">
+    <ul class="flex flex-col max-h-96 sm:pr-5 overflow-y-scroll text-md sm:text-lg">
         @foreach ($records as $record)
             <li wire:key="{{ $record->id }}" class="flex flex-col p-3 gap-1 border shadow-md rounded-md">
                 <div class="flex justify-between">

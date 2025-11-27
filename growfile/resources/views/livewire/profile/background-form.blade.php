@@ -21,7 +21,7 @@
         </div>
 
         {{-- File input field --}}
-        <input type="file" wire:model="background_image">
+        <input type="file" class="w-full" wire:model="background_image">
 
         {{-- Display validation error --}}
         <div>

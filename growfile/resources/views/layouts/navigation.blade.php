@@ -1,6 +1,8 @@
 <nav x-data="{ 
     open: false,
- }"
+    profile_image_path: '/{{ $userProfile->profile_image_path }}',
+ }" 
+ @set-profile-menu-icon.window="profile_image_path = event.detail[0].filePath;"
  class="bg-white border-b border-gray-100 py-2">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

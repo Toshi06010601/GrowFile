@@ -2,7 +2,7 @@
 <x-side-section>
 
     <x-slot name="header">
-        <h2 class="text-xl font-medium text-gray-700">
+        <h2 class="text-lg sm:text-xl font-medium text-gray-700">
             Skills
         </h2>
 
@@ -17,7 +17,7 @@
     {{-- Display User Skills below --}}
     <ul class="flex flex-col max-h-96 overflow-y-scroll">
         @foreach ($userSkills->take($numOfSkills) as $userSkill)
-            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between">
+            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between text-md sm:text-lg">
                 <p>
                     {{ $userSkill->skill->name }}
                 </p>
@@ -40,19 +40,22 @@
     </ul>
 
     {{-- Show All Button if more than 5 skills --}}
-    @if (count($userSkills) > 5)
-        @if ($numOfSkills === 5)
-            <div class="mt-3 flex flex-row justify-center">
-                <button wire:click="$set('numOfSkills', 1000)" class="text-neutral-500 text-md cursor-pointer">
-                    Show All
-                </button>
-            </div>
-        @else
-            <div class="mt-3 flex flex-row justify-center">
-                <button wire:click="$set('numOfSkills', 5)" class="text-neutral-500 text-md cursor-pointer">
-                    Show Less
-                </button>
-            </div>
+    <div class="text-neutral-500 text-sm sm:text-md">
+        @if (count($userSkills) > 5)
+            @if ($numOfSkills === 5)
+                <div class="mt-3 flex flex-row justify-center">
+                    <button wire:click="$set('numOfSkills', 1000)" class="cursor-pointer">
+                        Show All
+                    </button>
+                </div>
+            @else
+                <div class="mt-3 flex flex-row justify-center">
+                    <button wire:click="$set('numOfSkills', 5)" class="cursor-pointer">
+                        Show Less
+                    </button>
+                </div>
+            @endif
         @endif
-    @endif
+    </div>
+
     </x-section>
