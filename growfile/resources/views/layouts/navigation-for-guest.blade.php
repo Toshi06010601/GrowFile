@@ -44,28 +44,19 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('professional_profile.index')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('professional_profile.index')">
+                {{ __('Network') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('home')">
+                {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
+            <div class="mt-2 flex flex-row justify-center gap-3">
+                 <x-secondary-button :href="route('login')">Login</x-secondary-button>
+                 <x-primary-button :href="route('register')">Register</x-primary-button>
             </div>
         </div>
     </div>

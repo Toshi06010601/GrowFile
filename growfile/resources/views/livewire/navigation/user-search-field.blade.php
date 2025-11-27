@@ -1,6 +1,6 @@
-<div class="flex-1" x-data="{ open: false }" @click.away="open = false">
+<div class="w-full md:w-96" x-data="{ open: false }" @click.away="open = false">
     {{-- Search field --}}
-    <x-text-input type="text" class="w-full md:w-96" placeholder="Search Users" wire:model.live="search" x-on:focus="open = true" 
+    <x-text-input type="text" class="w-full" placeholder="Search Users" wire:model.live="search" x-on:focus="open = true" 
         x-on:keydown.escape.prevent="open = false" />
 
     {{-- Show suggestions that matches the search word --}}

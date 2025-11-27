@@ -87,8 +87,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('professional_profile.index')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('professional_profile.index')">
+                {{ __('Network') }}
             </x-responsive-nav-link>
         </div>
 
@@ -96,7 +96,10 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('My Account') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('professional_profile.edit', $userProfile->slug)">
+                    {{ __('My Profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

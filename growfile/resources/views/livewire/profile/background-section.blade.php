@@ -1,6 +1,6 @@
 {{-- Background image section --}}
 <section>
-    <div class="relative max-h-32 rounded-lg overflow-hidden mx-auto mb-4">
+    <div class="relative max-h-32 rounded-lg overflow-hidden mx-auto mb-0 sm:mb-4">
         {{-- Display background image --}}
         <img src="/{{ $profile->background_image_path ? $profile->background_image_path : 'storage/background_photos/default.png' }}"
             alt="background image" class="w-full h-full object-cover">

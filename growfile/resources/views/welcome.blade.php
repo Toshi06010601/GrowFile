@@ -5,15 +5,19 @@
         </h2>
     </x-slot>
 
-    <div class="py-5 md:py-12 mx-5 md:mx-10 lg:mx-56 font-garamond flex flex-col gap-10 md:gap-16">
-        <section class="mt-8 max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+    <div class="py-5 md:py-12 mx-5 md:mx-10 lg:mx-16 xl:mx-10 font-garamond flex flex-col gap-10 md:gap-16">
+        <section class="mt-3 md:mt-8 max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
             <div class="flex-1 flex flex-col justify-around items-center gap-6">
-                <h2 class="text-3xl md:text-4xl text-white font-semibold text-left">Grow your profile<br><span
-                        class="ml-20"></span>at every step your learn
-                </h2>
-                <p class="text-md text-gray-200 text-left text-wrap">Centralise all your learning records and
-                    achievements
-                    in one place <br> to showcase your skills, knowledge, and learning ability</p>
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-white font-semibold text-left">Grow your profile
+                    </h2>
+                    <h2 class="text-3xl md:text-4xl text-white font-semibold text-right">at every step your learn
+                    </h2>
+                    <p class="text-md text-gray-200 text-center md:text-left text-wrap mt-2">Centralise all your learning records
+                        and
+                        achievements
+                        in one place <br> to showcase your skills, knowledge, and learning ability</p>
+                </div>
                 {{-- Display image here in smartphones --}}
                 <div class="block overflow-hidden md:ml-10 rounded-lg sm:w-56 md:hidden">
                     <img src="{{ asset('images/profile-page.png') }}" alt="profile page">
@@ -41,7 +45,8 @@
             <h2 class="text-3xl lg:text-4xl text-white font-semibold text-center md:text-left ">
                 Turn your hardwork into career leverage
             </h2>
-            <p class="text-lg text-white text-center md:text-left text-wrap">Enhance your resume with proof of progress that recruiters
+            <p class="text-lg text-white text-center md:text-left text-wrap">Enhance your resume with proof of progress
+                that recruiters
                 can trust while fueling your motivation to
                 keep learning</p>
             <ul class="w-full flex flex-col items-center md:flex-row justify-between gap-6">
@@ -75,7 +80,7 @@
             <div class="text-white bg-green-900 px-3 py-1 rounded-full">How to use</div>
             <ul class="flex flex-col gap-10">
                 <li class="flex flex-col md:flex-row gap-3 bg-neutral-200 p-8 rounded-lg">
-                    <div class=" flex-1 flex flex-col justify-center gap-1 md:gap-3">
+                    <div class="flex-1 flex flex-col justify-center gap-1 md:gap-3">
                         <div class="flex flex-row items-center gap-2">
                             <div
                                 class=" bg-green-900 w-10 h-10 text-center flex justify-center items-center rounded-full text-white font-bold">

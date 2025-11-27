@@ -1,8 +1,10 @@
 <x-app-layout>
-    <div class="py-5 grid grid-cols-8 gap-4 px-16 max-w-7xl mx-auto">
+    <div class="py-5 flex flex-col-reverse sm:grid sm:grid-cols-8 gap-4 px-5 sm:px-16 max-w-7xl mx-auto">
         {{-- Main section --}}
         <div class="col-span-5">
-            <livewire:Profile.BackgroundSection :profileId="$profile->id" />
+            <div class="hidden sm:block">
+                <livewire:Profile.BackgroundSection :profileId="$profile->id" />
+            </div>
 
             <livewire:Profile.StudyRecordsSection :userId="$profile->user_id" />
 
@@ -13,6 +15,9 @@
         </div>
         {{-- Side bar --}}
         <div class="col-span-3 space-y-2 p-3 bg-white shadow sm:rounded-lg">
+            <div class="block sm:hidden">
+                <livewire:Profile.BackgroundSection :profileId="$profile->id" />
+            </div>
 
             <livewire:Profile.ProfileSection :profileId="$profile->id" />
 
