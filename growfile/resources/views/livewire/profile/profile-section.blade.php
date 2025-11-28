@@ -103,15 +103,15 @@
 
         {{-- Profile details --}}
 
-        <div class="flex-1 flex flex-col justify-center items-center gap-1">
+        <div class="flex-1 flex flex-col justify-center items-center gap-1 px-1">
             {{-- full name --}}
             <div class="mx-auto mt-2">
-                <h3 class="text-xl sm:text-2xl"><strong>{{ $profile->full_name }}</strong></h3>
+                <h3 class="text-lg text-center sm:text-2xl"><strong>{{ $profile->full_name }}</strong></h3>
             </div>
 
             {{-- headline --}}
             <div class="mx-auto mt-2">
-                <p class="text-gray-600 leading-none">{{ $profile->headline }}</p>
+                <p class="text-gray-600 text-center leading-none">{{ $profile->headline }}</p>
             </div>
 
             {{-- job status --}}

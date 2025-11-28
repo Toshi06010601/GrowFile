@@ -8,7 +8,7 @@
             <div class="w-full flex gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                     <a href="{{ route('professional_profile.index') }}">
+                     <a href="{{ route('home') }}">
                         <x-application-logo class="block h-12 w-auto" />
                     </a>
                 </div>

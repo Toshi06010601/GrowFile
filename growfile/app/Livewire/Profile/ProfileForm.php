@@ -90,7 +90,7 @@ class ProfileForm extends Component
 
             //Save profile_image to the folder and delete the old image
             $this->profile_image->storeAs(path: 'profile_photos', name: $newFileName);
-            if($oldFileName !== "storage/profile_photos/default.png") {
+            if($oldFileName !== "profile_photos/default.png") {
                     Storage::disk('public')->delete($oldFileName);
             }
         }

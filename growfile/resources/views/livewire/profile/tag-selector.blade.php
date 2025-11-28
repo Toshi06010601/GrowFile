@@ -53,7 +53,7 @@
 
             {{-- Add a new tag --}}
             <x-secondary-button x-on:click="addNewTag"
-                class="row-span-1 col-span-2 col-start-7 sm:col-span-2 sm:col-start-7 row-start-1 mt-1 text-center"
+                class="row-span-1 col-span-2 col-start-7 sm:col-span-1 sm:col-start-8 row-start-1 mt-1 text-center flex justify-center"
                 ::disabled="tags.some(tag => tag.name.toLowerCase() === search.toLowerCase()) || search.trim() === ''">Add</x-secondary-button>
         </div>
 

@@ -11,7 +11,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                      <a href="{{ route('professional_profile.index') }}">
-                        <x-application-logo class="block h-12 w-auto" />
+                        <x-application-logo class="block h-12 sm:h-16 w-auto" />
                     </a>
                 </div>
 
