@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use App\Models\User;
+use App\Models\Skill;
 use Illuminate\Support\Str;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProfessionalProfileController extends Controller
 {
@@ -16,14 +19,45 @@ class ProfessionalProfileController extends Controller
 
     public function index(Request $request)
     {
-        $search = strtolower($request->input('search', ''));
+        // 1. Get and sanitize input
+        $name = strtolower($request->input('name', ''));
+        $location = strtolower($request->input('location', ''));
+        $selectedSkills = $request->input('skill');
 
-        $profiles = Profile::whereRaw('LOWER(full_name) LIKE ?', $search . '%')
-                    ->where('visibility', true)
-                    ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug')
-                    ->orderBy('full_name')
-                    ->paginate(20);
-        return view('professional_profile_index', compact('profiles'));
+        // Start query on the final model you want to return: Profile
+        $profilesQuery = Profile::query();
+
+        // 2. Apply name and location filters (directly on Profile)
+        $profilesQuery->whereRaw('LOWER(full_name) LIKE ?', [$name . '%'])
+                    ->whereRaw('LOWER(location) LIKE ?', [$location . '%']);
+                    
+        // 3. Apply the "has ALL skills" filter (on the related User -> UserSkills)
+        if (is_array($selectedSkills) && count($selectedSkills) > 0) {
+            $skillCount = count($selectedSkills);
+
+            $profilesQuery->whereHas('user', function (Builder $q) use ($selectedSkills, $skillCount) {
+                
+                // Check the related user's skills
+                $q->whereHas('userSkills', function (Builder $qq) use ($selectedSkills) {
+                    // Filter the skills to only include the ones selected
+                    $qq->whereIn('skill_id', $selectedSkills);
+                }, '=', $skillCount); // <--- Count must exactly match the number of selected skills
+                
+            });
+        }
+
+        // 4. Eager load related data and execute final query
+        $profiles = $profilesQuery
+            ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
+            ->orderBy('full_name')
+            ->paginate(20);
+
+        // 5. Get skills for filter options
+        $groupedSkills = Skill::select('id', 'category', 'name')
+                            ->get()
+                            ->groupBy('category');
+
+        return view('professional_profile_index', compact('profiles', 'groupedSkills', 'name', 'location', 'selectedSkills'));
     }
 
     public function create()
