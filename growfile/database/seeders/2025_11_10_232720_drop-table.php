@@ -11,16 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('profiles', function (Blueprint $table) {
-            Schema::dropIfExists('profiles');
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -37,6 +27,16 @@ return new class extends Migration
             $table->string('linkedin_link', 200)->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('profiles', function (Blueprint $table) {
+            Schema::dropIfExists('profiles');
         });
     }
 };

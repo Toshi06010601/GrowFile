@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('full_name', 100)->index();
             $table->string('profile_image_path', 255)->nullable();
+            $table->string('background_image_path')->nullable();
             $table->string('headline', 100)->nullable();
             $table->text('bio')->nullable();
             $table->enum('job_status', ['open_to_work', 'not_looking', 'freelance', 'exploring'])->nullable()->index();
