@@ -63,6 +63,16 @@
                 </a>
             </figure>
         </div>
+        
+        {{-- Follow button --}}
+        @auth
+            @if(Auth::id() !== $profile->user_id)
+                <livewire:FollowButton 
+                    :userId="$profile->user_id" 
+                    :isFollowing="!is_null($profile->user->authFollows)" 
+                />  
+            @endif
+        @endauth
     </div>
 
     {{-- Display profile details below for phone --}}
@@ -99,6 +109,16 @@
                     </a>
                 </figure>
             </div>
+
+            {{-- Follow button --}}
+            @auth
+                @if(Auth::id() !== $profile->user_id)
+                    <livewire:FollowButton 
+                        :userId="$profile->user_id" 
+                        :isFollowing="!is_null($profile->user->authFollows)" 
+                    />  
+                @endif
+            @endauth
         </div>
 
         {{-- Profile details --}}
@@ -108,23 +128,24 @@
             <div class="mx-auto mt-2">
                 <h3 class="text-lg text-center sm:text-2xl"><strong>{{ $profile->full_name }}</strong></h3>
             </div>
-
+            
             {{-- headline --}}
             <div class="mx-auto mt-2">
                 <p class="text-gray-600 text-center leading-none">{{ $profile->headline }}</p>
             </div>
-
+            
             {{-- job status --}}
             <div class="mx-auto mt-2">
                 <div class="text-white bg-green-600 rounded-full py-1 px-2 text-center">
                     {{ str_replace('_', ' ', $profile->job_status) }}</div>
-            </div>
-
+                </div>
+                
             {{-- location --}}
             <div class="mx-5 mt-2 flex flex-row justify-center items-start gap-0">
                 <img src={{ asset('images/icons/pin.svg') }} alt="location pin" class="w-4">
                 <p class="text-gray-600 text-center leading-none">{{ $profile->location }}</p>
             </div>
+
 
             {{-- Show edit icon for owner --}}
             @can('update', $profile)

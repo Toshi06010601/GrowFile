@@ -28,7 +28,7 @@ class ProfileSection extends Component
     #[On('load-profile')]
     public function loadResult()
     {
-        $this->profile = Profile::find($this->profileId);
+        $this->profile = Profile::with('user.authFollows')->find($this->profileId);
     }
 
     public function render()

@@ -22,6 +22,8 @@ class ProfessionalProfileController extends Controller
         // 1. Get and sanitize input
         $name = strtolower($request->input('name', ''));
         $location = strtolower($request->input('location', ''));
+        $following = $request->input('following');
+        $followed = $request->input('followed');
         $selectedSkills = $request->input('skill');
 
         // Start query on the final model you want to return: Profile
@@ -46,18 +48,40 @@ class ProfessionalProfileController extends Controller
             });
         }
 
-        // 4. Eager load related data and execute final query
-        $profiles = $profilesQuery
-            ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
-            ->orderBy('full_name')
-            ->paginate(20);
+        if($following) {
+            // 4. Eager load related data and execute final query
+            $profiles = $profilesQuery
+                ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
+                ->with('user.authFollows')
+                ->Has('user.authFollows')
+                ->orderBy('full_name')
+                ->paginate(20);
+        } elseif($followed) {
+            // 4. Eager load related data and execute final query
+            $profiles = $profilesQuery
+                ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
+                ->with('user.authFollows')
+                ->with('user.authFollowed')
+                ->has('user.authFollowed')
+                ->orderBy('full_name')
+                ->paginate(20);
+        }
+        else {
+            // 4. Eager load related data and execute final query
+            $profiles = $profilesQuery
+                ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
+                ->with('user.authFollows')
+                ->orderBy('full_name')
+                ->paginate(20);
+                
+        }
 
         // 5. Get skills for filter options
         $groupedSkills = Skill::select('id', 'category', 'name')
                             ->get()
                             ->groupBy('category');
 
-        return view('professional_profile_index', compact('profiles', 'groupedSkills', 'name', 'location', 'selectedSkills'));
+        return view('professional_profile_index', compact('profiles', 'groupedSkills', 'name', 'location', 'selectedSkills', 'following', 'followed'));
     }
 
     public function create()
