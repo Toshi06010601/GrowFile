@@ -46,18 +46,18 @@
         </section>
 
         {{-- Section 2: Features --}}
-        <section class="w-full max-w-5xl flex flex-col items-center gap-6">
+        <section class="w-full max-w-5xl flex flex-col items-center">
             <div class="text-white bg-green-900 px-3 py-1 rounded-full">Features</div>
-            <h2 class="text-3xl lg:text-4xl text-white font-semibold text-center md:text-left">
+            <h2 class="mt-4 text-3xl lg:text-4xl text-white font-semibold text-center md:text-left">
                 Turn your hardwork into career leverage
             </h2>
-            <p class="text-lg text-white text-center md:text-left text-wrap">
+            <p class="mt-1 text-md sm:text-lg text-gray-200 text-center md:text-left text-wrap">
                 Enhance your resume with proof of progress that recruiters can trust while fueling your motivation to keep learning
             </p>
             
-            <ul class="flex flex-col items-center md:flex-row justify-center gap-24 w-full">
+            <ul class="mt-8 flex flex-col items-center md:flex-row justify-center gap-10  sm:gap-24 w-full">
                 <x-welcome.feature-item img_path="images/icons/pen.svg" img_alt="pen icon" title="Record your progress" description="Record your study hours, reading logs, courses, licenses & certifications, portfolios, published articles, major projects at one place" />
-                <x-welcome.feature-item img_path="images/icons/network.svg" img_alt="network icon" title="Find other engineers" description="Find other engineers to get inspirations on books, courses, certifications, and portfolios to boost your learning and motivate yourself with their progress" />
+                <x-welcome.feature-item img_path="images/icons/network.svg" img_alt="network icon" title="Connect with other engineers" description="Find other engineers to get inspirations on books, courses, certifications, and portfolios to boost your learning and motivate yourself with their progress" />
             </ul>
         </section>
 
@@ -66,45 +66,8 @@
             <div class="text-white bg-green-900 px-3 py-1 rounded-full">How to use</div>
             
             <ul class="flex flex-col gap-8 w-full">
-                <li class="flex flex-col md:flex-row gap-3 bg-neutral-200 p-8 rounded-lg">
-                    <div class="flex-1 flex flex-col justify-center gap-1 md:gap-3">
-                        <div class="flex flex-row items-center gap-2">
-                            <div class="bg-green-900 w-10 h-10 text-center flex justify-center items-center rounded-full text-white font-bold">
-                                1
-                            </div>
-                            <h3 class="text-2xl md:text-3xl text-gray-600 font-semibold text-left">
-                                Create your profile
-                            </h3>
-                        </div>
-                        <p class="text-gray-400 text-lg">Add all the basic information</p>
-                        <p class="text-md font-thin text-gray-600 text-left text-wrap">
-                            Create your profile by adding name, location, introduction, career history, skills and entering your Github and LinkedIn URL.
-                        </p>
-                    </div>
-                    <div class="flex-1 overflow-hidden rounded-lg">
-                        <img src="{{ asset('images/profile-page.png') }}" alt="profile page">
-                    </div>
-                </li>
-                
-                <li class="flex flex-col md:flex-row gap-3 bg-neutral-200 p-8 rounded-lg">
-                    <div class="flex-1 flex flex-col justify-center gap-1 md:gap-3">
-                        <div class="flex flex-row items-center gap-2">
-                            <div class="bg-green-900 w-10 h-10 text-center flex justify-center items-center rounded-full text-white font-bold">
-                                2
-                            </div>
-                            <h3 class="text-2xl md:text-3xl flex-1 text-gray-600 font-semibold text-left text-wrap">
-                                Record your learning progress
-                            </h3>
-                        </div>
-                        <p class="text-gray-400 text-lg">Update your activities</p>
-                        <p class="text-md font-thin text-gray-600 text-left text-wrap">
-                            Just click the plus icon at the top right corner of each section and start adding your learning records. Click the pen icon for editing the existing records.
-                        </p>
-                    </div>
-                    <div class="flex-1 overflow-hidden rounded-lg">
-                        <img src="{{ asset('images/profile-page.png') }}" alt="profile page">
-                    </div>
-                </li>
+                <x-welcome.how-to-use-item img_path='images/profile-page.png' img_alt='profile image' numbering="1" title="Create your profile" sub_title="Add all the basic information" description="Create your profile by adding name, location, introduction, career history, skills and entering your Github and LinkedIn URL."/>
+                <x-welcome.how-to-use-item img_path='images/profile-page.png' img_alt='profile image' numbering="2" title="Record your progress" sub_title="Update your activities" description="Just click the plus icon at the top right corner of each section and start adding your learning records. Click the pen icon for editing the existing records."/>
             </ul>
         </section>
 
