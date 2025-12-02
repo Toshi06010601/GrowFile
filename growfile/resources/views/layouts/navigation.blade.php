@@ -7,10 +7,10 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="w-full flex gap-4 md:gap-8">
+            <div class="w-full flex items-center gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                     <a href="{{ route('professional_profile.index') }}">
+                     <a href="{{ route('home') }}">
                         <x-application-logo class="block h-12 sm:h-16 w-auto" />
                     </a>
                 </div>
@@ -19,14 +19,35 @@
                 <div class="flex flex-row items-center flex-1">
                     <livewire:Navigation.UserSearchField />
                 </div>
-            </div>
 
+                
+            </div>
+            
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:gap-8 sm:ms-6">
+                <!-- Profile button -->
+                <div class="text-sm leading-4 font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    <a class="flex flex-col justify-end items-center" href={{ route('professional_profile.edit', $userProfile->slug) }}>
+                            <div class="size-9 rounded-full overflow-hidden">
+                                <img src="{{ asset('/images/icons/profile.svg') }}" alt="" class="w-full h-full object-cover" />
+                            </div>
+                            <p>Profile</p>
+                    </a>
+                </div>
+    
+                <!-- Network button -->
+                <div class="text-sm leading-4 font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    <a class="flex flex-col justify-center items-center" href="{{ route('professional_profile.index') }}">
+                             <div class="size-9 rounded-full overflow-hidden">
+                                <img src="{{ asset('/images/icons/people.svg') }}" alt="" class="w-full h-full object-cover" />
+                            </div>
+                            <p>Network</p>
+                    </a>
+                </div>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="flex flex-col justify-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="flex flex-col justify-center pr-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div class="ml-1 w-9 h-9 rounded-full overflow-hidden border">
                                 <img :src="profile_image_path" alt="profile image"
                                     class="w-full h-full object-cover">
@@ -50,10 +71,6 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('My Account') }}
-                        </x-dropdown-link>
-
-                        <x-dropdown-link :href="route('professional_profile.edit', $userProfile->slug)">
-                            {{ __('My Profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -88,20 +105,22 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('professional_profile.index')">
+        <div class="pt-2 pb-3">
+            <x-responsive-nav-link :href="route('professional_profile.index')" class="flex flex-row gap-2">
+                <img src="{{ asset('/images/icons/people.svg') }}" alt="" class="block h-6 w-auto" />
                 {{ __('Network') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('professional_profile.edit', $userProfile->slug)" class="flex flex-row gap-2">
+                <img src="{{ asset('/images/icons/profile.svg') }}" alt="" class="block h-6 w-auto" />
+                {{ __('Profile') }}
             </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="mt-3 space-y-1">
+        <div class="pt-2 pb-1 border-t border-gray-200">
+            <div class="mt-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('My Account') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('professional_profile.edit', $userProfile->slug)">
-                    {{ __('My Profile') }}
+                    {{ __('Account') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

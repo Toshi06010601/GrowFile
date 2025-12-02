@@ -5,7 +5,7 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="w-full flex gap-4 md:gap-8">
+            <div class="w-full flex items-center gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                      <a href="{{ route('home') }}">
@@ -17,6 +17,15 @@
                 <div class="flex flex-row items-center flex-1">
                     <livewire:Navigation.UserSearchField />
                 </div>
+
+                <!-- Network button -->
+                <div class="hidden sm:block text-xs leading-4 font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    <a class="flex flex-col justify-center items-center" href="{{ route('professional_profile.index') }}">
+                            <img src="{{ asset('/images/icons/people.svg') }}" alt="" class="block h-8 sm:h-9 w-auto" />
+                            <p>Network</p>
+                    </a>
+                </div>
+
             </div>
 
             <!-- Login menu -->
