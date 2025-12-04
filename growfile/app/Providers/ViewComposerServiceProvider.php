@@ -35,5 +35,18 @@ class ViewComposerServiceProvider extends ServiceProvider
             
             $view->with('userProfile', $userProfile);
         });
+
+         // Share with footer layout
+        View::composer('layouts.footer', function ($view) {
+            $userProfile = null;
+            
+            if (Auth::check()) {
+                $userProfile = Profile::where('user_id', Auth::id())
+                    ->select('slug')
+                    ->first();
+            }
+            
+            $view->with('userProfile', $userProfile);
+        });
     }
 }

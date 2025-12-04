@@ -8,7 +8,7 @@
             <div class="w-full flex items-center gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                     <a href="{{ route('home') }}">
+                     <a href="{{ route('home') }}" class="hover:scale-105">
                         <x-application-logo class="block h-12 w-auto" />
                     </a>
                 </div>
@@ -19,7 +19,7 @@
                 </div>
 
                 <!-- Network button -->
-                <div class="hidden sm:block text-xs leading-4 font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                <div class="hidden sm:block text-xs leading-4 font-medium text-gray-500 hover:text-gray-800 hover:scale-105 focus:outline-none transition ease-in-out duration-150">
                     <a class="flex flex-col justify-center items-center" href="{{ route('professional_profile.index') }}">
                             <img src="{{ asset('/images/icons/people.svg') }}" alt="" class="block h-8 sm:h-9 w-auto" />
                             <p>Network</p>
@@ -30,8 +30,8 @@
 
             <!-- Login menu -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 sm:gap-2">
-                 <x-secondary-button :href="route('login')">Login</x-secondary-button>
-                 <x-primary-button :href="route('register')">Register</x-primary-button>
+                 <x-secondary-button :href="route('login')" class="hover:scale-105">Login</x-secondary-button>
+                 <x-primary-button :href="route('register')" class="hover:scale-105">Register</x-primary-button>
             </div>
 
             <!-- Hamburger -->
@@ -53,16 +53,18 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('professional_profile.index')">
-                {{ __('Network') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('home')">
+             <x-responsive-nav-link :href="route('home')" class="flex flex-row gap-2 hover:bg-gray-300">
+                <img src="{{ asset('/images/icons/house.svg') }}" alt="" class="block h-6 w-auto" />
                 {{ __('Home') }}
+            </x-responsive-nav-link>
+             <x-responsive-nav-link :href="route('professional_profile.index')" class="flex flex-row gap-2 hover:bg-gray-300">
+                <img src="{{ asset('/images/icons/people.svg') }}" alt="" class="block h-6 w-auto" />
+                {{ __('Network') }}
             </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="py-2 border-t border-gray-200">
             <div class="mt-2 flex flex-row justify-center gap-3">
                  <x-secondary-button :href="route('login')">Login</x-secondary-button>
                  <x-primary-button :href="route('register')">Register</x-primary-button>

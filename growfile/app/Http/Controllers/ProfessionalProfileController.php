@@ -48,35 +48,29 @@ class ProfessionalProfileController extends Controller
             });
         }
 
+        // 4. Add following/followed filter if requested
         if($following) {
-            // 4. Eager load related data and execute final query
-            $profiles = $profilesQuery
-                ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
+            $profilesQuery
                 ->with('user.authFollows')
-                ->Has('user.authFollows')
-                ->orderBy('full_name')
-                ->paginate(20);
+                ->Has('user.authFollows');
+
         } elseif($followed) {
-            // 4. Eager load related data and execute final query
-            $profiles = $profilesQuery
-                ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
-                ->with('user.authFollows')
+            $profilesQuery
                 ->with('user.authFollowed')
-                ->has('user.authFollowed')
-                ->orderBy('full_name')
-                ->paginate(20);
-        }
-        else {
-            // 4. Eager load related data and execute final query
-            $profiles = $profilesQuery
-                ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
-                ->with('user.authFollows')
-                ->orderBy('full_name')
-                ->paginate(20);
-                
+                ->has('user.authFollowed');
+
         }
 
-        // 5. Get skills for filter options
+        // 5. Get profiles which matches all the filter criterion
+        $profiles = $profilesQuery
+                ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
+                ->where('visibility', true)
+                ->orderBy('full_name')
+                ->paginate(20);
+
+
+
+        // 6. Get skills for filter options
         $groupedSkills = Skill::select('id', 'category', 'name')
                             ->get()
                             ->groupBy('category');
@@ -103,8 +97,8 @@ class ProfessionalProfileController extends Controller
             'user_id' => Auth::id(),
             'full_name' => $fullName,
             'slug' => $slug,
-            'profile_image_path' => 'storage/profile_photos/default.png',
-            'background_image_path' => 'storage/background_photos/default.png',
+            'profile_image_path' => '/storage/profile_photos/default.svg',
+            'background_image_path' => '/storage/background_photos/default.jpg',
             'headline' => 'Your role',
             'bio' => 'Your bio',
             'job_status' => 'exploring',

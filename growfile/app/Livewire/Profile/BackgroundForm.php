@@ -57,11 +57,11 @@ class BackgroundForm extends Component
             //Validate new image and Update background_image_path
             $this->validate(['background_image' => 'image|max:1024']);
             $newFileName = (string) Str::uuid() . '.' .  $this->background_image->getClientOriginalExtension();
-            $this->background_image_path = "storage/background_photos/" . $newFileName;
+            $this->background_image_path = "/storage/background_photos/" . $newFileName;
 
             //Save background_image to the folder and delete the old image
             $this->background_image->storeAs(path: 'background_photos', name: $newFileName);
-            if($oldFileName !== "background_photos/default.png") {
+            if($oldFileName !== "/background_photos/default.jpg") {
                 Storage::disk('public')->delete($oldFileName);
             }
         }

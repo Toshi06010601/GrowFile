@@ -46,7 +46,7 @@
                                            class="hidden peer"
                                            {{ in_array($skill->id, old('skill', $selectedSkills)) ? 'checked' : '' }}>
                                     <label for="{{ $idPrefix }}-{{ $skill->name }}"
-                                           class="px-1 rounded-lg border border-gray-400 text-gray-500 text-sm py-0.5 cursor-pointer transition duration-150 hover:border-gray-500 peer-checked:bg-gray-600 peer-checked:text-white peer-checked:font-medium">
+                                           class="px-1 rounded-lg border border-gray-400 text-gray-500 text-sm py-0.5 cursor-pointer transition duration-150 hover:bg-gray-600 hover:text-white hover:scale-105 peer-checked:bg-gray-600 peer-checked:text-white peer-checked:font-medium">
                                         {{ $skill->name }}
                                     </label>
                                 </div>

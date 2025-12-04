@@ -1,5 +1,6 @@
 {{-- Profile section --}}
 <div class="py-1 sm:py-0 space-y-2 text-md sm:text-lg">
+
     {{-- Display profile details below for laptop --}}
     <div class="hidden sm:flex flex-col justify-start">
 
@@ -7,7 +8,7 @@
         <div class="relative w-32 mx-auto">
             {{-- Profile image --}}
             <div class="w-28 h-28 rounded-full overflow-hidden mx-auto">
-                <img src="/{{ $profile->profile_image_path }}" alt="profile image" class="w-full h-full object-cover">
+                <img src="{{ $profile->profile_image_path }}" alt="profile image" class="w-full h-full object-cover">
             </div>
 
             {{-- Show edit icon for owner --}}
@@ -32,7 +33,7 @@
 
         {{-- job status --}}
         <div class="mx-auto mt-2">
-            <div class="text-white bg-green-600 rounded-full py-1 px-2 text-center">
+            <div class="text-white bg-green-900 rounded-full py-1 px-2 text-center">
                 {{ str_replace('_', ' ', $profile->job_status) }}</div>
         </div>
 
@@ -46,7 +47,7 @@
         <div class="flex flex-row justify-center gap-3 mt-3">
             {{-- Github --}}
             <figure class="flex flex-col">
-                <a href={{ $profile->github_link }} target="_blank">
+                <a href={{ $profile->github_link }} target="_blank" class="hover:scale-105">
                     <img src={{ asset('images/icons/github.svg') }} alt="location pin" class="w-8 mx-auto">
                     <figcaption class="text-gray-600 leading-none mt-2">
                         Github
@@ -55,7 +56,7 @@
             </figure>
             {{-- LinkedIn --}}
             <figure class="flex flex-col">
-                <a href={{ $profile->linkedin_link }} target="_blank">
+                <a href={{ $profile->linkedin_link }} target="_blank" class="hover:scale-105" >
                     <img src={{ asset('images/icons/linkedin.svg') }} alt="location pin" class="w-8 mx-auto">
                     <figcaption class="text-gray-600 leading-none mt-2">
                         Linkedin
@@ -69,7 +70,8 @@
             @if(Auth::id() !== $profile->user_id)
                 <livewire:FollowButton 
                     :userId="$profile->user_id" 
-                    :isFollowing="!is_null($profile->user->authFollows)" 
+                    :isFollowing="!is_null($profile->user->authFollows)"
+                    idPrefix="laptop"
                 />  
             @endif
         @endauth
@@ -79,7 +81,7 @@
     <div class="sm:hidden flex flex-row justify-start relative">
 
         {{-- Profile header area --}}
-        <div class="flex flex-col justify-around">
+        <div class="ml-5 flex flex-col justify-around">
             <div class="w-24 mx-auto">
                 {{-- Profile image --}}
                 <div class="size-20 rounded-full overflow-hidden mx-auto">
@@ -115,7 +117,8 @@
                 @if(Auth::id() !== $profile->user_id)
                     <livewire:FollowButton 
                         :userId="$profile->user_id" 
-                        :isFollowing="!is_null($profile->user->authFollows)" 
+                        :isFollowing="!is_null($profile->user->authFollows)"
+                        idPrefix="mobile"
                     />  
                 @endif
             @endauth
@@ -136,7 +139,7 @@
             
             {{-- job status --}}
             <div class="mx-auto mt-2">
-                <div class="text-white bg-green-600 rounded-full py-1 px-2 text-center">
+                <div class="text-white bg-green-900 rounded-full py-1 px-2 text-center">
                     {{ str_replace('_', ' ', $profile->job_status) }}</div>
                 </div>
                 

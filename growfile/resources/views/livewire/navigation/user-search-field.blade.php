@@ -32,7 +32,7 @@
                     <a href={{ route('professional_profile.show', $suggestion->slug) }}
                         class="flex flex-row justify-start items-center gap-3">
                         <div class="ml-1 size-5 md:size-7 rounded-full overflow-hidden border">
-                            <img src="/{{ $suggestion->profile_image_path }}" alt="profile image"
+                            <img src="{{ $suggestion->profile_image_path }}" alt="profile image"
                                 class="w-full h-full object-cover">
                         </div>
                         <p class="text-gray-700 text-wrap text-sm md:text-md">{{ $suggestion->full_name }}</p>

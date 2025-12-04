@@ -16,7 +16,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-neutral-600">
+        <div class="min-h-screen bg-neutral-600 flex flex-col">
             @auth
                 @include('layouts.navigation')
             @else
@@ -24,9 +24,11 @@
             @endauth
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-1 flex flex-col">
                 {{ $slot }}
             </main>
+
+            @include('layouts.footer')
         </div>
     </body>
 </html>

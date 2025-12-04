@@ -2,7 +2,7 @@
 <section>
     <div class="relative max-h-32 rounded-lg overflow-hidden mx-auto mb-0 sm:mb-4">
         {{-- Display background image --}}
-        <img src="/{{ $profile->background_image_path ? $profile->background_image_path : 'storage/background_photos/default.png' }}"
+        <img src="{{ $profile->background_image_path }}"
             alt="background image" class="w-full h-full object-cover">
 
         {{-- Edit button for owner --}}

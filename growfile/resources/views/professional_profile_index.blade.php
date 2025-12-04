@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-row gap-4 p-5">
+    <div class="block sm:flex-1 sm:flex sm:flex-row sm:gap-4 p-5">
 
         {{--Filter Modal for mobile --}}
         <x-modal name="filter-profiles" :show="false" focusable>
@@ -26,7 +26,7 @@
                     :location="$location ?? ''"
                     :following="$following ?? false"
                     :followed="$followed ?? false"
-                    idPrefix="modal" />
+                    idPrefix="sidebar" />
         </aside>
 
         {{-- Search result --}}
@@ -38,22 +38,22 @@
                         class="w-5 mx-2 cursor-pointer hover:scale-110" />
                 </button>
             </div>
-            <ul class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+            <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                 @foreach ($profiles as $profile)
                     <li wire:key="{{ $profile->id }}"
-                        class="relative w-full h-64 bg-white border-2 border-gray-300 rounded-md overflow-hidden">
+                        class="relative w-full h-64 bg-white border-2 border-gray-300 rounded-md overflow-hidden shadow-lg shadow-gray-400 hover:scale-105">
                         <a href="{{ route('professional_profile.show', $profile->slug) }}"
                             class="flex flex-col items-center">
                             {{-- Background image --}}
                             <div class="w-full h-20 overflow-hidden border border-gray-600">
-                                <img src="/{{ $profile->background_image_path ? $profile->background_image_path : 'storage/background_photos/default.png' }}"
+                                <img src="{{ $profile->background_image_path }}"
                                     alt="background image" class="w-full h-full object-cover">
                             </div>
                             {{-- Profile image --}}
                             <div
                                 class="absolute top-3 z-10 w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
-                                <img src="/{{ $profile->profile_image_path }}" alt="profile image"
-                                    class="w-full h-full object-cover">
+                                <img src="{{ $profile->profile_image_path }}" alt="profile image"
+                                    class="w-full h-full object-cover bg-white">
                             </div>
                             <div class="flex flex-col gap-0 p-1">
                                 {{-- Full name --}}
@@ -74,7 +74,7 @@
                                 {{-- Follow button --}}
                                 @auth
                                     @if (Auth::id() !== $profile->user_id)
-                                        <livewire:FollowButton :userId="$profile->user_id" :isFollowing="!is_null($profile->user->authFollows)" />
+                                        <livewire:FollowButton :userId="$profile->user_id" :isFollowing="!is_null($profile->user->authFollows)" idPrefix="index" />
                                     @endif
                                 @endauth
                             </div>

@@ -86,11 +86,11 @@ class ProfileForm extends Component
             //Validate new image and Update profile_image_path
             $this->validate(['profile_image' => 'image|max:1024']);
             $newFileName = (string) Str::uuid() . '.' .  $this->profile_image->getClientOriginalExtension();
-            $this->profile_image_path = "storage/profile_photos/" . $newFileName;
+            $this->profile_image_path = "/storage/profile_photos/" . $newFileName;
 
             //Save profile_image to the folder and delete the old image
             $this->profile_image->storeAs(path: 'profile_photos', name: $newFileName);
-            if($oldFileName !== "profile_photos/default.png") {
+            if($oldFileName !== "/profile_photos/default.svg") {
                     Storage::disk('public')->delete($oldFileName);
             }
         }
@@ -103,7 +103,7 @@ class ProfileForm extends Component
 
         //Reflect the updates in Profile section
         $this->dispatch('load-profile')->to(ProfileSection::class);
-        $this->dispatch('set-profile-menu-icon', ['filePath' => "/" . $this->profile_image_path]);
+        $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile_image_path]);
 
         //Clean up the modal form, close the modal and delete the old profile image
         $this->reset();

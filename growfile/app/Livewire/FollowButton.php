@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class FollowButton extends Component
 {
     public $userId; // ID of the user whose profile we are on
-    public $isFollowing; 
+    public $isFollowing;
+    public $idPrefix;
 
-    public function mount($userId, $isFollowing)
+    public function mount($userId, $isFollowing, $idPrefix)
     {
         $this->userId = $userId;
         $this->isFollowing = $isFollowing;
+        $this->idPrefix = $idPrefix;
     }
 
     public function updatedIsFollowing() {

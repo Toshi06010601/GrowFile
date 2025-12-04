@@ -16,7 +16,7 @@
                     class="w-full h-full object-cover">
             @else
                 {{-- Fallback to the existing background image URL --}}
-                <img src="/{{ $background_image_path }}" alt="Current background image" class="w-full h-full object-cover">
+                <img src="{{ $background_image_path }}" alt="Current background image" class="w-full h-full object-cover">
             @endif
         </div>
 
