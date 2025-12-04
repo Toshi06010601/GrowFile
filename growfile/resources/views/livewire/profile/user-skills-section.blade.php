@@ -21,20 +21,22 @@
                 <p>
                     {{ $userSkill->skill->name }}
                 </p>
-                <div class="flex flex-row gap-0">
-                    @for ($i = 0; $i < $userSkill->level; $i++)
-                        <img src="/images/icons/filled-drop.svg" alt="skill level" class="w-3">
-                    @endfor
-                    @for ($i = 0; $i < 5 - $userSkill->level; $i++)
-                        <img src="/images/icons/empty-drop.svg" alt="skill level" class="w-3">
-                    @endfor
+                <div class="flex flex-row justify-start gap-5">
+                    <div class="flex flex-row gap-0">
+                        @for ($i = 0; $i < $userSkill->level; $i++)
+                            <img src="/images/icons/filled-drop.svg" alt="skill level" class="w-3">
+                        @endfor
+                        @for ($i = 0; $i < 5 - $userSkill->level; $i++)
+                            <img src="/images/icons/empty-drop.svg" alt="skill level" class="w-3">
+                        @endfor
+                    </div>
+    
+                    {{-- Edit icon for the owner --}}
+                    @if ($isOwner)
+                        <x-section.edit-icon class="w-5"
+                            x-on:click="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
+                    @endif
                 </div>
-
-                {{-- Edit icon for the owner --}}
-                @if ($isOwner)
-                    <x-section.edit-icon class="w-5"
-                        x-on:click="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
-                @endif
             </li>
         @endforeach
     </ul>
