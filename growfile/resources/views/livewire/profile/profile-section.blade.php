@@ -85,7 +85,7 @@
             <div class="w-24 mx-auto">
                 {{-- Profile image --}}
                 <div class="size-20 rounded-full overflow-hidden mx-auto">
-                    <img src="/{{ $profile->profile_image_path }}" alt="profile image"
+                    <img src="{{ $profile->profile_image_path }}" alt="profile image"
                         class="w-full h-full object-cover">
                 </div>
             </div>
