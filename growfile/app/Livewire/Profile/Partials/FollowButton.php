@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Profile;
+namespace App\Livewire\Profile\Partials;
 
 use Livewire\Component;
 use App\Models\Follow;
@@ -42,6 +42,6 @@ class FollowButton extends Component
 
     public function render()
     {
-        return view('livewire.profile.follow-button');
+        return view('livewire.profile.partials.follow-button');
     }
 }

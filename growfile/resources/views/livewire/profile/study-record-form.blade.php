@@ -21,7 +21,7 @@
             placeholder="What have you worked on?" />
 
         {{-- Tags --}}
-         <livewire:Profile.TagSelector wire:model="selectedTags"/>
+         <livewire:Profile.Partials.TagSelector wire:model="selectedTags"/>
 
         {{-- Start datetime --}}
         <x-modal.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />

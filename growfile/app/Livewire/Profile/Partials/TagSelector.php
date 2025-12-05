@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\Profile;
+namespace App\Livewire\Profile\Partials;
 
 use Livewire\Component;
 use App\Models\Tag;
@@ -57,7 +57,7 @@ class TagSelector extends Component
 
     public function render()
     {
-        return view('livewire.profile.tag-selector');
+        return view('livewire.profile.partials.tag-selector');
 ;
     }
 }

@@ -74,12 +74,12 @@ class ProfessionalProfileController extends Controller
                             ->get()
                             ->groupBy('category');
 
-        return view('professional_profile_index', compact('profiles', 'groupedSkills', 'name', 'location', 'selectedSkills', 'following', 'followed'));
+        return view('professional_profile.index', compact('profiles', 'groupedSkills', 'name', 'location', 'selectedSkills', 'following', 'followed'));
     }
 
     public function create()
     {
-        return view('professional_profile_create');
+        return view('professional_profile.create');
     }
 
     public function store(Request $request)
@@ -118,7 +118,7 @@ class ProfessionalProfileController extends Controller
     {
         // Navigate to profile page if visibility is true or the user is profile owner
         if($slug->visibility || $slug->user_id === Auth::id()) {
-            return view('professional_profile', ['profile' => $slug]);
+            return view('professional_profile.show', ['profile' => $slug]);
         } else {
             return redirect(route('professional_profile.index'));
         }

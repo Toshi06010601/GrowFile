@@ -13,7 +13,7 @@
         </x-modal.header-title>
 
         {{-- Skill selector --}}
-        <livewire:Profile.SkillSelector wire:model="skill_id" />
+        <livewire:Profile.Partials.SkillSelector wire:model="skill_id" />
         {{-- Validation error for skill selector --}}
         <div>
             @error('skill_id')
