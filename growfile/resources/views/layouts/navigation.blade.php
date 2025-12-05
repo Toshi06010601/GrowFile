@@ -27,7 +27,7 @@
             <div class="hidden sm:flex sm:items-center sm:gap-8 sm:ms-6">
                 <!-- Profile button -->
                 <div class="text-sm leading-4 font-medium text-gray-500 hover:text-gray-800 focus:outline-none transition ease-in-out duration-150">
-                    <a class="flex flex-col justify-end items-center hover:scale-105" href={{ route('professional_profile.edit', $userProfile->slug) }}>
+                    <a class="flex flex-col justify-end items-center hover:scale-105" href={{ route('professional_profile.show', $userProfile->slug) }}>
                             <div class="size-9 rounded-full overflow-hidden">
                                 <img src="{{ asset('/images/icons/profile.svg') }}" alt="" class="w-full h-full object-cover" />
                             </div>
@@ -110,7 +110,7 @@
                 <img src="{{ asset('/images/icons/house.svg') }}" alt="" class="block h-6 w-auto" />
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('professional_profile.edit', $userProfile->slug)" class="flex flex-row gap-2">
+            <x-responsive-nav-link :href="route('professional_profile.show', $userProfile->slug)" class="flex flex-row gap-2">
                 <img src="{{ asset('/images/icons/profile.svg') }}" alt="" class="block h-6 w-auto" />
                 {{ __('Profile') }}
             </x-responsive-nav-link>

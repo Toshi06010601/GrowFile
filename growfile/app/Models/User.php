@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function authFollowed()
     {
-        // Check if the currently authenticated user follows this user
+        // Check if this user follows the currently authenticated user 
         return $this->hasOne(Follow::class, 'follower_id', 'id')
                     ->where('followed_id', Auth::id());
     }

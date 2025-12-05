@@ -24,6 +24,7 @@ class BackgroundSection extends Component
     #[On('load-background')]
     public function loadBackground()
     {
+        // Get the profile with the background image
         $this->profile = Profile::select('id', 'background_image_path', 'user_id')
                         ->find($this->profileId);
     }

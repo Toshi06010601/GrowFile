@@ -20,13 +20,14 @@ class UserSkillsSection extends Component
     public function mount($userId)
     {
         $this->userId = $userId;
-        $this->isOwner = Auth::id() === $this->userId;
+        $this->isOwner = Auth::id() === $this->userId; //Check if the user is the owner
         $this->loadUserSkill();
     }
 
     #[On('load-user-skills')]
     public function loadUserSkill()
     {
+        // Get all the userskill records of the selected user
         $this->userSkills = UserSkill::with('skill')
                             ->where('user_id', $this->userId)
                             ->get();

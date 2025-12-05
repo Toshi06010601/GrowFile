@@ -10,19 +10,25 @@ use Livewire\Attributes\Modelable;
 
 class SkillSelector extends Component
 {
+    /*
+    Public variables
+    */
     public $skills = [];
 
     #[Modelable]
     public $skill_id;
 
+
+    /*
+    Public functions
+    */
     public function mount()
     {
         $this->loadAllSkills();
     }
     
-    /*
-    Retrieve all the tags created by the users and store id and name into allTags
-    */
+
+    // Retrieve all the tags created by the users
     public function loadAllSkills()
     {
         $this->skills = Skill::all();

@@ -9,41 +9,46 @@ use Livewire\Attributes\Modelable;
 
 class TagSelector extends Component
 {
+    /*
+    Public variables 
+    */
     public $allTags;
 
     #[Modelable]
     public $selectedTags = [];
 
+
+    /*
+    Public functions 
+    */
     public function mount()
     {
         $this->loadAllTags();
     }
     
-    /*
-    Retrieve all the tags created by the users and store id and name into allTags
-    */
     public function loadAllTags()
     {
+        // Retrieve all the tags created by the current user and store id and name into allTags
         $this->allTags = Tag::where('user_id', Auth::id())
                         ->orderBy('name')
                         ->get()
                         ->map(fn($tag) => ['id' => $tag->id, 'name' => $tag->name]);;
     }
     
-    /*
-    Create a new tag
-    */
     public function addTag($tagName)
     {
+        // 1. Create a new tag if it doesn't already exist
         $newTag = Tag::firstOrCreate([
                         'user_id' => Auth::id(),
                         'name' => $tagName
                     ]);
 
-        //Add it into selectedTags array
-        $this->selectedTags[] = $newTag->id;
+        // 2. Add it into selectedTags array
+        if (!in_array($newTag->id, $this->selectedTags)) {
+            $this->selectedTags[] = $newTag->id;
+        }
 
-        //Pass it to the view file
+        // 3. Pass it to the view file
         return [
             'id' => $newTag->id,
             'name' => $newTag->name,

@@ -31,51 +31,59 @@ class BackgroundForm extends Component
     #[On('set-background')]
     public function setBackground($id)
     {
+        // 1. If id is passed, find the profile and get background image path
         if($id) {
-            $this->reset();
+            $this->reset(); // Reset to refresh the temporary image
             $profile    = Profile::findOrFail($id);
             $this->profile        = $profile;
-            $this->background_image_path = $profile->background_image_path ? $profile->background_image_path : 'storage/background_photos/default.png';
+            $this->background_image_path = $profile->background_image_path;
         } else {
             $this->reset();
         }
 
+        // 2. Reset validation
         $this->resetValidation();
+
+        // 3. Dispatch background editor modal
         $this->dispatch('open-modal', 'edit-background');
     }
 
     public function update()
     {
-        //Authorize and validate the data
+        // 1. Authorize and validate the data
         $this->authorize('update', $this->profile);
 
-        //Update background_image_path if new background image uploaded
+        // 2. Update background_image_path if new background image uploaded
         if ($this->background_image) {
-            //Store the old background name
+            // 2.1. Store the old background name
             $oldFileName =  str_replace('storage/', '', $this->background_image_path);
 
-            //Validate new image and Update background_image_path
+            // 2.2. Validate newly uploaded image
             $this->validate(['background_image' => 'image|max:1024']);
+
+            // 2.3. Construct new file name and assign it to background image path
             $newFileName = (string) Str::uuid() . '.' .  $this->background_image->getClientOriginalExtension();
             $this->background_image_path = "/storage/background_photos/" . $newFileName;
 
-            //Save background_image to the folder and delete the old image
+            // 2.4. Save background_image to the folder
             $this->background_image->storeAs(path: 'background_photos', name: $newFileName);
+
+            // 2.5. Delete old image file except for the default image
             if($oldFileName !== "/background_photos/default.jpg") {
                 Storage::disk('public')->delete($oldFileName);
             }
         }
 
-        //Validate all data and remove background_image from $validatedData
+        // 3. Validate all data 
         $validateData = $this->validate();
 
-        //Update the background
+        // 4. Update the profile with the new background image
         $this->profile->update($validateData);
 
-        //Reflect the updates in Background section
+        // 5. Refresh Background section with new background image
         $this->dispatch('load-background')->to(BackgroundSection::class);
 
-        //Clean up the modal form, close the modal and delete the old background image
+        // 6. Clean up the modal form, close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-background');
 

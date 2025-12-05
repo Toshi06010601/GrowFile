@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileSection extends Component
 {
-
+    /*
+    Public variables for the section area
+    */
     public $profile;
     public $profileId;
 
@@ -21,13 +23,13 @@ class ProfileSection extends Component
     public function mount($profileId)
     {
         $this->profileId = $profileId;
-
         $this->loadResult();
     }
 
     #[On('load-profile')]
     public function loadResult()
     {
+        // Get profile data together with following status
         $this->profile = Profile::with('user.authFollows')->find($this->profileId);
     }
 

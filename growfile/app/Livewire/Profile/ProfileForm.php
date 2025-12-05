@@ -47,12 +47,15 @@ class ProfileForm extends Component
     #[Validate('nullable|url|string|max:200')]
     public $linkedin_link = '';
 
+
+
     /*
     Public functions for the modal form
     */
     #[On('set-profile')]
     public function setProfile($id)
     {
+        // 1. If id is passed, find the profile and get all the values
         if($id) {
             $this->reset();
             $profile    = Profile::findOrFail($id);
@@ -69,43 +72,52 @@ class ProfileForm extends Component
             $this->reset();
         }
 
+        // 2. Reset validation
         $this->resetValidation();
+
+        // 3. Dispatch profile editor modal
         $this->dispatch('open-modal', 'edit-profile');
     }
 
     public function update()
     {
-        //Authorize and validate the data
+        // 1. Authorize and validate the data
         $this->authorize('update', $this->profile);
 
-        //Update profile_image_path if new profile image uploaded
+        // 2. Update profile_image_path if new profile image uploaded
         if ($this->profile_image) {
-            //Store the old profile name
+            // 2.1 Store the old profile name
             $oldFileName =  str_replace('storage/', '', $this->profile_image_path);
 
-            //Validate new image and Update profile_image_path
+            // 2.2 Validate new image
             $this->validate(['profile_image' => 'image|max:1024']);
+
+            // 2.3 Construct new file name and assign it to profile img path
             $newFileName = (string) Str::uuid() . '.' .  $this->profile_image->getClientOriginalExtension();
             $this->profile_image_path = "/storage/profile_photos/" . $newFileName;
 
-            //Save profile_image to the folder and delete the old image
+            // 2.4 Save profile_image to the folder 
             $this->profile_image->storeAs(path: 'profile_photos', name: $newFileName);
+            
+            // 2.5 Delete old image file except for default image
             if($oldFileName !== "/profile_photos/default.svg") {
                     Storage::disk('public')->delete($oldFileName);
             }
         }
 
-        //Validate all data and remove profile_image from $validatedData
+        // 3. Validate all data
         $validateData = $this->validate();
 
-        //Update the profile
+        // 4. Update the profile
         $this->profile->update($validateData);
 
-        //Reflect the updates in Profile section
+        // 5. Refresh Profile section with new profile image
         $this->dispatch('load-profile')->to(ProfileSection::class);
+
+        // 6. Refresh navigation bar with new profile image
         $this->dispatch('set-profile-menu-icon', ['filePath' => $this->profile_image_path]);
 
-        //Clean up the modal form, close the modal and delete the old profile image
+        // 7. Clean up the modal form, close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-profile');
 

@@ -68,7 +68,7 @@
         {{-- Follow button --}}
         @auth
             @if(Auth::id() !== $profile->user_id)
-                <livewire:FollowButton 
+                <livewire:Profile.FollowButton 
                     :userId="$profile->user_id" 
                     :isFollowing="!is_null($profile->user->authFollows)"
                     idPrefix="laptop"
@@ -115,7 +115,7 @@
             {{-- Follow button --}}
             @auth
                 @if(Auth::id() !== $profile->user_id)
-                    <livewire:FollowButton 
+                    <livewire:Profile.FollowButton 
                         :userId="$profile->user_id" 
                         :isFollowing="!is_null($profile->user->authFollows)"
                         idPrefix="mobile"

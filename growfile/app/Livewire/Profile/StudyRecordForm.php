@@ -35,6 +35,7 @@ class StudyRecordForm extends Component
     #[On('set-study-record')]
     public function setStudyRecord($id)
     {
+        // 1. If id is passed, find the studyrecord and assign each field to public variables 
         if($id) {
             $studyRecord          = StudyRecord::findOrFail($id);
             $this->studyRecord    = $studyRecord;
@@ -47,24 +48,25 @@ class StudyRecordForm extends Component
             $this->reset();
         }
 
+        // 2. Reset validation and open studyrecord modal
         $this->resetValidation();
         $this->dispatch('open-modal', 'edit-study-record');
     }
 
     public function save()
     {
-        //Validate and prepare the data
+        // 1. Validate and prepare the data
         $validatedData = $this->validate();
         $validatedData['user_id'] = Auth::id();
 
-        //Create new studyrecord and register associated tags
+        // 2. Create new studyrecord and register associated tags
         $this->studyRecord = StudyRecord::create($validatedData);
         $this->studyRecord->tags()->sync($this->selectedTags);
 
-        //Reflect the updates in Study records section
+        // 3. Reflect the updates in Study records section
         $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
 
-        //Clean up the modal form and close the modal
+        // 4. Clean up the modal form and close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-study-record');
 
@@ -72,34 +74,36 @@ class StudyRecordForm extends Component
 
     public function update()
     {
-        //Authorize and validate the data
+        // 1. Authorize 
         $this->authorize('update', $this->studyRecord);
+
+        // 2. validate the data
         $validateDate = $this->validate();
 
-        //Update the studyrecord and register associated tags
+        // 3. Update the studyrecord and register associated tags
         $this->studyRecord->update($validateDate);
         $this->studyRecord->tags()->sync($this->selectedTags);
 
-        //Reflect the updates in Study records section
+        // 4. Reflect the updates in Study records section
         $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
 
-        //Clean up the modal form and close the modal
+        // 5. Clean up the modal form and close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-study-record');
     }
 
     public function delete()
     {
-        //Authorize the data
+        // 1. Authorize the data
         $this->authorize('delete', $this->studyRecord);
 
-        //Delete the record
+        // 2. Delete the record
         $this->studyRecord->delete();
 
-        //Reflect the updates in Study records section
+        // 3. Reflect the updates in Study records section
         $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
 
-        //Clean up the modal form and close the modal
+        // 4. Clean up the modal form and close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-study-record');
     }

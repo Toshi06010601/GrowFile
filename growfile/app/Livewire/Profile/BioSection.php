@@ -25,6 +25,7 @@ class BioSection extends Component
     #[On('load-bio')]
     public function loadBio()
     {
+        // Get the profile with bio
         $this->profile = Profile::select('id', 'user_id', 'bio')
                         ->find($this->profileId);
     }

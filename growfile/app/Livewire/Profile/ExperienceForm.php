@@ -30,12 +30,14 @@ class ExperienceForm extends Component
     #[Validate('string')]
     public $description = '';
 
+
     /*
     Public functions for the modal form
     */
     #[On('set-experience')]
     public function setExperience($id)
     {
+        // 1. If id is passed, find the experience and assign each field to public variables 
         if($id) {
             $experience          = Experience::findOrFail($id);
             $this->experience    = $experience;
@@ -48,23 +50,24 @@ class ExperienceForm extends Component
             $this->reset();
         }
 
+        // 2. Reset validation and open experience modal
         $this->resetValidation();
         $this->dispatch('open-modal', 'edit-experience');
     }
 
     public function save()
     {
-        //Validate and prepare the data
+        // 1. Validate and prepare the data
         $validatedData = $this->validate();
         $validatedData['user_id'] = Auth::id();
 
-        //Create new experience
+        // 2. Create new experience
         $this->experience = Experience::create($validatedData);
 
-        //Reflect the updates in Experiences section
+        // 3. Reflect the updates in Experiences section
         $this->dispatch('load-experiences')->to(ExperiencesSection::class);
 
-        //Clean up the modal form and close the modal
+        // 4. Clean up the modal form and close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-experience');
 
@@ -72,33 +75,35 @@ class ExperienceForm extends Component
 
     public function update()
     {
-        //Authorize and validate the data
+        // 1. Authorize 
         $this->authorize('update', $this->experience);
+
+        // 2. Validate inputs
         $validateDate = $this->validate();
 
-        //Update the experience
+        // 3. Update the experience
         $this->experience->update($validateDate);
 
-        //Reflect the updates in Experiences section
+        // 4. Reflect the updates in Experiences section
         $this->dispatch('load-experiences')->to(ExperiencesSection::class);
 
-        //Clean up the modal form and close the modal
+        // 5. Clean up the modal form and close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-experience');
     }
 
     public function delete()
     {
-        //Authorize the data
+        // 1. Authorize the data
         $this->authorize('delete', $this->experience);
 
-        //Delete the record
+        // 2. Delete the record
         $this->experience->delete();
 
-        //Reflect the updates in Experiences section
+        // 3. Reflect the updates in Experiences section
         $this->dispatch('load-experiences')->to(ExperiencesSection::class);
 
-        //Clean up the modal form and close the modal
+        // 4. Clean up the modal form and close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-experience');
     }

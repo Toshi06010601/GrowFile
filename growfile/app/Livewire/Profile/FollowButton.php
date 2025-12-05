@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Profile;
 
 use Livewire\Component;
 use App\Models\Follow;
@@ -12,6 +12,7 @@ class FollowButton extends Component
     public $isFollowing;
     public $idPrefix;
 
+    // Assign the target userid and following status
     public function mount($userId, $isFollowing, $idPrefix)
     {
         $this->userId = $userId;
@@ -19,10 +20,11 @@ class FollowButton extends Component
         $this->idPrefix = $idPrefix;
     }
 
+    // Trigger every time isFollowing gets changed
     public function updatedIsFollowing() {
         //When changed to Not following
         if(!$this->isFollowing) {
-            //delete follow record
+            // Delete follow record
             Follow::where('follower_id', Auth::id())
             ->where('followed_id', $this->userId)
             ->delete();
@@ -40,6 +42,6 @@ class FollowButton extends Component
 
     public function render()
     {
-        return view('livewire.follow-button');
+        return view('livewire.profile.follow-button');
     }
 }

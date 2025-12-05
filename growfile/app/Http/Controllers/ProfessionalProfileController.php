@@ -26,10 +26,10 @@ class ProfessionalProfileController extends Controller
         $followed = $request->input('followed');
         $selectedSkills = $request->input('skill');
 
-        // Start query on the final model you want to return: Profile
+        // Start query on Profile model
         $profilesQuery = Profile::query();
 
-        // 2. Apply name and location filters (directly on Profile)
+        // 2. Apply name and location filters
         $profilesQuery->whereRaw('LOWER(full_name) LIKE ?', [$name . '%'])
                     ->whereRaw('LOWER(location) LIKE ?', [$location . '%']);
                     
@@ -61,14 +61,13 @@ class ProfessionalProfileController extends Controller
 
         }
 
-        // 5. Get profiles which matches all the filter criterion
+        // 5. Get profiles which match all the filter criterion
         $profiles = $profilesQuery
                 ->select('id', 'full_name', 'profile_image_path', 'background_image_path', 'headline', 'location', 'bio', 'slug', 'user_id')
                 ->where('visibility', true)
+                ->where('user_id', '!=', Auth::id())
                 ->orderBy('full_name')
                 ->paginate(20);
-
-
 
         // 6. Get skills for filter options
         $groupedSkills = Skill::select('id', 'category', 'name')
@@ -85,14 +84,17 @@ class ProfessionalProfileController extends Controller
 
     public function store(Request $request)
     {
+        // 1. Validate name
         $request->validate([
             'first_name' => ['required', 'string', 'max:50'],
             'last_name' => ['required', 'string', 'max:50'],
         ]);
 
+        // 2. Construct full name and slug
         $fullName = $request->first_name . " " . $request->last_name;
         $slug = Str::slug($fullName) . "-" . Str::uuid();
 
+        // 3. Create profile with default information in other columns
         Profile::create([
             'user_id' => Auth::id(),
             'full_name' => $fullName,
@@ -111,21 +113,23 @@ class ProfessionalProfileController extends Controller
         return redirect(route('professional_profile.edit', $slug));
     }
 
+    // Get the selected profile based on slug
     public function show(Profile $slug)
     {
-        if($slug->visibility) {
+        // Navigate to profile page if visibility is true or the user is profile owner
+        if($slug->visibility || $slug->user_id === Auth::id()) {
             return view('professional_profile', ['profile' => $slug]);
         } else {
             return redirect(route('professional_profile.index'));
         }
     }
 
-    public function edit(Profile $slug)
-    {
-        $this->authorize('update', $slug);
+    // public function edit(Profile $slug)
+    // {
+    //     $this->authorize('update', $slug);
 
-        return view('professional_profile', ['profile' => $slug]);
+    //     return view('professional_profile', ['profile' => $slug]);
 
-    }
+    // }
 
 }

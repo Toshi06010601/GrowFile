@@ -24,6 +24,7 @@ class BioForm extends Component
     #[On('set-bio')]
     public function setBio($id)
     {
+        // If id is passed, find the profile and get bio
         if($id) {
             $this->reset();
             $profile    = Profile::findOrFail($id);
@@ -39,19 +40,19 @@ class BioForm extends Component
 
     public function update()
     {
-        //Authorize and validate the data
+        // 1. Authorize and validate the data
         $this->authorize('update', $this->profile);
 
-        //Validate bio
+        // 2. Validate bio
         $validateData = $this->validate();
 
-        //Update the bio
+        // 3. Update the bio
         $this->profile->update($validateData);
 
-        //Reflect the updates in Bio section
+        // 4. Reflect the updates in Bio section
         $this->dispatch('load-bio')->to(BioSection::class);
 
-        //Clean up the modal form, close the modal
+        // 5. Clean up the modal form, close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-bio');
 

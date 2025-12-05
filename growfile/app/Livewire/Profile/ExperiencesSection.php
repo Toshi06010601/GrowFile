@@ -10,7 +10,9 @@ use Illuminate\Support\Str;
 
 class ExperiencesSection extends Component
 {
-
+    /*
+    Public varialbes for the section area
+    */
     public $experiences;
     public $userId;
     public $isOwner;
@@ -21,13 +23,14 @@ class ExperiencesSection extends Component
     public function mount($userId)
     {
         $this->userId = $userId;
-        $this->isOwner = Auth::id() === $this->userId;
+        $this->isOwner = Auth::id() === $this->userId; // Find out if the user is the owner of the experience record
         $this->loadExperiences();
     }
 
     #[On('load-experiences')]
     public function loadExperiences()
     {
+        // Get experience records
         $this->experiences = Experience::where('user_id', $this->userId)
                             ->get();
     }
