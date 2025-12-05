@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="block sm:flex-1 sm:flex sm:flex-row sm:gap-4 p-5">
+    <div class="flex flex-col flex-1 sm:flex-row sm:gap-4 p-5">
 
         {{--Filter Modal for mobile --}}
         <x-modal name="filter-profiles" :show="false" focusable>
