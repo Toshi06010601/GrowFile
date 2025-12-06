@@ -49,14 +49,15 @@ class ProfessionalProfileController extends Controller
         }
 
         // 4. Add following/followed filter if requested
+        $profilesQuery->with('user.authFollows')
+                      ->with('user.authFollowed');
+                      
         if($following) {
             $profilesQuery
-                ->with('user.authFollows')
                 ->Has('user.authFollows');
 
         } elseif($followed) {
             $profilesQuery
-                ->with('user.authFollowed')
                 ->has('user.authFollowed');
 
         }
@@ -123,13 +124,5 @@ class ProfessionalProfileController extends Controller
             return redirect(route('professional_profile.index'));
         }
     }
-
-    // public function edit(Profile $slug)
-    // {
-    //     $this->authorize('update', $slug);
-
-    //     return view('professional_profile', ['profile' => $slug]);
-
-    // }
 
 }

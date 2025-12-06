@@ -22,11 +22,11 @@ class ProfileFactory extends Factory
             'slug' => \Illuminate\Support\Str::slug($name) . '-' . fake()->unique()->randomNumber(4),
             'profile_image_path' => '/storage/profile_photos/default.svg',
             'background_image_path' => '/storage/background_photos/default.jpg',
-            'headline' => 'Software Engineer',
+            'headline' => 'Backend Engineer',
             'bio' => fake()->text(200),
             'job_status' => 'exploring',
             'visibility' => true,
-            'location' => 'London, UK',
+            'location' => 'Tokyo, Japan',
             'github_link' => 'test_user.com',
             'linkedin_link' => 'test_user.com',
         ];

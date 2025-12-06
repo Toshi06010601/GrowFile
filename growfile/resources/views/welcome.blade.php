@@ -41,7 +41,7 @@
                 </div>
                 
                 @guest
-                    <div class="flex flex-row gap-2 items-center justify-start">
+                    <div class="sm:ml-7 flex flex-row gap-2 items-center justify-start">
                         <x-secondary-button :href="route('login')" class="hover:scale-105">Login</x-secondary-button>
                         <x-primary-button :href="route('register')" class="hover:scale-105">Register</x-primary-button>
                     </div>

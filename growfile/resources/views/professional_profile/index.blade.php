@@ -38,12 +38,12 @@
                         class="w-5 mx-2 cursor-pointer hover:scale-110" />
                 </button>
             </div>
-            <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <ul class="flex flex-row justify-start flex-wrap gap-4">
                 @foreach ($profiles as $profile)
                     <li wire:key="{{ $profile->id }}"
-                        class="relative w-full h-64 bg-white border-2 border-gray-300 rounded-md overflow-hidden shadow-lg shadow-gray-400 hover:scale-105">
+                        class="relative flex flex-col justify-between pb-3 w-36 h-64 sm:w-48 sm:h-72 bg-white border-2 border-gray-300 rounded-md overflow-hidden shadow-lg shadow-gray-400 hover:scale-105">
                         <a href="{{ route('professional_profile.show', $profile->slug) }}"
-                            class="flex flex-col items-center">
+                            class="h-full flex flex-col items-center">
                             {{-- Background image --}}
                             <div class="w-full h-20 overflow-hidden border border-gray-600">
                                 <img src="{{ $profile->background_image_path }}"
@@ -55,9 +55,9 @@
                                 <img src="{{ $profile->profile_image_path }}" alt="profile image"
                                     class="w-full h-full object-cover bg-white">
                             </div>
-                            <div class="flex flex-col gap-0 p-1">
+                            <div class="flex-1 flex flex-col justify-start p-1">
                                 {{-- Full name --}}
-                                <p class="text-sm text-center mt-9 line-clamp-1">
+                                <p class="text-sm text-center mt-4 line-clamp-1">
                                     <strong>{{ $profile->full_name }}</strong>
                                 </p>
                                 {{-- headline --}}
@@ -71,14 +71,16 @@
                                     {{ $profile->bio }}
                                 </p>
 
-                                {{-- Follow button --}}
-                                @auth
-                                    @if (Auth::id() !== $profile->user_id)
-                                        <livewire:Profile.Partials.FollowButton :userId="$profile->user_id" :isFollowing="!is_null($profile->user->authFollows)" idPrefix="index" />
-                                    @endif
-                                @endauth
                             </div>
                         </a>
+                        {{-- Follow button --}}
+                        @auth
+                            @if (Auth::id() !== $profile->user_id)
+                            <div>
+                                <livewire:Profile.Partials.FollowButton :userId="$profile->user_id" :isFollowing="!is_null($profile->user->authFollows)" idPrefix="index" wire:key="follow-{{ $profile->id }}" />
+                            </div>
+                            @endif
+                        @endauth
                     </li>
                 @endforeach
             </ul>

@@ -14,8 +14,8 @@ class SkillSeeder extends Seeder
     public function run(): void
     {
         Skill::create([
-            'name' => 'Python',
-            'category' => 'BackEnd',
+            'name' => 'Laravel',
+            'category' => 'Framework',
         ]);
     }
 }
