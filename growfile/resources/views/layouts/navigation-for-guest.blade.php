@@ -3,7 +3,7 @@
  }"
  class="bg-white border-b border-gray-100 py-2">
     <!-- Primary Navigation Menu -->
-    <div class="mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="w-full flex items-center gap-4 md:gap-8">
                 <!-- Logo -->
