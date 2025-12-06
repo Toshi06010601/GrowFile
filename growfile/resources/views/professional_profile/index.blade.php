@@ -82,7 +82,7 @@
                     </li>
                 @endforeach
             </ul>
-            <div class="mb-4">
+            <div class="my-4">
                 {{ $profiles->appends(request()->except('page'))->links() }}
             </div>
         </section>
