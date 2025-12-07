@@ -1,4 +1,4 @@
-# MediNavi Asia
+# GrowFile
 
 GrowFileは、個人のプロフィールと学習記録を融合させたWebアプリケーションです。
 
