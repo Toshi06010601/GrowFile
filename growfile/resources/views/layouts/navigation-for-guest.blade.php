@@ -4,12 +4,12 @@
  class="bg-white border-b border-gray-100 py-2">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-16 sm:h-18">
             <div class="w-full flex items-center gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                      <a href="{{ route('home') }}" class="hover:scale-105">
-                        <x-application-logo class="block h-12 w-auto" />
+                        <x-application-logo class="block h-12 sm:h-16 w-auto" />
                     </a>
                 </div>
 
@@ -19,7 +19,7 @@
                 </div>
 
                 <!-- Network button -->
-                <div class="hidden sm:block text-xs leading-4 font-medium text-gray-500 hover:text-gray-800 hover:scale-105 focus:outline-none transition ease-in-out duration-150">
+                <div class="hidden sm:block text-sm leading-4 font-medium text-gray-500 hover:text-gray-800 hover:scale-105 focus:outline-none transition ease-in-out duration-150">
                     <a class="flex flex-col justify-center items-center" href="{{ route('professional_profile.index') }}">
                             <img src="{{ asset('/images/icons/people.svg') }}" alt="" class="block h-8 sm:h-9 w-auto" />
                             <p>Network</p>
