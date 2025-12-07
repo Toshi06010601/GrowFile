@@ -45,7 +45,7 @@
 
                     @auth
                         <a class="flex flex-col justify-end items-center hover:text-black"
-                            href={{ route('professional_profile.edit', $userProfile->slug) }}>
+                            href={{ route('professional_profile.show', $userProfile->slug) }}>
                             <p>Profile</p>
                         </a>
                     @endauth

@@ -51,7 +51,7 @@ class ProfessionalProfileController extends Controller
         // 4. Add following/followed filter if requested
         $profilesQuery->with('user.authFollows')
                       ->with('user.authFollowed');
-                      
+
         if($following) {
             $profilesQuery
                 ->Has('user.authFollows');
@@ -111,7 +111,7 @@ class ProfessionalProfileController extends Controller
             'linkedin_link' => '',
         ]);
 
-        return redirect(route('professional_profile.edit', $slug));
+        return redirect(route('professional_profile.show', $slug));
     }
 
     // Get the selected profile based on slug

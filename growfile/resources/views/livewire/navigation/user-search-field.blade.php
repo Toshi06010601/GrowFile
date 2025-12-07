@@ -44,7 +44,7 @@
             {{-- View all results option --}}
             @if (!empty($suggestions))
                 <li class="relative first:mt-1 mb-1 py-1 border-b-0 border-dashed">
-                    <a href={{ route('professional_profile.index', ['name' => $search]) }}
+                    <a href="{{ route('professional_profile.index', ['name' => $search]) }}"
                         class="flex flex-row justify-start items-center ml-3">
                         <p class="text-blue-700 text-sm md:text-md">View Search Results</p>
                     </a>

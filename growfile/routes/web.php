@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
 
 
 //Professional Profile Routes
-Route::get('professional_profile/results/{name?}', [ProfessionalProfileController::class, 'index']
+Route::get('professional_profile/results', [ProfessionalProfileController::class, 'index']
 )->name('professional_profile.index');
 
 Route::get('professional_profile/create', [ProfessionalProfileController::class, 'create'])
@@ -30,8 +30,5 @@ Route::post('professional_profile', [ProfessionalProfileController::class, 'stor
 
 Route::get('professional_profile/{slug}', [ProfessionalProfileController::class, 'show']
 )->name('professional_profile.show');
-
-Route::get('professional_profile/{slug}/edit', [ProfessionalProfileController::class, 'edit']
-)->middleware(['auth', 'verified'])->name('professional_profile.edit');
 
 require __DIR__.'/auth.php';
