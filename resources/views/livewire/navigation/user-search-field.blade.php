@@ -35,7 +35,7 @@
                             <img src="{{ $suggestion->profile_image_path }}" alt="profile image"
                                 class="w-full h-full object-cover">
                         </div>
-                        <p class="text-gray-700 text-wrap text-sm md:text-md">{{ $suggestion->full_name }}</p>
+                        <p class="text-gray-700 text-wrap text-sm md:text-base">{{ $suggestion->full_name }}</p>
                         <p class="text-gray-500 text-wrap text-xs md:text-sm">{{ $suggestion->headline }}</p>
                     </a>
                 </li>
@@ -46,14 +46,14 @@
                 <li class="relative first:mt-1 mb-1 py-1 border-b-0 border-dashed">
                     <a href="{{ route('professional_profile.index', ['name' => $search]) }}"
                         class="flex flex-row justify-start items-center ml-3">
-                        <p class="text-blue-700 text-sm md:text-md">View Search Results</p>
+                        <p class="text-blue-700 text-sm md:text-base">View Search Results</p>
                     </a>
                 </li>
             @else
                 <li class="relative first:mt-1 mb-1 py-1 border-b-0 border-dashed">
                     <a href="{{ route('professional_profile.index') }}"
                         class="flex flex-row justify-start items-center ml-3">
-                        <p class="text-blue-700 text-sm md:text-md">View All Profiles</p>
+                        <p class="text-blue-700 text-sm md:text-base">View All Profiles</p>
                     </a>
                 </li>
             @endif

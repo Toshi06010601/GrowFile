@@ -1,7 +1,7 @@
 {{-- resources/views/components/profile-filter.blade.php --}}
 <div class="flex flex-col pt-7 sm:pt-0">
     {{-- Navigation links --}}
-    <div class="flex flex-col gap-1 mt-2 text-md text-gray-800">
+    <div class="flex flex-col gap-1 mt-2 text-base text-gray-800">
         <a href="{{ route('professional_profile.index') }}" 
            class="hover:text-blue-600 transition">All</a>
         @auth
@@ -17,7 +17,7 @@
     {{-- Filter section --}}
     <div>
         <div class="flex flex-row justify-between items-end mt-2">
-            <h2 class="text-md text-gray-800 font-medium">Filter</h2>
+            <h2 class="text-base text-gray-800 font-medium">Filter</h2>
             <a class="text-sm text-gray-400 hover:text-gray-600" 
                href="{{ route('professional_profile.index') }}">
                 Reset filters

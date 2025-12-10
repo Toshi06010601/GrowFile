@@ -84,7 +84,7 @@
                     </li>
                 @endforeach
             </ul>
-            <div class="my-4">
+            <div class="my-4 sm:pr-24">
                 {{ $profiles->appends(request()->except('page'))->links() }}
             </div>
         </section>

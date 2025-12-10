@@ -18,7 +18,7 @@
     {{-- Display User Skills below --}}
     <ul class="flex flex-col">
         @foreach ($experiences as $experience)
-            <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0 text-md sm:text-lg">
+            <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0 text-base sm:text-lg">
 
                 {{-- Experience item header --}}
                 <div class="flex flex-row justify-between">

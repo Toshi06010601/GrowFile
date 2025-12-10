@@ -4,7 +4,7 @@
         for="{{ $idPrefix }}-{{ $userId }}"
         class="
             px-3 rounded-full border-2 border-green-800
-            text-green-900  text-xs sm:text-md py-0.5 sm:py-1 cursor-pointer 
+            text-green-900  text-xs sm:text-base py-0.5 sm:py-1 cursor-pointer 
             transition duration-150
             peer-checked:bg-green-900         
             peer-checked:text-white          

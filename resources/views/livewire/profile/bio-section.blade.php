@@ -17,7 +17,7 @@
     </x-slot>
 
     {{-- Bio (Shorten to 200 if longer) --}}
-    <div class="text-gray-600 text-md sm:text-lg">
+    <div class="text-gray-600 text-base sm:text-lg">
         @if (Str::length($profile->bio) > 200)
             <div
                 x-data="{ open: true }">

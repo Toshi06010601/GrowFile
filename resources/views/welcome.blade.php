@@ -13,7 +13,7 @@
                 <div class="mx-auto">
                     <h2 class="text-3xl sm:text-5xl text-white font-semibold text-left">Grow your profile</h2>
                     <h2 class="text-3xl sm:text-5xl text-white font-semibold text-right">at every step your learn</h2>
-                    <p class="text-md sm:text-xl text-gray-200 text-center sm:text-left text-wrap mt-2 sm:mt-4">
+                    <p class="text-base sm:text-xl text-gray-200 text-center sm:text-left text-wrap mt-2 sm:mt-4">
                         Centralise all your learning records and achievements in one place <br> 
                         to showcase your skills, knowledge, and learning ability
                     </p>

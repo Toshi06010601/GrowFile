@@ -12,7 +12,7 @@
             </h3>
         </div>
         <p class="text-gray-500 text-lg sm:text-xl">{{ $sub_title }}</p>
-        <p class="text-md sm:text-xl font-thin text-gray-600 text-left text-wrap">
+        <p class="text-base sm:text-xl font-thin text-gray-600 text-left text-wrap">
             {{ $description }}
         </p>
     </div>

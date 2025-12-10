@@ -1,5 +1,5 @@
 {{-- Profile section --}}
-<div class="py-1 sm:py-0 space-y-2 text-md sm:text-lg">
+<div class="py-1 sm:py-0 space-y-2 text-base sm:text-lg">
 
     {{-- Display profile details below for laptop --}}
     <div class="ml-5 mb-8 sm:m-0 flex flex-row sm:flex-col justify-start items-center relative">
@@ -46,7 +46,7 @@
             </div>
 
             {{-- Github link and Linkedin --}}
-            <div class="flex flex-row justify-center gap-3 mt-5 text-sm sm:text-md">
+            <div class="flex flex-row justify-center gap-3 mt-5 text-sm sm:text-base">
                 {{-- Github --}}
                 <figure class="flex flex-col">
                     <a href={{ $profile->github_link }} target="_blank" class="hover:scale-105">
