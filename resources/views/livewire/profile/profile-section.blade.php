@@ -8,7 +8,7 @@
         <div class="mx-auto max-w-xs flex flex-col justify-around items-start">
             <div class="relative w-24 sm:w-32 mx-auto">
                 {{-- Profile image --}}
-                <div class="size-20 sm:size-28 rounded-full overflow-hidden mx-auto">
+                <div class="size-20 sm:size-28 rounded-full overflow-hidden mx-auto border-2 border-white shadow-md">
                     <img src="{{ $profile->profile_image_path }}" alt="profile image" class="w-full h-full object-cover">
                 </div>
 
