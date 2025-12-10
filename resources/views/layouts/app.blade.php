@@ -22,11 +22,7 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-neutral-600 flex flex-col">
-        @auth
-            @include('layouts.navigation')
-        @else
-            @include('layouts.navigation-for-guest')
-        @endauth
+        @include('layouts.navigation')
 
         <!-- Page Content -->
         <main class="flex-1 flex flex-col">
