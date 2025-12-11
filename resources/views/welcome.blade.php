@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                {{-- Mobile: Display image here --}}
+                {{-- For Mobile: Display image here --}}
                 <div class="block overflow-hidden sm:ml-10 rounded-lg sm:w-56 sm:hidden">
                     <img src="{{ asset('images/profile-page.png') }}" alt="profile page">
                 </div>
@@ -35,16 +35,16 @@
                     </x-welcome.hero-item>
                 </div>
 
-                {{-- Guest: Show login/register option --}}
+                {{-- For Guest: Show login/register option --}}
                 @guest
-                    <div class="sm:ml-7 flex flex-row gap-2 items-center justify-start">
+                    <div class="mx-auto sm:mx-0 flex flex-row gap-2 items-center sm:justify-start">
                         <x-secondary-button :href="route('login')" class="hover:scale-105">Login</x-secondary-button>
                         <x-primary-button :href="route('register')" class="hover:scale-105">Register</x-primary-button>
                     </div>
                 @endguest
             </div>
 
-            {{-- Laptop: Display this image --}}
+            {{-- For Laptop: Display this image --}}
             <div class="hidden sm:block sm:flex-1 sm:w-96 sm:p-7 overflow-hidden ml-10 rounded-lg">
                 <img src="{{ asset('images/profile-page.png') }}" alt="profile page">
             </div>
@@ -55,12 +55,9 @@
             <x-welcome.section-tag>
                 Features
             </x-welcome.section-tag>
-            <x-welcome.section-title class="text-center sm:text-left">Turn your hardwork into career
-                leverage</x-welcome.section-title>
-            {{-- <p class="mt-1 sm:mt-3 text-md sm:text-xl text-gray-200 text-center sm:text-left text-wrap">
-                Enhance your resume with proof of progress that recruiters can trust while fueling your motivation to
-                keep learning
-            </p> --}}
+            <x-welcome.section-title class="text-center sm:text-left">
+                Turn your hardwork into career leverage
+            </x-welcome.section-title>
             <div class="mt-1 sm:mt-3">
                 <x-welcome.section-subtitle>
                     Enhance your resume with proof of progress that recruiters can trust while fueling your motivation
