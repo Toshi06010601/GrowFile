@@ -55,7 +55,7 @@
                                         <img :src="profile_image_path" alt="profile image"
                                             class="w-full h-full object-cover">
                                     </div>
-                                    <div class="inline-flex items-center">
+                                    <div class="inline-flex justify-center items-center">
                                         <div>Me</div>
 
                                         <div class="ms-1">
