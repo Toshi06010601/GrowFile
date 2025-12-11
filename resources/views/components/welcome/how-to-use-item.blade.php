@@ -4,10 +4,10 @@
     <div class="flex-1 flex flex-col justify-center gap-1 md:gap-3">
         <div class="flex flex-row items-start gap-2 sm:mt-5">
             <div
-                class="bg-green-900 size-8 text-center flex justify-center items-center rounded-full text-white text-sm sm:text-lg font-bold">
+                class="bg-green-900 size-7 text-center flex justify-center items-center rounded-full text-white text-sm sm:text-lg font-bold">
                 {{ $numbering }}
             </div>
-            <h3 class="text-xl sm:text-3xl flex-1 text-gray-600 font-semibold text-left">
+            <h3 class="text-xl sm:text-2xl flex-1 text-gray-600 font-semibold text-left">
                 {{ $title }}
             </h3>
         </div>

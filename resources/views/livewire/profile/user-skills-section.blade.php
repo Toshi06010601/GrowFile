@@ -2,7 +2,7 @@
 <x-side-section>
 
     <x-slot name="header">
-        <h2 class="text-lg sm:text-xl font-medium text-gray-700">
+        <h2 class="text-xl font-semibold text-gray-700">
             Skills
         </h2>
 
@@ -17,7 +17,7 @@
     {{-- Display User Skills below --}}
     <ul class="flex flex-col max-h-96 overflow-y-scroll">
         @foreach ($userSkills->take($numOfSkills) as $userSkill)
-            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between text-md sm:text-lg">
+            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between text-gray-600 text-base sm:text-xl">
                 <p>
                     {{ $userSkill->skill->name }}
                 </p>
@@ -42,7 +42,7 @@
     </ul>
 
     {{-- Show All Button if more than 5 skills --}}
-    <div class="text-neutral-500 text-sm sm:text-md">
+    <div class="text-neutral-500 text-base">
         @if (count($userSkills) > 5)
             @if ($numOfSkills === 5)
                 <div class="mt-3 flex flex-row justify-center">

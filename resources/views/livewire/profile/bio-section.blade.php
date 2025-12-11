@@ -3,7 +3,7 @@
 
     {{-- Header --}}
     <x-slot name="header" class="flex flex-row justify-between">
-        <h2 class="text-lg sm:text-xl font-medium text-gray-700">
+        <h2 class="text-xl font-semibold text-gray-700">
             About
         </h2>
         
@@ -17,7 +17,7 @@
     </x-slot>
 
     {{-- Bio (Shorten to 200 if longer) --}}
-    <div class="text-gray-600 text-base sm:text-lg">
+    <div class="text-gray-600 text-base sm:text-xl">
         @if (Str::length($profile->bio) > 200)
             <div
                 x-data="{ open: true }">

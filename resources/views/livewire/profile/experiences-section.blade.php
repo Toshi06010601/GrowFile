@@ -2,7 +2,7 @@
 <x-side-section>
 
     <x-slot name="header">
-        <h2 class="text-lg sm:text-xl font-medium text-gray-700">
+        <h2 class="text-xl font-semibold text-gray-800">
             Experiences
         </h2>
 
@@ -18,12 +18,12 @@
     {{-- Display User Skills below --}}
     <ul class="flex flex-col">
         @foreach ($experiences as $experience)
-            <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0 text-base sm:text-lg">
+            <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0 text-base font-normal text-gray-600">
 
                 {{-- Experience item header --}}
                 <div class="flex flex-row justify-between">
 
-                    <h3 class="text-black">
+                    <h3 class="text-lg sm:text-xl font-medium">
                         {{ $experience->company_name }}
                     </h3>
 
@@ -34,26 +34,26 @@
                     @endif
                 </div>
 
+                {{-- Role --}}
+                <div>
+                    {{ $experience->role }}
+                </div>
+
                 {{-- Work period --}}
-                <div class="mt-1 text-gray-700">
+                <div>
                     {{ $experience->start_month->format('M Y') }} -
                     {{ $experience->end_month ? $experience->end_month->format('M Y') : 'Present' }}
                 </div>
 
-                {{-- Role --}}
-                <div class="mt-1 text-gray-700">
-                    {{ $experience->role }}
-                </div>
-
                 {{-- Work description (Shorten to 100 if longer) --}}
                 @if (Str::length($experience->description) > 100)
-                    <div x-data="{ open: true }" class="mt-1 text-gray-600">
+                    <div x-data="{ open: true }" class="mt-1">
                         <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button @click="open = false">...see
                                 more</button></p>
                         <p x-show="!open">{{ $experience->description, 100 }} <button @click="open = true">...see less</button></p>
                     </div>
                 @else
-                    <p class="text-gray-600">{{ $experience->description }}</p>
+                    <p>{{ $experience->description }}</p>
                 @endif
 
             </li>

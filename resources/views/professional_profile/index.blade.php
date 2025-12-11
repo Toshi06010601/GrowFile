@@ -3,7 +3,7 @@
 
         {{--Filter Modal for mobile --}}
         <x-modal name="filter-profiles" :show="false" focusable>
-            <div class="flex bg-white rounded-xl py-2 px-5 w-full flex-col">
+            <div class="flex bg-gray-50 rounded-xl py-2 px-5 w-full flex-col">
                 <x-modal.icon-close />
                 {{-- Reusable filter component --}}
                 <x-profile-filter 
@@ -18,7 +18,7 @@
         </x-modal>
 
         {{-- Filter Side bar for laptop --}}
-        <aside class="hidden sm:flex bg-white rounded-xl py-2 px-5 w-56 flex-col flex-shrink-0">
+        <aside class="hidden sm:flex bg-gray-50 rounded-xl py-2 px-5 w-56 flex-col flex-shrink-0">
                <x-profile-filter 
                     :groupedSkills="$groupedSkills"
                     :selectedSkills="$selectedSkills ?? []"
@@ -30,7 +30,7 @@
         </aside>
 
         {{-- Search result --}}
-        <section class="flex-grow bg-white rounded-xl py-5 px-7 md:px-10">
+        <section class="flex-grow bg-gray-50 rounded-xl py-5 px-5 md:px-10">
             <div class="flex flex-row justify-between items-center mb-3">
                 <h1 class="text-2xl md:text-3xl font-medium">Search Result</h1>
                 <button type="button" class="sm:hidden" x-data="" x-on:click="$dispatch('open-modal', 'filter-profiles')">
@@ -38,10 +38,10 @@
                         class="w-5 mx-2 cursor-pointer hover:scale-110" />
                 </button>
             </div>
-            <ul class="flex flex-row justify-start flex-wrap gap-4">
+            <ul class="flex flex-row justify-start flex-wrap gap-2 sm:gap-4">
                 @foreach ($profiles as $profile)
                     <li wire:key="{{ $profile->id }}"
-                        class="relative flex flex-col justify-between pb-3 w-36 h-64 sm:w-48 sm:h-72 bg-white border-2 border-gray-300 rounded-md overflow-hidden shadow-lg shadow-gray-400 hover:scale-105">
+                        class="relative flex flex-col justify-between pb-3 w-40 h-72 sm:w-56 sm:h-80 bg-gray-50 border-2 border-gray-300 rounded-md overflow-hidden shadow-lg shadow-gray-400 hover:scale-105">
                         <a href="{{ route('professional_profile.show', $profile->slug) }}"
                             class="h-full flex flex-col items-center">
                             {{-- Background image --}}
@@ -53,21 +53,21 @@
                             <div
                                 class="absolute top-3 z-10 w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
                                 <img src="{{ $profile->profile_image_path }}" alt="profile image"
-                                    class="w-full h-full object-cover bg-white">
+                                    class="w-full h-full object-cover bg-gray-50">
                             </div>
                             <div class="flex-1 flex flex-col justify-start p-1">
                                 {{-- Full name --}}
-                                <p class="text-sm text-center mt-4 line-clamp-1">
+                                <p class="text-base text-gray-900 text-center mt-4 line-clamp-1">
                                     <strong>{{ $profile->full_name }}</strong>
                                 </p>
                                 {{-- headline --}}
-                                <p class="text-xs md:text-sm text-center text-gray-700 line-clamp-2">
+                                <p class="text-base md:text-base text-center text-gray-600 line-clamp-2">
                                     {{ $profile->headline }}</p>
                                 {{-- location --}}
-                                <p class="text-xs md:text-sm text-center text-gray-600 line-clamp-1">
+                                <p class="text-base md:text-base text-center text-gray-600 line-clamp-1">
                                     {{ $profile->location }}</p>
                                 {{-- bio --}}
-                                <p class="text-xs md:text-sm text-center text-gray-500 line-clamp-3 mt-2">
+                                <p class="text-base md:text-base text-center text-gray-500 line-clamp-3 mt-2">
                                     {{ $profile->bio }}
                                 </p>
 
