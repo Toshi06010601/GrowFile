@@ -30,7 +30,7 @@
         </aside>
 
         {{-- Search result --}}
-        <section class="flex-grow bg-gray-50 rounded-xl py-5 px-5 md:px-10">
+        <section class="flex-grow bg-gray-50 rounded-xl py-5  px-3 sm:px-5 md:px-10">
             <div class="flex flex-row justify-between items-center mb-3">
                 <h1 class="text-2xl md:text-3xl font-medium">Search Result</h1>
                 <button type="button" class="sm:hidden" x-data="" x-on:click="$dispatch('open-modal', 'filter-profiles')">
@@ -41,7 +41,7 @@
             <ul class="flex flex-row justify-start flex-wrap gap-2 sm:gap-4">
                 @foreach ($profiles as $profile)
                     <li wire:key="{{ $profile->id }}"
-                        class="relative flex flex-col justify-between pb-3 w-40 h-72 sm:w-56 sm:h-80 bg-gray-50 border-2 border-gray-300 rounded-md overflow-hidden shadow-lg shadow-gray-400 hover:scale-105">
+                        class="relative flex flex-col justify-between pb-3 w-36 h-72 sm:w-56 sm:h-80 bg-gray-50 border-2 border-gray-300 rounded-md overflow-hidden shadow-lg shadow-gray-400 hover:scale-105">
                         <a href="{{ route('professional_profile.show', $profile->slug) }}"
                             class="h-full flex flex-col items-center">
                             {{-- Background image --}}
@@ -61,7 +61,7 @@
                                     <strong>{{ $profile->full_name }}</strong>
                                 </p>
                                 {{-- headline --}}
-                                <p class="text-base md:text-base text-center text-gray-600 line-clamp-2">
+                                <p class="text-base md:text-base text-center text-gray-600 line-clamp-1">
                                     {{ $profile->headline }}</p>
                                 {{-- location --}}
                                 <p class="text-base md:text-base text-center text-gray-600 line-clamp-1">

@@ -47,13 +47,13 @@
 
                 {{-- Work description (Shorten to 100 if longer) --}}
                 @if (Str::length($experience->description) > 100)
-                    <div x-data="{ open: true }" class="mt-1">
+                    <div x-data="{ open: true }" class="text-sm sm:text-base mt-1">
                         <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button @click="open = false">...see
                                 more</button></p>
                         <p x-show="!open">{{ $experience->description, 100 }} <button @click="open = true">...see less</button></p>
                     </div>
                 @else
-                    <p>{{ $experience->description }}</p>
+                    <p class="text-sm sm:text-base">{{ $experience->description }}</p>
                 @endif
 
             </li>

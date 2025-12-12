@@ -2,7 +2,7 @@
 <div class="py-1 sm:py-0 space-y-2 text-base sm:text-xl">
 
     {{-- Display profile details below for laptop --}}
-    <div class="ml-5 mb-2 sm:m-0 flex flex-row sm:flex-col justify-start items-center relative">
+    <div class="ml-5 mb-7 sm:m-0 flex flex-row sm:flex-col justify-start items-center relative">
 
         {{-- Profile header area --}}
         <div class="mx-auto max-w-xs flex flex-col justify-around items-start">
@@ -14,7 +14,7 @@
 
                 {{-- Laptop: Show edit icon for owner --}}
                 @can('update', $profile)
-                    <x-section.edit-icon class="hidden sm:block absolute z-10 bottom-0 right-0" x-data=""
+                    <x-section.edit-icon class="block absolute z-10 bottom-0 -right-1" x-data=""
                         x-on:click="
                 $dispatch('set-profile', { id: {{ $profile->id }} });" />
                 @endcan
@@ -74,14 +74,6 @@
                 @endif
             @endauth
         </div>
-
-
-        {{-- Mobile: Show edit icon for owner --}}
-        @can('update', $profile)
-            <x-section.edit-icon class="sm:hidden absolute -bottom-8 right-2" x-data=""
-                x-on:click="
-                    $dispatch('set-profile', { id: {{ $profile->id }} });" />
-        @endcan
     </div>
 
 </div>
