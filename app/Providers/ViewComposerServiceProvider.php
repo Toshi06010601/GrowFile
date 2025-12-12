@@ -48,5 +48,18 @@ class ViewComposerServiceProvider extends ServiceProvider
             
             $view->with('userProfile', $userProfile);
         });
+
+        // Share with welcome page
+        View::composer('welcome', function ($view) {
+            $userProfile = null;
+            
+            if (Auth::check()) {
+                $userProfile = Profile::where('user_id', Auth::id())
+                    ->select('slug')
+                    ->first();
+            }
+            
+            $view->with('userProfile', $userProfile);
+        });
     }
 }
