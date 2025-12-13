@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-5 font-garamond flex flex-col items-center gap-10 px-5 sm:px-10">
+    <div class="py-5 md:py-10 flex flex-col items-center gap-10 px-5 sm:px-10">
 
         {{-- Section 1: Hero --}}
         <section class="bg-neutral-700 px-6 sm:px-8 lg:px-12 rounded-lg max-w-7xl flex flex-col justify-between gap-3 sm:gap-10 md:gap-16 lg:flex-row">
@@ -21,13 +21,13 @@
                 </div>
                 @guest
                     <div class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
-                        <a href="{{ route('login') }}"
-                            class="w-full sm:w-auto inline-block rounded-lg bg-green-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-800 focus-visible:ring active:bg-green-700 md:text-base">
-                            Login
-                        </a>
                         <a href="{{ route('register') }}"
-                            class="w-full sm:w-auto inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-green-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">
-                            Register
+                        class="w-full sm:w-auto inline-block rounded-lg bg-green-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-800 focus-visible:ring active:bg-green-700 md:text-base">
+                            Start Now
+                        </a>
+                        <a href="{{ route('login') }}"
+                            class="w-full sm:w-auto inline-block rounded-lg bg-white px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-green-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">
+                            Login
                         </a>
                     </div>
                 @endguest
