@@ -10,7 +10,7 @@
         {{-- Section 1: Hero --}}
         <section class="bg-neutral-700 px-6 sm:px-8 lg:px-12 rounded-lg max-w-7xl flex flex-col justify-between gap-3 sm:gap-10 md:gap-16 lg:flex-row">
             <div class="flex flex-col justify-center sm:text-center py-5 lg:text-left xl:w-5/12 xl:py-12">
-                <p class="mb-4 font-semibold text-green-600 md:mb-6 md:text-lg xl:text-xl">Now launching</p>
+                <p class="mb-4 font-semibold text-green-700 md:mb-6 md:text-lg xl:text-xl">Now launching</p>
                 <x-welcome.section-title class="text-left">Grow your profile at every step your
                     learn</x-welcome.section-title>
                 <div>
