@@ -33,7 +33,7 @@
 
                 <div class="flex flex-col gap-1">
                     {{-- Display category and activity --}}
-                    <p><strong class="underline">{{ $record->category }}</strong>: {{ $record->activity }}</p>
+                    <p><strong>{{ $record->category }}</strong>: {{ $record->activity }}</p>
 
                     <div class="flex flex-row justify-between">
                         {{-- Display all tags --}}

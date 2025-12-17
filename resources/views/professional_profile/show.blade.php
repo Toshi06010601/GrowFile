@@ -6,7 +6,12 @@
                 <livewire:Profile.BackgroundSection :profileId="$profile->id" />
             </div>
 
-            <livewire:Profile.StudyRecordsSection :userId="$profile->user_id" />
+            <div class="flex flex-col gap-6">
+                <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
+    
+                <livewire:Profile.StudyRecordsSection :userId="$profile->user_id" />
+
+            </div>
 
             @can('update', $profile)
                 <livewire:Profile.BackgroundForm />
