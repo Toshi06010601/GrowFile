@@ -87,8 +87,8 @@
                 </div>
             @else
                 <div class="flex flex-row gap-2 items-center">
-                    <x-secondary-button :href="route('login')" class="hover:scale-105">Login</x-secondary-button>
                     <x-primary-button :href="route('register')" class="hover:scale-105">Start Now</x-primary-button>
+                    <x-secondary-button :href="route('login')" class="hover:scale-105">Start Now</x-secondary-button>
                 </div>
             @endauth
         </section>

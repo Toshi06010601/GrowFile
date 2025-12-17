@@ -4,9 +4,9 @@
 }" @set-profile-menu-icon.window="profile_image_path = event.detail[0].filePath;"
     class="bg-gray-50 border-b border-gray-100 py-2">
     <!-- Primary Navigation Menu -->
-    <div class="px-2 sm:px-0 max-w-6xl mx-auto">
+    <div class="max-w-6xl mx-auto">
         <div class="flex justify-between h-16">
-            <div class="w-full flex items-center gap-4 md:gap-8">
+            <div class="px-2 w-full flex items-center gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="hover:scale-105">

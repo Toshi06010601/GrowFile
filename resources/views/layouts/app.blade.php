@@ -13,8 +13,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.png') }}">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
@@ -33,6 +31,7 @@
 
         @include('layouts.footer')
     </div>
+    @stack('scripts')
 </body>
 
 </html>
