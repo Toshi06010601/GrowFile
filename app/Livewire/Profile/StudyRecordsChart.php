@@ -61,7 +61,6 @@ class StudyRecordsChart extends Component
             ];
         });
 
-        // $this->chartData = json_encode($chartData,JSON_PRETTY_PRINT);
     }
 
     public function render()

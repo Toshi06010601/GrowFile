@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Center the event title horizontally and vertically */
+.fc-event-title {
+    text-align: left;
+    margin-left: 10%;
+}

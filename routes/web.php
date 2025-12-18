@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileSearchController;
 use App\Http\Controllers\ProfessionalProfileController;
 use App\Http\Controllers\RegisterProfileController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,5 +31,9 @@ Route::post('professional_profile', [ProfessionalProfileController::class, 'stor
 
 Route::get('professional_profile/{slug}', [ProfessionalProfileController::class, 'show']
 )->name('professional_profile.show');
+
+//EventController Routes
+Route::get('/events', [EventController::class, 'index']
+);
 
 require __DIR__.'/auth.php';
