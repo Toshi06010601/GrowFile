@@ -21,13 +21,20 @@
             //windowに変数を入れて Alpine/Livewire の監視対象から外す
             window.studyChart = new Chart(
                 document.getElementById('study-hour-chart'), {
-                    type: 'bar',
+                    type: 'doughnut',
                     data: {
                         labels: this.chartData.map(row => row.study_date),
                         datasets: [{
                             label: 'Study hours per day',
-                            data: this.chartData.map(row => row.study_hours)
+                            data: this.chartData.map(row => row.study_hours),
+                            backgroundColor: 'rgba(22, 163, 74, 0.5)',
+                            borderColor: 'rgba(22, 163, 74, 1)',
+                            borderWidth: 1
                         }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // Critical for custom container heights
                     }
                 }
             );
@@ -47,14 +54,14 @@
 
     }">
 
-        <div class="w-full px-3">
+        <div class="relative h-[250px] w-full">
             <canvas id="study-hour-chart" wire:ignore>
             </canvas>
         </div>
 
-        <nav class="flex flex-row justify-between">
-            <a wire:click="loadPrevChart">prev</a>
-            <a wire:click="loadNextChart">next</a>
+        <nav class="my-5 px-3 flex flex-row justify-between">
+            <a wire:click="loadPrevChart" class="relative text-green-700 cursor-pointer w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-green-800 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left">Prev</a>
+            <a wire:click="loadNextChart" class="relative text-green-700 cursor-pointer w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-green-800 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left">Next</a>
         </nav>
 
     </div>
