@@ -46,14 +46,6 @@ class StudyRecordsChart extends Component
             ->selectRaw('SUM(EXTRACT(EPOCH FROM (end_datetime - start_datetime))) / 3600 AS study_hours')
             ->groupBy($this->groupBy)
             ->get()
-            ->map(function ($item) {
-                return [
-                    'label' => $item->{$this->groupBy} ?? 'Uncategorized', 
-                    'data' => [(float) $item->study_hours],
-                    'borderWidth' => 2,
-                    'barThickness' => 10,
-                ];
-            })
             ->toArray();
     }
 

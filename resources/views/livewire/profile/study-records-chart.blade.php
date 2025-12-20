@@ -1,10 +1,9 @@
 <x-section>
     <x-slot name="header">
         <h2 class="text-xl sm:text-2xl font-medium text-gray-900">
-            Study Stats
+            Statistics
         </h2>
     </x-slot>
-    {{-- AlpineJS to initialize and update chart --}}
     <div class="flex flex-col" x-data="{
         chartData: @entangle('chartData'),
         groupBy: @entangle('groupBy'),
@@ -23,15 +22,17 @@
             //windowに変数を入れて Alpine/Livewire の監視対象から外す
             window.studyChart = new Chart(
                 document.getElementById('study-hour-chart'), {
-                    type: 'bar',
+                    type: 'doughnut',
                     data: {
-                        labels: ['study hours'],
-                        datasets: this.chartData,
+                        labels: this.chartData.map(row => row[this.groupBy]),
+                        datasets: [{
+                            label: 'Study hours per day',
+                            data: this.chartData.map(row => row.study_hours),
+                        }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false, // Critical for custom container heights
-                        indexAxis: 'y',
                         plugins: {
                             colors: {
                                 forceOverride: true // This forces Chart.js to generate colors
@@ -41,26 +42,6 @@
                                 position: 'bottom'
                             },
                         },
-                        scales: {
-                            x: {
-                                stacked: true, // Enable stacking on x-axis
-                               
-                                beginAtZero: true,
-                                grid: {
-                                    display: true
-                                }
-                            },
-                            y: {
-                                stacked: true, // Enable stacking on y-axis
-                                title: {
-                                    display: false
-                                },
-                                grid: {
-                                    display: false
-                                }
-                            }
-                        }
-    
                     }
                 }
             );
@@ -71,7 +52,8 @@
     
             if (!chart) return;
     
-            chart.data.datasets = this.chartData;
+            chart.data.labels = this.chartData.map(row => row[this.groupBy]);
+            chart.data.datasets[0].data = this.chartData.map(row => row.study_hours);
     
             chart.update();
     
@@ -86,16 +68,33 @@
             </select>
         </div>
 
-        <div class="mb-5 relative h-[100px] w-full">
-            <canvas id="study-hour-chart" wire:ignore></canvas>
+        <nav class="flex flex-row justify-between">
+            <div class="inline-flex my-5">
+                <x-tertiary-button class="rounded-l-md" wire:click="loadPrevChart">
+                    <img src={{ asset('images/icons/prev.svg') }} alt="prev-icon"
+                        class="w-4 cursor-pointer hover:scale-110">
+                </x-tertiary-button>
+    
+                 <x-tertiary-button class="rounded-r-md" wire:click="loadNextChart">
+                <img src={{ asset('images/icons/next.svg') }} alt="prev-icon" class="w-4 cursor-pointer hover:scale-110">
+                </x-tertiary-button>
+            </div>
+            <div class="inline-flex my-5">
+              <x-tertiary-button class="rounded-l-md">
+                   <p class="text-white font-normal">month</p>
+                </x-tertiary-button>
+                
+                <x-tertiary-button class="rounded-r-md font-normal">
+                     <p class="text-white">week</p>
+                </x-tertiary-button>
+            </div>
+
+        </nav>
+
+        <div class="relative h-[250px] w-full">
+            <canvas id="study-hour-chart" wire:ignore>
+            </canvas>
         </div>
-{{-- 
-        <nav class="mb-5 px-3 flex flex-row justify-between items-center">
-            <a wire:click="loadPrevChart"
-                class="relative px-3 text-blue-700 cursor-pointer w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-green-800 after:w-2/3 after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left">prev</a>
-            <a wire:click="loadNextChart"
-                class="relative px-3 text-blue-700 cursor-pointer w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-green-800 after:w-2/3 after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left">next</a>
-        </nav> --}}
 
     </div>
 
