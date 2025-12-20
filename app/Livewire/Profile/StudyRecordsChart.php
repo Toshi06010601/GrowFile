@@ -12,29 +12,87 @@ class StudyRecordsChart extends Component
     public $chartData = [];
     public $groupBy = 'category';
     public $userId;
+    public $currentAnchor;
     public $startDate;
     public $endDate;
+    public $viewType = 'week';
 
     public function mount($userId) {
         $this->userId = $userId;
-        $this->startDate = Carbon::today()->subDays(6);
-        $this->endDate = Carbon::today()->addDays(1);
+        $this->currentAnchor = now()->startOfWeek();
+        $this->startDate = now()->startOfWeek();
+        $this->endDate = now()->endOfWeek();
         $this->loadChartData();
     }
 
     public function loadPrevChart() {
-        $this->startDate->subDays(7);
-        $this->endDate->subDays(7);
-        $this->loadChartData(); 
+        $this->currentAnchor = match($this->viewType) {
+            'week' => $this->currentAnchor->subWeek()->startOfWeek(),
+            'month' => $this->currentAnchor->subMonth()->startOfMonth(),
+            'year' => $this->currentAnchor->subYear()->startOfYear(),
+        };
+        $this->startDate = match($this->viewType) {
+            'week' => $this->currentAnchor->copy()->startOfWeek(),
+            'month' => $this->currentAnchor->copy()->startOfMonth(),
+            'year' => $this->currentAnchor->copy()->startOfYear(),
+        };
+        $this->endDate = match($this->viewType) {
+            'week' => $this->currentAnchor->copy()->endOfWeek(),
+            'month' => $this->currentAnchor->copy()->endOfMonth(),
+            'year' => $this->currentAnchor->copy()->endOfYear(),
+        };
+        $this->loadChartData();
+         \Log::info('currentAnchor is ' . $this->currentAnchor);
+        \Log::info('startDate is ' . $this->startDate);
+        \Log::info('endDate is ' . $this->endDate);
     }
 
     public function loadNextChart() {
-        $this->startDate->addDays(7);
-        $this->endDate->addDays(7);
+         $this->currentAnchor = match($this->viewType) {
+            'week' => $this->currentAnchor->addWeek()->startOfWeek(),
+            'month' => $this->currentAnchor->addMonth()->startOfMonth(),
+            'year' => $this->currentAnchor->addYear()->startOfYear(),
+        };
+        $this->startDate = match($this->viewType) {
+            'week' => $this->currentAnchor->copy()->startOfWeek(),
+            'month' => $this->currentAnchor->copy()->startOfMonth(),
+            'year' => $this->currentAnchor->copy()->startOfYear(),
+        };
+        $this->endDate = match($this->viewType) {
+            'week' => $this->currentAnchor->copy()->endOfWeek(),
+            'month' => $this->currentAnchor->copy()->endOfMonth(),
+            'year' => $this->currentAnchor->copy()->endOfYear(),
+        };
         $this->loadChartData(); 
+         \Log::info('currentAnchor is ' . $this->currentAnchor);
+         \Log::info('startDate is ' . $this->startDate);
+        \Log::info('endDate is ' . $this->endDate);
+        \Log::info('viewType is ' . $this->viewType);
     }
 
     public function UpdatedGroupBy() {
+        $this->loadChartData();
+    }
+
+    public function changeViewType($viewType) {
+        $this->viewType = $viewType;
+        \Log::info('current viewType is ' . $this->viewType);
+        $this->currentAnchor = match($this->viewType) {
+            'week' => now()->startOfWeek(),
+            'month' => now()->startOfMonth(),
+            'year' => now()->startOfYear(),
+        };
+        $this->startDate = match($this->viewType) {
+            'week' => $this->currentAnchor->copy()->startOfWeek(),
+            'month' => $this->currentAnchor->copy()->startOfMonth(),
+            'year' => $this->currentAnchor->copy()->startOfYear(),
+        };
+        $this->endDate = match($this->viewType) {
+            'week' => $this->currentAnchor->copy()->endOfWeek(),
+            'month' => $this->currentAnchor->copy()->endOfMonth(),
+            'year' => $this->currentAnchor->copy()->endOfYear(),
+        };
+
         $this->loadChartData();
     }
 

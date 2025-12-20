@@ -74,19 +74,23 @@
                     <img src={{ asset('images/icons/prev.svg') }} alt="prev-icon"
                         class="w-4 cursor-pointer hover:scale-110">
                 </x-tertiary-button>
-    
-                 <x-tertiary-button class="rounded-r-md" wire:click="loadNextChart">
-                <img src={{ asset('images/icons/next.svg') }} alt="prev-icon" class="w-4 cursor-pointer hover:scale-110">
+
+                <x-tertiary-button class="rounded-r-md" wire:click="loadNextChart">
+                    <img src={{ asset('images/icons/next.svg') }} alt="prev-icon"
+                        class="w-4 cursor-pointer hover:scale-110">
                 </x-tertiary-button>
             </div>
+            <div>
+                <p>{{ $startDate }} - {{ $endDate }}</p>
+            </div>
             <div class="inline-flex my-5">
-              <x-tertiary-button class="rounded-l-md">
-                   <p class="text-white font-normal">month</p>
-                </x-tertiary-button>
-                
-                <x-tertiary-button class="rounded-r-md font-normal">
-                     <p class="text-white">week</p>
-                </x-tertiary-button>
+                @foreach (['year', 'month', 'week'] as $view)
+                    <x-tertiary-button wire:click="changeViewType('{{ $view }}')"
+                        class="{{ $viewType === $view ? 'bg-[#4b5563] text-white' : 'bg-[#374151] text-gray-300' }} {{ $loop->first ? 'rounded-l-lg' : '' }} {{ $loop->last ? 'rounded-r-lg' : '' }} hover:text-white transition font-normal">
+                        {{ $view }}
+                    </x-tertiary-button>
+                @endforeach
+
             </div>
 
         </nav>
