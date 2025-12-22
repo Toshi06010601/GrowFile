@@ -16,6 +16,7 @@ class StudyRecordsChart extends Component
     public $startDate;
     public $endDate;
     public $viewType = 'week';
+    public $totalHours;
 
     public function mount($userId) {
         $this->userId = $userId;
@@ -31,20 +32,8 @@ class StudyRecordsChart extends Component
             'month' => $this->currentAnchor->subMonth()->startOfMonth(),
             'year' => $this->currentAnchor->subYear()->startOfYear(),
         };
-        $this->startDate = match($this->viewType) {
-            'week' => $this->currentAnchor->copy()->startOfWeek(),
-            'month' => $this->currentAnchor->copy()->startOfMonth(),
-            'year' => $this->currentAnchor->copy()->startOfYear(),
-        };
-        $this->endDate = match($this->viewType) {
-            'week' => $this->currentAnchor->copy()->endOfWeek(),
-            'month' => $this->currentAnchor->copy()->endOfMonth(),
-            'year' => $this->currentAnchor->copy()->endOfYear(),
-        };
+        $this->syncWithCurrentAnchor();
         $this->loadChartData();
-         \Log::info('currentAnchor is ' . $this->currentAnchor);
-        \Log::info('startDate is ' . $this->startDate);
-        \Log::info('endDate is ' . $this->endDate);
     }
 
     public function loadNextChart() {
@@ -53,47 +42,43 @@ class StudyRecordsChart extends Component
             'month' => $this->currentAnchor->addMonth()->startOfMonth(),
             'year' => $this->currentAnchor->addYear()->startOfYear(),
         };
-        $this->startDate = match($this->viewType) {
-            'week' => $this->currentAnchor->copy()->startOfWeek(),
-            'month' => $this->currentAnchor->copy()->startOfMonth(),
-            'year' => $this->currentAnchor->copy()->startOfYear(),
-        };
-        $this->endDate = match($this->viewType) {
-            'week' => $this->currentAnchor->copy()->endOfWeek(),
-            'month' => $this->currentAnchor->copy()->endOfMonth(),
-            'year' => $this->currentAnchor->copy()->endOfYear(),
-        };
+        $this->syncWithCurrentAnchor();
         $this->loadChartData(); 
-         \Log::info('currentAnchor is ' . $this->currentAnchor);
-         \Log::info('startDate is ' . $this->startDate);
-        \Log::info('endDate is ' . $this->endDate);
-        \Log::info('viewType is ' . $this->viewType);
     }
-
+    
     public function UpdatedGroupBy() {
         $this->loadChartData();
     }
-
+    
     public function changeViewType($viewType) {
         $this->viewType = $viewType;
-        \Log::info('current viewType is ' . $this->viewType);
         $this->currentAnchor = match($this->viewType) {
             'week' => now()->startOfWeek(),
             'month' => now()->startOfMonth(),
             'year' => now()->startOfYear(),
         };
+        
+        $this->syncWithCurrentAnchor();
+        $this->loadChartData();
+    }
+    
+    public function syncWithCurrentAnchor() {
         $this->startDate = match($this->viewType) {
             'week' => $this->currentAnchor->copy()->startOfWeek(),
             'month' => $this->currentAnchor->copy()->startOfMonth(),
             'year' => $this->currentAnchor->copy()->startOfYear(),
         };
+
         $this->endDate = match($this->viewType) {
             'week' => $this->currentAnchor->copy()->endOfWeek(),
             'month' => $this->currentAnchor->copy()->endOfMonth(),
             'year' => $this->currentAnchor->copy()->endOfYear(),
         };
 
-        $this->loadChartData();
+        \Log::info('currentAnchor is ' . $this->currentAnchor);
+        \Log::info('startDate is ' . $this->startDate);
+        \Log::info('endDate is ' . $this->endDate);
+        \Log::info('viewType is ' . $this->viewType);
     }
 
     public function loadChartData() {
@@ -105,6 +90,8 @@ class StudyRecordsChart extends Component
             ->groupBy($this->groupBy)
             ->get()
             ->toArray();
+        
+        $this->totalHours = collect($this->chartData)->sum('study_hours');
     }
 
     public function render()
