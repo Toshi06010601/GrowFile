@@ -65,7 +65,7 @@
                     }
                 },
 
-                events: '/events',
+                events: '/events?userId={{ $userId }}',
 
                 // Update title when dates change
                 datesSet: function(info) {

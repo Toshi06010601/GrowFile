@@ -7,12 +7,11 @@
             </div>
 
             <div class="flex flex-col gap-6">
-                @include('components.study-calendar')
+                @include('components.study-calendar', ['userId' => $profile->user_id])
                 
                 <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
     
                 <livewire:Profile.StudyRecordsSection :userId="$profile->user_id" />
-
 
             </div>
 

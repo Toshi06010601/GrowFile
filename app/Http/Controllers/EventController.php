@@ -14,12 +14,12 @@ class EventController extends Controller
     {
         $startDate = Carbon::parse($request->input('start'))->format('Y-m-d');
         $endDate = Carbon::parse($request->input('end'))->format('Y-m-d');
+        $userId = $request->input('userId');
 
         $diff = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate));
         
         \Log::info('Diff in days: ' . $diff);
-
-        $userId = 30;
+        \Log::info('userId: ' . $userId);
 
         if($diff > 7) {
             // 1. Get daily study hours with date
