@@ -6,70 +6,31 @@
     </x-slot>
     <div class="w-full overflow-hidden">
         <div id="calendar" class="max-w-full"></div>
+        {{-- <div id="fc-title-below" class="text-center text-xl font-semibold mt-3 mb-5"></div> --}}
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
-            // Helper function to update title
-            function updateTitle(start, end, viewType) {
-                var titleEl = document.querySelector('.fc-toolbar-title');
-                var isMobile = window.innerWidth < 768;
-
-                var endDate = new Date(end);
-                endDate.setDate(endDate.getDate() - 1);
-                var startYear = start.getFullYear();
-                var endYear = endDate.getFullYear();
-
-                if (viewType === 'timeGridWeek') {
-                    titleEl.textContent = startYear === endYear ? startYear : `${startYear}-${endYear}`;
-                } else {
-                    var currentDate = calendar.getDate();
-                    titleEl.textContent = currentDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: isMobile ? 'short' : 'long'
-                    });
-                }
-            }
-
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: [FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin],
                 initialView: 'dayGridMonth',
+                firstDay: 1,
 
                 headerToolbar: {
                     left: 'prev,today,next',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
 
                 height: 'auto',
                 contentHeight: 'auto',
                 aspectRatio: window.innerWidth < 768 ? 1 : 1.8,
-
-                views: {
-                    timeGridWeek: {
-                        dayHeaderFormat: {
-                            weekday: 'short',
-                            month: 'numeric',
-                            day: 'numeric',
-                            omitCommas: true
-                        }
-                    },
-                    dayGridMonth: {
-                        dayHeaderFormat: window.innerWidth < 768 ? {
-                            weekday: 'narrow'
-                        } : {
-                            weekday: 'short'
-                        }
-                    }
-                },
-
                 events: '/events?userId={{ $userId }}',
 
                 // Update title when dates change
                 datesSet: function(info) {
-                    updateTitle(info.start, info.end, calendar.view.type);
                     calendar.refetchEvents();
                 },
 
@@ -120,6 +81,37 @@
                 padding: 0.25rem 0.4rem !important;
                 font-size: 0.75rem !important;
             }
+        }
+
+        /* Force toolbar to wrap and put title on its own line */
+        .fc .fc-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem !important;
+        }
+
+        .fc .fc-toolbar-chunk:nth-child(1) {
+            order: 1;
+            flex: 0 0 auto;
+        }
+
+        .fc .fc-toolbar-chunk:nth-child(2) {
+            order: 3;
+            flex: 0 0 100%;
+            margin-top: 1rem;
+        }
+
+        .fc .fc-toolbar-chunk:nth-child(3) {
+            order: 2;
+            flex: 0 0 auto;
+            margin-left: auto;
+        }
+
+        .fc .fc-toolbar-title {
+            text-align: center;
+            font-size: 24px !important;
+            font-weight: 400;
+            color: #4B5563;
         }
     </style>
 </x-section>

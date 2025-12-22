@@ -83,13 +83,12 @@
             <div class="inline-flex">
                 @foreach (['year', 'month', 'week'] as $view)
                     <x-tertiary-button wire:click="changeViewType('{{ $view }}')"
-                        class="{{ $viewType === $view ? 'bg-[#4b5563] text-white' : 'bg-[#374151] text-gray-300' }} {{ $loop->first ? 'rounded-l-lg' : '' }} {{ $loop->last ? 'rounded-r-lg' : '' }} hover:text-white transition font-normal">
+                        class="{{ $viewType === $view ? 'bg-[#4b5563] text-white' : 'bg-[#374151] text-gray-300' }} {{ $loop->first ? 'rounded-l-md' : '' }} {{ $loop->last ? 'rounded-r-md' : '' }} hover:text-white transition font-normal">
                         {{ $view }}
                     </x-tertiary-button>
                 @endforeach
 
             </div>
-
         </nav>
 
         <div class="w-full mb-3 text-center">
@@ -105,22 +104,21 @@
 
                     @default
                         @if ($startDate->isSameMonth($endDate))
-                            {{ $startDate->format('d') . ' - ' . $endDate->format('d M Y') }}
+                            {{ $startDate->format('M d') . ' – ' . $endDate->format('d, Y') }}
                         @else
-                            {{ $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y') }}
+                            {{ $startDate->format('M d, Y') . ' – ' . $endDate->format('M d, Y') }}
                         @endif
                 @endswitch
             </h3>
         </div>
 
-
-        <div class="relative h-[250px] w-full">
+        <div class="relative h-[250px] w-full mb-3">
             <div class="{{ count($chartData) > 0 ? 'h-full w-full' : 'hidden' }}">
                 <canvas id="study-hour-chart" wire:ignore>
                 </canvas>
             </div>
             <div class="mt-12 text-center {{ count($chartData) > 0 ? 'hidden' : '' }}">
-                <img src="{{ asset('images/icons/chart.svg')}}" alt="" class="h-12 w-12 mx-auto">
+                <img src="{{ asset('images/icons/chart.svg') }}" alt="" class="h-12 w-12 mx-auto">
                 <p class="mt-2 text-sm font-medium text-gray-600">No data to display for this period</p>
             </div>
         </div>
