@@ -35,7 +35,7 @@
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: [FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin],
-                initialView: window.innerWidth < 768 ? 'timeGridWeek' : 'dayGridMonth',
+                initialView: 'dayGridMonth',
 
                 headerToolbar: {
                     left: 'prev,today,next',
