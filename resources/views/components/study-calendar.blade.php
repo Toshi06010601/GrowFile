@@ -1,9 +1,4 @@
-<x-section>
-    <x-slot name="header">
-        <h2 class="text-xl sm:text-2xl font-medium text-gray-900">
-            Study diary
-        </h2>
-    </x-slot>
+<div>
     <div class="w-full overflow-hidden">
         <div id="calendar" class="max-w-full"></div>
         {{-- <div id="fc-title-below" class="text-center text-xl font-semibold mt-3 mb-5"></div> --}}
@@ -114,4 +109,4 @@
             color: #4B5563;
         }
     </style>
-</x-section>
+</div>
