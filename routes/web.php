@@ -32,7 +32,8 @@ Route::post('professional_profile', [ProfessionalProfileController::class, 'stor
 Route::get('professional_profile/{slug}', [ProfessionalProfileController::class, 'show']
 )->name('professional_profile.show');
 
-//EventController Routes
+
+//FullCalendar EventController Routes
 Route::get('/events', [EventController::class, 'index']
 );
 

@@ -6,7 +6,7 @@
             <div class="flex bg-brand-tertiary-50 rounded-xl py-2 px-5 w-full flex-col">
                 <x-modal.icon-close />
                 {{-- Reusable filter component --}}
-                <x-profile-filter 
+                <x-index.profile-filter 
                     :groupedSkills="$groupedSkills"
                     :selectedSkills="$selectedSkills ?? []"
                     :name="$name ?? ''"
@@ -19,7 +19,7 @@
 
         {{-- Filter Side bar for laptop --}}
         <aside class="hidden sm:flex bg-brand-tertiary-50 rounded-xl py-2 px-5 w-56 flex-col flex-shrink-0">
-               <x-profile-filter 
+               <x-index.profile-filter 
                     :groupedSkills="$groupedSkills"
                     :selectedSkills="$selectedSkills ?? []"
                     :name="$name ?? ''"

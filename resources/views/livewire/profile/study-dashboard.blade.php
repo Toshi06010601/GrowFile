@@ -16,7 +16,7 @@
     <div class="mb-3" x-data="{ view: @entangle('currentView') }"
         x-effect="if(view === 'diary') { setTimeout(() => window.calendar.updateSize(), 100) }">
         <div :class="view === 'diary' ? 'block' : 'hidden'" wire:ignore>
-            @include('components.study-calendar', ['userId' => $userId])
+            @include('components.section.study-calendar', ['userId' => $userId])
         </div>
         <div :class="view === 'diary' ? 'hidden' : 'block'">
             <livewire:Profile.StudyRecordsSection :userId="$userId" />
