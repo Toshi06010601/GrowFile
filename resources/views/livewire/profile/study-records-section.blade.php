@@ -19,7 +19,7 @@
 
             <div class="flex flex-col gap-1">
                 {{-- Display category and activity --}}
-                <p><strong>{{ $record->category }}</strong>: {{ $record->activity }}</p>
+                <p><span class="font-medium">{{ $record->category }}: </span><span class="text-brand-secondary-700">{{ $record->activity }}</span></p>
 
                 <div class="flex flex-row justify-between">
                     {{-- Display all tags --}}

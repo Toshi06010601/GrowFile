@@ -1,8 +1,10 @@
 <div>
+    {{-- Display Calendar here --}}
     <div class="w-full overflow-hidden">
         <div id="calendar" class="max-w-full"></div>
     </div>
 
+    {{-- Make FullCalendar instance and insert --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -10,7 +12,7 @@
             window.calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: [FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin],
                 initialView: 'dayGridMonth',
-                firstDay: 1,
+                firstDay: 1, //Start from Monday
 
                 headerToolbar: {
                     left: 'prev,today,next',
@@ -22,11 +24,6 @@
                 contentHeight: 'auto',
                 aspectRatio: window.innerWidth < 768 ? 1 : 1.8,
                 events: '/events?userId={{ $userId }}',
-
-                // Update title when dates change
-                // datesSet: function(info) {
-                //     calendar.refetchEvents();
-                // },
 
                 eventBackgroundColor: 'rgba(13, 89, 2, 0.8)',
                 eventBorderColor: 'rgba(13, 89, 2, 0.8)',

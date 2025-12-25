@@ -12,17 +12,20 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
+        // Get startDate, endDate and userId from request
         $startDate = Carbon::parse($request->input('start'))->format('Y-m-d');
         $endDate = Carbon::parse($request->input('end'))->format('Y-m-d');
         $userId = $request->input('userId');
 
+        // Compuete date difference to find out viewType
         $diff = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate));
         
         \Log::info('Diff in days: ' . $diff);
         \Log::info('userId: ' . $userId);
 
+        // Response for monthly view
         if($diff > 7) {
-            // 1. Get daily study hours with date
+            // Get total study hours for each date
             $events = StudyRecord::where('user_id', $userId)
             ->wherebetween('start_datetime', [$startDate, $endDate])
             ->selectRaw('CAST(start_datetime AS DATE) AS start')
@@ -32,8 +35,11 @@ class EventController extends Controller
             ->map(function($record) {
                 $record->allDay = true;
                 return $record;
-            });;
+            });
+
+        // Response for weekly/daily view
         } else {
+            // Get each study hour records (Not summed up for each date)
             $events = StudyRecord::where('user_id', $userId)
                 ->wherebetween('start_datetime', [$startDate, $endDate])
                 ->selectRaw('start_datetime AS start')
@@ -46,10 +52,6 @@ class EventController extends Controller
                 });
 
         }
-
-
-
-
 
         return response()->json($events);
     }
