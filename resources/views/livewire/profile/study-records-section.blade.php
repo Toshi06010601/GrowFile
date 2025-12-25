@@ -15,7 +15,7 @@
                 </h2>
             </div>
 
-            <hr class="h-0.5 border-none bg-gray-500">
+            <hr class="h-0.5 border-none bg-brand-secondary-500">
 
             <div class="flex flex-col gap-1">
                 {{-- Display category and activity --}}

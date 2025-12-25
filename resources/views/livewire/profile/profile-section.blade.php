@@ -27,7 +27,7 @@
 
             {{-- headline --}}
             <div class="mx-auto mt-2">
-                <p class="text-center text-base sm:text-xl text-gray-600 leading-none">{{ $profile->headline }}</p>
+                <p class="text-center text-base sm:text-xl text-brand-secondary-600 leading-none">{{ $profile->headline }}</p>
             </div>
         </div>
 
@@ -35,14 +35,14 @@
         <div class="flex-1 min-w-[150px] flex flex-col justify-center items-center gap-1 px-1">
             {{-- job status --}}
             <div class="sm:mx-auto mt-2">
-                <div class="text-white bg-green-900 rounded-full py-1 px-2 text-center">
+                <div class="text-white bg-green-900 rounded-full py-1 px-3 text-center">
                     {{ str_replace('_', ' ', $profile->job_status) }}</div>
             </div>
 
             {{-- location --}}
             <div class="mx-5 sm:mx-auto mt-2 flex flex-row justify-center items-start gap-0">
                 <img src={{ asset('images/icons/pin.svg') }} alt="location pin" class="w-4">
-                <p class="text-gray-600 text-center leading-none">{{ $profile->location }}</p>
+                <p class="text-brand-secondary-600 text-center leading-none">{{ $profile->location }}</p>
             </div>
 
             {{-- Github link and Linkedin --}}
@@ -51,7 +51,7 @@
                 <figure class="flex flex-col">
                     <a href={{ $profile->github_link }} target="_blank" class="hover:scale-105">
                         <img src={{ asset('images/icons/github.svg') }} alt="location pin" class="w-8 mx-auto">
-                        <figcaption class="text-gray-600 leading-none mt-2">
+                        <figcaption class="text-brand-secondary-600 leading-none mt-2">
                             Github
                         </figcaption>
                     </a>
@@ -60,7 +60,7 @@
                 <figure class="flex flex-col">
                     <a href={{ $profile->linkedin_link }} target="_blank" class="hover:scale-105">
                         <img src={{ asset('images/icons/linkedin.svg') }} alt="location pin" class="w-8 mx-auto">
-                        <figcaption class="text-gray-600 leading-none mt-2">
+                        <figcaption class="text-brand-secondary-600 leading-none mt-2">
                             Linkedin
                         </figcaption>
                     </a>

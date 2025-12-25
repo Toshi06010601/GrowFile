@@ -1,7 +1,7 @@
 @props(['name', 'title', 'options'])
 
 <div>
-    <div class = "font-medium text-gray-700 ml-1 text-lg mt-4">
+    <div class = "font-medium text-brand-secondary-700 ml-1 text-lg mt-4">
         {{ $title }}
     </div>
 

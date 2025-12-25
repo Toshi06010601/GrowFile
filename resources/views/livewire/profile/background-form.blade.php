@@ -9,7 +9,7 @@
             Edit Background
         </x-modal.header-title>
 
-        <div class="max-h-32 rounded-lg overflow-hidden mx-auto mb-4 border-2 border-gray-400">
+        <div class="max-h-32 rounded-lg overflow-hidden mx-auto mb-4 border-2 border-brand-secondary-400">
             {{-- Check if a new file has been selected --}}
             @if ($background_image && Str::startsWith($background_image->getMimeType(), 'image/'))
                 <img src="{{ $background_image->temporaryUrl() }}" alt="New background image preview"

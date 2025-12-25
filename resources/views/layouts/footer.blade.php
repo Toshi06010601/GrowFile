@@ -10,14 +10,14 @@
                 </div>
                 <!-- logo - end -->
 
-                <p class="mb-6 text-gray-500 sm:pr-8">Let us help you showcase your learning ability to recruiters and
+                <p class="mb-6 text-brand-secondary-500 sm:pr-8">Let us help you showcase your learning ability to recruiters and
                     expand your network with other
                     like-minded engineers</p>
 
                 <!-- social - start -->
                 <div class="flex gap-4">
                     <a href="#" target="_blank"
-                        class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+                        class="text-brand-secondary-400 transition duration-100 hover:text-brand-secondary-500 active:text-brand-secondary-600">
                         <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -26,7 +26,7 @@
                     </a>
 
                     <a href="#" target="_blank"
-                        class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+                        class="text-brand-secondary-400 transition duration-100 hover:text-brand-secondary-500 active:text-brand-secondary-600">
                         <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -35,7 +35,7 @@
                     </a>
 
                     <a href="#" target="_blank"
-                        class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+                        class="text-brand-secondary-400 transition duration-100 hover:text-brand-secondary-500 active:text-brand-secondary-600">
                         <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -44,7 +44,7 @@
                     </a>
 
                     <a href="#" target="_blank"
-                        class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+                        class="text-brand-secondary-400 transition duration-100 hover:text-brand-secondary-500 active:text-brand-secondary-600">
                         <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -57,17 +57,17 @@
 
             <!-- nav - start -->
             <div>
-                <div class="mb-4 font-bold uppercase tracking-widest text-gray-800">Page map</div>
+                <div class="mb-4 font-bold uppercase tracking-widest text-brand-secondary-800">Page map</div>
 
                 <nav class="flex flex-col gap-4">
                     <div>
                         <a href="#features"
-                            class="text-gray-500 transition duration-100 hover:text-green-600 active:text-green-700">Features</a>
+                            class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">Features</a>
                     </div>
 
                     <div>
                         <a href="#how-to-use"
-                            class="text-gray-500 transition duration-100 hover:text-green-600 active:text-green-700">How
+                            class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">How
                             to use</a>
                     </div>
                 </nav>
@@ -76,27 +76,27 @@
 
             <!-- nav - start -->
             <div>
-                <div class="mb-4 font-bold uppercase tracking-widest text-gray-800">Site map</div>
+                <div class="mb-4 font-bold uppercase tracking-widest text-brand-secondary-800">Site map</div>
 
                 <nav class="flex flex-col gap-4">
                     <a href="{{ route('home') }}"
-                        class="text-gray-500 transition duration-100 hover:text-green-600 active:text-green-700">
+                        class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">
                         <p>Home</p>
                     </a>
 
                     <a href="{{ route('professional_profile.index') }}"
-                        class="text-gray-500 transition duration-100 hover:text-green-600 active:text-green-700">
+                        class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">
                         <p>Network</p>
                     </a>
 
                     @auth
-                        <a class="text-gray-500 transition duration-100 hover:text-green-600 active:text-green-700"
+                        <a class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700"
                             href={{ route('professional_profile.show', $userProfile->slug) }}>
                             <p>Profile</p>
                         </a>
 
                         <a href="{{ route('profile.edit') }}"
-                            class="text-gray-500 transition duration-100 hover:text-green-600 active:text-green-700">
+                            class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">
                             <p>Account</p>
                         </a>
                     @endauth
@@ -105,7 +105,7 @@
             <!-- nav - end -->
         </div>
 
-        <div class="border-t py-8 text-center text-sm text-gray-400">© 2025 - GrowFile. All rights reserved.
+        <div class="border-t py-8 text-center text-sm text-brand-secondary-400">© 2025 - GrowFile. All rights reserved.
         </div>
     </footer>
 </div>

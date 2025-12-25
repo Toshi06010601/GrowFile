@@ -1,14 +1,13 @@
 <div>
     <div class="w-full overflow-hidden">
         <div id="calendar" class="max-w-full"></div>
-        {{-- <div id="fc-title-below" class="text-center text-xl font-semibold mt-3 mb-5"></div> --}}
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            window.calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: [FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin],
                 initialView: 'dayGridMonth',
                 firstDay: 1,
@@ -25,16 +24,16 @@
                 events: '/events?userId={{ $userId }}',
 
                 // Update title when dates change
-                datesSet: function(info) {
-                    calendar.refetchEvents();
-                },
+                // datesSet: function(info) {
+                //     calendar.refetchEvents();
+                // },
 
-                eventBackgroundColor: 'rgba(22, 101, 52, 0.9)',
-                eventBorderColor: 'rgba(22, 101, 52, 1)',
+                eventBackgroundColor: 'rgba(13, 89, 2, 0.8)',
+                eventBorderColor: 'rgba(13, 89, 2, 0.8)',
                 eventTextColor: '#ffffff'
             });
 
-            calendar.render();
+            window.calendar.render();
         });
     </script>
 
@@ -108,5 +107,6 @@
             font-weight: 400;
             color: #4B5563;
         }
+        
     </style>
 </div>

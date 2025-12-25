@@ -1,6 +1,6 @@
 <x-section>
     <x-slot name="header">
-        <h2 class="text-xl sm:text-2xl font-medium text-gray-900">
+        <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
             Statistics
         </h2>
     </x-slot>
@@ -83,7 +83,7 @@
             <div class="inline-flex">
                 @foreach (['year', 'month', 'week'] as $view)
                     <x-tertiary-button wire:click="changeViewType('{{ $view }}')"
-                        class="{{ $viewType === $view ? 'bg-[#4b5563] text-white' : 'bg-[#374151] text-gray-300' }} {{ $loop->first ? 'rounded-l-md' : '' }} {{ $loop->last ? 'rounded-r-md' : '' }} hover:text-white transition font-normal">
+                        class="{{ $viewType === $view ? 'bg-[#4b5563] text-white' : 'bg-[#374151] text-brand-secondary-300' }} {{ $loop->first ? 'rounded-l-md' : '' }} {{ $loop->last ? 'rounded-r-md' : '' }} hover:text-white transition font-normal">
                         {{ $view }}
                     </x-tertiary-button>
                 @endforeach
@@ -92,7 +92,7 @@
         </nav>
 
         <div class="w-full mb-3 text-center">
-            <h3 class="text-2xl text-gray-600">
+            <h3 class="text-2xl text-brand-secondary-600">
                 @switch($viewType)
                     @case('year')
                         Jan - Dec {{ $startDate->format('Y') }}
@@ -119,11 +119,11 @@
             </div>
             <div class="mt-12 text-center {{ count($chartData) > 0 ? 'hidden' : '' }}">
                 <img src="{{ asset('images/icons/chart.svg') }}" alt="" class="h-12 w-12 mx-auto">
-                <p class="mt-2 text-sm font-medium text-gray-600">No data to display for this period</p>
+                <p class="mt-2 text-base text-brand-secondary-600">No data to display for this period</p>
             </div>
         </div>
 
-        <div class="w-full text-center text-gray-600">
+        <div class="w-full text-center text-brand-secondary-600">
             <p>Total for the {{ $viewType }}: {{ number_format($totalHours, 1) }} hours</p>
         </div>
 

@@ -1,5 +1,5 @@
 <section {{ $attributes->merge([
-    'class' => 'space-y-2 p-3 bg-gray-100 shadow sm:rounded-lg
+    'class' => 'space-y-2 p-3 bg-brand-tertiary-100 shadow sm:rounded-lg
 ',
 ]) }}>
 

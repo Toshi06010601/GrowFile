@@ -47,11 +47,11 @@
                     x-transition:leave="transition ease-in duration-100"
                     x-transition:leave-start="opacity-100 transform translate-y-0"
                     x-transition:leave-end="opacity-0 transform -translate-y-4"
-                    class="flex flex-col border border-x-gray-300 border-b-gray-300 max-h-20 w-full rounded-sm mt-0.5 overflow-y-auto"
+                    class="flex flex-col border border-x-brand-secondary-300 border-b-brand-secondary-300 max-h-20 w-full rounded-sm mt-0.5 overflow-y-auto"
                     :class="!hasSuggestions() && 'border-none' ">
                     <template x-for="tag in tags" :key="tag.id" x-show="open">
                         <label x-show="tag.show"
-                            class="pl-2 py-0.5 flex items-center gap-2 border-b last:border-none border-gray-200">
+                            class="pl-2 py-0.5 flex items-center gap-2 border-b last:border-none border-brand-secondary-200">
                             <input type="checkbox" :value="tag.id" x-model="selected" />
                             <span x-text="tag.name"></span>
                         </label>
@@ -68,7 +68,7 @@
         <template x-for="tag in selectedTags()" :key="tag.id"
             class="mt-2 flex flex-col max-h-20 w-full overflow-y-auto">
             <div
-                class="inline-flex justify-around select-none min-w-12 align-middle px-1 py-1 m-1 rounded-md bg-black text-sm text-white cursor-pointer hover:bg-gray-700 transition-all duration-200">
+                class="inline-flex justify-around select-none min-w-12 align-middle px-1 py-1 m-1 rounded-md bg-black text-sm text-white cursor-pointer hover:bg-brand-secondary-700 transition-all duration-200">
                 <span x-text="tag.name"></span>
                 <button class="font-bold ml-1 text-white bg-none border-none cursor-pointer text-sm leading-none"
                     x-on:click.prevent="selected = selected.filter(s => s != tag.id)">

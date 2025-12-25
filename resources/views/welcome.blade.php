@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-brand-secondary-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -8,9 +8,9 @@
     <div class="py-5 md:py-10 flex flex-col items-center gap-10 px-5 sm:px-10">
 
         {{-- Section 1: Hero --}}
-        <section class="bg-neutral-700 px-6 sm:px-8 lg:px-12 rounded-lg max-w-7xl flex flex-col justify-between gap-3 sm:gap-10 md:gap-16 lg:flex-row">
+        <section class="bg-brand-secondary-950 px-6 sm:px-8 lg:px-12 rounded-lg max-w-7xl flex flex-col justify-between gap-3 sm:gap-10 md:gap-16 lg:flex-row">
             <div class="flex flex-col justify-center sm:text-center py-5 lg:text-left xl:w-5/12 xl:py-12">
-                <p class="mb-4 font-semibold text-green-700 md:mb-6 md:text-lg xl:text-xl">Now launching</p>
+                <p class="mb-4 font-semibold text-brand-primary-700 md:mb-6 md:text-lg xl:text-xl">Now launching</p>
                 <x-welcome.section-title class="text-left">Grow your profile at every step your
                     learn</x-welcome.section-title>
                 <div>
@@ -21,14 +21,8 @@
                 </div>
                 @guest
                     <div class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
-                        <a href="{{ route('register') }}"
-                        class="w-full sm:w-auto inline-block rounded-lg bg-green-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-800 focus-visible:ring active:bg-green-700 md:text-base">
-                            Start Now
-                        </a>
-                        <a href="{{ route('login') }}"
-                            class="w-full sm:w-auto inline-block rounded-lg bg-white px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-green-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">
-                            Login
-                        </a>
+                       <x-primary-button :href="route('register')" class="w-full sm:w-auto">Start Now</x-primary-button>
+                    <x-secondary-button :href="route('login')" class="w-full sm:w-auto ">Login</x-secondary-button>
                     </div>
                 @endguest
             </div>
@@ -83,12 +77,12 @@
             </x-welcome.section-subtitle>
             @auth
                 <div class="flex flex-row gap-2 items-center">
-                    <x-primary-button  :href="route('professional_profile.show', $userProfile->slug)" class="hover:scale-105">Go to my profile</x-primary-button>
+                    <x-primary-button  :href="route('professional_profile.show', $userProfile->slug)">Go to my profile</x-primary-button>
                 </div>
             @else
                 <div class="flex flex-row gap-2 items-center">
-                    <x-primary-button :href="route('register')" class="hover:scale-105">Start Now</x-primary-button>
-                    <x-secondary-button :href="route('login')" class="hover:scale-105">Start Now</x-secondary-button>
+                    <x-primary-button :href="route('register')">Start Now</x-primary-button>
+                    <x-secondary-button :href="route('login')">Login</x-secondary-button>
                 </div>
             @endauth
         </section>

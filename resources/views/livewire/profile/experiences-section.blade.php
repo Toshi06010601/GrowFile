@@ -2,7 +2,7 @@
 <x-side-section>
 
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-800">
+        <h2 class="text-xl font-semibold text-brand-secondary-800">
             Experiences
         </h2>
 
@@ -18,7 +18,7 @@
     {{-- Display User Skills below --}}
     <ul class="flex flex-col">
         @foreach ($experiences as $experience)
-            <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0 text-base font-normal text-gray-600">
+            <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0 text-base font-normal text-brand-secondary-600">
 
                 {{-- Experience item header --}}
                 <div class="flex flex-row justify-between">

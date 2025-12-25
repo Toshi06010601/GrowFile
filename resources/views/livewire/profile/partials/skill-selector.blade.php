@@ -37,7 +37,7 @@
         {{-- Select skill category --}}
         <select id="category"
             x-model="selectedCategory"
-            class="flex flex-col gap-1 border-1 border-gray-300 rounded-md max-h-20 w-full overflow-y-auto">
+            class="flex flex-col gap-1 border-1 border-brand-secondary-300 rounded-md max-h-20 w-full overflow-y-auto">
             {{-- Show category options --}}
             <template x-for="category in distinctCategories" :key="category">
                 <option :value="category" x-text="category" :selected="category == selectedCategory"></option>
@@ -53,7 +53,7 @@
         {{-- Select skill name --}}
         <select id="name"
             x-model="id"
-            class="flex flex-col gap-1 border-1 border-gray-300 rounded-md max-h-20 w-full overflow-y-auto">
+            class="flex flex-col gap-1 border-1 border-brand-secondary-300 rounded-md max-h-20 w-full overflow-y-auto">
             {{-- Show skill options that belong to the selected category --}}
             <template x-for="skill in filteredByCategory()" :key="skill.id">
                 <option :value="skill.id" x-text="skill.name" :selected="skill.id == id"></option>

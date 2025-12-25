@@ -2,7 +2,7 @@
 <x-side-section>
 
     <x-slot name="header">
-        <h2 class="text-xl font-semibold text-gray-700">
+        <h2 class="text-xl font-semibold text-brand-secondary-700">
             Skills
         </h2>
 
@@ -17,7 +17,7 @@
     {{-- Display User Skills below --}}
     <ul class="flex flex-col max-h-96 overflow-y-scroll">
         @foreach ($userSkills->take($numOfSkills) as $userSkill)
-            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between text-gray-600 text-base sm:text-xl">
+            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between text-brand-secondary-600 text-base">
                 <p>
                     {{ $userSkill->skill->name }}
                 </p>

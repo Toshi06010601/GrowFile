@@ -21,7 +21,7 @@
 </head>
 
 <body class="font-roboto antialiased">
-    <div class="min-h-screen bg-neutral-600 flex flex-col">
+    <div class="min-h-screen bg-brand-secondary-700 flex flex-col">
         @include('layouts.navigation')
 
         <!-- Page Content -->
