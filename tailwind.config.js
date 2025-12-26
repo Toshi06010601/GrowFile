@@ -13,7 +13,6 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                garamond: ['"EB Garamond"', 'serif'],
                 roboto: ['"Roboto"', 'serif'],
             },
             colors: {

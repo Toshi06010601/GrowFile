@@ -24,6 +24,11 @@
                 contentHeight: 'auto',
                 aspectRatio: window.innerWidth < 768 ? 1 : 1.8,
                 events: '/events?userId={{ $userId }}',
+                
+                // Refetch if view changes
+                viewDidMount: function(info) {
+                    calendar.refetchEvents();
+                },
 
                 eventBackgroundColor: 'rgba(13, 89, 2, 0.8)',
                 eventBorderColor: 'rgba(13, 89, 2, 0.8)',
@@ -37,7 +42,7 @@
     <style>
         /* Make calendar more responsive */
         #calendar {
-            font-size: 14px;
+            font-size: 16px;
         }
 
         @media (max-width: 768px) {
@@ -50,7 +55,7 @@
             }
 
             .fc-button {
-                padding: 0.3rem 0.5rem !important;
+                padding: 0.5rem 1rem !important;
                 font-size: 0.875rem !important;
             }
 
@@ -61,7 +66,7 @@
 
         @media (max-width: 480px) {
             #calendar {
-                font-size: 11px;
+                font-size: 12px;
             }
 
             .fc-toolbar-title {
@@ -69,7 +74,7 @@
             }
 
             .fc-button {
-                padding: 0.25rem 0.4rem !important;
+                padding: 0.4rem 0.6rem !important;
                 font-size: 0.75rem !important;
             }
         }
