@@ -95,4 +95,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSkill::class, 'user_id');
     }
+
+    public function readingLogs ()
+    {
+        return $this->hasMany(ReadingLog::class, 'user_id');
+    }
 }
