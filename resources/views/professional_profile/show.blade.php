@@ -11,7 +11,9 @@
                 <livewire:Profile.StudyDashboard :userId="$profile->user_id" />
                 
                 <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
-    
+
+                <livewire:Profile.ReadingLogSection :userId="$profile->user_id" />
+                    
             </div>
 
             @can('update', $profile)
