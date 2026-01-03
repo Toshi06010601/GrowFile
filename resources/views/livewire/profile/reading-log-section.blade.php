@@ -16,21 +16,30 @@
     {{-- Reading Log section --}}
 
     {{-- Display reading logs below --}}
-    <ul class="flex flex-row max-h-64 max-w-full gap-5 sm:pr-5 overflow-x-scroll text-base sm:text-xl">
+    <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory">
         @foreach ($readingLogs as $log)
-            <li wire:key="{{ $log->id }}" class="flex flex-col p-3 gap-1 border shadow-md rounded-md">
-                <div class="flex flex-col gap-1">
-                    {{-- Display cover image --}}
-                    <div>
-                        <img src="{{ $log->cover_url }}" alt="book_cover">
+            <li wire:key="{{ $log->id }}"
+                class="flex-none w-24 sm:w-32 snap-start flex flex-col p-3 gap-1 border shadow-md rounded-md bg-white">
+
+                <div class="flex flex-col gap-2">
+                    {{-- Maintain aspect ratio so images don't stretch --}}
+                    <div class="aspect-[3/4] w-full overflow-hidden rounded">
+                        <img src="{{ $log->cover_url }}" alt="book_cover" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <p class="text-center">{{ $log->status }}</p>
+
+                    <div class="min-h-[3rem] flex flex-col justify-between">
+                        <p class="text-center text-sm sm:text-base font-medium line-clamp-2">
+                            {{ $log->status }}
+                        </p>
+
+                        {{-- Show Edit icon for the owner --}}
+                        @if ($isOwner)
+                            <div class="flex justify-center mt-2">
+                                <x-section.edit-icon
+                                    x-on:click="$dispatch('set-reading-log', { id: {{ $log->id }} })" />
+                            </div>
+                        @endif
                     </div>
-                    {{-- Show Edit icon for the owner --}}
-                    @if ($isOwner)
-                        <x-section.edit-icon x-on:click="$dispatch('set-reading-log', { id: {{ $log->id }} })" />
-                    @endif
                 </div>
             </li>
         @endforeach

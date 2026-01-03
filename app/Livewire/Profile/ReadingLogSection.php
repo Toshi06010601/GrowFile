@@ -19,6 +19,7 @@ class ReadingLogSection extends Component
         $this->loadReadingLogs();
     }
 
+    #[On('load-reading-logs')]
     public function loadReadingLogs() {
         $this->readingLogs = ReadingLog::where('user_id', $this->userId)
                             ->orderByDesc('updated_at')

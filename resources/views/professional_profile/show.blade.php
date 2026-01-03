@@ -1,12 +1,12 @@
 <x-app-layout>
-    <div class="py-5 flex flex-col-reverse sm:grid sm:grid-cols-8 gap-4 px-5 sm:px-16 max-w-7xl mx-auto">
+    <div class="py-5 flex flex-col-reverse sm:grid sm:grid-cols-8 gap-4 px-5 sm:px-16 w-full max-w-7xl mx-auto">
         {{-- Main: Learning records section --}}
         <div class="col-span-5">
             <div class="hidden sm:block">
                 <livewire:Profile.BackgroundSection :profileId="$profile->id" />
             </div>
 
-            <div class="flex flex-col gap-6">
+            <div class="w-full flex flex-col gap-6">
 
                 <livewire:Profile.StudyDashboard :userId="$profile->user_id" />
                 
