@@ -2,7 +2,7 @@
     open: false,
     profile_image_path: '{{ $userProfile ? $userProfile->profile_image_path : '' }}',
 }" @set-profile-menu-icon.window="profile_image_path = event.detail[0].filePath;"
-    class="bg-brand-tertiary-50 border-b border-brand-secondary-100 py-2">
+    class="bg-brand-tertiary-50 border-b border-brand-secondary-100 py-2 pr-5 lg:pr-0">
     <!-- Primary Navigation Menu -->
     <div class="max-w-6xl mx-auto">
         <div class="flex justify-between h-16">
@@ -46,7 +46,7 @@
                     </div>
 
                     <!-- Settings Dropdown -->
-                    <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    <div class="hidden lg:flex sm:items-center sm:ms-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
@@ -93,7 +93,7 @@
                 {{-- For guest user --}}
                 @else
                     <!-- Login menu -->
-                    <div class="hidden sm:flex sm:items-center sm:ms-6 sm:gap-2">
+                    <div class="hidden lg:flex sm:items-center sm:ms-6 sm:gap-2">
                         <x-primary-button :href="route('register')" class="hover:scale-105">Start Now</x-primary-button>
                         <x-secondary-button :href="route('login')" class="hover:scale-105">Login</x-secondary-button>
                     </div>
@@ -104,10 +104,10 @@
 
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <div class="-me-2 flex items-center lg:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-brand-secondary-400 hover:text-brand-secondary-500 hover:bg-brand-secondary-100 focus:outline-none focus:bg-brand-secondary-100 focus:text-brand-secondary-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <svg class="h-6 w-6 mx-3" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="pt-2 pb-3">
             <x-responsive-nav-link :href="route('home')" class="flex flex-row gap-2 hover:bg-brand-secondary-300">
                 <img src="{{ asset('/images/icons/house.svg') }}" alt="" class="block h-6 w-auto" />
