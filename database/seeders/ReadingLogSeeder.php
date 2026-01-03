@@ -17,7 +17,8 @@ class ReadingLogSeeder extends Seeder
         'user_id' => 30,
         'title' => 'test book',
         'cover_url' => 'http://books.google.com/books/content?id=Bdh_RQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api',
-        'status' => 'in_progress',
+        'current_page' => 100,
+        'total_pages' => 300,
         'author' => 'souseki natsume',
         'review' => 'No review'
         ]);

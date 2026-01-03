@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('title', 100);
             $table->string('cover_url', 255);
             $table->string('author', 100);
-            $table->enum('status', ['not_started', 'in_progress', 'completed']);
+            $table->integer('current_page');
+            $table->integer('total_pages');
             $table->text('review')->nullable();
             $table->timestamps();
         });
