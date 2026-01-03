@@ -21,8 +21,11 @@ class ReadingLogForm extends Component
     #[Validate('required|string|max:255')]
     public $title;
 
-    #[Validate('required|string')]
-    public $status = 'not_started';
+    #[Validate('required|integer')]
+    public $current_page;
+
+    #[Validate('required|integer')]
+    public $total_pages;
 
     #[Validate('required|string|max:255')]
     public $cover_url;
@@ -40,11 +43,13 @@ class ReadingLogForm extends Component
         if($id) {
             $readingLog          = ReadingLog::findOrFail($id);
             $this->readingLog    = $readingLog;
-            $this->title       = $readingLog->title;
-            $this->author       = $readingLog->author;
-            $this->status       = $readingLog->status;
+            $this->title         = $readingLog->title;
+            $this->author        = $readingLog->author;
+            $this->current_page   = $readingLog->current_page;
+            $this->total_pages    = $readingLog->total_pages;
             $this->cover_url = $readingLog->cover_url;
             $this->review = $readingLog->review;
+            // dd($this->readingLog);
         } else {
             $this->reset();
         }
@@ -82,14 +87,13 @@ class ReadingLogForm extends Component
 
         // 3. Update the studyrecord and register associated tags
         $this->readingLog->update($validateDate);
-        $this->readingLog->tags()->sync($this->selectedTags);
 
         // 4. Reflect the updates in Study records section
-        $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
+        $this->dispatch('load-reading-logs')->to(ReadingLogSection::class);
 
         // 5. Clean up the modal form and close the modal
         $this->reset();
-        $this->dispatch('close-modal', 'edit-study-record');
+        $this->dispatch('close-modal', 'edit-reading-log');
     }
 
     public function delete()
@@ -101,11 +105,11 @@ class ReadingLogForm extends Component
         $this->readingLog->delete();
 
         // 3. Reflect the updates in Study records section
-        $this->dispatch('load-study-records')->to(StudyRecordsSection::class);
+        $this->dispatch('load-reading-logs')->to(ReadingLogSection::class);
 
         // 4. Clean up the modal form and close the modal
         $this->reset();
-        $this->dispatch('close-modal', 'edit-study-record');
+        $this->dispatch('close-modal', 'edit-reading-log');
     }
 
     public function render()

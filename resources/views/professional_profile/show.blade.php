@@ -19,6 +19,7 @@
             @can('update', $profile)
                 <livewire:Profile.BackgroundForm />
                 <livewire:Profile.StudyRecordForm />
+                <livewire:Profile.ReadingLogForm />
             @endcan
         </div>
 
