@@ -12,8 +12,14 @@ class ReadingLog extends Model
         'title',
         'cover_url',
         'author',
-        'status',
+        'current_page',
+        'total_pages',
         'review',
+    ];
+
+    protected $casts = [
+        'current_page' => 'integer',
+        'total_pages' => 'integer',
     ];
 
     public function user()
