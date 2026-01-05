@@ -30,7 +30,7 @@ class ReadingLogForm extends Component
     #[Validate('required|integer')]
     public $total_pages;
 
-    #[Validate('required|string|max:255')]
+    #[Validate('required|string')]
     public $cover_url;
 
     #[Validate('string')]
@@ -61,6 +61,7 @@ class ReadingLogForm extends Component
         $this->dispatch('open-modal', 'edit-reading-log');
     }
 
+    // Search books using google books api
     public function updatedSearch () {
         $apiUrl = config('services.google_books.api_url');
         $apiKey = config('services.google_books.api_key');
@@ -72,17 +73,48 @@ class ReadingLogForm extends Component
             'maxResults' => 20,
         ]);
         
-        // レスポンスの処理
+        // Response handling
         if ($response->successful()) {
             $this->suggestions = $response->json()['items'] ?? [];
         }
     
-        // エラーハンドリング
+        // Error handling
         if ($response->failed()) {
             session()->flash('error', 'Failed to fetch books');
             $this->suggestions = [];
         }
 
+    }
+
+    public function selectBook($id) {
+     
+        $apiUrl = config('services.google_books.api_url');
+        $apiKey = config('services.google_books.api_key');
+
+        // GET request for the specified book 
+        $response = Http::get($apiUrl . '/' . $id, [
+            'key' => $apiKey
+        ]);
+
+//    dd($id);
+        
+        // Response handling
+      if ($response->successful()) {
+    $volumeInfo = $response->json('volumeInfo'); // json()に引数を渡すと安全に取得可能
+
+    $this->title       = data_get($volumeInfo, 'title', 'タイトル不明');
+    // authorsがなくてもエラーにならないよう空配列をデフォルトにする
+    $this->author      = collect(data_get($volumeInfo, 'authors', []))->join(', ') ?: '著者不明';
+    // 正しいキー名は pageCount
+    $this->total_pages = data_get($volumeInfo, 'pageCount', 0);
+    $this->cover_url   = data_get($volumeInfo, 'imageLinks.thumbnail');
+}
+    
+        // Error handling
+        if ($response->failed()) {
+            session()->flash('error', 'Failed to fetch books');
+            $this->suggestions = [];
+        }
     }
 
     public function save()

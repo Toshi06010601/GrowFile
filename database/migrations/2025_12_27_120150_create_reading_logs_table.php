@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title', 100);
-            $table->string('cover_url', 255);
+            $table->text('cover_url');
             $table->string('author', 100);
             $table->integer('current_page');
             $table->integer('total_pages');
