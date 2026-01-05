@@ -11,7 +11,7 @@
         <div class="flex-1">
             <input type="text" name="name"
                 class="w-full py-2 px-0 border-none rounded-lg focus:border-none focus:ring-0 focus:outline-none"
-                placeholder="Search Users" wire:model.live="search" x-on:focus="open = true"
+                placeholder="Search Users" wire:model.live.debounce.200="search" x-on:focus="open = true"
                 x-on:keydown.escape.prevent="open = false" autocomplete="off" />
         </div>
         {{-- Erase button --}}
