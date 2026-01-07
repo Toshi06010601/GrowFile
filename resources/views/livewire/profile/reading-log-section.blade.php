@@ -9,7 +9,8 @@
         @if ($isOwner)
             <x-section.add-icon x-data=""
                 x-on:click="
-                $dispatch('set-reading-log', { id: null });" />
+                $dispatch('set-reading-log', { id: null , 
+                isOwner: {{ $isOwner ? 'true' : 'false' }} });" />
         @endif
     </x-slot>
 

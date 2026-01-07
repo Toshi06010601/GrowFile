@@ -16,12 +16,12 @@
             {{-- Book search area --}}
             <div x-data="{ open: false }" @click.away="open = false" class="relative mb-4">
                 {{-- Label --}}
-                <x-input-label for="book-search" value="Find the book" class="text-lg mt-4" />
+                <x-input-label for="book-search" value="Find your book" class="text-lg mt-4" />
 
                 {{-- search input field --}}
                 <input id="book-search"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-secondary-500 focus:ring-brand-secondary-500"
-                    wire:model.live.debounce.300ms="search" @focus="open = true" @keydown.escape.prevent="open = false"
+                    wire:model.live.debounce.800ms="search" @focus="open = true" @keydown.escape.prevent="open = false"
                     autocomplete="off" placeholder="Search books...">
 
                 {{-- Show books that match the search input --}}
@@ -72,7 +72,7 @@
                 <x-text-input id="current-page" type="text" class="mt-1 block" placeholder="current page"
                     wire:model="current_page" />
                 <p class="text-lg"> / </p>
-                <p class="text-lg text-gray-600">{{ $total_pages ?? 'total pages' }}</p>
+                <p class="text-lg text-gray-600">{{ $total_pages ?? 'total' }} pages</p>
             </div>
 
             {{-- Validation error --}}
