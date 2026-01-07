@@ -35,7 +35,14 @@ class ReadingLogForm extends Component
     public $cover_url;
 
     #[Validate('string')]
-    public $review;
+    public $review = '';
+
+    protected function messages()
+    {
+        return [
+            'title.required' => 'Please select book that you would like to register.',
+        ];
+    }
 
     /*
     Public functions for the modal form

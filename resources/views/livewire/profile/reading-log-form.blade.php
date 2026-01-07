@@ -24,6 +24,23 @@
                     wire:model.live.debounce.800ms="search" @focus="open = true" @keydown.escape.prevent="open = false"
                     autocomplete="off" placeholder="Search books...">
 
+                {{-- <div wire:loading wire:target="search">
+                    Searching books...
+                </div> --}}
+
+                {{-- loading indicator --}}
+                <p wire:loading wire:target="search" class="mt-2 text-sm text-gray-500 italic flex items-center gap-2">
+                    <img src="{{ asset('/images/icons/spinner.svg')}}" alt="spinner" class="animate-spin h-4 w-4">
+                    Searching books...
+                </p>
+
+                {{-- Validation error --}}
+                <div>
+                    @error('title')
+                        <x-input-error :messages="$message" class="mt-2" />
+                    @enderror
+                </div>
+
                 {{-- Show books that match the search input --}}
                 @if ($suggestions && count($suggestions) > 0)
                     <div x-show="open" x-transition
@@ -77,7 +94,7 @@
 
             {{-- Validation error --}}
             <div>
-                @error($current_page)
+                @error('current_page')
                     <x-input-error :messages="$message" class="mt-2" />
                 @enderror
             </div>
