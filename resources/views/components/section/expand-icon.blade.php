@@ -1,0 +1,5 @@
+<img {{ $attributes->merge([
+        'src' => asset('images/icons/expand-view.svg'),
+        'alt' => 'expand-icon',
+        'class' => 'w-7 px-1 cursor-pointer hover:scale-110']) }}>
+</img>

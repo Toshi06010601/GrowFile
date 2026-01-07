@@ -14,6 +14,7 @@ class ReadingLogForm extends Component
     public ?ReadingLog $readingLog;
     public $suggestions = [];
     public $search = '';
+    public $isOwner = false;
  
     /*
     Public variables for the modal form
@@ -40,7 +41,7 @@ class ReadingLogForm extends Component
     Public functions for the modal form
     */
     #[On('set-reading-log')]
-    public function setReadingLog($id)
+    public function setReadingLog($id, $isOwner)
     {
         // 1. If id is passed, find the readingLog and assign each field to public variables 
         if($id) {
@@ -56,7 +57,10 @@ class ReadingLogForm extends Component
             $this->reset();
         }
 
-        // 2. Reset validation and open readinglog modal
+        // 2. Assign isOwner value
+        $this->isOwner = $isOwner;
+
+        // 3. Reset validation and open readinglog modal
         $this->resetValidation();
         $this->dispatch('open-modal', 'edit-reading-log');
     }
@@ -95,20 +99,18 @@ class ReadingLogForm extends Component
         $response = Http::get($apiUrl . '/' . $id, [
             'key' => $apiKey
         ]);
-
-//    dd($id);
         
         // Response handling
-      if ($response->successful()) {
-    $volumeInfo = $response->json('volumeInfo'); // json()に引数を渡すと安全に取得可能
+        if ($response->successful()) {
+            $volumeInfo = $response->json('volumeInfo'); // json()に引数を渡すと安全に取得可能
 
-    $this->title       = data_get($volumeInfo, 'title', 'タイトル不明');
-    // authorsがなくてもエラーにならないよう空配列をデフォルトにする
-    $this->author      = collect(data_get($volumeInfo, 'authors', []))->join(', ') ?: '著者不明';
-    // 正しいキー名は pageCount
-    $this->total_pages = data_get($volumeInfo, 'pageCount', 0);
-    $this->cover_url   = data_get($volumeInfo, 'imageLinks.thumbnail');
-}
+            $this->title       = data_get($volumeInfo, 'title', 'タイトル不明');
+            // authorsがなくてもエラーにならないよう空配列をデフォルトにする
+            $this->author      = collect(data_get($volumeInfo, 'authors', []))->join(', ') ?: '著者不明';
+            // 正しいキー名は pageCount
+            $this->total_pages = data_get($volumeInfo, 'pageCount', 0);
+            $this->cover_url   = data_get($volumeInfo, 'imageLinks.thumbnail');
+            }
     
         // Error handling
         if ($response->failed()) {

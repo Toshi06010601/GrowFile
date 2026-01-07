@@ -9,18 +9,19 @@
             <div class="w-full flex flex-col gap-6">
 
                 <livewire:Profile.StudyDashboard :userId="$profile->user_id" />
-                
+
                 <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
 
                 <livewire:Profile.ReadingLogSection :userId="$profile->user_id" />
-                    
+
             </div>
 
             @can('update', $profile)
                 <livewire:Profile.BackgroundForm />
                 <livewire:Profile.StudyRecordForm />
-                <livewire:Profile.ReadingLogForm />
             @endcan
+            
+            <livewire:Profile.ReadingLogForm />
         </div>
 
         {{-- Side bar: Profile section --}}

@@ -19,11 +19,23 @@
     <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory">
         @foreach ($readingLogs as $log)
             <li wire:key="{{ $log->id }}"
-                class="flex-none w-24 sm:w-32 snap-start flex flex-col p-3 pb-5 gap-1 border shadow-md rounded-md bg-white relative">
+                class="flex-none w-24 sm:w-32 snap-start flex flex-col p-3 pb-6 gap-1 border shadow-md rounded-md bg-white relative">
                 {{-- Show Edit icon for the owner --}}
                 @if ($isOwner)
                     <div class="absolute bottom-1 right-1 flex justify-end mt-2 min-w-5">
-                        <x-section.edit-icon x-on:click="$dispatch('set-reading-log', { id: {{ $log->id }} })" />
+                        <x-section.edit-icon
+                            x-on:click="$dispatch('set-reading-log', { 
+                            id: {{ $log->id }}, 
+                            isOwner: {{ $isOwner ? 'true' : 'false' }} 
+                        })" />
+                    </div>
+                @else
+                    <div class="absolute bottom-1 right-1 flex justify-end mt-2 min-w-5">
+                        <x-section.expand-icon
+                            x-on:click="$dispatch('set-reading-log', { 
+                            id: {{ $log->id }}, 
+                            isOwner: {{ $isOwner ? 'true' : 'false' }} 
+                        })" />
                     </div>
                 @endif
 
