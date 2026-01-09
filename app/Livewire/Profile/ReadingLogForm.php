@@ -109,13 +109,15 @@ class ReadingLogForm extends Component
         
         // Response handling
         if ($response->successful()) {
-            $volumeInfo = $response->json('volumeInfo'); // json()に引数を渡すと安全に取得可能
+            $volumeInfo = $response->json('volumeInfo'); // Convert json into php array
 
+            // Get required data from php array
             $this->title       = data_get($volumeInfo, 'title', 'タイトル不明');
-            // authorsがなくてもエラーにならないよう空配列をデフォルトにする
-            $this->author      = collect(data_get($volumeInfo, 'authors', []))->join(', ') ?: '著者不明';
-            // 正しいキー名は pageCount
+            // If authors is none, give empty array. *Just for info: data_get(target, key, default)
+            $this->author = implode(', ', data_get($volumeInfo, 'authors', [])) ?: '著者不明';
+            // Get pageCount
             $this->total_pages = data_get($volumeInfo, 'pageCount', 0);
+            // Get thumbnail path
             $this->cover_url   = data_get($volumeInfo, 'imageLinks.thumbnail');
             }
     
