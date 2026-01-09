@@ -100,4 +100,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ReadingLog::class, 'user_id');
     }
+
+    public function portfolios ()
+    {
+        return $this->hasMany(Portfolio::class, 'user_id');
+    }
 }
