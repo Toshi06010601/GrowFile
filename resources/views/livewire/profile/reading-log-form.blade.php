@@ -24,10 +24,6 @@
                     wire:model.live.debounce.800ms="search" @focus="open = true" @keydown.escape.prevent="open = false"
                     autocomplete="off" placeholder="Search books...">
 
-                {{-- <div wire:loading wire:target="search">
-                    Searching books...
-                </div> --}}
-
                 {{-- loading indicator --}}
                 <p wire:loading wire:target="search" class="mt-2 text-sm text-gray-500 italic flex items-center gap-2">
                     <img src="{{ asset('/images/icons/spinner.svg')}}" alt="spinner" class="animate-spin h-4 w-4">
