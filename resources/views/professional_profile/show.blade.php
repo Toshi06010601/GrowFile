@@ -13,6 +13,8 @@
                 <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
 
                 <livewire:Profile.ReadingLogSection :userId="$profile->user_id" />
+                
+                <livewire:Profile.PortfolioSection :userId="$profile->user_id" />
 
             </div>
 
@@ -20,7 +22,7 @@
                 <livewire:Profile.BackgroundForm />
                 <livewire:Profile.StudyRecordForm />
             @endcan
-            
+
             <livewire:Profile.ReadingLogForm />
         </div>
 
