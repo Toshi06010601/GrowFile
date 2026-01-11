@@ -12,6 +12,7 @@
             {{ $readingLog ? 'Edit' : 'Add' }} reading log
         </x-modal.header-title>
 
+        {{-- Searchable for owner --}}
         @if ($isOwner)
             {{-- Book search area --}}
             <div x-data="{ open: false }" @click.away="open = false" class="relative mb-4">
@@ -83,7 +84,7 @@
             <x-input-label for="current-page" value="Reading status" class="text-lg mt-4" />
             <div class="flex flex-row items-end gap-3">
                 <x-text-input id="current-page" type="text" class="mt-1 block" placeholder="current page"
-                    wire:model="current_page" />
+                    wire:model="current_page" :disabled="!$isOwner" />
                 <p class="text-lg"> / </p>
                 <p class="text-lg text-gray-600">{{ $total_pages ?? 'total' }} pages</p>
             </div>
@@ -98,10 +99,12 @@
 
         {{-- Review --}}
         <x-modal.input-textarea label="Review" id="review" name="review"
-            placeholder="Write your thoughts or feedback here" />
+            placeholder="Write your thoughts or feedback here" :disabled="!$isOwner" />
 
-        {{-- Save/Update button --}}
-        <x-modal.submit-buttons :name="$readingLog ? 'update' : 'save'" />
+        @if ($isOwner)
+            {{-- Save/Update button --}}
+            <x-modal.submit-buttons :name="$readingLog ? 'update' : 'save'" />    
+        @endif
     </form>
 
 </x-modal>
