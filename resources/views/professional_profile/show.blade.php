@@ -24,6 +24,7 @@
             @endcan
 
             <livewire:Profile.ReadingLogForm />
+            <livewire:Profile.PortfolioForm />
         </div>
 
         {{-- Side bar: Profile section --}}
