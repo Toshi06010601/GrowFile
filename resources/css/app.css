@@ -7,3 +7,15 @@
     text-align: left;
     margin-left: 10%;
 } */
+
+@layer components {
+    .splide__slide {
+        transition: opacity filter 1s ease-out;
+        opacity: 0.4;
+        filter: grayscale(50%);
+    }
+    .splide__slide.is-active {
+        opacity: 1;
+        filter: grayscale(0%);
+    }
+}

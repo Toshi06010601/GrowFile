@@ -3,13 +3,33 @@ import Splide from '@splidejs/splide';
 
 // Set default splide options
 Splide.defaults = {
-    type   : 'loop',
-    perPage    : 3,
+    type    : 'loop',      // 'slide' (default), 'loop', or 'fade'
+    perPage : 1,           // Number of slides to show at once
+    perMove : 1,           // Number of slides to move per transition
+    gap     : '0.5rem',      // Space between slides
+    autoplay: true,        // Auto-scroll
+    interval: 5000,        // Time between autoplay transitions (ms)
+    pauseOnHover: true,    // Pause autoplay when hovering
+    arrows  : true,        // Show/hide arrows
+    pagination: true,
+    focus: 'center',
+    padding: '5rem',
+    trimSpace: false,
+    easing: 'ease-out',
+    speed : 1000,
+    updateOnMove: true,
+    
     breakpoints: {
-        640: {
-            perPage: 1,
+        1024: { 
+            padding: '4rem' 
         },
-    },
+        768: {
+            padding: '3rem' // スマホで左右を少し見せる
+        },
+        480: {
+            padding: '2rem' // 小さい画面では余白を狭くする
+        },
+    }
 }
 
 // Once DOM loaded, mount splide to all elements with splide class name
