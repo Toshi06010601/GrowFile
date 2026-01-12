@@ -16,7 +16,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
         'user_id' => 30,
         'title' => 'test portfolio',
-        'site_image_path' => 'http://books.google.com/books/content?id=Bdh_RQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api',
+        'site_image_path' => 'screenshot.png',
         'site_url' => 'http://localhost/professional_profile',
         'github_url' => 'https://github.com/Toshi06010601/GrowFile',
         'description' => 'test portfolio',
