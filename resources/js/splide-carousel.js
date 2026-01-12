@@ -13,7 +13,7 @@ Splide.defaults = {
     arrows  : true,        // Show/hide arrows
     pagination: true,
     focus: 'center',
-    padding: '5rem',
+    padding: '6rem',
     trimSpace: false,
     easing: 'ease-out',
     speed : 1000,
@@ -21,13 +21,13 @@ Splide.defaults = {
     
     breakpoints: {
         1024: { 
-            padding: '4rem' 
+            padding: '5rem' 
         },
         768: {
-            padding: '3rem' // スマホで左右を少し見せる
+            padding: '4rem' 
         },
         480: {
-            padding: '2rem' // 小さい画面では余白を狭くする
+            padding: '3rem' 
         },
     }
 }
