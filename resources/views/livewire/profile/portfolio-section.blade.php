@@ -23,7 +23,7 @@
                 @foreach ($portfolios as $portfolio)
                     <li class="splide__slide p-4">
                         <div
-                            class="relative flex flex-col bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 transition hover:shadow-lg">
+                            class="relative flex flex-col bg-white rounded-md shadow-md overflow-hidden border border-gray-100 transition hover:shadow-lg">
 
                             {{-- Image --}}
                             <div class="aspect-video w-full overflow-hidden bg-gray-200">
