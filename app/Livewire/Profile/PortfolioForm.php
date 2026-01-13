@@ -8,15 +8,22 @@ use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioForm extends Component
 {
+    use WithFileUploads;
     public ?Portfolio $portfolio;
     public $isOwner = false;
  
     /*
     Public variables for the modal form
     */
+    public $site_image;       // Holds the temporary uploaded file object
+
     #[Validate('required|string|max:255')]
     public $title;
 
@@ -65,18 +72,39 @@ class PortfolioForm extends Component
 
     public function save()
     {
-        // 1. Validate and prepare the data
+        // 1. Update site_image_path if new site image uploaded
+        if ($this->site_image) {
+            // 1.1. Store the old site name
+            $oldFileName =  str_replace('storage/', '', $this->site_image_path);
+
+            // 1.2. Validate newly uploaded image
+            $this->validate(['site_image' => 'image|max:1024']);
+
+            // 1.3. Construct new file name and assign it to site image path
+            $newFileName = (string) Str::uuid() . '.' .  $this->site_image->getClientOriginalExtension();
+            $this->site_image_path = "/storage/site_photos/" . $newFileName;
+
+            // 1.4. Save site_image to the folder
+            $this->site_image->storeAs(path: 'site_photos', name: $newFileName);
+
+            // 1.5. Delete old image file except for the default image
+            if($oldFileName !== "/site_photos/default.jpg") {
+                Storage::disk('public')->delete($oldFileName);
+            }
+        }
+
+        // 2. Validate and prepare the data
         $validatedData = $this->validate();
 
         $validatedData['user_id'] = Auth::id();
 
-        // 2. Create new studyrecord and register associated tags
+        // 3. Create new studyrecord and register associated tags
         Portfolio::create($validatedData);
 
-        // 3. Reflect the updates in reading logs section
+        // 4. Reflect the updates in reading logs section
         $this->dispatch('load-portfolio')->to(PortfolioSection::class);
 
-        // 4. Clean up the modal form and close the modal
+        // 5. Clean up the modal form and close the modal
         $this->reset();
         $this->dispatch('close-modal', 'edit-portfolio');
 
@@ -87,6 +115,27 @@ class PortfolioForm extends Component
         // 1. Authorize 
         $this->authorize('update', $this->Portfolio);
 
+        // 2. Update site_image_path if new site image uploaded
+        if ($this->site_image) {
+            // 2.1. Store the old site name
+            $oldFileName =  str_replace('storage/', '', $this->site_image_path);
+
+            // 2.2. Validate newly uploaded image
+            $this->validate(['site_image' => 'image|max:1024']);
+
+            // 2.3. Construct new file name and assign it to site image path
+            $newFileName = (string) Str::uuid() . '.' .  $this->site_image->getClientOriginalExtension();
+            $this->site_image_path = "/storage/site_photos/" . $newFileName;
+
+            // 2.4. Save site_image to the folder
+            $this->site_image->storeAs(path: 'site_photos', name: $newFileName);
+
+            // 2.5. Delete old image file except for the default image
+            if($oldFileName !== "/site_photos/default.jpg") {
+                Storage::disk('public')->delete($oldFileName);
+            }
+        }
+        
         // 2. validate the data
         $validatedData = $this->validate();
 
