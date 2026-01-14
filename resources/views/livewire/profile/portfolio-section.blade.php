@@ -21,9 +21,9 @@
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($portfolios as $portfolio)
-                    <li class="splide__slide p-4">
+                    <li class="splide__slide py-4 px-2">
                         <div
-                            class="relative flex flex-col bg-white rounded-md shadow-md overflow-hidden border border-gray-100 transition hover:shadow-lg">
+                            class="relative slider-content flex flex-col bg-white rounded-md shadow-md overflow-hidden border border-gray-100 transition hover:shadow-lg scale-75">
 
                             {{-- Image --}}
                             <div class="aspect-video w-full overflow-hidden bg-gray-200">
@@ -41,15 +41,17 @@
                                 </p>
 
                                 {{-- Link button --}}
-                                <div class="mt-auto pt-2 border-t border-gray-50 flex justify-start gap-5 items-center">
+                                <div class="mt-auto pt-2 border-t border-gray-50 flex justify-start gap-3 sm:gap-5 items-center">
                                     <a href="{{ $portfolio->site_url }}"
-                                        class="text-blue-600 text-sm font-medium hover:underline" target="blank">View
-                                        Site</a>
+                                        class="text-blue-600 text-sm font-medium hover:underline" target="blank">
+                                        <img src="{{ asset('images/icons/site.svg')}}" alt="github-icon" class="w-5 lg:hidden">
+                                        <p class="hidden lg:inline">View Site</p>
+                                        </a>
                                     <a href="{{ $portfolio->github_url }}"
                                         class="text-blue-600 text-sm font-medium hover:underline flex gap-2"
                                         target="blank">
-                                        {{-- <img src="{{ asset('images/icons/github.svg')}}" alt="github-icon" class="w-5"> --}}
-                                        View Repository
+                                        <img src="{{ asset('images/icons/github.svg')}}" alt="github-icon" class="w-5 lg:hidden">
+                                        <p class="hidden lg:inline">View Repository</p>
                                     </a>
                                 </div>
                             </div>

@@ -2,20 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Center the event title horizontally and vertically */
-/* .fc-event-title {
-    text-align: left;
-    margin-left: 10%;
-} */
-
-@layer components {
-    .splide__slide {
-        transition: opacity filter 1s ease-out;
-        opacity: 0.4;
-        filter: grayscale(50%);
+@layer components {     
+    .slider-content {
+        opacity: 0.35;
+        transform: scale(0.8);
+        filter: grayscale(40%) brightness(1);
+        transition: all 0.6s ease-in; 
+        will-change: transform, opacity, filter;
     }
-    .splide__slide.is-active {
+
+    .splide__slide.is-active .slider-content {
         opacity: 1;
-        filter: grayscale(0%);
+        transform: scale(1);
+        filter: grayscale(0%) brightness(1);
+        transition: all 0.6s ease-in; 
     }
 }
