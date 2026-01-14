@@ -51,7 +51,7 @@ class PortfolioForm extends Component
         // 1. If id is passed, find the Portfolio and assign each field to public variables 
         if($id) {
             $portfolio          = Portfolio::findOrFail($id);
-            $this->Portfolio    = $portfolio;
+            $this->portfolio    = $portfolio;
             $this->title         = $portfolio->title;
             $this->description        = $portfolio->description;
             $this->site_url   = $portfolio->site_url;
@@ -102,7 +102,7 @@ class PortfolioForm extends Component
         Portfolio::create($validatedData);
 
         // 4. Reflect the updates in reading logs section
-        $this->dispatch('load-portfolio')->to(PortfolioSection::class);
+        $this->dispatch('load-portfolios')->to(PortfolioSection::class);
 
         // 5. Clean up the modal form and close the modal
         $this->reset();
@@ -113,7 +113,7 @@ class PortfolioForm extends Component
     public function update()
     {
         // 1. Authorize 
-        $this->authorize('update', $this->Portfolio);
+        $this->authorize('update', $this->portfolio);
 
         // 2. Update site_image_path if new site image uploaded
         if ($this->site_image) {
@@ -140,26 +140,27 @@ class PortfolioForm extends Component
         $validatedData = $this->validate();
 
         // 3. Update the studyrecord and register associated tags
-        $this->Portfolio->update($validatedData);
+        $this->portfolio->update($validatedData);
 
         // 4. Reflect the updates in Study records section
-        $this->dispatch('load-portfolio')->to(PortfolioSection::class);
+        $this->dispatch('load-portfolios')->to(PortfolioSection::class);
 
         // 5. Clean up the modal form and close the modal
-        $this->reset();
+        // $this->reset();
+        $this->reset(['title', 'description', 'site_url', 'github_url', 'comment', 'site_image', 'site_image_path']);
         $this->dispatch('close-modal', 'edit-portfolio');
     }
 
     public function delete()
     {
         // 1. Authorize the data
-        $this->authorize('delete', $this->Portfolio);
+        $this->authorize('delete', $this->portfolio);
 
         // 2. Delete the record
-        $this->Portfolio->delete();
+        $this->portfolio->delete();
 
         // 3. Reflect the updates in Study records section
-        $this->dispatch('load-portfolio')->to(PortfolioSection::class);
+        $this->dispatch('load-portfolios')->to(PortfolioSection::class);
 
         // 4. Clean up the modal form and close the modal
         $this->reset();
