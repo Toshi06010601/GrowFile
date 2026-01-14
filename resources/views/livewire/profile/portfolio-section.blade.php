@@ -17,11 +17,13 @@
     {{-- portfolio section --}}
 
     {{-- Display portfolios below --}}
-    <section class="splide pb-5" aria-label="Portfolio Showcase">
+    <section class="splide pb-5" aria-label="Portfolio Showcase" wire:key="slider-{{ $lastUpdated }}"
+    x-data="splideCarousel"
+    >
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($portfolios as $portfolio)
-                    <li class="splide__slide py-4 px-2">
+                    <li class="splide__slide py-4 px-2" wire:key="portfolio-slide-{{ $portfolio->id }}">
                         <div
                             class="relative slider-content flex flex-col bg-white rounded-md shadow-md overflow-hidden border border-gray-100 transition hover:shadow-lg scale-75">
 
