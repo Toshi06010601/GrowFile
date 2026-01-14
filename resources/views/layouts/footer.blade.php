@@ -10,7 +10,8 @@
                 </div>
                 <!-- logo - end -->
 
-                <p class="mb-6 text-brand-secondary-500 sm:pr-8">Let us help you showcase your learning ability to recruiters and
+                <p class="mb-6 text-brand-secondary-500 sm:pr-8">Let us help you showcase your learning ability to
+                    recruiters and
                     expand your network with other
                     like-minded engineers</p>
 
@@ -56,22 +57,24 @@
             </div>
 
             <!-- nav - start -->
-            <div>
-                <div class="mb-4 font-bold uppercase tracking-widest text-brand-secondary-800">Page map</div>
+            @if (Route::is('home'))
+                <div>
+                    <div class="mb-4 font-bold uppercase tracking-widest text-brand-secondary-800">Page map</div>
 
-                <nav class="flex flex-col gap-4">
-                    <div>
-                        <a href="#features"
-                            class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">Features</a>
-                    </div>
+                    <nav class="flex flex-col gap-4">
+                        <div>
+                            <a href="#features"
+                                class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">Features</a>
+                        </div>
 
-                    <div>
-                        <a href="#how-to-use"
-                            class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">How
-                            to use</a>
-                    </div>
-                </nav>
-            </div>
+                        <div>
+                            <a href="#how-to-use"
+                                class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700">How
+                                to use</a>
+                        </div>
+                    </nav>
+                </div>
+            @endif
             <!-- nav - end -->
 
             <!-- nav - start -->
