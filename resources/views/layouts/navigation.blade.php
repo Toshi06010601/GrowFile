@@ -6,7 +6,7 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-6xl mx-auto">
         <div class="flex justify-between h-16">
-            <div class="px-2 w-full flex items-center gap-4 md:gap-8">
+            <div class="px-4 w-full flex items-center gap-4 md:gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="hover:scale-105">
@@ -21,7 +21,7 @@
 
                 <!-- Network button -->
                 <div
-                    class="hidden sm:block text-base leading-4 font-medium text-brand-secondary-500 hover:text-brand-secondary-800 hover:scale-105 focus:outline-none transition ease-in-out duration-150">
+                    class="hidden md:block text-base leading-4 font-medium text-brand-secondary-500 hover:text-brand-secondary-800 hover:scale-105 focus:outline-none transition ease-in-out duration-150">
                     <a class="flex flex-col justify-center items-center"
                         href="{{ route('professional_profile.index') }}">
                         <img src="{{ asset('/images/icons/people.svg') }}" alt=""
@@ -34,7 +34,7 @@
                 @auth
                     <!-- Profile button -->
                     <div
-                        class="hidden sm:block text-base leading-4 font-medium text-brand-secondary-500 hover:text-brand-secondary-800 focus:outline-none transition ease-in-out duration-150">
+                        class="hidden md:block text-base leading-4 font-medium text-brand-secondary-500 hover:text-brand-secondary-800 focus:outline-none transition ease-in-out duration-150">
                         <a class="flex flex-col justify-end items-center hover:scale-105"
                             href={{ route('professional_profile.show', $userProfile ? $userProfile->slug : '') }}>
                             <div class="size-9 rounded-full overflow-hidden">
@@ -46,7 +46,7 @@
                     </div>
 
                     <!-- Settings Dropdown -->
-                    <div class="hidden lg:flex sm:items-center sm:ms-6">
+                    <div class="hidden md:flex md:items-center md:ms-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
@@ -104,10 +104,10 @@
 
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center lg:hidden">
+            <div class="-me-2 flex items-center md:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-brand-secondary-400 hover:text-brand-secondary-500 hover:bg-brand-secondary-100 focus:outline-none focus:bg-brand-secondary-100 focus:text-brand-secondary-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6 mx-3" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
+    <div :class="{ 'block': open, 'hidden': !open }" class="block md:hidden">
         <div class="pt-2 pb-3">
             <x-responsive-nav-link :href="route('home')" class="flex flex-row gap-2 hover:bg-brand-secondary-300">
                 <img src="{{ asset('/images/icons/house.svg') }}" alt="" class="block h-6 w-auto" />

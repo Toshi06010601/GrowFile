@@ -98,7 +98,7 @@ class PortfolioForm extends Component
 
         $validatedData['user_id'] = Auth::id();
 
-        // 3. Create new studyrecord and register associated tags
+        // 3. Create new portfolio and register associated tags
         Portfolio::create($validatedData);
 
         // 4. Reflect the updates in reading logs section
@@ -139,15 +139,14 @@ class PortfolioForm extends Component
         // 2. validate the data
         $validatedData = $this->validate();
 
-        // 3. Update the studyrecord and register associated tags
+        // 3. Update the portfolio and register associated tags
         $this->portfolio->update($validatedData);
 
-        // 4. Reflect the updates in Study records section
+        // 4. Reflect the updates in Portfolio section
         $this->dispatch('load-portfolios')->to(PortfolioSection::class);
 
         // 5. Clean up the modal form and close the modal
-        // $this->reset();
-        $this->reset(['title', 'description', 'site_url', 'github_url', 'comment', 'site_image', 'site_image_path']);
+        $this->reset();
         $this->dispatch('close-modal', 'edit-portfolio');
     }
 
@@ -159,7 +158,7 @@ class PortfolioForm extends Component
         // 2. Delete the record
         $this->portfolio->delete();
 
-        // 3. Reflect the updates in Study records section
+        // 3. Reflect the updates in Portfolio section
         $this->dispatch('load-portfolios')->to(PortfolioSection::class);
 
         // 4. Clean up the modal form and close the modal
