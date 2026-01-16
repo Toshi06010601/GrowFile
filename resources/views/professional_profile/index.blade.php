@@ -41,7 +41,7 @@
             <ul class="flex flex-row justify-start flex-wrap gap-2 sm:gap-4">
                 @foreach ($profiles as $profile)
                     <li wire:key="{{ $profile->id }}"
-                        class="relative flex flex-col justify-between pb-3 w-36 h-72 sm:w-56 sm:h-80 bg-brand-tertiary-50 border-2 border-brand-secondary-300 rounded-md overflow-hidden shadow-lg shadow-brand-secondary-400 hover:scale-105">
+                        class="relative flex flex-col justify-between pb-3 w-36 h-80 sm:w-56 sm:h-80 bg-brand-tertiary-50 border-2 border-brand-secondary-300 rounded-md overflow-hidden shadow-lg shadow-brand-secondary-400 hover:scale-105">
                         <a href="{{ route('professional_profile.show', $profile->slug) }}"
                             class="h-full flex flex-col items-center">
                             {{-- Background image --}}
