@@ -2,7 +2,7 @@
     {{-- Header area --}}
     <x-slot name="header">
         <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
-            portfolios
+            Portfolios
         </h2>
 
         {{-- button to add a new portfolio --}}
@@ -18,8 +18,17 @@
 
     {{-- Display portfolios below --}}
     <section class="splide pb-5" aria-label="Portfolio Showcase" wire:key="slider-{{ $lastUpdated }}"
-    x-data="splideCarousel"
-    >
+        x-data="splideCarousel"
+        data-splide='{
+        "type": "slide",
+        "padding": { "left": "10rem", "right": "10rem" },
+        "breakpoints": {
+            "1024": { "padding": { "left": "6rem", "right": "6rem" } },
+            "768": { "padding": { "left": "3rem", "right": "3rem" } },
+            "640": { "padding": { "left": "3rem", "right": "3rem" } }
+        }
+     }'
+     >
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($portfolios as $portfolio)
@@ -43,16 +52,19 @@
                                 </p>
 
                                 {{-- Link button --}}
-                                <div class="mt-auto pt-2 border-t border-gray-50 flex justify-start gap-3 sm:gap-5 items-center">
+                                <div
+                                    class="mt-auto pt-2 border-t border-gray-50 flex justify-start gap-3 sm:gap-5 items-center">
                                     <a href="{{ $portfolio->site_url }}"
                                         class="text-blue-600 text-sm font-medium hover:underline" target="blank">
-                                        <img src="{{ asset('images/icons/site.svg')}}" alt="github-icon" class="w-5 lg:hidden">
+                                        <img src="{{ asset('images/icons/site.svg') }}" alt="github-icon"
+                                            class="w-5 lg:hidden">
                                         <p class="hidden lg:inline">View Site</p>
-                                        </a>
+                                    </a>
                                     <a href="{{ $portfolio->github_url }}"
                                         class="text-blue-600 text-sm font-medium hover:underline flex gap-2"
                                         target="blank">
-                                        <img src="{{ asset('images/icons/github.svg')}}" alt="github-icon" class="w-5 lg:hidden">
+                                        <img src="{{ asset('images/icons/github.svg') }}" alt="github-icon"
+                                            class="w-5 lg:hidden">
                                         <p class="hidden lg:inline">View Repository</p>
                                     </a>
                                 </div>
