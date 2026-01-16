@@ -57,7 +57,7 @@
                                 {{-- Date --}}
                                 <div class="flex justify-end">
                                     <p class="text-brand-secondary-500 text-xs line-clamp-1">
-                                        {{ $article->published_date->format('M d, Y') }}
+                                        Published at {{ $article->published_date->format('d/m/Y') }}
                                     </p>
                                 </div>
                             </div>
