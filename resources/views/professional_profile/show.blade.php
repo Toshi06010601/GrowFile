@@ -16,6 +16,8 @@
                 
                 <livewire:Profile.PortfolioSection :userId="$profile->user_id" />
 
+                <livewire:Profile.ArticleSection :userId="$profile->user_id" />
+                
             </div>
 
             @can('update', $profile)
