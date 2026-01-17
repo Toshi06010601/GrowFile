@@ -13,15 +13,13 @@
         </x-modal.header-title>
 
         {{-- Category --}}
-        <x-modal.input-text label="Category" id="project-name" name="category"
-            placeholder="Category or Project Name" />
+        <x-modal.input-text label="Category" id="project-name" name="category" placeholder="Category or Project Name" />
 
         {{-- Activity --}}
-        <x-modal.input-text label="Activity" id="activity" name="activity"
-            placeholder="What have you worked on?" />
+        <x-modal.input-text label="Activity" id="activity" name="activity" placeholder="What have you worked on?" />
 
         {{-- Tags --}}
-         <livewire:Profile.Partials.TagSelector wire:model="selectedTags"/>
+        <livewire:Profile.Partials.TagSelector wire:model="selectedTags" />
 
         {{-- Start datetime --}}
         <x-modal.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />

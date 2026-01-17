@@ -19,7 +19,8 @@
 
             <div class="flex flex-col gap-1">
                 {{-- Display category and activity --}}
-                <p><span class="font-medium">{{ $record->category }}: </span><span class="text-brand-secondary-700">{{ $record->activity }}</span></p>
+                <p><span class="font-medium">{{ $record->category }}: </span><span
+                        class="text-brand-secondary-700">{{ $record->activity }}</span></p>
 
                 <div class="flex flex-row justify-between">
                     {{-- Display all tags --}}
@@ -32,9 +33,8 @@
                     </ul>
 
                     {{-- Show Edit icon for the owner --}}
-                    @if ($isOwner)
-                        <x-section.edit-icon x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
-                    @endif
+                    <x-section.edit-icon x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" />
+
                 </div>
             </div>
         </li>
