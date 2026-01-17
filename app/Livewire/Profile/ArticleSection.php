@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleSection extends Component
 {
+    public $userId;
     public $articles;
     public $isOwner;
     public $lastUpdated;
@@ -20,7 +21,7 @@ class ArticleSection extends Component
         $this->loadArticle();
     }
 
-    #[On('load-article')]
+    #[On('load-articles')]
     public function loadArticle() {
         logger('🔄 loadArticle called', ['userId' => $this->userId]);
         $this->articles = Article::where('user_id', $this->userId)

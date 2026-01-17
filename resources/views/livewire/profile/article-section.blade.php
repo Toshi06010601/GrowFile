@@ -18,6 +18,8 @@
 
     {{-- Display articles below --}}
     <div class="splide pb-5" aria-label="Portfolio Showcase"
+        wire:key="slider-{{ $lastUpdated }}" 
+        x-data="splideCarousel"
         data-splide='{
         "perPage": 3,
         "perMove": 3,
@@ -28,8 +30,7 @@
         "arrows": true,
         "waitForTransition": false,
         "padding": { "top": "1rem", "bottom": "1rem" }
-     }'
-        wire:key="slider-{{ $lastUpdated }}" x-data="splideCarousel">
+     }'>
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($articles as $article)
