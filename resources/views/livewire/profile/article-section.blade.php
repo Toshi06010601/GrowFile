@@ -18,25 +18,28 @@
 
     {{-- Display articles below --}}
     <div class="splide pb-5" aria-label="Portfolio Showcase"
-        wire:key="slider-{{ $lastUpdated }}" 
-        x-data="splideCarousel"
         data-splide='{
-        "perPage": 3,
-        "perMove": 3,
+        "perPage": 1,
         "direction": "ttb", 
-        "height": "400px",
+        "height": "300px",
         "wheel": true,
+        "wheelSleep": 500,
+        "speed": 500,
+        "wheelMinThreshold": 1,
         "pagination": false,
-        "arrows": true,
-        "waitForTransition": false,
-        "padding": { "top": "1rem", "bottom": "1rem" }
-     }'>
+        "arrows": false,
+        "releaseWheel": true,
+        "flickPower": 1,
+        "waitForTransition": true,
+        "padding": { "top": "2rem", "bottom": "3rem" }
+     }'
+        wire:key="slider-{{ $lastUpdated }}" x-data="splideCarousel">
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($articles as $article)
                     <li class="splide__slide py-1 h-full" wire:key="article-slide-{{ $article->id }}">
                         <div
-                            class="relative h-full flex items-center bg-white rounded-md shadow-md overflow-hidden border border-brand-secondary-100 transition hover:shadow-lg">
+                            class="relative slider-content h-full flex items-center bg-white rounded-md shadow-md overflow-hidden border border-brand-secondary-100 transition hover:shadow-lg">
 
                             {{-- Left: Content area --}}
                             <div class="flex-1 pl-3 py-2 flex flex-col">
