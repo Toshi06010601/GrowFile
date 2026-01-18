@@ -58,7 +58,7 @@ class ArticleForm extends Component
             $this->article_url   = $article->article_url;
             $this->article_image_path    = $article->article_image_path;
             $this->platform_name = $article->platform_name;
-            $this->published_date = $article->published_date->format('Y-m-d');;
+            $this->published_date = $article->published_date ? $article->published_date->format('Y-m-d') : null;
         } else {
             $this->reset();
         }
