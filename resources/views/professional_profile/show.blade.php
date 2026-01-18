@@ -13,11 +13,13 @@
                 <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
 
                 <livewire:Profile.ReadingLogSection :userId="$profile->user_id" />
-                
-                <livewire:Profile.PortfolioSection :userId="$profile->user_id" />
+
+                <livewire:Profile.CourseSection :userId="$profile->user_id" />
 
                 <livewire:Profile.ArticleSection :userId="$profile->user_id" />
-                
+
+                <livewire:Profile.PortfolioSection :userId="$profile->user_id" />
+
             </div>
 
             @can('update', $profile)
@@ -28,6 +30,7 @@
             <livewire:Profile.ReadingLogForm />
             <livewire:Profile.PortfolioForm />
             <livewire:Profile.ArticleForm />
+            <livewire:Profile.CourseForm />
         </div>
 
         {{-- Side bar: Profile section --}}
