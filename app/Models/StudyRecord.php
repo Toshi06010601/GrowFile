@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\ModelLogging;
 
 class StudyRecord extends Model
 {
     use HasFactory;
+    use ModelLogging;
     
     protected $fillable = [
         'user_id',

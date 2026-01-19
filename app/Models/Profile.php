@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\ModelLogging;
 
 class Profile extends Model
 {
     use HasFactory;
+    use ModelLogging;
 
     protected $fillable = [
         'user_id',

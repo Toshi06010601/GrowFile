@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ModelLogging;
 
 class Portfolio extends Model
 {
+    use ModelLogging;
+    
     protected $fillable = [
         'user_id',
         'title',

@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ModelLogging;
 
 class Skill extends Model
 {
+    use ModelLogging;
+    
     protected $fillable = [
         'name',
         'category'

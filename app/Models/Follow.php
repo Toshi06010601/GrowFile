@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ModelLogging;
 
 class Follow extends Model
 {
+    use ModelLogging;
+    
     protected $fillable = [
         'follower_id',
         'followed_id',
