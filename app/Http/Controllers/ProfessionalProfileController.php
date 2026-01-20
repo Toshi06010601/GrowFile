@@ -54,7 +54,7 @@ class ProfessionalProfileController extends Controller
 
         if($following) {
             $profilesQuery
-                ->Has('user.authFollows');
+                ->has('user.authFollows');
 
         } elseif($followed) {
             $profilesQuery
