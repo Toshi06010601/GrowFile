@@ -15,7 +15,7 @@
     </x-slot>
 
     {{-- Display study records below --}}
-    <ul class="flex flex-col max-h-72 sm:pr-5 border-2 overflow-y-auto rounded-md text-base sm:text-xl">
+    <ul class="flex flex-col max-h-56 sm:pr-5 border-2 overflow-y-auto rounded-sm text-base sm:text-xl">
         @foreach ($courses as $course)
             <li wire:key="{{ $course->id }}"
                 class="relative flex p-1 gap-1 border-b-2 last:border-b-0 items-center bg-white border-brand-secondary-100 transition hover:shadow-lg">
