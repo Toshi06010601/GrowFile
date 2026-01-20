@@ -18,25 +18,25 @@ class CourseForm extends Component
     Public variables for the modal form
     */
     #[Validate('required|string')]
-    public $provider;
+    public $provider = '';
 
     #[Validate('required|string|max:100')]
-    public $name;
+    public $name = '';
 
-    #[Validate('required|string|max:255')]
-    public $description;
+    #[Validate('string')]
+    public $description = '';
     
     #[Validate('string')]
-    public $course_url;
+    public $course_url = '';
 
    #[Validate('in:in_progress,completed')]
     public $progress_status = 'in_progress';
     
     #[Validate('string')]
-    public $certificate_url;
+    public $certificate_url = '';
 
-    #[Validate('required|date')]
-    public $completion_date;
+    #[Validate('date|nullable')]
+    public $completion_date = null;
 
     /*
     Public functions for the modal form
