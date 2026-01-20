@@ -30,8 +30,8 @@ class ProfessionalProfileController extends Controller
         $profilesQuery = Profile::query();
 
         // 2. Apply name and location filters
-        $profilesQuery->whereRaw('LOWER(full_name) LIKE ?', [$name . '%'])
-                    ->whereRaw('LOWER(location) LIKE ?', [$location . '%']);
+        $profilesQuery->whereLike('full_name', $name . '%')
+                    ->whereLike('location', $location . '%');
                     
         // 3. Apply the "has ALL skills" filter (on the related User -> UserSkills)
         if (is_array($selectedSkills) && count($selectedSkills) > 0) {
