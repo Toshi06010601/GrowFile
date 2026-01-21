@@ -30,6 +30,8 @@ class ExperiencesSection extends Component
     #[On('load-experiences')]
     public function loadExperiences()
     {
+        logger('🔄 loadExperiences called', ['profileUserId' => $this->userId]);
+
         // Get experience records
         $this->experiences = Experience::where('user_id', $this->userId)
                             ->get();

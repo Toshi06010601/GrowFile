@@ -32,6 +32,8 @@ class StudyRecordsSection extends Component
     #[On('load-study-records')]
     public function refreshRecords()
     {
+        logger('🔄 loadStudyRecords called', ['profileUserId' => $this->userId]);
+
         // Return to the first page of studyrecords
         $this->resetPage();
     }

@@ -21,6 +21,8 @@ class ReadingLogSection extends Component
 
     #[On('load-reading-logs')]
     public function loadReadingLogs() {
+        logger('🔄 loadReadingLogs called', ['profileUserId' => $this->userId]);
+
         $this->readingLogs = ReadingLog::where('user_id', $this->userId)
                             ->orderByDesc('updated_at')
                             ->get();

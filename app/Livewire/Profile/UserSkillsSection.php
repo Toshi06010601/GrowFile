@@ -27,6 +27,8 @@ class UserSkillsSection extends Component
     #[On('load-user-skills')]
     public function loadUserSkill()
     {
+        logger('🔄 loadUserSkills called', ['profileUserId' => $this->userId]);
+
         // Get all the userskill records of the selected user
         $this->userSkills = UserSkill::with('skill')
                             ->where('user_id', $this->userId)

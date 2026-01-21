@@ -24,7 +24,7 @@ class PortfolioSection extends Component
 
     #[On('load-portfolios')]
     public function loadPortfolios() {
-        logger('🔄 loadPortfolios called', ['userId' => $this->userId]);
+        logger()->info('🔄 loadPortfolios called', ['profileUserId' => $this->userId]);
         $this->portfolios = Portfolio::where('user_id', $this->userId)
                             ->orderByDesc('updated_at')
                             ->get();
