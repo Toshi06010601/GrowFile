@@ -29,7 +29,7 @@ class ProfileSection extends Component
     #[On('load-profile')]
     public function loadResult()
     {
-        logger('🔄 loadProfile called', ['profileId' => $this->profileId]);
+        logger()->info('🔄 loadProfile called', ['profileId' => $this->profileId]);
 
         // Get profile data together with following status
         $this->profile = Profile::with('user.authFollows')->find($this->profileId);

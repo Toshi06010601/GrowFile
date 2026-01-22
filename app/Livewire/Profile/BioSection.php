@@ -26,7 +26,7 @@ class BioSection extends Component
     public function loadBio()
     {
         // Get the profile with bio
-        logger('🔄 loadCourses called', ['profileId' => $this->profileId]);
+        logger()->info('🔄 loadBio called', ['profileId' => $this->profileId]);
         $this->profile = Profile::select('id', 'user_id', 'bio')
                         ->find($this->profileId);
     }

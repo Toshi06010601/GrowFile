@@ -23,7 +23,7 @@ class ArticleSection extends Component
 
     #[On('load-articles')]
     public function loadArticle() {
-        logger('🔄 loadArticle called', ['profileUserId' => $this->userId]);
+        logger()->info('🔄 loadArticle called', ['profileUserId' => $this->userId]);
         $this->articles = Article::where('user_id', $this->userId)
                             ->orderByDesc('updated_at')
                             ->get();

@@ -32,8 +32,6 @@ class StudyRecordsSection extends Component
     #[On('load-study-records')]
     public function refreshRecords()
     {
-        logger('🔄 loadStudyRecords called', ['profileUserId' => $this->userId]);
-
         // Return to the first page of studyrecords
         $this->resetPage();
     }
@@ -45,6 +43,7 @@ class StudyRecordsSection extends Component
 
     public function render()
     {
+        logger()->info('🔄 loading StudyRecords', ['profileUserId' => $this->userId]);
         // Passing studyrecords with view method to use Pagination
         return view('livewire.profile.study-records-section', [
             'records' => StudyRecord::with('tags')

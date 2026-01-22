@@ -21,7 +21,7 @@ class CourseSection extends Component
 
     #[On('load-courses')]
     public function loadCourses() {
-        logger('🔄 loadCourses called', ['profileUserId' => $this->userId]);
+        logger()->info('🔄 loadCourses called', ['profileUserId' => $this->userId]);
         $this->courses = Course::where('user_id', $this->userId)
                             ->orderByDesc('updated_at')
                             ->get();
