@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\AccessLogging;
+use App\Http\Middleware\AddContext;
 
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -14,9 +15,14 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
          $middleware->web(append: [
-            AccessLogging::class
+            AddContext::class,
+            AccessLogging::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->context(fn () => [
+        'user_id' => auth()->id(),
+        'env' => app()->environment(),
+        'url' => request()->fullUrl(),
+    ]);
     })->create();

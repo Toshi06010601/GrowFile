@@ -19,9 +19,6 @@ class EventController extends Controller
 
         // Compuete date difference to find out viewType
         $diff = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate));
-        
-        \Log::info('Diff in days: ' . $diff);
-        \Log::info('userId: ' . $userId);
 
         // Response for monthly view
         if($diff > 7) {
