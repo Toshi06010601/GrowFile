@@ -16,12 +16,15 @@ class AccessLogging
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+    if (!$request->is('livewire/update')) {
         logger()->info(
             'access', [
                 'method' => $request->method(),
                 'uri' => $request->getRequestUri(),
             ]
-            );
+        );
+    }
 
         return $next($request);
     }
