@@ -25,10 +25,10 @@ class ReadingLogForm extends Component
     #[Validate('required|string|max:255')]
     public $author;
 
-    #[Validate('required|integer')]
+    #[Validate('required|integer|min:1|lte:total_pages')]
     public $current_page;
 
-    #[Validate('required|integer')]
+    #[Validate('required|integer|min:1')]
     public $total_pages;
 
     #[Validate('required|string')]
