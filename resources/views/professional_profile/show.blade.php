@@ -3,7 +3,7 @@
         {{-- Main: Learning records section --}}
         <div class="col-span-5">
             <div class="hidden md:block">
-                <livewire:Profile.BackgroundSection :profileId="$profile->id" lazy />
+                <livewire:Profile.BackgroundSection :profileId="$profile->id" key="background-desktop" />
             </div>
 
             <div class="w-full flex flex-col gap-6">
@@ -36,7 +36,7 @@
         {{-- Side bar: Profile section --}}
         <div class="col-span-3 space-y-2 p-3 bg-white shadow sm:rounded-lg">
             <div class="block md:hidden">
-                <livewire:Profile.BackgroundSection :profileId="$profile->id" />
+                <livewire:Profile.BackgroundSection :profileId="$profile->id" key="background-mobile" />
             </div>
 
             <livewire:Profile.ProfileSection :profileId="$profile->id" />
