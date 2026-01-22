@@ -3,7 +3,7 @@
         {{-- Main: Learning records section --}}
         <div class="col-span-5">
             <div class="hidden md:block">
-                <livewire:Profile.BackgroundSection :profileId="$profile->id" />
+                <livewire:Profile.BackgroundSection :profileId="$profile->id" lazy />
             </div>
 
             <div class="w-full flex flex-col gap-6">
