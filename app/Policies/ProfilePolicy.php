@@ -37,12 +37,7 @@ class ProfilePolicy
      */
     public function update(User $user, Profile $profile): bool
     {
-               // Add logging to debug
-        \Log::info('Policy check', [
-            'user_id' => $user->id,
-            'profile_user_id' => $profile->user_id,
-            'result' => $user->id === $profile->user_id
-        ]);
+
         return $user?->id === $profile->user_id;
     }
 
