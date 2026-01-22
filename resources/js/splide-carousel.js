@@ -29,13 +29,13 @@ document.addEventListener('alpine:init', () => {
         init() {
             this.splide = new Splide(this.$el);
             this.splide.mount();
-            console.log('🧹 Creating Splide');
+            // console.log('🧹 Creating Splide');
         },
 
         // Alpine will automatically execute it before cleaning up the component
         destroy() {
             if (this.splide) {
-                console.log('🧹 Destroying Splide');
+                // console.log('🧹 Destroying Splide');
                 this.splide.destroy(true);
                 this.splide = null;
             }
