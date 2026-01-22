@@ -16,12 +16,10 @@ class AccessLogging
      */
     public function handle(Request $request, Closure $next): Response
     {
-        logger()->debug(
+        logger()->info(
             'access', [
                 'method' => $request->method(),
                 'uri' => $request->getRequestUri(),
-                'ip' => $request->ip(),
-                'user' => Auth::id(),
             ]
             );
 
