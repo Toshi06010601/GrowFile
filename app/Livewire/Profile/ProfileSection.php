@@ -15,24 +15,24 @@ class ProfileSection extends Component
     Public variables for the section area
     */
     public $profile;
-    public $profileId;
+    public $userId;
 
     /*
     Public function for the section area
     */
-    public function mount($profileId)
+    public function mount($userId)
     {
-        $this->profileId = $profileId;
+        $this->userId = $userId;
         $this->loadResult();
     }
 
     #[On('load-profile')]
     public function loadResult()
     {
-        logger()->info('🔄 loadProfile called', ['profileId' => $this->profileId]);
+        logger()->info('🔄 loadProfile called', ['profileUserId' => $this->userId]);
 
         // Get profile data together with following status
-        $this->profile = Profile::with('user.authFollows')->find($this->profileId);
+        $this->profile = Profile::with('user.authFollows')->firstWhere('user_id', $this->userId);
     }
 
     public function render()

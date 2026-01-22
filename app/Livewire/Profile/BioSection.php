@@ -11,14 +11,14 @@ use Illuminate\Support\Str;
 class BioSection extends Component
 {
     public $profile;
-    public $profileId;
+    public $userId;
 
     /*
     Public function for the section area
     */
-    public function mount($profileId)
+    public function mount($userId)
     {
-        $this->profileId = $profileId;
+        $this->userId = $userId;
         $this->loadBio();
     }
 
@@ -26,9 +26,9 @@ class BioSection extends Component
     public function loadBio()
     {
         // Get the profile with bio
-        logger()->info('🔄 loadBio called', ['profileId' => $this->profileId]);
+        logger()->info('🔄 loadBio called', ['profileUserId' => $this->userId]);
         $this->profile = Profile::select('id', 'user_id', 'bio')
-                        ->find($this->profileId);
+                        ->firstWhere('user_id', $this->userId);
     }
 
     public function render()
