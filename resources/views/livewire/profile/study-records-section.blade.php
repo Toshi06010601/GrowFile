@@ -3,7 +3,7 @@
     <x-session-flash-message></x-session-flash-message>
 
     {{-- Display study records below --}}
-    <ul class="flex flex-col max-h-96 sm:pr-5 overflow-y-scroll text-base sm:text-xl">
+    <ul class="flex flex-col max-h-96 gap-2  sm:pr-5 overflow-y-scroll text-base sm:text-xl">
         @foreach ($records as $record)
             <li wire:key="{{ $record->id }}" class="flex flex-col p-3 gap-1 border shadow-md rounded-md">
                 <div class="flex justify-between">
