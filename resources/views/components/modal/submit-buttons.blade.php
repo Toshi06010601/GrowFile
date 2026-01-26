@@ -5,13 +5,14 @@
         <x-danger-button 
             type="button" {{--  Change type to button to stop Enter key submission --}}
             wire:click.prevent="delete"
+            wire:loading.attr="disabled"
             wire:confirm="Are you sure you want to delete this record?" {{-- Optional safety --}}
         >
             {{ __('Delete') }}
         </x-danger-button>
     @endif
 
-    <x-primary-button type="submit">
+    <x-primary-button type="submit" wire:loading.attr="disabled">
         {{ __($name) }}
     </x-primary-button>
 </div>
