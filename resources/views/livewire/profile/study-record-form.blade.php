@@ -1,19 +1,20 @@
 {{-- modal  --}}
 <x-modal name="edit-study-record" :show="false" focusable>
 
+    <x-session-flash-message></x-session-flash-message>
+
     {{-- Modal close button --}}
     <x-modal.icon-close />
 
     {{-- form to update study record --}}
     <form wire:submit="{{ $studyRecord ? 'update' : 'save' }}" class="px-6 pt-14 pb-6">
-
         {{-- Form title --}}
         <x-modal.header-title>
             {{ $studyRecord ? 'Edit' : 'Add' }} study record
         </x-modal.header-title>
 
         {{-- Category --}}
-        <x-modal.input-text label="Category" id="project-name" name="category" placeholder="Category or Project Name" />
+        <x-modal.input-text label="Category" id="project-name" name="category" placeholder="Category or Project Name" :required="true"/>
 
         {{-- Activity --}}
         <x-modal.input-text label="Activity" id="activity" name="activity" placeholder="What have you worked on?" />
