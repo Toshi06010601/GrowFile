@@ -30,8 +30,11 @@ class StudyRecordsSection extends Component
     }
 
     #[On('load-study-records')]
-    public function refreshRecords()
+    public function refreshRecords($type, $message)
     {
+        // Display success flash message if exists
+        session()->flash($type, $message);
+
         // Return to the first page of studyrecords
         $this->resetPage();
     }
