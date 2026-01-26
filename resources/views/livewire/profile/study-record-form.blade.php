@@ -23,10 +23,10 @@
         <livewire:Profile.Partials.TagSelector wire:model="selectedTags" />
 
         {{-- Start datetime --}}
-        <x-modal.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" />
+        <x-modal.input-datetime label="Start DateTime" id="start-datetime" name="start_datetime" :required="true"/>
 
         {{-- End datetime --}}
-        <x-modal.input-datetime label="End DateTime" id="end-datetime" name="end_datetime" />
+        <x-modal.input-datetime label="End DateTime" id="end-datetime" name="end_datetime" :required="true" />
 
         {{-- Save/Update button --}}
         <x-modal.submit-buttons :name="$studyRecord ? 'update' : 'save'" />
