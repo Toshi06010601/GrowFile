@@ -1,7 +1,7 @@
-@props(['label', 'id', 'name', 'placeholder', 'disabled' => false])
+@props(['label', 'id', 'name', 'placeholder', 'disabled' => false, 'required' => false])
 
 <div>
-    <x-input-label :for="$id" :value="$label" class="text-lg mt-4" />
+    <x-input-label :for="$id" :value="$label" class="text-lg mt-4" :required="$required" />
     <x-text-input :id="$id" type="text" class="mt-1 block w-full " :placeholder="$placeholder"
         wire:model="{{ $name }}" :disabled="$disabled" />
     <div>
