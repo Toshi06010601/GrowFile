@@ -68,15 +68,16 @@ class StudyRecordForm extends Component
             DB::transaction(function () use ($validatedData) {
                 $this->studyRecord = StudyRecord::create($validatedData);
                 $this->studyRecord->tags()->sync($this->selectedTags);
-                throw new Exception('Testing error handling');
+                // throw new Exception('Testing error handling');
             });
 
             // 2.2. Reflect the updates in Study records section with flash message
             $this->dispatch('load-study-records', type: 'success', message: 'Study record created successfully.')->to(StudyRecordsSection::class);
 
         } catch(Exception $e) {
-            reset('studyRecord');
-            // 2.1. Display session flash message and log error 
+            // 2.1 Reset study record to avoid displaying update and delete buttons
+            $this->reset('studyRecord');
+            // 2.2. Display session flash message and log error 
             session()->flash('error', 'Failed to save study record. Please try again.');
             logger()->error('Study record save action failed.', ['error details' => $e->getMessage()]);
             return;
@@ -103,7 +104,7 @@ class StudyRecordForm extends Component
             DB::transaction(function () use ($validatedData) {
                 $this->studyRecord->update($validatedData);
                 $this->studyRecord->tags()->sync($this->selectedTags);
-                throw new Exception('Testing error handling');
+                // throw new Exception('Testing error handling');
             });
 
             // 3.2. Reflect the updates in Study records section with flash message
@@ -128,8 +129,8 @@ class StudyRecordForm extends Component
 
         // 2. Delete studyrecord and associated tags
         try {
-            // 2.1. Delete the record
             throw new Exception('Testing error handling');
+            // 2.1. Delete the record
             $this->studyRecord->delete();
             
             // 2.2. Reflect the updates in Study records section
