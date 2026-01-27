@@ -4,9 +4,22 @@
     @if($name !== 'save' && $deletable)
         <x-danger-button 
             type="button" {{--  Change type to button to stop Enter key submission --}}
-            wire:click.prevent="delete"
             wire:loading.attr="disabled"
-            wire:confirm="Are you sure you want to delete this record?" {{-- Optional safety --}}
+            {{-- wire:confirm="Are you sure you want to delete this record?" --}}
+            x-on:click="Swal.fire({
+                    theme: 'material-ui',
+                    title: 'Delete',
+                    text: 'Are you sure you want to delete this record?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#13590e',
+                    cancelButtonColor: '#5b5c5f',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if(result.isConfirmed) {
+                        $wire.delete();
+                    }
+                })"
         >
             {{ __('Delete') }}
         </x-danger-button>

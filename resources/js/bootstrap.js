@@ -19,3 +19,7 @@ window.FullCalendar = {
     timeGridPlugin: timeGridPlugin,
     interactionPlugin: interactionPlugin
 };
+
+//Import SweetAlertJS and make it global object
+import Swal from 'sweetalert2';
+window.Swal = Swal;
