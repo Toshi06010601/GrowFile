@@ -16,6 +16,8 @@
 
     {{-- Reading Log section --}}
 
+    <x-session-flash-message></x-session-flash-message>
+
     {{-- Display reading logs below --}}
     <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory">
         @foreach ($readingLogs as $log)
