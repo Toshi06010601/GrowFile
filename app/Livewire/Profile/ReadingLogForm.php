@@ -80,7 +80,7 @@ class ReadingLogForm extends Component
         
         // 2. 
         try {
-            throw new Exception('Testing error handling');
+            // throw new Exception('Testing error handling');
             // 2.1. Create new reading log
             ReadingLog::create($validatedData);
 
@@ -113,7 +113,7 @@ class ReadingLogForm extends Component
         
         // 3. 
         try {
-            throw new Exception('Testing error handling');
+            // throw new Exception('Testing error handling');
             // 3.1. Update reading log
             $this->readingLog->update($validatedData);
 
@@ -141,7 +141,7 @@ class ReadingLogForm extends Component
 
         // 2. 
         try {
-            throw new Exception('Testing error handling');
+            // throw new Exception('Testing error handling');
 
             // 2. Delete the record
             $this->readingLog->delete();
@@ -168,6 +168,10 @@ class ReadingLogForm extends Component
 
     // Search books using google books api
     public function updatedSearch (GoogleBooksService $service) {
+
+        if($this->search === "") {
+            return;
+        }
 
         try {
 
