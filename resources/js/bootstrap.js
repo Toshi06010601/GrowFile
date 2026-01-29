@@ -23,3 +23,9 @@ window.FullCalendar = {
 //Import SweetAlertJS and make it global object
 import Swal from 'sweetalert2';
 window.Swal = Swal;
+
+
+// Import dropdownNavigator and make it global object
+import dropdownNavigator from './dropdown-navigator';
+window.dropdownNavigator = dropdownNavigator;
+
