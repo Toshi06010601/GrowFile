@@ -15,8 +15,14 @@ export default () => ({
     selectCurrent() {
         if (this.selectedIndex >= 0) {
             const items = this.getItems();
-            if (items[this.selectedIndex]) {
-                items[this.selectedIndex].click();
+            const selectedItem = items[this.selectedIndex];
+            if (selectedItem) {
+                const link = selectedItem.querySelector('a');
+                if (link) {
+                    link.click();
+                } else {
+                    selectedItem.click();
+                }
                 this.reset();
             }
         }
