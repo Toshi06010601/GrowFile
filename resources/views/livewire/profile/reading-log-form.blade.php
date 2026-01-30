@@ -67,8 +67,7 @@
                                     wire:click="selectBook('{{ $suggest['id'] }}')" 
                                     {{-- Start: Attributes for dropdown-navigator.js --}}
                                         data-suggestion-item
-                                        @click="open = false"
-                                        @click="reset()"
+                                        @click="open = false; reset();"
                                         :class="isSelected({{ $index }}) ? 'bg-brand-secondary-100' : ''"
                                     {{-- End: Attributes for dropdown-navigator.js --}}
                                     class="flex flex-row gap-3 p-3 hover:bg-brand-secondary-50 cursor-pointer transition">
