@@ -7,6 +7,7 @@ use App\Services\GoogleBooksService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Exception;
@@ -16,6 +17,8 @@ class ReadingLogForm extends Component
     public ?ReadingLog $readingLog = null;
     public $suggestions = [];
     public $search = '';
+
+    #[Locked]
     public $isOwner = false;
  
     /*
@@ -27,7 +30,7 @@ class ReadingLogForm extends Component
     #[Validate('required|string|max:255')]
     public $author = '';
 
-    #[Validate('required|integer|min:1|lte:total_pages')]
+    #[Validate('required|integer|min:0|lte:total_pages')]
     public $current_page = 0;
 
     #[Validate('required|integer|min:1')]
@@ -87,6 +90,8 @@ class ReadingLogForm extends Component
             // 2.2. Reflect the updates in Reading Log section with flash message
             $this->dispatch('load-reading-logs', type: 'success', message: 'Reading Log created successfully.')->to(ReadingLogSection::class);
 
+            $this->dispatch('scroll-to-start');
+            
         } catch (Exception $e) {
             // 2.1 Reset study record to avoid displaying update and delete buttons
             $this->reset('readingLog');

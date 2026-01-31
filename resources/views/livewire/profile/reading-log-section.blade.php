@@ -19,7 +19,20 @@
     <x-session-flash-message></x-session-flash-message>
 
     {{-- Display reading logs below --}}
-    <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory">
+    {{-- Wire:key for ul is to re-render after adding new book --}}
+    <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory"
+        x-data="{ 
+            scrollToFirst() {
+                this.$nextTick(() => {
+                    const firstItem = this.$el.querySelector('li');
+                    if (firstItem) {
+                        firstItem.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+                    }
+                });
+            }
+        }" 
+        @scroll-to-start.window="scrollToFirst()"
+        > 
         @foreach ($readingLogs as $log)
             <li wire:key="{{ $log->id }}"
                 class="flex-none w-28 sm:w-32 snap-start flex flex-col p-3 pb-6 gap-1 border shadow-md rounded-md bg-white relative">
