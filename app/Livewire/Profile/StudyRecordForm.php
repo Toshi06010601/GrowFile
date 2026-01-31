@@ -129,7 +129,7 @@ class StudyRecordForm extends Component
 
         // 2. Delete studyrecord and associated tags
         try {
-            throw new Exception('Testing error handling');
+            // throw new Exception('Testing error handling');
             // 2.1. Delete the record
             $this->studyRecord->delete();
             

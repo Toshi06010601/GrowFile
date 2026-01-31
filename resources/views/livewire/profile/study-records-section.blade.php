@@ -43,7 +43,7 @@
         @endforeach
 
         {{-- Load More Button --}}
-        @if ($records->hasMorePages())
+        @if (count($records) > 0 && $records->hasMorePages())
             <div class="flex justify-center py-8">
                 <button wire:click="loadMore" class="bg-green-900 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
                     Load More
