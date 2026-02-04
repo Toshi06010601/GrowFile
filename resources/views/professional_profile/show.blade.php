@@ -7,19 +7,12 @@
             </div>
 
             <div class="w-full flex flex-col gap-6">
-
                 <livewire:Profile.StudyDashboard :userId="$profile->user_id" />
-
                 <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
-
                 <livewire:Profile.ReadingLogSection :userId="$profile->user_id" />
-
                 <livewire:Profile.CourseSection :userId="$profile->user_id" />
-
                 <livewire:Profile.ArticleSection :userId="$profile->user_id" />
-
                 <livewire:Profile.PortfolioSection :userId="$profile->user_id" />
-
             </div>
 
             @can('update', $profile)
@@ -29,7 +22,7 @@
 
             <livewire:Profile.ReadingLogForm />
             <livewire:Profile.PortfolioForm />
-            <livewire:Profile.ArticleForm />
+            <livewire:Profile.ArticleEditor />
             <livewire:Profile.CourseForm />
         </div>
 
@@ -38,13 +31,9 @@
             <div class="block md:hidden">
                 <livewire:Profile.BackgroundSection :userId="$profile->user_id" key="background-mobile" />
             </div>
-
             <livewire:Profile.ProfileSection :userId="$profile->user_id" />
-
             <livewire:Profile.BioSection :userId="$profile->user_id" />
-
             <livewire:Profile.UserSkillsSection :userId="$profile->user_id" />
-
             <livewire:Profile.ExperiencesSection :userId="$profile->user_id" />
 
             @can('update', $profile)
