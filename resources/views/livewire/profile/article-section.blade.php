@@ -9,8 +9,7 @@
         @if ($isOwner)
             <x-section.add-icon x-data=""
                 x-on:click="
-                $dispatch('set-article', { id: null , 
-                isOwner: {{ $isOwner ? 'true' : 'false' }} });" />
+                $dispatch('set-article', { id: null });" />
         @endif
     </x-slot>
 
@@ -68,8 +67,8 @@
 
                             {{-- Right: Image (responsive) --}}
                             <div class="flex-shrink-0 p-2 sm:p-3">
-                                <div class="w-24 sm:w-32 aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
-                                    <img src="{{ $article->article_image_path ? asset($article->article_image_path) : asset('storage/site_photos/default.jpg') }}"
+                                <div class="w-32 sm:w-40 aspect-video overflow-hidden rounded-md bg-gray-100">
+                                    <img src="{{ $article->article_image_path !== '' ? asset("storage/{$article->article_image_path}") : '/storage/article_photos/default.jpg' }}"
                                         alt="{{ $article->title }}" class="w-full h-full object-cover">
                                 </div>
                             </div>
@@ -77,7 +76,7 @@
                             {{-- Action button --}}
                             @if ($isOwner)
                                 <button type="button"
-                                    @click.stop="$dispatch('set-article', { id: {{ $article->id }}, isOwner: true })"
+                                    @click.stop="$dispatch('set-article', { id: {{ $article->id }} })"
                                     class="absolute bottom-1 right-1 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:bg-white hover:shadow-lg transition-all">
                                     <svg class="w-4 h-4 text-brand-secondary-600" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -87,7 +86,7 @@
                                 </button>
                             @else
                                 <button type="button"
-                                    @click.stop="$dispatch('set-article', { id: {{ $article->id }}, isOwner: false })"
+                                    @click.stop="$dispatch('set-article', { id: {{ $article->id }} })"
                                     class="absolute bottom-1 right-1 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:bg-white hover:shadow-lg transition-all">
                                     <svg class="w-4 h-4 text-brand-secondary-600" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
