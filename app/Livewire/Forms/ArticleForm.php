@@ -15,25 +15,25 @@ class ArticleForm extends Form
 
     public ?Article $article = null;
 
-    #[Validate('image|max:1024')]
+    #[Validate('nullable|mimes:jpg,jpeg,png,webp|max:1024')]
     public $article_image;       // Holds the temporary uploaded file object
 
     #[Validate('required|string|max:255')]
     public $title;
 
-    #[Validate('string')]
+    #[Validate('nullable|string')]
     public $description = '';
 
-    #[Validate('string')]
+    #[Validate('nullable|string|url|max:500')]
     public $article_url = '';
 
-    #[Validate('string')]
+    #[Validate('nullable|string')]
     public $article_image_path = '';
 
-    #[Validate('string')]
+    #[Validate('nullable|string|max:100')]
     public $platform_name = '';
     
-    #[Validate('date')]
+    #[Validate('nullable|date')]
     public $published_date = null;
 
     /*
@@ -63,7 +63,7 @@ class ArticleForm extends Form
 
             // 3. Create new article
             Article::create(
-                $this->only(['title', 'description', 'article_url', 'article_image_path', 'platform_name', 'published_date']) 
+                $this->only('title', 'description', 'article_url', 'article_image_path', 'platform_name', 'published_date') 
                 + 
                 ['user_id' => Auth::id()]
             );
@@ -75,18 +75,15 @@ class ArticleForm extends Form
     {
         DB::transaction(function ()
         {
-            // 1. Authorize 
-            $this->authorize('update', $this->article);
-
-            // 2. Validate
+            // 1. Validate
             $this->validate();
 
-            // 3. Upload Image
+            // 2. Upload Image
             $this->uploadArticleImage();
 
-            // 4. Update article
+            // 3. Update article
             $this->article->update(
-                $this->only(['title', 'description', 'article_url', 'article_image_path', 'platform_name', 'published_date'])
+                $this->only('title', 'description', 'article_url', 'article_image_path', 'platform_name', 'published_date')
             );
      
         });
@@ -97,24 +94,21 @@ class ArticleForm extends Form
     */
     protected function uploadArticleImage()
     {
-            $oldPath = $this->article_image_path;
-    
-            // 1. Upload new image and store file path
-            if ($this->article_image) {
-                $this->article_image_path = $this->uploadImage(
-                    $this->article_image,
-                    'article_photos',
-                    $oldPath
-                );
-            }
+        if (!$this->article_image) {
+            return;
+        }
 
-            // 2. Delete old image if successfull
-            DB::afterCommit(function () use ($oldPath) {
-                $this->deleteOldImage(
-                    $oldPath,
-                    '/default.jpg'
-                );
-            });
+        $oldPath = $this->article_image_path;
+
+        // 1. Upload new image and store file path
+        $this->article_image_path = $this->uploadNewImage(
+            $this->article_image,
+            'article_photos',
+            $oldPath
+        );
+
+        // 2. Delete old image if successfull
+        DB::aftercommit(fn() => $this->deleteOldImage( $oldPath, '/default.jpg' ));
     }
 
 }
