@@ -1,7 +1,7 @@
-@props(['label', 'id', 'name', 'disabled' => false])
+@props(['label', 'id', 'name', 'disabled' => false, 'required' => false])
 
 <div>
-    <x-input-label :for="$id" :value="$label" class="text-lg mt-4" />
+    <x-input-label :for="$id" :value="$label" class="text-lg mt-4" :required="$required"/>
     <x-text-input :id="$id" type="date" class="mt-1" wire:model.blur="{{ $name }}" :disabled="$disabled" />
     <div>
         @error($name)
