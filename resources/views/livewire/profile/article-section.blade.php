@@ -15,6 +15,8 @@
 
     {{-- article section --}}
 
+    <x-session-flash-message></x-session-flash-message>
+
     {{-- Display articles below --}}
     <div class="splide pb-5" aria-label="Portfolio Showcase"
         data-splide='{
@@ -35,7 +37,7 @@
         wire:key="slider-{{ $lastUpdated }}" x-data="splideCarousel">
         <div class="splide__track">
             <ul class="splide__list">
-                @foreach ($articles as $article)
+                @foreach ($this->articles as $article)
                     <li class="splide__slide py-1 h-full" wire:key="article-slide-{{ $article->id }}">
                         <div
                             class="relative slider-content h-full flex items-center bg-white rounded-md shadow-md overflow-hidden border border-brand-secondary-100 transition hover:shadow-lg">
