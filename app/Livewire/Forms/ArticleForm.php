@@ -16,10 +16,10 @@ class ArticleForm extends Form
     public ?Article $article = null;
 
     #[Validate('nullable|mimes:jpg,jpeg,png,webp|max:1024')]
-    public $article_image;       // Holds the temporary uploaded file object
+    public $article_image = null;       // Holds the temporary uploaded file object
 
     #[Validate('required|string|max:255')]
-    public $title;
+    public $title = '';
 
     #[Validate('nullable|string')]
     public $description = '';
@@ -30,10 +30,10 @@ class ArticleForm extends Form
     #[Validate('nullable|string')]
     public $article_image_path = '';
 
-    #[Validate('nullable|string|max:100')]
+    #[Validate('required|string|max:100')]
     public $platform_name = '';
     
-    #[Validate('nullable|date')]
+    #[Validate('required|date')]
     public $published_date = null;
 
     /*
