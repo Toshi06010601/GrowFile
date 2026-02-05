@@ -10,6 +10,7 @@ use App\Livewire\Forms\ArticleForm;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\ValidationException; 
 use Exception;
 
 class ArticleEditor extends Component
@@ -28,6 +29,7 @@ class ArticleEditor extends Component
     public function setArticle($id)
     {
         $this->form->reset();
+        $this->form->resetValidation();
 
         if($id) {
             $article = Article::findOrFail($id);
@@ -43,12 +45,14 @@ class ArticleEditor extends Component
     public function save()
     {
         $isUpdate = (bool) $this->form->article;
-
+        
         try {
+            // throw new Exception('Testing error handling');
             $isUpdate && $this->authorize('update', $this->form->article);
             $isUpdate ? $this->form->update() : $this->form->store();
             $this->finishAction($isUpdate ? 'updated' : 'created');
-
+        } catch (ValidationException $e) {
+            throw $e;
         } catch (Exception $e) {
             $this->handleError($isUpdate ? 'update' : 'create', $e);
         }
@@ -71,7 +75,7 @@ class ArticleEditor extends Component
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('load-articles', 
+        $this->dispatch('articles-updated', 
             type: 'success', 
             message: "Article {$actionName} successfully."
         )->to(ArticleSection::class);
@@ -81,8 +85,8 @@ class ArticleEditor extends Component
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->form->reset('article');
         session()->flash('error', "Failed to {$actionName} article. Please try again.");
+        $this->dispatch('flash-message');
         logger()->error("Article {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 
