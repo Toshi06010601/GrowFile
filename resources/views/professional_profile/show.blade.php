@@ -23,7 +23,7 @@
             <livewire:Profile.ReadingLogForm />
             <livewire:Profile.PortfolioForm />
             <livewire:Profile.ArticleEditor />
-            <livewire:Profile.CourseForm />
+            <livewire:Profile.CourseEditor />
         </div>
 
         {{-- Side bar: Profile section --}}
