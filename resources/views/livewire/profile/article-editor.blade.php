@@ -1,13 +1,7 @@
 {{-- modal  --}}
 <x-modal name="edit-article" :show="false" focusable>
-
-    <div x-data="{
-        scrollToTop() {
-            console.log('scrolling');
-            this.$el.closest('[role=dialog]')?.scrollIntoView({ top: 0, behavior: 'smooth' });
-        }
-    }" @flash-message.window="scrollToTop()">
-
+   
+        {{-- Session flash message --}}
         <x-session-flash-message></x-session-flash-message>
 
         {{-- Modal close button --}}
@@ -23,7 +17,7 @@
 
             {{-- Title --}}
             <x-modal.input-text label="Title" id="title" name="form.title" placeholder="Name of your article"
-                :disabled="!$isOwner" :required="true"/>
+                :disabled="!$isOwner" :required="true" />
 
             {{-- Description --}}
             <x-modal.input-textarea label="Description" id="description" name="form.description"
@@ -65,18 +59,16 @@
 
             {{-- Platform Name --}}
             <x-modal.input-text label="Platform Name" id="platform_name" name="form.platform_name"
-                placeholder="Platform Name" :disabled="!$isOwner" :required="true"/>
+                placeholder="Platform Name" :disabled="!$isOwner" :required="true" />
 
             {{-- Published Date --}}
             <x-modal.input-date label="Published Date" id="published_date" name="form.published_date"
-                placeholder="Describe your article..." :disabled="!$isOwner" :required="true"/>
+                placeholder="Describe your article..." :disabled="!$isOwner" :required="true" />
 
             @if ($isOwner)
                 {{-- Save/Update button --}}
                 <x-modal.submit-buttons :name="$form->article ? 'update' : 'save'" />
             @endif
         </form>
-
-    </div>
 
 </x-modal>
