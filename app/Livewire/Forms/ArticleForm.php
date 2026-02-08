@@ -8,6 +8,7 @@ use Livewire\Form;
 use Illuminate\Support\Facades\DB;
 use App\Traits\HasImageUpload;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class ArticleForm extends Form
 {
