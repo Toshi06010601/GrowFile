@@ -8,7 +8,7 @@
         {{-- button to add a new portfolio --}}
         @if ($isOwner)
             <x-section.add-icon x-data=""
-                x-on:click="
+                x-on:click.stop="
                 $dispatch('set-portfolio', { id: null , 
                 isOwner: {{ $isOwner ? 'true' : 'false' }} });" />
         @endif
@@ -57,15 +57,15 @@
                                     <a href="{{ $portfolio->site_url }}"
                                         class="text-blue-600 text-sm font-medium hover:underline" target="blank">
                                         <img src="{{ asset('images/icons/site.svg') }}" alt="github-icon"
-                                            class="w-5 lg:hidden">
-                                        <p class="hidden lg:inline">View Site</p>
+                                            class="w-5 xl:hidden">
+                                        <p class="hidden xl:inline">View Site</p>
                                     </a>
                                     <a href="{{ $portfolio->github_url }}"
                                         class="text-blue-600 text-sm font-medium hover:underline flex gap-2"
                                         target="blank">
                                         <img src="{{ asset('images/icons/github.svg') }}" alt="github-icon"
-                                            class="w-5 lg:hidden">
-                                        <p class="hidden lg:inline">View Repository</p>
+                                            class="w-5 xl:hidden">
+                                        <p class="hidden xl:inline">View Repository</p>
                                     </a>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                             @if ($isOwner)
                                 <div class="absolute bottom-1 right-1 flex justify-end mt-2 min-w-5">
                                     <x-section.edit-icon
-                                        x-on:click="$dispatch('set-portfolio', { 
+                                        x-on:click.stop="$dispatch('set-portfolio', { 
                                         id: {{ $portfolio->id }}, 
                                         isOwner: {{ $isOwner ? 'true' : 'false' }} 
                                     })" />
@@ -82,7 +82,7 @@
                             @else
                                 <div class="absolute bottom-1 right-1 flex justify-end mt-2 min-w-5">
                                     <x-section.expand-icon
-                                        x-on:click="$dispatch('set-portfolio', { 
+                                        x-on:click.stop="$dispatch('set-portfolio', { 
                                         id: {{ $portfolio->id }}, 
                                         isOwner: {{ $isOwner ? 'true' : 'false' }} 
                                     })" />

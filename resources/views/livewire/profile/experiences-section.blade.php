@@ -29,7 +29,7 @@
 
                     {{-- Edit icon for owner of the profile --}}
                     @if ($isOwner)
-                        <x-section.edit-icon class="w-5"
+                        <x-section.edit-icon
                             x-on:click="$dispatch('set-experience', { id: {{ $experience->id }} })" />
                     @endif
                 </div>

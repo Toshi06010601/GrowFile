@@ -9,19 +9,19 @@
         {{-- button to add a new skill --}}
         @if ($isOwner)
             <x-section.add-icon x-data=""
-                x-on:click="
+                x-on:click.stop="
                 $dispatch('set-user-skill', { id: null });" />
         @endif
     </x-slot>
 
     {{-- Display User Skills below --}}
-    <ul class="flex flex-col max-h-96 overflow-y-scroll">
+    <ul class="flex flex-col max-h-96 overflow-y-scroll gap-0.5">
         @foreach ($userSkills->take($numOfSkills) as $userSkill)
-            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between text-brand-secondary-600 text-base">
+            <li wire:key="{{ $userSkill->id }}" class="flex flex-row justify-between items-center text-brand-secondary-600 text-base">
                 <p>
                     {{ $userSkill->skill->name }}
                 </p>
-                <div class="flex flex-row justify-start gap-5">
+                <div class="flex flex-row justify-start gap-2">
                     <div class="flex flex-row gap-0">
                         @for ($i = 0; $i < $userSkill->level; $i++)
                             <img src="/images/icons/filled-drop.svg" alt="skill level" class="w-3">
@@ -33,8 +33,8 @@
     
                     {{-- Edit icon for the owner --}}
                     @if ($isOwner)
-                        <x-section.edit-icon class="w-5"
-                            x-on:click="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
+                        <x-section.edit-icon-without-bg
+                            x-on:click.stop="$dispatch('set-user-skill', { id: {{ $userSkill->id }} })" />
                     @endif
                 </div>
             </li>
