@@ -26,6 +26,8 @@
 
         <!-- Page Content -->
         <main class="flex-1 flex flex-col">
+            {{-- Session flash message --}}
+            <x-session-flash-message></x-session-flash-message>
             {{ $slot }}
         </main>
 
