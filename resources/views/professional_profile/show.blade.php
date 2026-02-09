@@ -21,7 +21,7 @@
             @endcan
 
             <livewire:Profile.ReadingLogForm />
-            <livewire:Profile.PortfolioForm />
+            <livewire:Profile.PortfolioEditor />
             <livewire:Profile.ArticleEditor />
             <livewire:Profile.CourseEditor />
         </div>
