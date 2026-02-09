@@ -2,7 +2,7 @@
 <x-modal name="edit-course" :show="false" focusable>
 
     {{-- Session flash message --}}
-    <x-session-flash-message></x-session-flash-message>
+    {{-- <x-session-flash-message></x-session-flash-message> --}}
 
     {{-- Modal close button --}}
     <x-modal.icon-close />

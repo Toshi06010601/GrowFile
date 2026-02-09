@@ -16,8 +16,6 @@
 
     {{-- Reading Log section --}}
 
-    <x-session-flash-message></x-session-flash-message>
-
     {{-- Display reading logs below --}}
     {{-- Wire:key for ul is to re-render after adding new book --}}
     <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory"

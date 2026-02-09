@@ -1,8 +1,6 @@
 {{-- modal  --}}
 <x-modal name="edit-reading-log" :show="false" focusable>
 
-    <x-session-flash-message></x-session-flash-message>
-
     {{-- Modal close button --}}
     <x-modal.icon-close />
 

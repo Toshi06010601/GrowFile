@@ -1,6 +1,5 @@
 {{-- Study records section --}}
 <div>
-    <x-session-flash-message></x-session-flash-message>
 
     {{-- Display study records below --}}
     <ul class="flex flex-col max-h-96 gap-2  sm:pr-5 overflow-y-scroll text-base sm:text-xl">

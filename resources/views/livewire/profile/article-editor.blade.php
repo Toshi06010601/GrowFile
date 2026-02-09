@@ -1,8 +1,5 @@
 {{-- modal  --}}
 <x-modal name="edit-article" :show="false" focusable>
-   
-        {{-- Session flash message --}}
-        <x-session-flash-message></x-session-flash-message>
 
         {{-- Modal close button --}}
         <x-modal.icon-close />

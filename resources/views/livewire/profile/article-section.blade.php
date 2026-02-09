@@ -1,6 +1,4 @@
 <x-section id="article-section">
-    {{-- Session flash --}}
-    <x-session-flash-message></x-session-flash-message>
 
     {{-- Header area --}}
     <x-slot name="header">
