@@ -40,7 +40,7 @@
                 <livewire:Profile.ProfileForm />
                 <livewire:Profile.BioForm />
                 <livewire:Profile.UserSkillForm />
-                <livewire:Profile.ExperienceForm />
+                <livewire:Profile.ExperienceEditor />
             @endcan
 
         </div>
