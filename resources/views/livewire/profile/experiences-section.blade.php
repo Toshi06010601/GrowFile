@@ -15,49 +15,65 @@
 
     </x-slot>
 
-    {{-- Display User Skills below --}}
-    <ul class="flex flex-col">
-        @foreach ($experiences as $experience)
-            <li wire:key="{{ $experience->id }}" class="flex flex-col justify-start mb-4 last:mb-0 text-base font-normal text-brand-secondary-600">
+    {{-- Error State --}}
+    @if ($hasError)
+        <x-loading-error>Failed to load experiences. Please try again.</x-loading-error>
+    @endif
 
-                {{-- Experience item header --}}
-                <div class="flex flex-row justify-between">
+    {{-- Display experiences below --}}
+    @if (!$hasError)
+        {{-- Display if experience data exists --}}
+        @if (count($this->experiences) > 0)
+            <ul class="flex flex-col">
+                @foreach ($this->experiences as $experience)
+                    <li wire:key="{{ $experience->id }}"
+                        class="flex flex-col justify-start mb-4 last:mb-0 text-base font-normal text-brand-secondary-600">
 
-                    <h3 class="font-medium">
-                        {{ $experience->company_name }}
-                    </h3>
+                        {{-- Experience item header --}}
+                        <div class="flex flex-row justify-between">
 
-                    {{-- Edit icon for owner of the profile --}}
-                    @if ($isOwner)
-                        <x-section.edit-icon
-                            x-on:click="$dispatch('set-experience', { id: {{ $experience->id }} })" />
-                    @endif
-                </div>
+                            <h3 class="font-medium">
+                                {{ $experience->company_name }}
+                            </h3>
 
-                {{-- Role --}}
-                <div>
-                    {{ $experience->role }}
-                </div>
+                            {{-- Edit icon for owner of the profile --}}
+                            @if ($isOwner)
+                                <x-section.edit-icon
+                                    x-on:click="$dispatch('set-experience', { id: {{ $experience->id }} })" />
+                            @endif
+                        </div>
 
-                {{-- Work period --}}
-                <div>
-                    {{ $experience->start_month->format('M Y') }} -
-                    {{ $experience->end_month ? $experience->end_month->format('M Y') : 'Present' }}
-                </div>
+                        {{-- Role --}}
+                        <div>
+                            {{ $experience->role }}
+                        </div>
 
-                {{-- Work description (Shorten to 100 if longer) --}}
-                @if (Str::length($experience->description) > 100)
-                    <div x-data="{ open: true }" class="text-sm mt-1">
-                        <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button @click="open = false">...see
-                                more</button></p>
-                        <p x-show="!open">{{ $experience->description, 100 }} <button @click="open = true">...see less</button></p>
-                    </div>
-                @else
-                    <p class="text-sm">{{ $experience->description }}</p>
-                @endif
+                        {{-- Work period --}}
+                        <div>
+                            {{ $experience->start_month->format('M Y') }} -
+                            {{ $experience->end_month ? $experience->end_month->format('M Y') : 'Present' }}
+                        </div>
 
-            </li>
-        @endforeach
-    </ul>
+                        {{-- Work description (Shorten to 100 if longer) --}}
+                        @if (Str::length($experience->description) > 100)
+                            <div x-data="{ open: true }" class="text-sm mt-1">
+                                <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button
+                                        @click="open = false">...see
+                                        more</button></p>
+                                <p x-show="!open">{{ $experience->description, 100 }} <button
+                                        @click="open = true">...see less</button></p>
+                            </div>
+                        @else
+                            <p class="text-sm">{{ $experience->description }}</p>
+                        @endif
+
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            {{-- Display if no experience exists --}}
+            <x-no-data-to-display fileName="experience.svg">No experience to display</x-no-data-to-display>
+        @endif
+    @endif
 
     </x-section>
