@@ -7,31 +7,40 @@ use App\Models\Skill;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Modelable;
+use Livewire\Attributes\Computed;
+use Exception;
 
 class SkillSelector extends Component
 {
     /*
     Public variables
     */
-    public $skills = [];
-
     #[Modelable]
     public $skill_id;
-
+    public $hasError = false;
 
     /*
     Public functions
     */
-    public function mount()
-    {
-        $this->loadAllSkills();
-    }
-    
 
-    // Retrieve all the tags created by the users
-    public function loadAllSkills()
+    #[Computed]
+    public function Skills()
     {
-        $this->skills = Skill::all();
+        try {
+            // throw new exception('error');
+            logger()->info('🔄 loading skills');
+            $this->hasError = false;
+            return Skill::all();
+        } catch (Exception $e) {
+            logger()->error('Failed to load skills', ['error' => $e->getMessage()]);
+            $this->hasError = true;
+            return collect();
+        }
+    }
+
+    public function refetch() {
+        logger()->info('🔄 Refetching skills');
+        unset($this->skills); // Refresh skills
     }
 
     public function render()
