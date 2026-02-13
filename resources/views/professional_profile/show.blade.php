@@ -16,8 +16,8 @@
             </div>
 
             @can('update', $profile)
-                <livewire:Profile.BackgroundForm />
-                <livewire:Profile.StudyRecordForm />
+                <livewire:Profile.BackgroundEditor />
+                <livewire:Profile.StudyRecordEditor />
             @endcan
 
             <livewire:Profile.ReadingLogForm />
@@ -37,9 +37,9 @@
             <livewire:Profile.ExperiencesSection :userId="$profile->user_id" />
 
             @can('update', $profile)
-                <livewire:Profile.ProfileForm />
-                <livewire:Profile.BioForm />
-                <livewire:Profile.UserSkillForm />
+                <livewire:Profile.ProfileEditor />
+                <livewire:Profile.BioEditor />
+                <livewire:Profile.UserSkillEditor />
                 <livewire:Profile.ExperienceEditor />
             @endcan
 
