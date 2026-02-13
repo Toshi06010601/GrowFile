@@ -21,6 +21,7 @@ class StudyRecordsSection extends Component
     #[Locked]
     public $isOwner;
     public $perPage;
+    public $hasError = false;
 
     /*
     Public function for the section area
@@ -32,14 +33,10 @@ class StudyRecordsSection extends Component
         $this->isOwner = Auth::id() === $this->userId;
     }
 
-    #[On('load-study-records')]
-    public function refreshRecords($type = '', $message = '')
-    {
-        // Display success flash message if exists
-        session()->flash($type, $message);
-
-        // Return to the first page of studyrecords
-        $this->resetPage();
+    #[On('study-records-updated')]
+    public function refetch() {
+        logger()->info('🔄 Resetting study records', ['profileUserId' => $this->userId]);
+        $this->resetPage(); // Return to the first page of studyrecords
     }
     
     public function loadMore()
@@ -49,10 +46,11 @@ class StudyRecordsSection extends Component
     
     public function render()
     {
-        logger()->info('🔄 loading StudyRecords', ['profileUserId' => $this->userId]);
-
+        
         try {
             // throw new Exception('Testing error handling');
+            logger()->info('🔄 loading StudyRecords', ['profileUserId' => $this->userId]);
+            $this->hasError = false;
             // Passing studyrecords with view method to use Pagination
             return view('livewire.profile.study-records-section', [
                 'records' => StudyRecord::with('tags')
@@ -62,7 +60,7 @@ class StudyRecordsSection extends Component
             ]);
         } catch (Exception $e) {
             logger()->error('Failed to load study records', ['error' => $e->getMessage(), 'profileUserId' => $this->userId]);
-            session()->flash('error', 'Failed to load study records.');
+             $this->hasError = true;
             return view('livewire.profile.study-records-section', ['records' => collect()]);
         }
         
