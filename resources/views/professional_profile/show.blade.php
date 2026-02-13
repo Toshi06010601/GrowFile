@@ -20,7 +20,7 @@
                 <livewire:Profile.StudyRecordEditor />
             @endcan
 
-            <livewire:Profile.ReadingLogForm />
+            <livewire:Profile.ReadingLogEditor />
             <livewire:Profile.PortfolioEditor />
             <livewire:Profile.ArticleEditor />
             <livewire:Profile.CourseEditor />
