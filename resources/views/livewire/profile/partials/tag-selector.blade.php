@@ -2,7 +2,7 @@
     <div x-data="{
         open: false,
         search: '',
-        tags: @js($allTags).map(tag => ({ ...tag, show: true })),
+        tags: @js($this->allTags).map(tag => ({ ...tag, show: true })),
         selected: @entangle('selectedTags'),
     
         //update x-show to hide the tags which don't match the search input
@@ -25,10 +25,14 @@
     
         //create new Tag
         async addNewTag() {
-            const newTag = await $wire.addTag(this.search);
-            this.tags.push({ ...newTag, show: true });
-            this.search = '';
-            this.updateSuggestion();
+            try {
+                const newTag = await $wire.addTag(this.search);
+                this.tags.push({ ...newTag, show: true });
+                this.search = '';
+                this.updateSuggestion();
+            } catch (error) {
+                console.error('Failed to add a new tag:', error);
+            }
         },
     }" @click.away="open = false">
 
