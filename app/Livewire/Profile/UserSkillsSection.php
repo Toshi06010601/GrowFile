@@ -2,16 +2,21 @@
 
 namespace App\Livewire\Profile;
 
-use App\Models\UserSkill;
 use Livewire\Component;
+use App\Models\UserSkill;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class UserSkillsSection extends Component
 {
-    public $userSkills;
-    public $userId;
-    public $isOwner;
+    #[Locked]
+    public $userId = null;
+    #[Locked]
+    public $isOwner = false;
+    public $hasError = false;
     public $numOfSkills = 5;
 
     /*
@@ -21,7 +26,29 @@ class UserSkillsSection extends Component
     {
         $this->userId = $userId;
         $this->isOwner = Auth::id() === $this->userId; //Check if the user is the owner
-        $this->loadUserSkill();
+    }
+
+    #[Computed] 
+    public function userSkills()
+    {
+        try {
+            // throw new exception('error');
+            logger()->info('🔄 loading user skills', ['profileUserId' => $this->userId]);
+            $this->hasError = false;
+            return UserSkill::with('skill')
+                            ->where('user_id', $this->userId)
+                            ->get();
+        } catch (Exception $e) {
+            logger()->error('Failed to load user skills', ['profileUserId' => $this->userId, 'error' => $e->getMessage()]);
+            $this->hasError = true;
+            return collect();
+        }
+    }
+    
+    #[On('user-skills-updated')]
+    public function refetch() {
+        logger()->info('🔄 Refetching user skills', ['profileUserId' => $this->userId]);
+        unset($this->userSkills); // Refresh userSkills
     }
 
     #[On('load-user-skills')]
@@ -37,6 +64,7 @@ class UserSkillsSection extends Component
 
     public function render()
     {
+        $this->userSkills;
         return view('livewire.profile.user-skills-section');
     }
 }
