@@ -52,7 +52,7 @@
                                 <button
                                     class="flex flex-col justify-center pr-3 py-2 border border-transparent text-base leading-4 font-medium rounded-md text-brand-secondary-500 bg-secondary-background-50 hover:text-brand-secondary-800 hover:scale-105 focus:outline-none transition ease-in-out duration-150">
                                     <div class="ml-1 size-9 sm:size-12 rounded-full overflow-hidden border-2">
-                                        <img :src="profile_image_path" alt="profile image"
+                                        <img :src="'/storage/' + profile_image_path" alt="profile image"
                                             class="w-full h-full object-cover">
                                     </div>
                                     <div class="inline-flex justify-center items-center">
