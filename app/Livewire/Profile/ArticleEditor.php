@@ -82,11 +82,6 @@ class ArticleEditor extends Component
             $this->handleError('delete', $e);
         }   
     }
-
-    public function render()
-    {
-        return view('livewire.profile.article-editor');
-    }
     
     /*
     Private functions for the modal form
