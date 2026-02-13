@@ -5,11 +5,11 @@
     <x-modal.icon-close />
 
     {{-- form to update reading log --}}
-    <form wire:submit="{{ $readingLog ? 'update' : 'save' }}" class="px-6 pt-14 pb-6">
+    <form wire:submit="save" class="px-6 pt-14 pb-6">
 
         {{-- Form title --}}
         <x-modal.header-title>
-            {{ $readingLog ? 'Edit' : 'Add' }} reading log
+            {{ $form->readingLog ? 'Edit' : 'Add' }} reading log
         </x-modal.header-title>
 
         {{-- Searchable for owner --}}
@@ -49,7 +49,7 @@
 
                 {{-- Validation error --}}
                 <div>
-                    @error('title')
+                    @error('form.title')
                         <x-input-error :messages="$message" class="mt-2" />
                     @enderror
                 </div>
@@ -92,13 +92,13 @@
             </div>
         @endif
 
-        @if ($title)
+        @if ($form->title)
             <div
                 class="flex items-center gap-4 p-4 mb-4 bg-brand-secondary-50 rounded-lg border border-brand-secondary-200">
-                <img src="{{ $cover_url ?? 'default.png' }}" class="w-16 h-20 object-cover shadow">
+                <img src="{{ $form->cover_url ?? 'default.png' }}" class="w-16 h-20 object-cover shadow">
                 <div class="flex-1">
-                    <h4 class="font-bold text-sm">{{ $title }}</h4>
-                    <p class="text-xs text-gray-600">{{ $author }}</p>
+                    <h4 class="font-bold text-sm">{{ $form->title }}</h4>
+                    <p class="text-xs text-gray-600">{{ $form->author }}</p>
                 </div>
             </div>
         @endif
@@ -109,26 +109,26 @@
             <x-input-label for="current-page" value="Reading status" class="text-lg mt-4" />
             <div class="flex flex-row items-end gap-3">
                 <x-text-input id="current-page" type="text" class="mt-1 block" placeholder="current page"
-                    wire:model="current_page" :disabled="!$isOwner" />
+                    wire:model="form.current_page" :disabled="!$isOwner" />
                 <p class="text-lg"> / </p>
-                <p class="text-lg text-gray-600">{{ $total_pages ?? 'total' }} pages</p>
+                <p class="text-lg text-gray-600">{{ $form->total_pages ?? 'total' }} pages</p>
             </div>
 
             {{-- Validation error --}}
             <div>
-                @error('current_page')
+                @error('form.current_page')
                     <x-input-error :messages="$message" class="mt-2" />
                 @enderror
             </div>
         </div>
 
         {{-- Review --}}
-        <x-modal.input-textarea label="Review" id="review" name="review"
+        <x-modal.input-textarea label="Review" id="review" name="form.review"
             placeholder="Write your thoughts or feedback here" :disabled="!$isOwner" />
 
         @if ($isOwner)
             {{-- Save/Update button --}}
-            <x-modal.submit-buttons :name="$readingLog ? 'update' : 'save'" />
+            <x-modal.submit-buttons :name="$form->readingLog ? 'update' : 'save'" />
         @endif
     </form>
 
