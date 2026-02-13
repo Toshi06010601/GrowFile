@@ -16,15 +16,16 @@ class GoogleBooksService
         $this->baseUrl = config('services.google_books.api_url');
     }
 
-    public function search (String $query) 
+    public function search (String $query) : array
     {
         try {
             // Make API call to get matching books data  
-            $response = Http::get($this->baseUrl, [
-                'q' => $query,
-                'key' => $this->apiKey,
-                'maxResults' => 20,
-            ]);
+            $response = Http::timeout(10)
+                ->get($this->baseUrl, [
+                    'q' => $query,
+                    'key' => $this->apiKey,
+                    'maxResults' => 20,
+                ]);
 
             // This throws a RequestException if there's a 400 or 500 error
             if ($response->failed()) {
@@ -42,11 +43,12 @@ class GoogleBooksService
 
     }
     
-    public function selectBook ($id) 
+    public function selectBook ($id) : array
     {
         try {
             // Make API call to get specific book data
-            $response = Http::get($this->baseUrl . '/' . $id, [
+            $response = Http::timeout(10)
+                        ->get($this->baseUrl . '/' . $id, [
                             'key' => $this->apiKey
                         ]);
                         
@@ -64,9 +66,9 @@ class GoogleBooksService
             $volumeInfo = $response->json('volumeInfo'); 
 
             // Get required data from php array
-            $bookInfo['title']       = data_get($volumeInfo, 'title', 'タイトル不明');
+            $bookInfo['title']       = data_get($volumeInfo, 'title', 'Title unknown');
             // If authors is none, give empty array. *Just for info: data_get(target, key, default)
-            $bookInfo['author'] = implode(', ', data_get($volumeInfo, 'authors', [])) ?: '著者不明';
+            $bookInfo['author'] = implode(', ', data_get($volumeInfo, 'authors', [])) ?: 'Author unknown';
             // Get pageCount
             $bookInfo['total_pages'] = data_get($volumeInfo, 'pageCount', 0);
             // Get thumbnail path
