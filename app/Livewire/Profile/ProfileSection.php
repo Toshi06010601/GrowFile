@@ -2,20 +2,22 @@
 
 namespace App\Livewire\Profile;
 
-use App\Models\Profile;
 use Livewire\Component;
+use App\Models\Profile;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class ProfileSection extends Component
 {
     /*
     Public variables for the section area
     */
-    public $profile;
-    public $userId;
+    #[Locked]
+    public $userId = null;
+    public $hasError = false;
 
     /*
     Public function for the section area
@@ -23,20 +25,34 @@ class ProfileSection extends Component
     public function mount($userId)
     {
         $this->userId = $userId;
-        $this->loadResult();
     }
 
-    #[On('load-profile')]
-    public function loadResult()
+    #[Computed] 
+    public function profile()
     {
-        logger()->info('🔄 loadProfile called', ['profileUserId' => $this->userId]);
-
-        // Get profile data together with following status
-        $this->profile = Profile::with('user.authFollows')->firstWhere('user_id', $this->userId);
+        try {
+            // throw new exception('error');
+            logger()->info('🔄 loading profile', ['profileUserId' => $this->userId]);
+            $this->hasError = false;
+            // Get the profile with the profile image
+            return Profile::with('user.authFollows')->firstWhere('user_id', $this->userId);
+        } catch (Exception $e) {
+            logger()->error('Failed to load profile', ['profileUserId' => $this->userId, 'error' => $e->getMessage()]);
+            $this->hasError = true;
+            return collect();
+        }
+    }
+    
+    #[On('profile-updated')]
+    public function refetch() {
+        logger()->info('🔄 Refetching profile', ['profileUserId' => $this->userId]);
+        unset($this->profile); // Refresh profile
     }
 
     public function render()
     {
+        $this->profile;
         return view('livewire.profile.profile-section');
     }
 }
+
