@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        // Profile::factory(10)->create();
+        Profile::factory(30)->create();
         // StudyRecord::factory(10000)->create();
     }
 }
