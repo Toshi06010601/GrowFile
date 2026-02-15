@@ -82,9 +82,13 @@
 
                                     {{-- Action button --}}
                                     @if ($isOwner)
-                                        <x-section.edit-icon x-data="" x-on:click.stop="$dispatch('set-article', { id: {{ $article->id }} })" class="absolute bottom-1 right-1"/>
+                                        <x-section.edit-icon x-data=""
+                                            x-on:click.stop="$dispatch('set-article', { id: {{ $article->id }} })"
+                                            class="absolute bottom-1 right-1" />
                                     @else
-                                        <x-section.expand-icon x-data="" x-on:click.stop="$dispatch('set-article', { id: {{ $article->id }} })" class="absolute bottom-1 right-1"/>  
+                                        <x-section.expand-icon x-data=""
+                                            x-on:click.stop="$dispatch('set-article', { id: {{ $article->id }} })"
+                                            class="absolute bottom-1 right-1" />
                                     @endif
                                 </div>
                             </li>

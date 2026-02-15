@@ -44,7 +44,7 @@ class BioSection extends Component
     #[On('bio-updated')]
     public function refetch() {
         logger()->info('🔄 Refetching bio', ['profileUserId' => $this->userId]);
-        unset($this->bio); // Refresh bio
+        unset($this->profile); 
     }
 
     public function render()

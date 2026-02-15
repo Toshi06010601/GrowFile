@@ -44,7 +44,7 @@ class BackgroundSection extends Component
     #[On('background-updated')]
     public function refetch() {
         logger()->info('🔄 Refetching background', ['profileUserId' => $this->userId]);
-        unset($this->background); // Refresh background
+        unset($this->profile); // Refresh background
     }
 
     public function render()

@@ -32,7 +32,6 @@ class ReadingLogSection extends Component
             $this->hasError = false;
             return ReadingLog::where('user_id', $this->userId)
                                 ->orderByDesc('updated_at')
-                                ->limit(0)
                                 ->get();
         } catch (Exception $e) {
             logger()->error('Failed to load reading logs', ['profileUserId' => $this->userId, 'error' => $e->getMessage()]);
