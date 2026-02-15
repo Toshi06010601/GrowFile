@@ -42,11 +42,9 @@ class ExperienceEditor extends Component
             $this->dispatch('open-modal', 'edit-experience');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('experiences-updated')->to(ExperiencesSection::class);
             $this->dispatch('flash-message', type: 'error', message: "The selected experience not found.");
             logger()->warning('Experience not found', ['article_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('experiences-updated')->to(ExperiencesSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Failed to load experience form.");
             logger()->error('Failed to load experience form', ['id' => $id, 'error' => $e->getMessage()]);
         }
@@ -90,7 +88,7 @@ class ExperienceEditor extends Component
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('experiences-updated')->to(ExperiencesSection::class);
+        $this->dispatch('experiences-updated')->to(component: ExperiencesSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-experience');
         $this->dispatch('flash-message', type: 'success', message: "Experience {$actionName} successfully.");

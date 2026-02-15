@@ -47,11 +47,9 @@ class ReadingLogEditor extends Component
             $this->dispatch('open-modal', 'edit-reading-log');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('reading-logs-updated')->to(ReadingLogSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Reading log not found.");
             logger()->warning('Reading log not found', ['article_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('reading-logs-updated')->to(ReadingLogSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Failed to load reading log modal.");
             logger()->error('Failed to load reading log modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
@@ -84,6 +82,11 @@ class ReadingLogEditor extends Component
         } catch (Exception $e) {
             $this->handleError('delete', $e);
         }   
+    }
+
+    public function render()
+    {
+        return view('livewire.profile.reading-log-editor');
     }
     
 
@@ -124,7 +127,7 @@ class ReadingLogEditor extends Component
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('reading-logs-updated')->to(ReadingLogSection::class);
+        $this->dispatch('reading-logs-updated')->to(component: ReadingLogSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-reading-log');
         $this->dispatch('flash-message', type: 'success', message: "Reading log {$actionName} successfully.");

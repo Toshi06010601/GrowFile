@@ -68,7 +68,7 @@ class ProfileEditor extends Component
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('profile-updated')->to(ProfileSection::class);
+        $this->dispatch('profile-updated')->to(component: ProfileSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-profile');
         $this->dispatch('flash-message', type: 'success', message: "Profile {$actionName} successfully.");

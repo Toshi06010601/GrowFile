@@ -45,11 +45,9 @@ class ArticleEditor extends Component
             $this->dispatch('open-modal', 'edit-article');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('articles-updated')->to(ArticleSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Article not found.");
             logger()->warning('Article not found', ['article_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('articles-updated')->to(ArticleSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Failed to load article modal.");
             logger()->error('Failed to load article modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
@@ -82,13 +80,18 @@ class ArticleEditor extends Component
             $this->handleError('delete', $e);
         }   
     }
+
+    public function render()
+    {
+        return view('livewire.profile.article-editor');
+    }
     
     /*
     Private functions for the modal form
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('articles-updated')->to(ArticleSection::class);
+        $this->dispatch('articles-updated')->to(component: ArticleSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-article');
         $this->dispatch('flash-message', type: 'success', message: "Article {$actionName} successfully.");

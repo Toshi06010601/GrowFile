@@ -43,11 +43,9 @@ class StudyRecordEditor extends Component
             $this->dispatch('open-modal', 'edit-study-record');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('study-records-updated')->to(StudyRecordsSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Study record not found.");
             logger()->warning('Study record not found', ['article_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('study-records-updated')->to(StudyRecordsSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Failed to load study record modal.");
             logger()->error('Failed to load study record modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
@@ -91,7 +89,7 @@ class StudyRecordEditor extends Component
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('study-records-updated')->to(StudyRecordsSection::class);
+        $this->dispatch('study-records-updated')->to(component: StudyRecordEditor::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-study-record');
         $this->dispatch('flash-message', type: 'success', message: "Study record {$actionName} successfully.");

@@ -42,11 +42,9 @@ class UserSkillEditor extends Component
             $this->dispatch('open-modal', 'edit-user-skill');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('user-skills-updated')->to(UserSkillsSection::class);
             $this->dispatch('flash-message', type: 'error', message: "User skill not found.");
             logger()->warning('User skill not found', ['article_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('user-skills-updated')->to(UserSkillsSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Failed to load user skill modal.");
             logger()->error('Failed to load user skill modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
@@ -79,13 +77,18 @@ class UserSkillEditor extends Component
             $this->handleError('delete', $e);
         }   
     }
+
+    public function render()
+    {
+        return view('livewire.profile.user-skill-editor');
+    }
     
     /*
     Private functions for the modal form
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('user-skills-updated')->to(UserSkillsSection::class);
+        $this->dispatch('user-skills-updated')->to(component: UserSkillsSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-user-skill');
         $this->dispatch('flash-message', type: 'success', message: "User skill {$actionName} successfully.");

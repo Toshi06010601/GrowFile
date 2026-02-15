@@ -56,13 +56,18 @@ class BackgroundEditor extends Component
             $this->handleError('update', $e);
         }
     }
+
+    public function render()
+    {
+        return view('livewire.profile.background-editor');
+    }
     
     /*
     Private functions for the modal form
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('background-updated')->to(BackgroundSection::class);
+        $this->dispatch('background-updated')->to(component: BackgroundSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-background');
         $this->dispatch('flash-message', type: 'success', message: "Background {$actionName} successfully.");

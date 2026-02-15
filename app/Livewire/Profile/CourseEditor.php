@@ -44,11 +44,9 @@ class CourseEditor extends Component
             $this->dispatch('open-modal', 'edit-course');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('courses-updated')->to(CourseSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Course not found.");
             logger()->warning('Course not found', ['course_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('courses-updated')->to(CourseSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Failed to load course modal.");
             logger()->error('Failed to load course modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
@@ -97,7 +95,7 @@ class CourseEditor extends Component
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('courses-updated')->to(CourseSection::class);
+        $this->dispatch('courses-updated')->to(component: CourseSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-course');
         $this->dispatch('flash-message', type: 'success', message: "Course {$actionName} successfully.");
