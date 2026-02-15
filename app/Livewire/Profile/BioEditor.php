@@ -40,11 +40,9 @@ class BioEditor extends Component
             $this->dispatch('open-modal', 'edit-bio');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('bio-updated')->to(BioSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Profile not found.");
             logger()->warning('Profile not found', ['profile_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('bio-updated')->to(BioSection::class);
             $this->dispatch('flash-message', type: 'error', message: "Failed to load bio modal.");
             logger()->error('Failed to load bio modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
@@ -62,13 +60,18 @@ class BioEditor extends Component
             $this->handleError('update', $e);
         }
     }
+
+    public function render()
+    {
+        return view('livewire.profile.bio-editor');
+    }
     
     /*
     Private functions for the modal form
     */
     private function finishAction(string $actionName): void
     {
-        $this->dispatch('bio-updated')->to(BioSection::class);
+        $this->dispatch('bio-updated')->to(component: BioSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-bio');
         $this->dispatch('flash-message', type: 'success', message: "Bio {$actionName} successfully.");
