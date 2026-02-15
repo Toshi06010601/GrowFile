@@ -3,44 +3,44 @@
         {{-- Main: Learning records section --}}
         <div class="col-span-5">
             <div class="hidden md:block">
-                <livewire:Profile.BackgroundSection :userId="$profile->user_id" key="background-desktop" />
+                <livewire:profile.background-section :userId="$profile->user_id" key="background-desktop" />
             </div>
 
             <div class="w-full flex flex-col gap-6">
-                <livewire:Profile.StudyDashboard :userId="$profile->user_id" />
-                <livewire:Profile.StudyRecordsChart :userId="$profile->user_id" />
-                <livewire:Profile.ReadingLogSection :userId="$profile->user_id" />
-                <livewire:Profile.CourseSection :userId="$profile->user_id" />
-                <livewire:Profile.ArticleSection :userId="$profile->user_id" />
-                <livewire:Profile.PortfolioSection :userId="$profile->user_id" />
+                <livewire:profile.study-dashboard :userId="$profile->user_id" />
+                <livewire:profile.study-records-chart :userId="$profile->user_id" />
+                <livewire:profile.reading-log-section :userId="$profile->user_id" />
+                <livewire:profile.course-section :userId="$profile->user_id" />
+                <livewire:profile.article-section :userId="$profile->user_id" />
+                <livewire:profile.portfolio-section :userId="$profile->user_id" />
             </div>
 
             @can('update', $profile)
-                <livewire:Profile.BackgroundEditor />
-                <livewire:Profile.StudyRecordEditor />
+                <livewire:profile.background-editor />
+                <livewire:profile.study-record-editor />
             @endcan
 
-            <livewire:Profile.ReadingLogEditor />
-            <livewire:Profile.PortfolioEditor />
-            <livewire:Profile.ArticleEditor />
-            <livewire:Profile.CourseEditor />
+            <livewire:profile.reading-log-editor />
+            <livewire:profile.portfolio-editor />
+            <livewire:profile.article-editor />
+            <livewire:profile.course-editor />
         </div>
 
         {{-- Side bar: Profile section --}}
         <div class="col-span-3 space-y-2 p-3 bg-white shadow sm:rounded-lg">
             <div class="block md:hidden">
-                <livewire:Profile.BackgroundSection :userId="$profile->user_id" key="background-mobile" />
+                <livewire:profile.background-section :userId="$profile->user_id" key="background-mobile" />
             </div>
-            <livewire:Profile.ProfileSection :userId="$profile->user_id" />
-            <livewire:Profile.BioSection :userId="$profile->user_id" />
-            <livewire:Profile.UserSkillsSection :userId="$profile->user_id" />
-            <livewire:Profile.ExperiencesSection :userId="$profile->user_id" />
+            <livewire:profile.profile-section :userId="$profile->user_id" />
+            <livewire:profile.bio-section :userId="$profile->user_id" />
+            <livewire:profile.user-skills-section :userId="$profile->user_id" />
+            <livewire:profile.experiences-section :userId="$profile->user_id" />
 
             @can('update', $profile)
-                <livewire:Profile.ProfileEditor />
-                <livewire:Profile.BioEditor />
-                <livewire:Profile.UserSkillEditor />
-                <livewire:Profile.ExperienceEditor />
+                <livewire:profile.profile-editor />
+                <livewire:profile.bio-editor />
+                <livewire:profile.user-skill-editor />
+                <livewire:profile.experience-editor />
             @endcan
 
         </div>
