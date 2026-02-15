@@ -65,9 +65,10 @@
                     {{-- End: Attributes for dropdown-navigator.js --}}
                     class="relative first:pt-1 pb-2 px-1 border-b border-dashed hover:bg-brand-secondary-50">
                     <a href={{ route('professional_profile.show', $suggestion->slug) }}
+                        wire:navigate.hover
                         class="flex flex-row justify-start items-center gap-3">
                         <div class="ml-1 size-5 md:size-7 rounded-full overflow-hidden border">
-                            <img src="{{ $suggestion->profile_image_path }}" alt="profile image"
+                            <img src="{{ asset("/storage/{$suggestion->profile_image_path}") }}" alt="profile image"
                                 class="w-full h-full object-cover">
                         </div>
                         <p class="text-brand-secondary-700 text-wrap text-base md:text-base">{{ $suggestion->full_name }}</p>
@@ -85,6 +86,7 @@
                     :class="isSelected({{ count($suggestions) }}) ? 'bg-brand-secondary-50' : ''"
                 {{-- End: Attributes for dropdown-navigator.js --}}>
                     <a href="{{ route('professional_profile.index', ['name' => $search]) }}"
+                        wire:navigate.hover
                         class="flex flex-row justify-start items-center ml-3">
                         <p class="text-blue-700 text-base md:text-base">View Search Results</p>
                     </a>
@@ -97,6 +99,7 @@
                     :class="isSelected({{ count($suggestions) }}) ? 'bg-brand-secondary-50' : ''"
                 {{-- End: Attributes for dropdown-navigator.js --}}>
                     <a href="{{ route('professional_profile.index') }}"
+                        wire:navigate.hover
                         class="flex flex-row justify-start items-center ml-3">
                         <p class="text-blue-700 text-base md:text-base">View All Profiles</p>
                     </a>

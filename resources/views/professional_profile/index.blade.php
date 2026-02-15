@@ -43,16 +43,17 @@
                     <li wire:key="{{ $profile->id }}"
                         class="relative flex flex-col justify-between pb-3 w-36 h-80 sm:w-56 sm:h-80 bg-brand-tertiary-50 border-2 border-brand-secondary-300 rounded-md overflow-hidden shadow-lg shadow-brand-secondary-400 hover:scale-105">
                         <a href="{{ route('professional_profile.show', $profile->slug) }}"
+                            wire:navigate.hover
                             class="h-full flex flex-col items-center">
                             {{-- Background image --}}
                             <div class="w-full h-20 overflow-hidden border border-brand-secondary-600">
-                                <img src="{{ $profile->background_image_path }}"
+                                <img src="{{ asset("/storage/{$profile->background_image_path}") }}"
                                     alt="background image" class="w-full h-full object-cover">
                             </div>
                             {{-- Profile image --}}
                             <div
                                 class="absolute top-3 z-10 w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
-                                <img src="{{ $profile->profile_image_path }}" alt="profile image"
+                                <img src="{{ asset("/storage/{$profile->profile_image_path}") }}" alt="profile image"
                                     class="w-full h-full object-cover bg-brand-tertiary-50">
                             </div>
                             <div class="flex-1 flex flex-col justify-start p-1">
