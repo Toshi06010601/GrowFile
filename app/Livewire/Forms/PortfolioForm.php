@@ -58,7 +58,7 @@ class PortfolioForm extends Form
             // 1. Validate
             $this->validate();
 
-            throw new Exception("Error Processing Request", 1);
+            // throw new Exception("Error Processing Request", 1);
             
             // 2. Upload Image
             $this->uploadSiteImage();
@@ -80,7 +80,7 @@ class PortfolioForm extends Form
             // 1. Validate
             $this->validate();
 
-            throw new Exception("Error Processing Request", 1);
+            // throw new Exception("Error Processing Request", 1);
             
 
             // 2. Upload Image
