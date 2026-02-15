@@ -6,8 +6,9 @@
 
     {{-- Make FullCalendar instance and insert --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        function initCalendar() {
             var calendarEl = document.getElementById('calendar');
+            if (!calendarEl) return;
 
             window.calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: [FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin],
@@ -36,7 +37,14 @@
             });
 
             window.calendar.render();
-        });
+
+        };
+
+        // Runs on the very first cold load
+        document.addEventListener('DOMContentLoaded', initCalendar);
+
+        // Runs every time Livewire finishes a wire:navigate transition
+        document.addEventListener('livewire:navigated', initCalendar);
     </script>
 
     <style>

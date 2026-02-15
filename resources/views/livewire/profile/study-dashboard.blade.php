@@ -16,7 +16,7 @@
 
     {{-- Display study calendar or study records (*Use AlpineJS entangle for currentView to not interfere with fullCalendarJS)--}}
     <div class="mb-3" x-data="{ view: @entangle('currentView') }"
-        x-effect="if(view === 'diary') { setTimeout(() => window.calendar.updateSize(), 100) }">
+        x-effect="if(view === 'diary') { setTimeout(() => window.calendar.updateSize(), 1000) }">
 
         {{-- study calendar --}}
         <div :class="view === 'diary' ? 'block' : 'hidden'" wire:ignore>
