@@ -3,12 +3,12 @@
     {{-- Navigation links --}}
     <div class="flex flex-col gap-1 mt-2 text-base text-brand-secondary-800">
         <a href="{{ route('professional_profile.index') }}" 
-           class="hover:text-blue-600 transition">All</a>
+           class="hover:text-blue-600 transition" wire:navigate>All</a>
         @auth
             <a href="{{ route('professional_profile.index', ['following' => true]) }}" 
-               class="hover:text-blue-600 transition">Following</a>
+               class="hover:text-blue-600 transition" wire:navigate>Following</a>
             <a href="{{ route('professional_profile.index', ['followed' => true]) }}" 
-               class="hover:text-blue-600 transition">Followers</a>
+               class="hover:text-blue-600 transition" wire:navigate>Followers</a>
         @endauth
     </div>
     
@@ -19,7 +19,7 @@
         <div class="flex flex-row justify-between items-end mt-2">
             <h2 class="text-base text-brand-secondary-800 font-medium">Filter</h2>
             <a class="text-base text-brand-secondary-400 hover:text-brand-secondary-600" 
-               href="{{ route('professional_profile.index') }}">
+               href="{{ route('professional_profile.index') }}" wire:navigate>
                 Reset filters
             </a>
         </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Profile;
+namespace App\Livewire\Profile\Bio;
 
 use Livewire\Component;
 use App\Models\Profile;
@@ -10,11 +10,8 @@ use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 
-class ProfileSection extends Component
+class BioSection extends Component
 {
-    /*
-    Public variables for the section area
-    */
     #[Locked]
     public $userId = null;
     public $hasError = false;
@@ -32,27 +29,28 @@ class ProfileSection extends Component
     {
         try {
             // throw new exception('error');
-            logger()->info('🔄 loading profile', ['profileUserId' => $this->userId]);
+            logger()->info('🔄 loading bio', ['profileUserId' => $this->userId]);
             $this->hasError = false;
-            // Get the profile with the profile image
-            return Profile::with('user.authFollows')->firstWhere('user_id', $this->userId);
+            // Get the profile with the bio image
+            return Profile::select('id', 'user_id', 'bio')
+                        ->firstWhere('user_id', $this->userId);
         } catch (Exception $e) {
-            logger()->error('Failed to load profile', ['profileUserId' => $this->userId, 'error' => $e->getMessage()]);
+            logger()->error('Failed to load bio', ['profileUserId' => $this->userId, 'error' => $e->getMessage()]);
             $this->hasError = true;
             return collect();
         }
     }
     
-    #[On('profile-updated')]
+    #[On('bio-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching profile', ['profileUserId' => $this->userId]);
-        unset($this->profile); // Refresh profile
+        logger()->info('🔄 Refetching bio', ['profileUserId' => $this->userId]);
+        unset($this->profile); 
     }
 
     public function render()
     {
         $this->profile;
-        return view('livewire.profile.section');
+        return view('livewire.profile.bio.section');
     }
 }
 

@@ -8,7 +8,7 @@
         @keydown.up.prevent="navigateUp()"
         @keydown.enter.prevent="selectCurrent()" 
         @keydown.escape="reset()" 
-    {{-- Start: Attributes for dropdown-navigator.js --}}
+    {{-- End: Attributes for dropdown-navigator.js --}}
     @click.away="open = false">
     {{-- Search field --}}
     <form method="get" action={{ route('professional_profile.index') }}

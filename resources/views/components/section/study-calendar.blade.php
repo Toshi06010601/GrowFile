@@ -1,51 +1,46 @@
-<div>
-    {{-- Display Calendar here --}}
+{{-- <div> --}}
+<div x-data="{
+    calendar: null,
+    init() {
+        this.mountCalendar();
+        window.addEventListener('livewire:navigated', () => this.mountCalendar());
+    },
+    mountCalendar() {
+        const el = document.getElementById('calendar');
+        if (!el) return;
+        if (this.calendar) {
+            this.calendar.destroy();
+            this.calendar = null;
+        }
+        this.calendar = new FullCalendar.Calendar(el, {
+            plugins: [FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin],
+            initialView: 'dayGridMonth',
+            firstDay: 1,
+            headerToolbar: {
+                left: 'prev,today,next',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            height: 'auto',
+            contentHeight: 'auto',
+            aspectRatio: window.innerWidth < 768 ? 1 : 1.8,
+            events: '/events?userId={{ $userId }}',
+            viewDidMount: () => this.calendar.refetchEvents(),
+            eventBackgroundColor: 'rgba(13, 89, 2, 0.8)',
+            eventBorderColor: 'rgba(13, 89, 2, 0.8)',
+            eventTextColor: '#ffffff'
+        });
+        this.calendar.render();
+    },
+    updateCalendarSize() {
+        if (this.calendar) {
+            this.calendar.updateSize();
+        }
+    }
+}" @calendar-update-size="updateCalendarSize()" x-init="init()">
     <div class="w-full overflow-hidden">
-        <div id="calendar" class="max-w-full"></div>
+        <div id="calendar" x-ignore class="max-w-full"></div>
     </div>
-
-    {{-- Make FullCalendar instance and insert --}}
-    <script>
-        function initCalendar() {
-            var calendarEl = document.getElementById('calendar');
-            if (!calendarEl) return;
-
-            window.calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: [FullCalendar.dayGridPlugin, FullCalendar.timeGridPlugin],
-                initialView: 'dayGridMonth',
-                firstDay: 1, //Start from Monday
-
-                headerToolbar: {
-                    left: 'prev,today,next',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-
-                height: 'auto',
-                contentHeight: 'auto',
-                aspectRatio: window.innerWidth < 768 ? 1 : 1.8,
-                events: '/events?userId={{ $userId }}',
-                
-                // Refetch if view changes
-                viewDidMount: function(info) {
-                    calendar.refetchEvents();
-                },
-
-                eventBackgroundColor: 'rgba(13, 89, 2, 0.8)',
-                eventBorderColor: 'rgba(13, 89, 2, 0.8)',
-                eventTextColor: '#ffffff'
-            });
-
-            window.calendar.render();
-
-        };
-
-        // Runs on the very first cold load
-        document.addEventListener('DOMContentLoaded', initCalendar);
-
-        // Runs every time Livewire finishes a wire:navigate transition
-        document.addEventListener('livewire:navigated', initCalendar);
-    </script>
 
     <style>
         /* Make calendar more responsive */
@@ -117,6 +112,6 @@
             font-weight: 400;
             color: #4B5563;
         }
-        
     </style>
+
 </div>

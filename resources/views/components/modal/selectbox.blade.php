@@ -1,7 +1,7 @@
-@props(['label', 'id', 'name'])
+@props(['label', 'id', 'name', 'disabled' => false, 'required' => false])
 
 <div class="relative overflow-visible">
-    <x-input-label :for="$id" :value="$label" class="text-lg mt-4" />
+    <x-input-label :for="$id" :value="$label" class="text-lg mt-4" :required="$required"/>
     <select :id="$id" class="block w-full border-brand-secondary-300 focus:border-brand-secondary-500 focus:ring-brand-secondary-500 rounded-md shadow-sm" wire:model="{{ $name }}">
         {{ $slot }}
     </select>

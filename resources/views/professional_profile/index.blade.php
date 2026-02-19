@@ -78,7 +78,7 @@
                         @auth
                             @if (Auth::id() !== $profile->user_id)
                             <div>
-                                <livewire:Profile.Partials.FollowButton :userId="$profile->user_id" :isFollowing="!is_null($profile->user->authFollows)" idPrefix="index" wire:key="follow-{{ $profile->id }}" />
+                                <livewire:shared.follow-button :userId="$profile->user_id" :isFollowing="!is_null($profile->user->authFollows)" idPrefix="index" wire:key="follow-{{ $profile->id }}" />
                             </div>
                             @endif
                         @endauth
