@@ -12,13 +12,13 @@ export default () => ({
         this.scrollToSelected();
     },
 
-    selectCurrent() {
+    selectCurrent(clickLink = true) {
         if (this.selectedIndex >= 0) {
             const items = this.getItems();
             const selectedItem = items[this.selectedIndex];
             if (selectedItem) {
                 const link = selectedItem.querySelector('a');
-                if (link) {
+                if (link && clickLink) {
                     link.click();
                 } else {
                     selectedItem.click();

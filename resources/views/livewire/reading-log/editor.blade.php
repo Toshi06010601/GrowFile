@@ -19,7 +19,7 @@
         {{-- Searchable for owner --}}
         @if ($isOwner)
             {{-- Book search area --}}
- <div
+        <div
                 {{-- Start: Attributes for dropdown-navigator.js --}}
                     x-data="{
                         open: false,
@@ -27,7 +27,7 @@
                         }" 
                     @keydown.down.prevent="navigateDown()" 
                     @keydown.up.prevent="navigateUp()"
-                    @keydown.enter.prevent="selectCurrent()" 
+                    @keydown.enter.prevent="selectCurrent(false)" 
                     @keydown.escape="reset()" 
                 {{-- Start: Attributes for dropdown-navigator.js --}}
                 @click.away="open = false"
