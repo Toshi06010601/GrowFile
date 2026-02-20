@@ -24,11 +24,18 @@
     <div class="min-h-screen bg-brand-secondary-700 flex flex-col">
         @include('layouts.navigation')
 
+
         <!-- Page Content -->
         <main class="flex-1 flex flex-col">
+
+            {{-- Connection status message --}}
+            <x-connection-status-message/>
+
             {{-- Session flash message --}}
-            <x-session-flash-message></x-session-flash-message>
+            <x-session-flash-message/>
+
             {{ $slot }}
+
         </main>
 
         @include('layouts.footer')
