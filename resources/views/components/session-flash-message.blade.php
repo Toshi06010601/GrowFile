@@ -23,7 +23,7 @@
     x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
     x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0"
     x-transition:leave-end="opacity-0 translate-y-4" :class="type === 'success' ? 'bg-brand-primary-900' : 'bg-red-600'"
-    class="fixed top-2 left-1/2 -translate-x-1/2 z-50 text-white px-6 py-4 rounded-lg shadow-xl flex items-center gap-4 max-w-md">
+    class="fixed top-2 left-1/2 -translate-x-1/2 z-50 text-white px-6 py-4 rounded-lg shadow-xl flex items-center gap-1 sm:gap-4 w-[90vw] sm:max-w-md">
 
     <template x-if="type === 'success'">
         <img src={{ asset('images/icons/check.svg') }} alt="check icon" class="size-6">
