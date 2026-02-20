@@ -19,7 +19,7 @@
         {{-- Searchable for owner --}}
         @if ($isOwner)
             {{-- Book search area --}}
-            <div
+ <div
                 {{-- Start: Attributes for dropdown-navigator.js --}}
                     x-data="{
                         open: false,
@@ -34,17 +34,19 @@
                 class="relative mb-4">
 
                 {{-- Label --}}
-                <x-input-label for="book-search" value="Find your book" class="text-lg mt-4" />
+                <div class="flex items-center justify-between mt-4 mr-5">
+                    <x-input-label for="book-search" value="Find your book" class="text-lg" />
+                    <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google" class="h-5">
+                </div>
 
                 {{-- search input field --}}
                 <input id="book-search"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-secondary-500 focus:ring-brand-secondary-500"
-                    wire:model.live.debounce.800ms="search" 
+                 wire:model.live.debounce.800ms="search" 
                     @focus="open = true"
                     @input="open = true"
                     @keydown.escape.prevent="open = false"
                     autocomplete="off" placeholder="Search books...">
-
                 {{-- loading indicator --}}
                 <p wire:loading wire:target="search" class="mt-2 text-sm text-gray-500 italic flex items-center gap-2">
                     <img src="{{ asset('/images/icons/spinner.svg') }}" alt="spinner" class="animate-spin h-4 w-4">
@@ -60,17 +62,21 @@
 
                 {{-- Show books that match the search input --}}
                 @if ($suggestions && count($suggestions) > 0)
-                    <div x-show="open" 
-                        x-transition
-                        class="absolute top-full left-0 z-20 w-full mt-1 max-h-64 overflow-y-auto bg-white border-2 border-brand-secondary-300 rounded-md shadow-lg">
-                        <ul class="divide-y divide-gray-200">
+                    <div x-show="open" x-transition
+                        class="absolute top-full left-0 z-20 w-full mt-1 bg-white border-2 border-brand-secondary-300 rounded-md shadow-lg">
+                        {{-- Google Books search results label --}}
+                        <div class="px-3 py-1 text-xs text-gray-400 border-b border-gray-100 flex justify-between items-center">
+                            <span>Google Books search results</span>
+                            <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google" class="h-5">
+                        </div>
+                        {{-- book search results --}}
+                        <ul class="divide-y divide-gray-200 max-h-64 overflow-y-auto">
                             @foreach ($suggestions as $index => $suggest)
-                                <li wire:key="{{ $suggest['id'] }}" 
-                                    wire:click="selectBook('{{ $suggest['id'] }}')" 
-                                    {{-- Start: Attributes for dropdown-navigator.js --}}
-                                        data-suggestion-item
-                                        @click="open = false; reset();"
-                                        :class="isSelected({{ $index }}) ? 'bg-brand-secondary-100' : ''"
+                                <li wire:key="{{ $suggest['id'] }}" wire:click="selectBook('{{ $suggest['id'] }}')"
+                                    {{-- Start: Attributes for dropdown-navigator.js --}} 
+                                    data-suggestion-item 
+                                    @click="open = false; reset();"
+                                    :class="isSelected({{ $index }}) ? 'bg-brand-secondary-100' : ''"
                                     {{-- End: Attributes for dropdown-navigator.js --}}
                                     class="flex flex-row gap-3 p-3 hover:bg-brand-secondary-50 cursor-pointer transition">
                                     {{-- Thumbnail image --}}
@@ -87,6 +93,11 @@
                                         <p class="text-sm text-gray-600">
                                             {{ collect(data_get($suggest, 'volumeInfo.authors'))->join(', ') ?: '著者不明' }}
                                         </p>
+                                        {{-- Link --}}
+                                        <a href="{{ data_get($suggest, 'volumeInfo.infoLink') }}" target="_blank"
+                                            class="text-sm text-blue-500">
+                                            View on Google Books
+                                        </a>
                                     </div>
                                 </li>
                             @endforeach
@@ -106,7 +117,6 @@
                 </div>
             </div>
         @endif
-
 
         {{-- Reading current status --}}
         <div>
