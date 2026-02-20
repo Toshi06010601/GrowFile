@@ -1,16 +1,18 @@
 <x-section class="h-full" id="reading-log-section">
     {{-- Header area --}}
     <x-slot name="header">
-        <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
-            Reading Logs
-        </h2>
+        <div class="flex items-center gap-5">
+            <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
+                Reading Logs
+            </h2>
+            <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google" class="h-6">
+        </div>
 
-        {{-- button to add a new reading log --}}
         @if ($isOwner)
             <x-section.add-icon x-data=""
-                x-on:click="
-                $dispatch('set-reading-log', { id: null });" />
+                x-on:click="$dispatch('set-reading-log', { id: null });" />
         @endif
+
     </x-slot>
 
     {{-- Error State --}}
@@ -22,8 +24,6 @@
     @if (!$hasError)
         {{-- Display if reading log data exists --}}
         @if (count($this->readingLogs) > 0)
-
-            {{-- Wire:key for ul is to re-render after adding new book --}}
             <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory" x-data="{
                 scrollToFirst() {
                     this.$nextTick(() => {
@@ -52,6 +52,10 @@
                             <div class="aspect-[3/4] w-full overflow-hidden rounded">
                                 <img src="{{ $log->cover_url }}" alt="book_cover" class="w-full h-full object-cover">
                             </div>
+
+                            <a href="{{ $log->info_link }}" target="_blank" class="text-xs text-blue-500 text-center">
+                                Google Books
+                            </a>
 
                             <div class="flex flex-col items-center gap-1">
                                 <div
