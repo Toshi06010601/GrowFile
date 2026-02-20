@@ -32,6 +32,7 @@ class ReadingLogEditor extends Component
     public function setReadingLog($id)
     {
         try {
+            $this->reset('suggestions', 'search');
             $this->form->reset();
             $this->form->resetValidation();
     
