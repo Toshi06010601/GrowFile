@@ -28,6 +28,9 @@ class ReadingLogForm extends Form
     #[Validate('required|url|string')]
     public $cover_url = '';
 
+    #[Validate('required|url|string')]
+    public $info_link = '';
+
     #[Validate('nullable|string')]
     public $review = '';
 
@@ -48,7 +51,7 @@ class ReadingLogForm extends Form
         $this->readingLog = $readingLog;
  
         $this->fill([
-                ...$readingLog->only('title', 'author', 'current_page', 'total_pages', 'cover_url', 'url'),
+                ...$readingLog->only('title', 'author', 'current_page', 'total_pages', 'cover_url', 'info_link'),
             ]);
     }
 
@@ -56,10 +59,12 @@ class ReadingLogForm extends Form
     {
         // 1. Validate
         $this->validate();
+
+        // dd('test');
         
         // 2. Create new readingLog
         ReadingLog::create(
-            $this->only('title', 'author', 'current_page', 'total_pages', 'cover_url', 'url')
+            $this->only('title', 'author', 'current_page', 'total_pages', 'cover_url', 'info_link')
             + 
             ['user_id' => Auth::id()]
         );
@@ -75,7 +80,7 @@ class ReadingLogForm extends Form
 
         // 3. Update readingLog
         $this->readingLog->update(
-            $this->only('title', 'author', 'current_page', 'total_pages', 'cover_url', 'url')
+            $this->only('title', 'author', 'current_page', 'total_pages', 'cover_url', 'info_link')
         );
     }
 

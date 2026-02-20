@@ -59,11 +59,14 @@ class ReadingLogEditor extends Component
 
     public function save()
     {
+
+        // dd('test');
         $isUpdate = (bool) $this->form->readingLog;
         
         try {
             $isUpdate && $this->authorize('update', $this->form->readingLog);
             $isUpdate ? $this->form->update() : $this->form->store();
+            // dd('test');
             $this->finishAction($isUpdate ? 'updated' : 'created');
             $isUpdate ?: $this->dispatch('scroll-to-start');
         } catch (ValidationException $e) {
@@ -116,8 +119,9 @@ class ReadingLogEditor extends Component
             $service = app(GoogleBooksService::class);
             $bookInfo = $service->selectBook($id);
             $this->form->fill(
-                collect($bookInfo)->only('title', 'author', 'total_pages', 'cover_url')
+                collect($bookInfo)->only('title', 'author', 'total_pages', 'cover_url', 'info_link')
             );
+            // dd($this->form);
         } catch (Exception $e) {
             $this->dispatch('flash-message', type: 'error', message: "Failed to select book. Please try again.");
         }

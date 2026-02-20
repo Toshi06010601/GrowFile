@@ -15,6 +15,7 @@ class ReadingLog extends Model
         'cover_url',
         'author',
         'current_page',
+        'info_link',
         'total_pages',
         'review',
     ];

@@ -73,6 +73,10 @@ class GoogleBooksService
             $bookInfo['total_pages'] = data_get($volumeInfo, 'pageCount', 0);
             // Get thumbnail path
             $bookInfo['cover_url']   = data_get($volumeInfo, 'imageLinks.thumbnail');
+            // Get thumbnail path
+            $bookInfo['info_link']   = data_get($volumeInfo, 'infoLink');
+
+            // dd($bookInfo['info_link']);
     
             return $bookInfo;
             
