@@ -38,6 +38,8 @@
 
         </main>
 
+        @include('layouts.bottom-navigation')
+
         @include('layouts.footer')
     </div>
     @stack('scripts')
