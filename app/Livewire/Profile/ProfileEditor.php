@@ -50,6 +50,7 @@ class ProfileEditor extends Component
         try {
             $this->authorize('update', $this->form->profile);
             $this->form->update();
+            $this->dispatch('set-profile-menu-icon', filePath: $this->form->profile_image_path);
             $this->finishAction('updated');
         } catch (ValidationException $e) {
             throw $e;
