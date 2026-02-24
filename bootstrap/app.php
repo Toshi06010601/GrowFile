@@ -3,8 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 use App\Http\Middleware\AccessLogging;
 use App\Http\Middleware\AddContext;
+use App\Http\Middleware\SetLocale;
 
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -14,7 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-         $middleware->web(append: [
+        $middleware->web(prepend: [
+            SetLocale::class,  // Run first
+        ]);
+        $middleware->web(append: [
             AddContext::class,
             AccessLogging::class,
         ]);
