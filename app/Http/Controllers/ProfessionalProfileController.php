@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
@@ -111,11 +112,11 @@ class ProfessionalProfileController extends Controller
             'linkedin_link' => '',
         ]);
 
-        return redirect(route('professional_profile.show', $slug));
+        return redirect(route('professional_profile.show', ['slug' => $slug]));
     }
 
     // Get the selected profile based on slug
-    public function show(Profile $slug)
+    public function show($locale, Profile $slug)
     {
         // Navigate to profile page if visibility is true or the user is profile owner
         if($slug->visibility || $slug->user_id === Auth::id()) {
