@@ -3,11 +3,23 @@
     calendar: null,
     init() {
         this.mountCalendar();
-        window.addEventListener('livewire:navigated', () => this.mountCalendar());
+        window.addEventListener('livewire:navigate', () => {
+            if (this.calendar) {
+                this.calendar.destroy();
+                this.calendar = null;
+            }
+        });
     },
     mountCalendar() {
+        // Guard: do nothing if already mounted
+        if (this.calendar) {
+            console.log('calendar already mounted — skipping');
+            return;
+        }
+
         const el = document.getElementById('calendar');
         if (!el) return;
+
         if (this.calendar) {
             this.calendar.destroy();
             this.calendar = null;
@@ -24,8 +36,8 @@
             height: 'auto',
             contentHeight: 'auto',
             aspectRatio: window.innerWidth < 768 ? 1 : 1.8,
-            events: '/events?userId={{ $userId }}',
-            viewDidMount: () => this.calendar.refetchEvents(),
+            events: '{{ url('/api/events') }}?userId={{ $userId }}',
+            // viewDidMount: () => this.calendar.refetchEvents(),
             eventBackgroundColor: 'rgba(13, 89, 2, 0.8)',
             eventBorderColor: 'rgba(13, 89, 2, 0.8)',
             eventTextColor: '#ffffff'
