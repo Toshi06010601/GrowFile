@@ -13,7 +13,6 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                roboto: ['"Roboto"', 'serif'],
             },
             colors: {
                 // Map your Adobe Color palette names here
