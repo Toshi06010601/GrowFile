@@ -3,12 +3,12 @@
     {{-- Navigation links --}}
     <div class="flex flex-col gap-1 mt-2 text-base text-brand-secondary-800">
         <a href="{{ route('professional_profile.index') }}" 
-           class="hover:text-blue-600 transition" wire:navigate>All</a>
+           class="hover:text-blue-600 transition" wire:navigate>{{ __('filter.all') }}</a>
         @auth
             <a href="{{ route('professional_profile.index', ['following' => true]) }}" 
-               class="hover:text-blue-600 transition" wire:navigate>Following</a>
+               class="hover:text-blue-600 transition" wire:navigate>{{ __('filter.following') }}</a>
             <a href="{{ route('professional_profile.index', ['followed' => true]) }}" 
-               class="hover:text-blue-600 transition" wire:navigate>Followers</a>
+               class="hover:text-blue-600 transition" wire:navigate>{{ __('filter.followers') }}</a>
         @endauth
     </div>
     
@@ -17,10 +17,10 @@
     {{-- Filter section --}}
     <div>
         <div class="flex flex-row justify-between items-end mt-2">
-            <h2 class="text-base text-brand-secondary-800 font-medium">Filter</h2>
+            <h2 class="text-base text-brand-secondary-800 font-medium">{{ __('filter.filter') }}</h2>
             <a class="text-base text-brand-secondary-400 hover:text-brand-secondary-600" 
                href="{{ route('professional_profile.index') }}" wire:navigate>
-                Reset filters
+                {{ __('filter.reset-filters') }}
             </a>
         </div>
         
@@ -28,7 +28,7 @@
         
         <form method="get" action="{{ route('professional_profile.index') }}">
             {{-- Skills --}}
-            <h3 class="text-base text-brand-secondary-600 mt-2 mb-1 leading-4">Skills</h3>
+            <h3 class="text-base text-brand-secondary-600 mt-2 mb-1 leading-4">{{ __('filter.skills') }}</h3>
             <div class="ml-2">
                 <input type="hidden" name="following" value="{{ $following }}">
                 <input type="hidden" name="followed" value="{{ $followed }}">
@@ -58,20 +58,20 @@
 
             {{-- Name --}}
             <div class="mt-2">
-                <label for="{{ $idPrefix }}-name" class="text-base text-brand-secondary-600 block mb-1">Name</label>
+                <label for="{{ $idPrefix }}-name" class="text-base text-brand-secondary-600 block mb-1">{{ __('filter.name') }}</label>
                 <x-text-input id="{{ $idPrefix }}-name" 
                               name="name" 
-                              placeholder="Name" 
+                              :placeholder="__('filter.name-placeholder')" 
                               value="{{ old('name', $name) }}" 
                               class="text-base leading-4 w-full" />
             </div>
 
             {{-- Location --}}
             <div class="mt-2">
-                <label for="{{ $idPrefix }}-location" class="text-base text-brand-secondary-600 block mb-1">Location</label>
+                <label for="{{ $idPrefix }}-location" class="text-base text-brand-secondary-600 block mb-1">{{ __('filter.location') }}</label>
                 <x-text-input id="{{ $idPrefix }}-location" 
                               name="location" 
-                              placeholder="(e.g. London)"
+                              :placeholder="__('filter.location-placeholder')"
                               value="{{ old('location', $location) }}" 
                               class="text-base leading-4 w-full" />
             </div>
@@ -79,7 +79,7 @@
             {{-- Submit button --}}
             <div>
                 <x-primary-button type="submit" class="mt-5 w-full flex justify-center">
-                    Apply Filter
+                    {{ __('filter.apply-filter') }}
                 </x-primary-button>
             </div>
         </form>
