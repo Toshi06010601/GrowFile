@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\App;
 
 class ProfileController extends Controller
 {
@@ -46,6 +47,8 @@ class ProfileController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
+        $locale = App::getLocale();
+
         $user = $request->user();
 
         Auth::logout();
@@ -55,6 +58,7 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect()->route('home', ['locale' => $locale]);
+
     }
 }
