@@ -16,12 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->web(prepend: [
-            SetLocale::class,  // Run first
-        ]);
+        $middleware->prependToPriorityList(
+            before: SubstituteBindings::class,
+            prepend: SetLocale::class,
+        );
         $middleware->web(append: [
             AddContext::class,
             AccessLogging::class,
+            SetLocale::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
@@ -31,3 +33,5 @@ return Application::configure(basePath: dirname(__DIR__))
         'url' => request()->fullUrl(),
     ]);
     })->create();
+
+    
