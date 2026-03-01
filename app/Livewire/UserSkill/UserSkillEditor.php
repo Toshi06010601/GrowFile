@@ -28,11 +28,10 @@ class UserSkillEditor extends Component
             $this->form->resetValidation();
     
             if($id) {
+                // Not using findOrFail method here as it will use with method to retrieve skill
                 $this->form->setFields($id);
-
             } else {
-                // throw new Exception('Testing error handling');
-                $this->isOwner = Auth::check();
+                
             }
             
             // Trigger category initialize method with the current skillId 
@@ -42,10 +41,10 @@ class UserSkillEditor extends Component
             $this->dispatch('open-modal', 'edit-user-skill');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "User skill not found.");
-            logger()->warning('User skill not found', ['article_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.user-skill.not-found'));
+            logger()->warning('User skill not found', ['user_skill_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load user skill modal.");
+            $this->dispatch('flash-message', type: 'error', message: __('flash.user-skill.failed-load'));
             logger()->error('Failed to load user skill modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
     }
@@ -55,7 +54,7 @@ class UserSkillEditor extends Component
         $isUpdate = (bool) $this->form->userSkill;
         
         try {
-            $isUpdate && $this->authorize('update', $this->form->userSkill);
+            $isUpdate ? $this->authorize('update', $this->form->userSkill) : Auth::check();
             $isUpdate ? $this->form->update() : $this->form->store();
             $this->finishAction($isUpdate ? 'updated' : 'created');
         } catch (ValidationException $e) {
@@ -69,7 +68,6 @@ class UserSkillEditor extends Component
     {
         try {
             $this->authorize('delete', $this->form->userSkill);
-            // throw new Exception('Testing error handling');
             $this->form->userSkill->delete();
             $this->finishAction('deleted');
     
@@ -91,12 +89,12 @@ class UserSkillEditor extends Component
         $this->dispatch('user-skills-updated')->to(component: UserSkillSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-user-skill');
-        $this->dispatch('flash-message', type: 'success', message: "User skill {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.user-skill.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} user skill. Please try again.");
+        $this->dispatch('flash-message', type: 'error', message: __("flash.user-skill.failed-{$actionName}"));
         logger()->error("User skill {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 
