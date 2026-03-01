@@ -88,12 +88,11 @@ class ProfessionalProfileController extends Controller
     {
         // 1. Validate name
         $request->validate([
-            'first_name' => ['required', 'string', 'max:50'],
-            'last_name' => ['required', 'string', 'max:50'],
+            'full_name' => ['required', 'string', 'max:100'],
         ]);
 
         // 2. Construct full name and slug
-        $fullName = $request->first_name . " " . $request->last_name;
+        $fullName = $request->full_name;
         $slug = Str::slug($fullName) . "-" . Str::uuid();
 
         // 3. Create profile with default information in other columns
