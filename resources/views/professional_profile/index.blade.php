@@ -18,7 +18,7 @@
         </x-modal>
 
         {{-- Filter Side bar for laptop --}}
-        <aside class="hidden sm:flex bg-brand-tertiary-50 rounded-xl py-2 px-5 w-56 flex-col flex-shrink-0">
+        <aside class="hidden md:flex bg-brand-tertiary-50 rounded-xl py-2 px-5 w-56 flex-col flex-shrink-0">
                <x-index.profile-filter 
                     :groupedSkills="$groupedSkills"
                     :selectedSkills="$selectedSkills ?? []"
@@ -32,16 +32,16 @@
         {{-- Search result --}}
         <section class="flex-grow bg-brand-tertiary-50 rounded-xl py-5  px-3 sm:px-5 md:px-10">
             <div class="flex flex-row justify-between items-center mb-3">
-                <h1 class="text-2xl md:text-3xl font-medium">Search Result</h1>
+                <h1 class="text-2xl md:text-3xl font-medium">{{ __('professional-profile-index.search-result') }}</h1>
                 <button type="button" class="sm:hidden" x-data="" x-on:click="$dispatch('open-modal', 'filter-profiles')">
                     <img src={{ asset('images/icons/filter.svg') }} alt="search-icon"
                         class="w-5 mx-2 cursor-pointer hover:scale-110" />
                 </button>
             </div>
-            <ul class="flex flex-row justify-start flex-wrap gap-2 sm:gap-4">
+            <ul class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(180px,1fr))]">
                 @foreach ($profiles as $profile)
                     <li wire:key="{{ $profile->id }}"
-                        class="relative flex flex-col justify-between pb-3 w-36 h-80 sm:w-56 sm:h-80 bg-brand-tertiary-50 border-2 border-brand-secondary-300 rounded-md overflow-hidden shadow-lg shadow-brand-secondary-400 hover:scale-105">
+                        class="relative flex flex-col justify-between pb-3 h-80 sm:h-80 bg-brand-tertiary-50 border-2 border-brand-secondary-300 rounded-md overflow-hidden shadow-lg shadow-brand-secondary-400 hover:scale-105">
                         <a href="{{ route('professional_profile.show', $profile->slug) }}"
                             wire:navigate.hover
                             class="h-full flex flex-col items-center">
@@ -85,7 +85,7 @@
                     </li>
                 @endforeach
             </ul>
-            <div class="my-4 sm:pr-24">
+            <div class="my-4">
                 {{ $profiles->appends(request()->except('page'))->links() }}
             </div>
         </section>
