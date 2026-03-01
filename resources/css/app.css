@@ -18,3 +18,11 @@
         transition: all 0.6s ease-in; 
     }
 }
+
+html:lang(en) {
+    font-family: 'Roboto', 'serif';
+}
+
+html:lang(jp) {
+    font-family: 'Noto Sans JP', 'serif';
+}
