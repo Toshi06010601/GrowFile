@@ -3,10 +3,10 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Layout Language Lines
+    | Footer Language Lines
     |--------------------------------------------------------------------------
     |
-    | English translations for layout components
+    | English translations for footer components
     |
     */
 
@@ -20,9 +20,4 @@ return [
     'profile' => 'Profile',
     'account' => 'Account',
     'all-rights-reserved' => 'All rights reserved',
-    'me' => 'Me',
-    'my-account' => 'My Account',
-    'logout' => 'Log Out',
-    'start-now' => 'Start Now',
-    'login' => 'Login',
 ];
