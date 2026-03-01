@@ -22,7 +22,7 @@
         <div class="flex-1 relative flex items-center">
             <input type="text" name="name"
                 class="w-full py-2 px-0 border-none rounded-lg focus:border-none focus:ring-0 focus:outline-none"
-                placeholder="Search Users"
+                placeholder="{{__('navigation.search-users')}}"
                 wire:model.live.debounce.200="search"
                 {{-- Identify the input so Alpine can target it --}}
                 x-ref="searchInput"
@@ -88,7 +88,7 @@
                     <a href="{{ route('professional_profile.index', ['name' => $search]) }}"
                         wire:navigate.hover
                         class="flex flex-row justify-start items-center ml-3">
-                        <p class="text-blue-700 text-base md:text-base">View Search Results</p>
+                        <p class="text-blue-700 text-base md:text-base">{{ __('navigation.view-search-results') }}</p>
                     </a>
                 </li>
             @else
@@ -101,7 +101,7 @@
                     <a href="{{ route('professional_profile.index') }}"
                         wire:navigate.hover
                         class="flex flex-row justify-start items-center ml-3">
-                        <p class="text-blue-700 text-base md:text-base">View All Profiles</p>
+                        <p class="text-blue-700 text-base md:text-base">{{ __('navigation.view-all-profiles') }}</p>
                     </a>
                 </li>
             @endif

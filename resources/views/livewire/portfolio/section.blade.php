@@ -3,7 +3,7 @@
     {{-- Header area --}}
     <x-slot name="header">
         <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
-            Portfolios
+            {{ __('professional-profile.portfolios') }}
         </h2>
 
         {{-- button to add a new portfolio --}}
@@ -18,7 +18,7 @@
 
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load portfolios. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load-portfolios') }}</x-loading-error>
     @endif
 
     {{-- Display portfolio below --}}
@@ -64,16 +64,16 @@
                                             <a href="{{ $portfolio->site_url }}"
                                                 class="text-blue-600 text-sm font-medium hover:underline"
                                                 target="blank">
-                                                <img src="{{ asset('images/icons/site.svg') }}" alt="github-icon"
+                                                <img src="{{ asset('images/icons/site.svg') }}" alt="site-icon"
                                                     class="w-5 xl:hidden">
-                                                <p class="hidden xl:inline">View Site</p>
+                                                <p class="hidden xl:inline">{{ __('professional-profile.view-site') }}</p>
                                             </a>
                                             <a href="{{ $portfolio->github_url }}"
                                                 class="text-blue-600 text-sm font-medium hover:underline flex gap-2"
                                                 target="blank">
                                                 <img src="{{ asset('images/icons/github.svg') }}" alt="github-icon"
                                                     class="w-5 xl:hidden">
-                                                <p class="hidden xl:inline">View Repository</p>
+                                                <p class="hidden xl:inline">{{ __('professional-profile.view-repository') }}</p>
                                             </a>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
             </div>
         @else
             {{-- Display if no article exists --}}
-            <x-no-data-to-display fileName="portfolio.svg">No portfolios to display</x-no-data-to-display>
+            <x-no-data-to-display fileName="portfolio.svg">{{ __('professional-profile.no-portfolios') }}</x-no-data-to-display>
         @endif
     @endif
 </x-section>

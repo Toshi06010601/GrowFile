@@ -9,23 +9,23 @@
 
         {{-- Form title --}}
         <x-modal.header-title>
-            {{ $form->experience ? 'Edit' : 'Add' }} Experience
+            {{ $form->experience ? __('professional-profile.edit-experience') : __('professional-profile.add-experience') }}
         </x-modal.header-title>
 
         {{-- company name --}}
-        <x-modal.input-text label="Company Name" id="company-name" name="form.company_name" placeholder="Enter Company Name" :required="true" />
+        <x-modal.input-text label="{{ __('professional-profile.company-name') }}" id="company-name" name="form.company_name" placeholder="{{ __('professional-profile.company-name-placeholder') }}" :required="true" />
 
         {{-- Role --}}
-        <x-modal.input-text label="Role" id="role" name="form.role" placeholder="Role" :required="true" />
+        <x-modal.input-text label="{{ __('professional-profile.role') }}" id="role" name="form.role" placeholder="{{ __('professional-profile.role-placeholder') }}" :required="true" />
 
         {{-- start month --}}
-        <x-modal.input-date label="Start Date" id="start-month" name="form.start_month" :required="true" />
+        <x-modal.input-date label="{{ __('professional-profile.start-date') }}" id="start-month" name="form.start_month" :required="true" />
 
         {{-- end month --}}
-        <x-modal.input-date label="End Date (Keep it empty if it's your current employment)" id="end-month" name="form.end_month" />
+        <x-modal.input-date label="{{ __('professional-profile.end-date') }}" id="end-month" name="form.end_month" />
 
         {{-- description --}}
-        <x-modal.input-textarea label="Description" id="description" name="form.description" placeholder="Write your responsibility and/or achievement" />
+        <x-modal.input-textarea label="{{ __('professional-profile.description') }}" id="description" name="form.description" placeholder="{{ __('professional-profile.experience-description-placeholder') }}" />
 
         {{-- save button --}}
         <x-modal.submit-buttons :name="$form->experience ? 'update' : 'save'" />

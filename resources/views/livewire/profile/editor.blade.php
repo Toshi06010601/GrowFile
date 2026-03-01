@@ -7,7 +7,7 @@
 
         {{-- Modal Title --}}
         <x-modal.header-title>
-            Edit profile
+            {{ __('professional-profile.edit-profile') }}
         </x-modal.header-title>
 
         {{-- Profile image --}}
@@ -36,36 +36,36 @@
         </div>
 
         {{-- full name --}}
-        <x-modal.input-text label="Full Name" id="full-name" name="form.full_name" placeholder="Your full name" />
+        <x-modal.input-text label="{{ __('professional-profile.full-name') }}" id="full-name" name="form.full_name" placeholder="{{ __('professional-profile.full-name-placeholder') }}" />
 
         {{-- headline/role --}}
-        <x-modal.input-text label="Profession/Title" id="headline" name="form.headline" placeholder="Describe yourself" />
+        <x-modal.input-text label="{{ __('professional-profile.profession-title') }}" id="headline" name="form.headline" placeholder="{{ __('professional-profile.profession-title-placeholder') }}" />
 
         {{-- Job status --}}
-        <x-modal.selectbox label="Job Status" id="job-status" name="form.job_status">
-            <option value="">--Please choose an option--</option>
-            <option value="open_to_work">Open to work</option>
-            <option value="not_looking">Not looking</option>
-            <option value="freelance">Freelance</option>
-            <option value="exploring">Exploring</option>
+        <x-modal.selectbox label="{{ __('professional-profile.job-status') }}" id="job-status" name="form.job_status">
+            <option value="">--{{ __('professional-profile.please-choose') }}--</option>
+            <option value="open_to_work">{{ __('professional-profile.open-to-work') }}</option>
+            <option value="not_looking">{{ __('professional-profile.not-looking') }}</option>
+            <option value="freelance">{{ __('professional-profile.freelance') }}</option>
+            <option value="exploring">{{ __('professional-profile.exploring') }}</option>
         </x-modal.selectbox>
 
         {{-- Visibility --}}
-        <x-modal.input-radio title="Do you want to make your profile visible to others?" name="form.visibility" :options="[
-            ['id' => 'visibility_true', 'label' => 'Yes', 'value' => 1],
-            ['id' => 'visibility_false', 'label' => 'No', 'value' => 0],
+        <x-modal.input-radio title="{{ __('professional-profile.profile-visibility-question') }}" name="form.visibility" :options="[
+            ['id' => 'visibility_true', 'label' => __('professional-profile.yes'), 'value' => 1],
+            ['id' => 'visibility_false', 'label' => __('professional-profile.no'), 'value' => 0],
         ]" />
 
         {{-- Location --}}
-        <x-modal.input-text label="Location" id="location" name="form.location"
-            placeholder="(e.g. London, United Kingdom)" />
+        <x-modal.input-text label="{{ __('professional-profile.location') }}" id="location" name="form.location"
+            placeholder="{{ __('professional-profile.location-placeholder') }}" />
 
         {{-- Github link --}}
-        <x-modal.input-text label="Github Link" id="github-link" name="form.github_link" placeholder="Your github link" />
+        <x-modal.input-text label="{{ __('professional-profile.github-link') }}" id="github-link" name="form.github_link" placeholder="{{ __('professional-profile.github-link-placeholder') }}" />
 
         {{-- Linkedin link --}}
-        <x-modal.input-text label="Linkedin Link" id="linkedin-link" name="form.linkedin_link"
-            placeholder="Your Linkedin link" />
+        <x-modal.input-text label="{{ __('professional-profile.linkedin-link') }}" id="linkedin-link" name="form.linkedin_link"
+            placeholder="{{ __('professional-profile.linkedin-link-placeholder') }}" />
 
         {{-- Update button --}}
         <x-modal.submit-buttons name="update" :deletable="false" />

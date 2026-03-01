@@ -3,7 +3,7 @@
     <div class="relative max-h-32 rounded-lg overflow-hidden mx-auto mb-0 sm:mb-4">
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load background image. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load-background') }}</x-loading-error>
     @endif
 
     {{-- Display background image below --}}

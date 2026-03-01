@@ -10,9 +10,9 @@
         {{-- Form title --}}
         <x-modal.header-title>
             @if ($isOwner)
-                {{ $form->readingLog ? 'Edit' : 'Add' }} reading log
+                {{ $form->readingLog ? __('professional-profile.reading-log.modal.edit') : __('professional-profile.reading-log.modal.add') }}
             @else
-                View reading log
+                {{ __('professional-profile.reading-log.modal.view') }}
             @endif
         </x-modal.header-title>
 
@@ -35,8 +35,8 @@
 
                 {{-- Label --}}
                 <div class="flex items-center justify-between mt-4 mr-5">
-                    <x-input-label for="book-search" value="Find your book" class="text-lg" />
-                    <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google" class="h-5">
+                    <x-input-label for="book-search" value="{{ __('professional-profile.reading-log.find-book') }}" class="text-lg" />
+                    <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="{{ __('professional-profile.reading-log.google-powered-by') }}" class="h-5">
                 </div>
 
                 {{-- search input field --}}
@@ -46,11 +46,11 @@
                     @focus="open = true"
                     @input="open = true"
                     @keydown.escape.prevent="open = false"
-                    autocomplete="off" placeholder="Search books...">
+                    autocomplete="off" placeholder="{{ __('professional-profile.reading-log.search-placeholder') }}">
                 {{-- loading indicator --}}
                 <p wire:loading wire:target="search" class="mt-2 text-sm text-gray-500 italic flex items-center gap-2">
                     <img src="{{ asset('/images/icons/spinner.svg') }}" alt="spinner" class="animate-spin h-4 w-4">
-                    Searching books...
+                    {{ __('professional-profile.reading-log.searching-books') }}
                 </p>
 
                 {{-- Validation error --}}
@@ -66,8 +66,8 @@
                         class="absolute top-full left-0 z-20 w-full mt-1 bg-white border-2 border-brand-secondary-300 rounded-md shadow-lg">
                         {{-- Google Books search results label --}}
                         <div class="px-3 py-1 text-xs text-gray-400 border-b border-gray-100 flex justify-between items-center">
-                            <span>Google Books search results</span>
-                            <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google" class="h-5">
+                            <span>{{ __('professional-profile.reading-log.search-results') }}</span>
+                            <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="{{ __('professional-profile.reading-log.google-powered-by') }}" class="h-5">
                         </div>
                         {{-- book search results --}}
                         <ul class="divide-y divide-gray-200 max-h-64 overflow-y-auto">
@@ -82,7 +82,7 @@
                                     {{-- Thumbnail image --}}
                                     @if (data_get($suggest, 'volumeInfo.imageLinks.thumbnail'))
                                         <img src="{{ data_get($suggest, 'volumeInfo.imageLinks.thumbnail') }}"
-                                            alt="book cover" class="w-16 h-20 object-cover flex-shrink-0">
+                                            alt="{{ __('professional-profile.reading-log.book-cover-alt') }}" class="w-16 h-20 object-cover flex-shrink-0">
                                     @endif
                                     <div class="flex-1 min-w-0">
                                         {{-- Book title --}}
@@ -91,12 +91,12 @@
                                         </p>
                                         {{-- Author --}}
                                         <p class="text-sm text-gray-600">
-                                            {{ collect(data_get($suggest, 'volumeInfo.authors'))->join(', ') ?: '著者不明' }}
+                                            {{ collect(data_get($suggest, 'volumeInfo.authors'))->join(', ') ?: __('professional-profile.reading-log.unknown-author') }}
                                         </p>
                                         {{-- Link --}}
                                         <a href="{{ data_get($suggest, 'volumeInfo.infoLink') }}" target="_blank"
                                             class="text-sm text-blue-500">
-                                            View on Google Books
+                                            {{ __('professional-profile.reading-log.view-on-google-books') }}
                                         </a>
                                     </div>
                                 </li>
@@ -110,7 +110,7 @@
         @if ($form->title)
             <div
                 class="flex items-center gap-4 p-4 mb-4 bg-brand-secondary-50 rounded-lg border border-brand-secondary-200">
-                <img src="{{ $form->cover_url ?? 'default.png' }}" class="w-16 h-20 object-cover shadow">
+                <img src="{{ $form->cover_url ?? 'default.png' }}" class="w-16 h-20 object-cover shadow" alt="{{ __('professional-profile.reading-log.book-cover-alt') }}">
                 <div class="flex-1">
                     <h4 class="font-bold text-sm">{{ $form->title }}</h4>
                     <p class="text-xs text-gray-600">{{ $form->author }}</p>
@@ -120,12 +120,17 @@
 
         {{-- Reading current status --}}
         <div>
-            <x-input-label for="current-page" value="Reading status" class="text-lg mt-4" />
+            <x-input-label for="current-page" value="{{ __('professional-profile.reading-log.reading-status') }}" class="text-lg mt-4" />
             <div class="flex flex-row items-end gap-3">
-                <x-text-input id="current-page" type="text" class="mt-1 block" placeholder="current page"
+                <x-text-input id="current-page" type="text" class="mt-1 block" placeholder="{{ __('professional-profile.reading-log.current-page-placeholder') }}"
                     wire:model="form.current_page" :disabled="!$isOwner" />
                 <p class="text-lg"> / </p>
-                <p class="text-lg text-gray-600">{{ $form->total_pages ?? 'total' }} pages</p>
+                <p class="text-lg text-gray-600">
+                    {{ $form->total_pages
+                        ? __('professional-profile.reading-log.total-pages', ['total' => $form->total_pages])
+                        : __('professional-profile.reading-log.total-pages', ['total' => __('professional-profile.reading-log.current-page-placeholder')])
+                    }}
+                </p>
             </div>
 
             {{-- Validation error --}}
@@ -137,8 +142,8 @@
         </div>
 
         {{-- Review --}}
-        <x-modal.input-textarea label="Review" id="review" name="form.review"
-            placeholder="Write your thoughts or feedback here" :disabled="!$isOwner" />
+        <x-modal.input-textarea :label="__('professional-profile.reading-log.review')" id="review" name="form.review"
+            placeholder="{{ __('professional-profile.reading-log.review-placeholder') }}" :disabled="!$isOwner" />
 
         @if ($isOwner)
             {{-- Save/Update button --}}

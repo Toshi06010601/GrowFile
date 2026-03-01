@@ -9,7 +9,7 @@
 
         {{-- Form title --}}
         <x-modal.header-title>
-            {{ $form->userSkill ? 'Edit' : 'Add' }} Skill
+            {{ $form->userSkill ? __('professional-profile.edit-skill') : __('professional-profile.add-skill') }}
         </x-modal.header-title>
 
         {{-- Skill selector --}}
@@ -22,7 +22,7 @@
         </div>
 
         {{-- Skill level --}}
-        <x-modal.selectbox label="Level" id="level" name="form.level">
+        <x-modal.selectbox label="{{ __('professional-profile.level') }}" id="level" name="form.level">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

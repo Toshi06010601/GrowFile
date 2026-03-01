@@ -10,29 +10,29 @@
             {{-- Form title --}}
             <x-modal.header-title>
                 @if ($isOwner)
-                    {{ $form->article ? 'Edit' : 'Add' }} article
+                    {{ $form->article ? __('professional-profile.edit-article') : __('professional-profile.add-article') }}
                 @else
-                    View Article
+                    {{ __('professional-profile.view-article') }}
                 @endif
             </x-modal.header-title>
 
             {{-- Title --}}
-            <x-modal.input-text label="Title" id="title" name="form.title" placeholder="Name of your article"
+            <x-modal.input-text label="{{ __('professional-profile.title') }}" id="title" name="form.title" placeholder="{{ __('professional-profile.article-name-placeholder') }}"
                 :disabled="!$isOwner" :required="$isOwner" />
  
             {{-- Platform Name --}}
-            <x-modal.input-text label="Platform Name" id="platform_name" name="form.platform_name"
-                placeholder="Platform Name" :disabled="!$isOwner" :required="$isOwner" />
+            <x-modal.input-text label="{{ __('professional-profile.platform-name') }}" id="platform_name" name="form.platform_name"
+                placeholder="{{ __('professional-profile.platform-name-placeholder') }}" :disabled="!$isOwner" :required="$isOwner" />
 
             {{-- Description --}}
-            <x-modal.input-textarea label="Description" id="description" name="form.description"
-                placeholder="Describe your article..." :disabled="!$isOwner" />
+            <x-modal.input-textarea label="{{ __('professional-profile.description') }}" id="description" name="form.description"
+                placeholder="{{ __('professional-profile.article-description-placeholder') }}" :disabled="!$isOwner" />
 
             {{-- Article URL --}}
-            <x-modal.input-text label="Article URL" id="article_url" name="form.article_url" placeholder="Article URL"
+            <x-modal.input-text label="{{ __('professional-profile.article-url') }}" id="article_url" name="form.article_url" placeholder="{{ __('professional-profile.article-url-placeholder') }}"
                 :disabled="!$isOwner" />
 
-            <x-input-label for="article_image" value="Article Image" class="text-lg mt-4" />
+            <x-input-label for="article_image" value="{{ __('professional-profile.article-image') }}" class="text-lg mt-4" />
 
             {{-- article image path --}}
             <div>
@@ -63,8 +63,8 @@
             </div>
 
             {{-- Published Date --}}
-            <x-modal.input-date label="Published Date" id="published_date" name="form.published_date"
-                placeholder="Describe your article..." :disabled="!$isOwner" :required="$isOwner" />
+            <x-modal.input-date label="{{ __('professional-profile.published-at') }}" id="published_date" name="form.published_date"
+                placeholder="{{ __('professional-profile.article-date-placeholder') }}" :disabled="!$isOwner" :required="$isOwner" />
 
             @if ($isOwner)
                 {{-- Save/Update button --}}

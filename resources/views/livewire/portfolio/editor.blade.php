@@ -10,24 +10,24 @@
         {{-- Form title --}}
         <x-modal.header-title>
             @if ($isOwner)
-                {{ $form->portfolio ? 'Edit' : 'Add' }} portfolio    
+                {{ $form->portfolio ? __('professional-profile.edit-portfolio') : __('professional-profile.add-portfolio') }}
             @else
-                View portfolio
+                {{ __('professional-profile.view-portfolio') }}
             @endif
         </x-modal.header-title>
 
         {{-- Title --}}
-        <x-modal.input-text label="Name" id="title" name="form.title" placeholder="Name of your portfolio"
+        <x-modal.input-text label="{{ __('professional-profile.name') }}" id="title" name="form.title" placeholder="{{ __('professional-profile.portfolio-name-placeholder') }}"
             :disabled="!$isOwner" :required="$isOwner" />
 
         {{-- Description --}}
-        <x-modal.input-textarea label="Description" id="description" name="form.description"
-            placeholder="Describe your portfolio..." :disabled="!$isOwner" />
+        <x-modal.input-textarea label="{{ __('professional-profile.description') }}" id="description" name="form.description"
+            placeholder="{{ __('professional-profile.portfolio-description-placeholder') }}" :disabled="!$isOwner" />
 
         {{-- Site URL --}}
-        <x-modal.input-text label="Site URL" id="site_url" name="form.site_url" placeholder="Site URL" :disabled="!$isOwner" />
+        <x-modal.input-text label="{{ __('professional-profile.site-url') }}" id="site_url" name="form.site_url" placeholder="{{ __('professional-profile.site-url-placeholder') }}" :disabled="!$isOwner" />
 
-        <x-input-label for="site_image" value="Site Image Path" class="text-lg mt-4" />
+        <x-input-label for="site_image" value="{{ __('professional-profile.site-image') }}" class="text-lg mt-4" />
 
         {{-- Site image path --}}
         <div>
@@ -58,11 +58,11 @@
         </div>
 
         {{-- Github URL --}}
-        <x-modal.input-text label="Github URL" id="github_url" name="form.github_url" placeholder="Github URL"
+        <x-modal.input-text label="{{ __('professional-profile.github-url') }}" id="github_url" name="form.github_url" placeholder="{{ __('professional-profile.github-url-placeholder') }}"
             :disabled="!$isOwner" />
 
         {{-- Comment --}}
-        <x-modal.input-textarea label="Comment" id="comment" name="form.comment" placeholder="Describe your portfolio..."
+        <x-modal.input-textarea label="{{ __('professional-profile.comment') }}" id="comment" name="form.comment" placeholder="{{ __('professional-profile.portfolio-comment-placeholder') }}"
             :disabled="!$isOwner" />
 
         @if ($isOwner)

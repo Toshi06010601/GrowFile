@@ -9,5 +9,5 @@
             peer-checked:bg-brand-primary-950         
             peer-checked:text-white          
             peer-checked:font-medium
-        ">{{ $isFollowing ? "Following" : "+Follow" }}</label>
+        ">{{ $isFollowing ? __('professional-profile.following') : __('professional-profile.follow') }}</label>
 </div>

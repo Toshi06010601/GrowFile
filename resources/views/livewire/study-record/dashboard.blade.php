@@ -3,7 +3,7 @@
     <x-slot name="header">
         {{-- Change header title depending on current view --}}
         <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
-            {{ $currentView === 'diary' ? 'Study Diary' : 'Study Records' }}
+            {{ $currentView === 'diary' ? __('professional-profile.study-diary') : __('professional-profile.study-records') }}
         </h2>
 
         {{-- button to add a new record in Study Records view --}}
@@ -32,9 +32,9 @@
     {{-- view change buttons --}}
     <nav class="flex flex-row justify-end text-base sm:text-xl font-normal cursor-pointer">
         @if ($currentView === 'diary')
-            <x-section.view-change-button viewType='records' iconName='right-arrow.svg'>Records</x-section.view-change-button>
+            <x-section.view-change-button viewType='records' iconName='right-arrow.svg'>{{ __('professional-profile.study-records') }}</x-section.view-change-button>
         @else
-            <x-section.view-change-button viewType='diary' iconName='left-arrow.svg'>Diary</x-section.view-change-button>
+            <x-section.view-change-button viewType='diary' iconName='left-arrow.svg'>{{ __('professional-profile.study-diary') }}</x-section.view-change-button>
         @endif
     </nav>
 

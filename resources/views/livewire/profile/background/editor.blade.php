@@ -6,7 +6,7 @@
     <form wire:submit="save" class="px-6 pt-14 pb-6">
 
         <x-modal.header-title>
-            Edit Background
+            {{ __('professional-profile.edit-background') }}
         </x-modal.header-title>
 
         <div class="max-h-32 rounded-lg overflow-hidden mx-auto mb-4 border-2 border-brand-secondary-400">

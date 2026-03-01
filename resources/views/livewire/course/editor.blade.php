@@ -9,39 +9,39 @@
 
         {{-- Form title --}}
         <x-modal.header-title>
-            {{ $form->course ? 'Edit' : 'Add' }} course
+            {{ $form->course ? __('professional-profile.edit-course') : __('professional-profile.add-course') }}
         </x-modal.header-title>
 
         {{-- Provider name --}}
-        <x-modal.input-text label="Provider Name" id="course-provider-name" name="form.provider" placeholder="Provider name"
+        <x-modal.input-text label="{{ __('professional-profile.provider-name') }}" id="course-provider-name" name="form.provider" placeholder="{{ __('professional-profile.provider-name-placeholder') }}"
             :required="$isOwner" :disabled="!$isOwner" />
 
         {{-- name --}}
-        <x-modal.input-text label="name" id="course-name" name="form.name" placeholder="Course name" :required="$isOwner"
+        <x-modal.input-text label="{{ __('professional-profile.course-name') }}" id="course-name" name="form.name" placeholder="{{ __('professional-profile.course-name-placeholder') }}" :required="$isOwner"
             :disabled="!$isOwner" />
 
         {{-- Course URL --}}
-        <x-modal.input-text label="Course URL" id="course-url" name="form.course_url" placeholder="Course URL"
+        <x-modal.input-text label="{{ __('professional-profile.course-url') }}" id="course-url" name="form.course_url" placeholder="{{ __('professional-profile.course-url-placeholder') }}"
             :required="$isOwner" :disabled="!$isOwner" />
 
         {{-- Description --}}
-        <x-modal.input-textarea label="Description" id="description" name="form.description"
-            placeholder="Tell us more about the course..." :disabled="!$isOwner" />
+        <x-modal.input-textarea label="{{ __('professional-profile.description') }}" id="description" name="form.description"
+            placeholder="{{ __('professional-profile.course-description-placeholder') }}" :disabled="!$isOwner" />
 
         {{-- Progress status --}}
-        <x-modal.selectbox label="Progress Status" id="course-progress-status" name="form.progress_status"
+        <x-modal.selectbox label="{{ __('professional-profile.progress-status') }}" id="course-progress-status" name="form.progress_status"
             :disabled="!$isOwner">
-            <option value="in_progress">In Progress</option>
-            <option value="completed">Completed</option>
+            <option value="in_progress">{{ __('professional-profile.in-progress') }}</option>
+            <option value="completed">{{ __('professional-profile.completed') }}</option>
         </x-modal.selectbox>
 
 
         {{-- Certificate URL --}}
-        <x-modal.input-text label="Certificate URL" id="certificate-url" name="form.certificate_url"
-            placeholder="Certificate URL" :disabled="!$isOwner" />
+        <x-modal.input-text label="{{ __('professional-profile.certificate-url') }}" id="certificate-url" name="form.certificate_url"
+            placeholder="{{ __('professional-profile.certificate-url-placeholder') }}" :disabled="!$isOwner" />
 
         {{-- Completed Date --}}
-        <x-modal.input-date label="Completed Date" id="course_completion_date" name="form.completion_date"
+        <x-modal.input-date label="{{ __('professional-profile.completed-at') }}" id="course_completion_date" name="form.completion_date"
             :disabled="!$isOwner" />
 
         @if ($isOwner)

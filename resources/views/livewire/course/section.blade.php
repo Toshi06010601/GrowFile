@@ -2,10 +2,10 @@
     {{-- Header area --}}
     <x-slot name="header">
         <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
-            Courses
+            {{ __('professional-profile.courses') }}
         </h2>
 
-        {{-- button to add a new reading log --}}
+        {{-- button to add a new course --}}
         @if ($isOwner)
             <x-section.add-icon x-data=""
                 x-on:click.stop="
@@ -15,7 +15,7 @@
 
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load courses. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load-courses') }}</x-loading-error>
     @endif
 
     {{-- Display courses below --}}
@@ -42,15 +42,15 @@
                             <div class="flex justify-between">
                                 {{-- Provider --}}
                                 <p class="text-brand-secondary-500 text-xs line-clamp-1">
-                                    Provided by {{ $course->provider }}
+                                    {{ __('professional-profile.provided-by') }} {{ $course->provider }}
                                 </p>
 
                                 {{-- Date --}}
                                 @if ($course->progress_status === 'completed')
                                     <div class="flex justify-end items-center gap-2">
                                         <p class="text-brand-secondary-500 text-xs line-clamp-1">
-                                            Completed
-                                            {{ $course->completion_date ? 'at ' . $course->completion_date->format('d/m/Y') : '' }}
+                                            {{-- {{ __('professional-profile.completed') }} --}}
+                                            {{ $course->completion_date ? __('professional-profile.completed-at') . ' ' . $course->completion_date->format('d/m/Y') : '' }}
                                         </p>
                                         @if ($course->certificate_url)
                                             <a href="{{ $course->certificate_url }}" target="blank">
@@ -62,7 +62,7 @@
                                 @else
                                     <div class="flex justify-end">
                                         <p class="text-brand-secondary-500 text-xs line-clamp-1">
-                                            In progress
+                                            {{ __('professional-profile.in-progress') }}
                                         </p>
                                     </div>
                                 @endif
@@ -87,7 +87,7 @@
                 @endforeach
             @else
                 {{-- Display if no courses exists --}}
-                <x-no-data-to-display fileName="course.svg">No courses to display</x-no-data-to-display>
+                <x-no-data-to-display fileName="course.svg">{{ __('professional-profile.no-courses') }}</x-no-data-to-display>
         @endif
     @endif
 

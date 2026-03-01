@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="text-xl font-semibold text-brand-secondary-700">
-            Skills
+            {{ __('professional-profile.skills') }}
         </h2>
 
         {{-- button to add a new skill --}}
@@ -16,7 +16,7 @@
 
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load user skills. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load-skills') }}</x-loading-error>
     @endif
 
     {{-- Display user skills below --}}
@@ -56,13 +56,13 @@
                     @if ($numOfSkills === 5)
                         <div class="mt-3 flex flex-row justify-center">
                             <button wire:click="$set('numOfSkills', 1000)" class="cursor-pointer">
-                                Show All
+                                {{ __('professional-profile.show-all') }}
                             </button>
                         </div>
                     @else
                         <div class="mt-3 flex flex-row justify-center">
                             <button wire:click="$set('numOfSkills', 5)" class="cursor-pointer">
-                                Show Less
+                                {{ __('professional-profile.show-less') }}
                             </button>
                         </div>
                     @endif
@@ -70,8 +70,8 @@
             </div>
         @else
             {{-- Display if no user skill exists --}}
-            <x-no-data-to-display fileName="skill.svg">No skills to display</x-no-data-to-display>
+            <x-no-data-to-display fileName="skill.svg">{{ __('professional-profile.no-skills') }}</x-no-data-to-display>
         @endif
     @endif
 
-    </x-section>
+</x-side-section>

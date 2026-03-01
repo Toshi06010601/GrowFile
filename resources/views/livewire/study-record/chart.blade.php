@@ -2,7 +2,7 @@
     {{-- Header --}}
     <x-slot name="header">
         <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
-            Statistics
+            {{ __('professional-profile.statistics') }}
         </h2>
     </x-slot>
 
@@ -29,7 +29,7 @@
                     data: {
                         labels: this.chartData.map(row => row[this.groupBy]), //Group by category or activity
                         datasets: [{
-                            label: 'Study hours',
+                            label: '{{ __('professional-profile.study-hours') }}',
                             data: this.chartData.map(row => row.study_hours), //Study hours
                         }]
                     },
@@ -68,8 +68,8 @@
         {{-- GroupBy selectbox --}}
         <div class="flex flex-row justify-between mb-5">
             <select wire:model.change="groupBy" id="group-by">
-                <option value="category">Category</option>
-                <option value="activity">Activity</option>
+                <option value="category">{{ __('professional-profile.category') }}</option>
+                <option value="activity">{{ __('professional-profile.activity') }}</option>
             </select>
         </div>
 
@@ -94,7 +94,7 @@
                 @foreach (['year', 'month', 'week'] as $view)
                     <x-tertiary-button wire:click="changeViewType('{{ $view }}')"
                         class="{{ $viewType === $view ? 'bg-[#4b5563] text-white' : 'bg-[#374151] text-brand-secondary-300' }} {{ $loop->first ? 'rounded-l-md' : '' }} {{ $loop->last ? 'rounded-r-md' : '' }} hover:text-white transition font-normal">
-                        {{ $view }}
+                        {{ __('professional-profile.' . $view) }}
                     </x-tertiary-button>
                 @endforeach
 
@@ -134,13 +134,13 @@
             {{-- Display if no chartdata exists --}}
             <div class="mt-12 text-center {{ count($chartData) > 0 ? 'hidden' : '' }}">
                 <img src="{{ asset('images/icons/chart.svg') }}" alt="" class="h-12 w-12 mx-auto">
-                <p class="mt-2 text-base text-brand-secondary-600">No data to display for this period</p>
+                <p class="mt-2 text-base text-brand-secondary-600">{{ __('professional-profile.no-data-to-display') }}</p>
             </div>
         </div>
 
         {{-- Show total study hours --}}
         <div class="w-full text-center text-brand-secondary-600">
-            <p>Total for the {{ $viewType }}: {{ number_format($totalHours, 1) }} hours</p>
+            <p>{{ __('professional-profile.total-for-period', ['period' => __('professional-profile.' . $viewType)]) }}: {{ number_format($totalHours, 1) }} {{ __('professional-profile.hrs') }}</p>
         </div>
 
     </div>

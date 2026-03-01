@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-5">
             <h2 class="text-xl sm:text-2xl font-medium text-brand-secondary-900">
-                Reading Logs
+                 {{ __('professional-profile.reading-log') }}
             </h2>
             <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google" class="h-6">
         </div>
@@ -17,7 +17,7 @@
 
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load articles. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load') }}</x-loading-error>
     @endif
 
     {{-- Reading Log section --}}
@@ -27,12 +27,10 @@
             <ul class="flex flex-row max-w-full overflow-x-auto gap-4 snap-x snap-mandatory" x-data="{
                 scrollToFirst() {
                     this.$nextTick(() => {
-                        // If already at position 0, scroll slightly right first
                         if (this.$el.scrollLeft === 0) {
                             this.$el.scrollLeft = 1;
                         }
             
-                        // Then scroll back to 0
                         setTimeout(() => {
                             this.$el.scrollTo({
                                 left: 0,
@@ -54,7 +52,7 @@
                             </div>
 
                             <a href="{{ $log->info_link }}" target="_blank" class="text-xs text-blue-500 text-center">
-                                Google Books
+                                {{ __('professional-profile.google-books') }}
                             </a>
 
                             <div class="flex flex-col items-center gap-1">
@@ -66,7 +64,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <span class="text-xs text-gray-500 text-center">
-                                        {{ round(($log->current_page / $log->total_pages) * 100) }}% complete
+                                        {{ round(($log->current_page / $log->total_pages) * 100) }}% {{ __('professional-profile.complete') }}
                                     </span>
                                 </div>
 
@@ -94,7 +92,7 @@
             </ul>
         @else
             {{-- Display if no reading log exists --}}
-            <x-no-data-to-display fileName="book.svg">No reading logs to display</x-no-data-to-display>
+            <x-no-data-to-display fileName="book.svg">{{ __('professional-profile.no-reading-logs') }}</x-no-data-to-display>
         @endif
     @endif
 </x-section>

@@ -5,19 +5,19 @@
     selectedCategory: '',
 
     getDistinctCategories() {
-        this.distinctCategories = ['Choose category', ...new Set(this.skills.map(skill => skill.category))];
+        this.distinctCategories = ['{{ __('professional-profile.choose-category') }}', ...new Set(this.skills.map(skill => skill.category))];
     },
 
     //Set the current userSkill record's category
     initializeCategory(skillId) {
         const selectedSkill = this.skills.find(skill => skill.id == skillId);
-        this.selectedCategory = selectedSkill ? selectedSkill.category : 'Choose category';
+        this.selectedCategory = selectedSkill ? selectedSkill.category : '{{ __('professional-profile.choose-category') }}';
     },
 
     //Update skill name options by currently selected category
     filteredByCategory() {
         const filtered = this.skills.filter(skill => skill.category == this.selectedCategory);
-        return [{ id: 0, name: 'Choose Skill Name', category: 'Choose category' }, ...filtered];
+        return [{ id: 0, name: '{{ __('professional-profile.choose-skill-name') }}', category: '{{ __('professional-profile.choose-category') }}' }, ...filtered];
     },
 }" {{-- Get distinct categories of all skills --}} x-init="getDistinctCategories" {{-- Set the current category when user click a particular user skill item --}}
     @trigger-category-init.window="initializeCategory($event.detail[0].skillId)" {{-- Initialize id to 0 whenever category has been changed --}}
@@ -25,13 +25,13 @@
 
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load skills. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load-skills') }}</x-loading-error>
     @endif
 
     @if (!$hasError)
         {{-- skill category --}}
         <div>
-            <x-input-label for="category" value="Skill Category" class="text-lg mt-4" />
+            <x-input-label for="category" value="{{ __('professional-profile.skill-category') }}" class="text-lg mt-4" />
 
             {{-- Select skill category --}}
             <select id="category" x-model="selectedCategory"
@@ -46,7 +46,7 @@
 
         {{-- skill name --}}
         <div>
-            <x-input-label for="name" value="Skill Name" class="text-lg mt-4" />
+            <x-input-label for="name" value="{{ __('professional-profile.skill-name') }}" class="text-lg mt-4" />
 
             {{-- Select skill name --}}
             <select id="name" x-model="id"

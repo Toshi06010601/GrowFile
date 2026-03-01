@@ -6,7 +6,7 @@
 
         {{-- Error State --}}
         @if ($hasError)
-            <x-loading-error>Failed to load background image. Please try again.</x-loading-error>
+            <x-loading-error>{{ __('professional-profile.failed-to-load-background') }}</x-loading-error>
         @endif
 
         {{-- Profile header area --}}

@@ -3,7 +3,7 @@
 
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load study records. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load-study-records') }}</x-loading-error>
     @endif
 
     {{-- Display studyRecords below --}}
@@ -16,11 +16,11 @@
                         <div class="flex justify-between">
                             <h2>
                                 {{-- Display study date --}}
-                                {{ $record->start_datetime->isToday() ? 'Today' : $record->start_datetime->toDateString() }}
+                                {{ $record->start_datetime->isToday() ? __('professional-profile.today') : $record->start_datetime->toDateString() }}
                             </h2>
                             <h2>
                                 {{-- Display study hours --}}
-                                {{ round($record->start_datetime->diffInHours($record->end_datetime), 1) }} hrs
+                                {{ round($record->start_datetime->diffInHours($record->end_datetime), 1) }} {{ __('professional-profile.hrs') }}
                             </h2>
                         </div>
 
@@ -41,10 +41,6 @@
                                     @endforeach
                                 </ul>
 
-                                {{-- Show Edit icon for the owner
-                                <x-section.edit-icon
-                                    x-on:click="$dispatch('set-study-record', { id: {{ $record->id }} })" /> --}}
-
                                 {{-- Show Edit icon for the owner --}}
                                 @if ($isOwner)
                                     <x-section.edit-icon
@@ -63,14 +59,14 @@
                     <div class="flex justify-center py-8">
                         <button wire:click="loadMore"
                             class="bg-green-900 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
-                            Load More
+                            {{ __('professional-profile.load-more') }}
                         </button>
                     </div>
                 @endif
             </ul>
         @else
             {{-- Display if no article exists --}}
-            <x-no-data-to-display fileName="study.svg">No study records to display</x-no-data-to-display>
+            <x-no-data-to-display fileName="study.svg">{{ __('professional-profile.no-study-records') }}</x-no-data-to-display>
         @endif
     @endif
 </div>

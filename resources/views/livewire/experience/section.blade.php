@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="text-xl font-semibold text-brand-secondary-800">
-            Experiences
+            {{ __('professional-profile.experiences') }}
         </h2>
 
         {{-- button to add a new skill for owner --}}
@@ -17,7 +17,7 @@
 
     {{-- Error State --}}
     @if ($hasError)
-        <x-loading-error>Failed to load experiences. Please try again.</x-loading-error>
+        <x-loading-error>{{ __('professional-profile.failed-to-load-experiences') }}</x-loading-error>
     @endif
 
     {{-- Display experiences below --}}
@@ -51,17 +51,16 @@
                         {{-- Work period --}}
                         <div>
                             {{ $experience->start_month->format('M Y') }} -
-                            {{ $experience->end_month ? $experience->end_month->format('M Y') : 'Present' }}
+                            {{ $experience->end_month ? $experience->end_month->format('M Y') : __('professional-profile.present') }}
                         </div>
 
                         {{-- Work description (Shorten to 100 if longer) --}}
                         @if (Str::length($experience->description) > 100)
                             <div x-data="{ open: true }" class="text-sm mt-1">
                                 <p x-show="open">{{ Str::limit($experience->description, 100, '') }} <button
-                                        @click="open = false">...see
-                                        more</button></p>
+                                        @click="open = false">{{ __('professional-profile.see-more') }}</button></p>
                                 <p x-show="!open">{{ $experience->description, 100 }} <button
-                                        @click="open = true">...see less</button></p>
+                                        @click="open = true">{{ __('professional-profile.see-less') }}</button></p>
                             </div>
                         @else
                             <p class="text-sm">{{ $experience->description }}</p>
@@ -72,8 +71,8 @@
             </ul>
         @else
             {{-- Display if no experience exists --}}
-            <x-no-data-to-display fileName="experience.svg">No experience to display</x-no-data-to-display>
+            <x-no-data-to-display fileName="experience.svg">{{ __('professional-profile.no-experiences') }}</x-no-data-to-display>
         @endif
     @endif
 
-    </x-section>
+</x-side-section>
