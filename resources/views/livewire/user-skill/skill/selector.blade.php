@@ -12,6 +12,7 @@
     initializeCategory(skillId) {
         const selectedSkill = this.skills.find(skill => skill.id == skillId);
         this.selectedCategory = selectedSkill ? selectedSkill.category : '{{ __('professional-profile.choose-category') }}';
+        this.id = skillId;
     },
 
     //Update skill name options by currently selected category
@@ -21,7 +22,7 @@
     },
 }" {{-- Get distinct categories of all skills --}} x-init="getDistinctCategories" {{-- Set the current category when user click a particular user skill item --}}
     @trigger-category-init.window="initializeCategory($event.detail[0].skillId)" {{-- Initialize id to 0 whenever category has been changed --}}
-    x-effect="if (selectedCategory !== '') id = 0">
+    x-effect="if (selectedCategory == '') id = 0">
 
     {{-- Error State --}}
     @if ($hasError)
