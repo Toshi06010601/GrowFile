@@ -34,7 +34,6 @@ class StudyRecordEditor extends Component
             if($id) {
                 $studyRecord = StudyRecord::findOrFail($id);
                 $this->isOwner = Auth::id() === $studyRecord->user_id;
-                // throw new Exception('Testing error handling');
                 $this->form->setFields($studyRecord);
             } else {
                 $this->isOwner = Auth::check();
@@ -43,10 +42,10 @@ class StudyRecordEditor extends Component
             $this->dispatch('open-modal', 'edit-study-record');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Study record not found.");
-            logger()->warning('Study record not found', ['article_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.study-record.not-found'));
+            logger()->warning('Study record not found', ['study_record_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load study record modal.");
+            $this->dispatch('flash-message', type: 'error', message: __('flash.study-record.failed-load'));
             logger()->error('Failed to load study record modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
     }
@@ -70,7 +69,6 @@ class StudyRecordEditor extends Component
     {
         try {
             $this->authorize('delete', $this->form->studyRecord);
-            // throw new Exception('Testing error handling');
             $this->form->studyRecord->delete();
             $this->finishAction('deleted');
     
@@ -92,12 +90,12 @@ class StudyRecordEditor extends Component
         $this->dispatch('study-records-updated')->to(component: StudyRecordSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-study-record');
-        $this->dispatch('flash-message', type: 'success', message: "Study record {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.study-record.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} study record. Please try again.");
+        $this->dispatch('flash-message', type: 'error', message: __("flash.study-record.failed-{$actionName}"));
         logger()->error("Study record {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
     

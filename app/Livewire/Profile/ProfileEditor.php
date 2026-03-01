@@ -33,15 +33,14 @@ class ProfileEditor extends Component
             
             $profile = Profile::findOrFail($id);
             $this->form->setFields($profile);
-
             $this->dispatch('open-modal', 'edit-profile');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Profile not found.");
-            logger()->warning('Profile not found', ['profile_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.profile.not-found'));
+            logger()->warning('Profile not found');
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load profile modal.");
-            logger()->error('Failed to load profile modal', ['id' => $id, 'error' => $e->getMessage()]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.profile.failed-load'));
+            logger()->error('Failed to load profile modal', ['error' => $e->getMessage()]);
         }
     }
 
@@ -72,12 +71,12 @@ class ProfileEditor extends Component
         $this->dispatch('profile-updated')->to(component: ProfileSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-profile');
-        $this->dispatch('flash-message', type: 'success', message: "Profile {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.profile.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} profile. Please try again.");
+        $this->dispatch('flash-message', type: 'error', message: __("flash.profile.failed-{$actionName}"));
         logger()->error("Profile {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 

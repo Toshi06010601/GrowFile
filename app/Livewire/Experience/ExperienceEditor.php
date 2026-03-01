@@ -24,14 +24,13 @@ class ExperienceEditor extends Component
     Public functions for the modal form
     */
     #[On('set-experience')]
-    public function setPortfolio($id)
+    public function setExperience($id)
     {
         try {
             $this->form->reset();
             $this->form->resetValidation();
     
             if($id) {
-                // throw new Exception('Testing error handling');
                 $experience = Experience::findOrFail($id);
                 $this->isOwner = Auth::id() === $experience->user_id;
                 $this->form->setFields($experience);
@@ -42,10 +41,10 @@ class ExperienceEditor extends Component
             $this->dispatch('open-modal', 'edit-experience');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "The selected experience not found.");
-            logger()->warning('Experience not found', ['article_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.experience.not-found'));
+            logger()->warning('Experience not found', ['experience_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load experience form.");
+            $this->dispatch('flash-message', type: 'error', message: __('flash.experience.failed-load'));
             logger()->error('Failed to load experience form', ['id' => $id, 'error' => $e->getMessage()]);
         }
     }
@@ -69,7 +68,6 @@ class ExperienceEditor extends Component
     {
         try {
             $this->authorize('delete', $this->form->experience);
-            // throw new Exception('Testing error handling');
             $this->form->experience->delete();
             $this->finishAction('deleted');
     
@@ -91,12 +89,12 @@ class ExperienceEditor extends Component
         $this->dispatch('experiences-updated')->to(component: ExperienceSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-experience');
-        $this->dispatch('flash-message', type: 'success', message: "Experience {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.experience.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} experience. Please try again.");
+        $this->dispatch('flash-message', type: 'error', message: __("flash.experience.failed-{$actionName}"));
         logger()->error("Experience {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 

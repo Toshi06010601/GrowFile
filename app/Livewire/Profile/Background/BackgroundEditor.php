@@ -32,15 +32,14 @@ class BackgroundEditor extends Component
             
             $profile = Profile::findOrFail($id);
             $this->form->setFields($profile);
-
             $this->dispatch('open-modal', 'edit-background');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Profile not found.");
-            logger()->warning('Profile not found', ['profile_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.background.not-found'));
+            logger()->warning('Background not found');
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load background image modal.");
-            logger()->error('Failed to load profile modal', ['id' => $id, 'error' => $e->getMessage()]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.background.failed-load'));
+            logger()->error('Failed to load background image modal', ['error' => $e->getMessage()]);
         }
     }
 
@@ -70,12 +69,12 @@ class BackgroundEditor extends Component
         $this->dispatch('background-updated')->to(component: BackgroundSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-background');
-        $this->dispatch('flash-message', type: 'success', message: "Background {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.background.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} background image. Please try again.");
+        $this->dispatch('flash-message', type: 'error', message: __("flash.background.failed-{$actionName}"));
         logger()->error("Background {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 

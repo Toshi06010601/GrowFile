@@ -32,7 +32,6 @@ class ReadingLogEditor extends Component
     public function setReadingLog($id)
     {
         try {
-            $this->reset('suggestions', 'search');
             $this->form->reset();
             $this->form->resetValidation();
     
@@ -41,34 +40,28 @@ class ReadingLogEditor extends Component
                 $this->isOwner = Auth::id() === $readingLog->user_id;
                 $this->form->setFields($readingLog);
             } else {
-                // throw new Exception('Testing error handling');
                 $this->isOwner = Auth::check();
             }
     
-            // dd('test');
             $this->dispatch('open-modal', 'edit-reading-log');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Reading log not found.");
-            logger()->warning('Reading log not found', ['article_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.reading-log.not-found'));
+            logger()->warning('Reading log not found', ['reading_log_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load reading log modal.");
+            $this->dispatch('flash-message', type: 'error', message: __('flash.reading-log.failed-load'));
             logger()->error('Failed to load reading log modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
     }
 
     public function save()
     {
-
-        // dd('test');
         $isUpdate = (bool) $this->form->readingLog;
         
         try {
             $isUpdate && $this->authorize('update', $this->form->readingLog);
             $isUpdate ? $this->form->update() : $this->form->store();
-            // dd('test');
             $this->finishAction($isUpdate ? 'updated' : 'created');
-            $isUpdate ?: $this->dispatch('scroll-to-start');
         } catch (ValidationException $e) {
             throw $e;
         } catch (Exception $e) {
@@ -80,7 +73,6 @@ class ReadingLogEditor extends Component
     {
         try {
             $this->authorize('delete', $this->form->readingLog);
-            // throw new Exception('Testing error handling');
             $this->form->readingLog->delete();
             $this->finishAction('deleted');
     
@@ -135,14 +127,13 @@ class ReadingLogEditor extends Component
     {
         $this->dispatch('reading-logs-updated')->to(component: ReadingLogSection::class);
         $this->form->reset();
-        $this->reset('search', 'suggestions');
         $this->dispatch('close-modal', 'edit-reading-log');
-        $this->dispatch('flash-message', type: 'success', message: "Reading log {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.reading-log.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} reading log. Please try again.");
+        $this->dispatch('flash-message', type: 'error', message: __("flash.reading-log.failed-{$actionName}"));
         logger()->error("Reading log {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 }

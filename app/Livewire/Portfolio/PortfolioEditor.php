@@ -34,7 +34,6 @@ class PortfolioEditor extends Component
             $this->form->resetValidation();
     
             if($id) {
-                // throw new Exception('Testing error handling');
                 $portfolio = Portfolio::findOrFail($id);
                 $this->isOwner = Auth::id() === $portfolio->user_id;
                 $this->form->setFields($portfolio);
@@ -45,10 +44,10 @@ class PortfolioEditor extends Component
             $this->dispatch('open-modal', 'edit-portfolio');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "portfolio not found.");
-            logger()->warning('portfolio not found', ['article_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.portfolio.not-found'));
+            logger()->warning('Portfolio not found', ['portfolio_id' => $id]);
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load portfolio modal.");
+            $this->dispatch('flash-message', type: 'error', message: __('flash.portfolio.failed-load'));
             logger()->error('Failed to load portfolio modal', ['id' => $id, 'error' => $e->getMessage()]);
         }
     }
@@ -72,7 +71,6 @@ class PortfolioEditor extends Component
     {
         try {
             $this->authorize('delete', $this->form->portfolio);
-            // throw new Exception('Testing error handling');
             $this->form->portfolio->delete();
             $this->finishAction('deleted');
     
@@ -80,27 +78,23 @@ class PortfolioEditor extends Component
             $this->handleError('delete', $e);
         }   
     }
-    
-    public function render()
-    {
-        return view('livewire.portfolio.editor');
-    }
-    
-    /*
-    Private functions for the modal form
-    */
+
     private function finishAction(string $actionName): void
     {
         $this->dispatch('portfolios-updated')->to(component: PortfolioSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-portfolio');
-        $this->dispatch('flash-message', type: 'success', message: "portfolio {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.portfolio.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} portfolio. Please try again.");
-        logger()->error("portfolio {$actionName} action failed.", ['error' => $e->getMessage()]);
+        $this->dispatch('flash-message', type: 'error', message: __("flash.portfolio.failed-{$actionName}"));
+        logger()->error("Portfolio {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 
+    public function render()
+    {
+        return view('livewire.portfolio.editor');
+    }
 }

@@ -36,15 +36,14 @@ class BioEditor extends Component
             $profile = Profile::findOrFail($id);
             $this->isOwner = Auth::id() === $profile->user_id;
             $this->form->setFields($profile);
-
             $this->dispatch('open-modal', 'edit-bio');
             
         } catch (ModelNotFoundException $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Profile not found.");
-            logger()->warning('Profile not found', ['profile_id' => $id]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.bio.not-found'));
+            logger()->warning('Bio not found');
         } catch (Exception $e) {
-            $this->dispatch('flash-message', type: 'error', message: "Failed to load bio modal.");
-            logger()->error('Failed to load bio modal', ['id' => $id, 'error' => $e->getMessage()]);
+            $this->dispatch('flash-message', type: 'error', message: __('flash.bio.failed-load'));
+            logger()->error('Failed to load bio modal', ['error' => $e->getMessage()]);
         }
     }
 
@@ -74,12 +73,12 @@ class BioEditor extends Component
         $this->dispatch('bio-updated')->to(component: BioSection::class);
         $this->form->reset();
         $this->dispatch('close-modal', 'edit-bio');
-        $this->dispatch('flash-message', type: 'success', message: "Bio {$actionName} successfully.");
+        $this->dispatch('flash-message', type: 'success', message: __("flash.bio.{$actionName}"));
     }
 
     private function handleError(string $actionName, Exception $e): void
     {
-        $this->dispatch('flash-message', type: 'error', message: "Failed to {$actionName} bio. Please try again.");
+        $this->dispatch('flash-message', type: 'error', message: __("flash.bio.failed-{$actionName}"));
         logger()->error("Bio {$actionName} action failed.", ['error' => $e->getMessage()]);
     }
 
