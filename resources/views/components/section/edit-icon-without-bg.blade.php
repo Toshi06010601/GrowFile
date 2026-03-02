@@ -1,4 +1,6 @@
 <button type="button"
-        {{ $attributes->merge()}}>
+        {{ $attributes->merge() }}
+        wire:offline.attr="disabled"
+        wire:offline.class="opacity-50 cursor-not-allowed pointer-events-none">
         <img src="{{ asset('images/icons/edit-pen-without-bg.svg') }}" alt="edit-icon" class="w-6 px-1 cursor-pointer hover:scale-110">
 </button>
