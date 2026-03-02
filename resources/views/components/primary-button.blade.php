@@ -23,7 +23,6 @@
             'wire:loading.class' => 'opacity-50 cursor-not-allowed bg-gray-400',
             'wire:offline.class' => 'opacity-50 cursor-not-allowed bg-gray-400',
         ]) }}>
-        <span wire:offline.remove>{{ $slot }}</span>
-        <span wire:offline.class.remove="hidden" class="hidden">Offline</span>
+        {{ $slot }}
     </button>
 @endif
