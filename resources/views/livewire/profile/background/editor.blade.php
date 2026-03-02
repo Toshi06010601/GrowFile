@@ -30,6 +30,11 @@
             @enderror
         </div>
 
+        <div wire:offline.class="bg-gray-300">
+            offline
+        </div>
+
+
         <x-modal.submit-buttons name="update" :deletable="false"/>
     </form>
 
