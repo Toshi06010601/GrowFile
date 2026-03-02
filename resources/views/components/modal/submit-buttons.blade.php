@@ -4,28 +4,28 @@
     @if($name !== 'save' && $deletable)
         <x-danger-button 
             type="button" {{--  Change type to button to stop Enter key submission --}}
-            wire:loading.attr="disabled"
+
             {{-- wire:confirm="Are you sure you want to delete this record?" --}}
             x-on:click="Swal.fire({
                     theme: 'material-ui',
-                    title: 'Delete',
-                    text: 'Are you sure you want to delete this record?',
+                    title: '{{ __('modal.delete') }}',
+                    text: '{{ __('modal.delete-confirm') }}',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#13590e',
                     cancelButtonColor: '#5b5c5f',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: '{{ __('modal.delete-confirm-yes') }}'
                 }).then((result) => {
                     if(result.isConfirmed) {
                         $wire.delete();
                     }
                 })"
         >
-            {{ __('Delete') }}
+            {{ __('modal.delete') }}
         </x-danger-button>
     @endif
 
-    <x-primary-button type="submit" wire:loading.attr="disabled">
-        {{ __($name) }}
+    <x-primary-button type="submit">
+        {{ __('modal.' . $name) }}
     </x-primary-button>
 </div>
