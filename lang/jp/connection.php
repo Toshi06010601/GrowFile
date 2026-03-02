@@ -10,7 +10,7 @@ return [
     |
     */
 
-    'offline' => 'オフラインです',
-    'back-online' => 'オンラインに戻りました。',
-    'offline-error' => '現在オフライン状態です。',
+    'offline'       => 'オフライン',
+    'back-online'   => '接続が復旧しました',
+    'offline-error' => 'インターネットに接続されていません',
 ];
