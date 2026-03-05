@@ -29,7 +29,6 @@ class ProfileEditor extends Component
         try {
             $this->form->reset();
             $this->form->resetValidation();
-            // throw new Exception("Error Processing Request", 1);
             
             $profile = Profile::findOrFail($id);
             $this->form->setFields($profile);
