@@ -20,13 +20,14 @@
                         class="w-full h-full object-cover">
                 @else
                     {{-- Fallback to the existing profile image URL --}}
-                    <img src="{{ $form->profile_image_path ? asset("/storage/{$form->profile_image_path}") : '/storage/profile_photos/default.svg' }}" alt="Current profile image" class="w-full h-full object-cover">
+                    <img src="{{ asset('storage/' . ($form->profile_image_path ?? 'profile_photos/default.svg')) }}"
+                        alt="Current profile image" class="w-full h-full object-cover">
                 @endif
             </div>
-    
+
             {{-- profile image field --}}
             <input type="file" class="w-full" wire:model.blur="form.profile_image">
-    
+
             {{-- Show validation error --}}
             <div>
                 @error('form.profile_image')
@@ -36,10 +37,12 @@
         </div>
 
         {{-- full name --}}
-        <x-modal.input-text label="{{ __('professional-profile.full-name') }}" id="full-name" name="form.full_name" placeholder="{{ __('professional-profile.full-name-placeholder') }}" />
+        <x-modal.input-text label="{{ __('professional-profile.full-name') }}" id="full-name" name="form.full_name"
+            placeholder="{{ __('professional-profile.full-name-placeholder') }}" />
 
         {{-- headline/role --}}
-        <x-modal.input-text label="{{ __('professional-profile.profession-title') }}" id="headline" name="form.headline" placeholder="{{ __('professional-profile.profession-title-placeholder') }}" />
+        <x-modal.input-text label="{{ __('professional-profile.profession-title') }}" id="headline"
+            name="form.headline" placeholder="{{ __('professional-profile.profession-title-placeholder') }}" />
 
         {{-- Job status --}}
         <x-modal.selectbox label="{{ __('professional-profile.job-status') }}" id="job-status" name="form.job_status">
@@ -51,21 +54,23 @@
         </x-modal.selectbox>
 
         {{-- Visibility --}}
-        <x-modal.input-radio title="{{ __('professional-profile.profile-visibility-question') }}" name="form.visibility" :options="[
-            ['id' => 'visibility_true', 'label' => __('professional-profile.yes'), 'value' => 1],
-            ['id' => 'visibility_false', 'label' => __('professional-profile.no'), 'value' => 0],
-        ]" />
+        <x-modal.input-radio title="{{ __('professional-profile.profile-visibility-question') }}"
+            name="form.visibility" :options="[
+                ['id' => 'visibility_true', 'label' => __('professional-profile.yes'), 'value' => 1],
+                ['id' => 'visibility_false', 'label' => __('professional-profile.no'), 'value' => 0],
+            ]" />
 
         {{-- Location --}}
         <x-modal.input-text label="{{ __('professional-profile.location') }}" id="location" name="form.location"
             placeholder="{{ __('professional-profile.location-placeholder') }}" />
 
         {{-- Github link --}}
-        <x-modal.input-text label="{{ __('professional-profile.github-link') }}" id="github-link" name="form.github_link" placeholder="{{ __('professional-profile.github-link-placeholder') }}" />
+        <x-modal.input-text label="{{ __('professional-profile.github-link') }}" id="github-link"
+            name="form.github_link" placeholder="{{ __('professional-profile.github-link-placeholder') }}" />
 
         {{-- Linkedin link --}}
-        <x-modal.input-text label="{{ __('professional-profile.linkedin-link') }}" id="linkedin-link" name="form.linkedin_link"
-            placeholder="{{ __('professional-profile.linkedin-link-placeholder') }}" />
+        <x-modal.input-text label="{{ __('professional-profile.linkedin-link') }}" id="linkedin-link"
+            name="form.linkedin_link" placeholder="{{ __('professional-profile.linkedin-link-placeholder') }}" />
 
         {{-- Update button --}}
         <x-modal.submit-buttons name="update" :deletable="false" />

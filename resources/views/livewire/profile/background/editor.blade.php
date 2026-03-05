@@ -16,7 +16,8 @@
                     class="w-full h-full object-cover">
             @else
                 {{-- Fallback to the existing background image URL --}}
-                <img src="{{ $form->background_image_path ? asset("/storage/{$form->background_image_path}") : '/storage/background_photos/default.jpg' }}" alt="Current background image" class="w-full h-full object-cover">
+                <img src="{{ asset('storage/' . ($form->background_image_path ?? 'background_photos/default.svg')) }}"
+                    alt="Current background image" class="w-full h-full object-cover">
             @endif
         </div>
 
@@ -30,12 +31,7 @@
             @enderror
         </div>
 
-        <div wire:offline.class="bg-gray-300">
-            offline
-        </div>
-
-
-        <x-modal.submit-buttons name="update" :deletable="false"/>
+        <x-modal.submit-buttons name="update" :deletable="false" />
     </form>
 
 </x-modal>

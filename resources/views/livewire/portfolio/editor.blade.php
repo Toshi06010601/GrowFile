@@ -17,15 +17,18 @@
         </x-modal.header-title>
 
         {{-- Title --}}
-        <x-modal.input-text label="{{ __('professional-profile.name') }}" id="title" name="form.title" placeholder="{{ __('professional-profile.portfolio-name-placeholder') }}"
-            :disabled="!$isOwner" :required="$isOwner" />
+        <x-modal.input-text label="{{ __('professional-profile.name') }}" id="title" name="form.title"
+            placeholder="{{ __('professional-profile.portfolio-name-placeholder') }}" :disabled="!$isOwner"
+            :required="$isOwner" />
 
         {{-- Description --}}
-        <x-modal.input-textarea label="{{ __('professional-profile.description') }}" id="description" name="form.description"
-            placeholder="{{ __('professional-profile.portfolio-description-placeholder') }}" :disabled="!$isOwner" />
+        <x-modal.input-textarea label="{{ __('professional-profile.description') }}" id="description"
+            name="form.description" placeholder="{{ __('professional-profile.portfolio-description-placeholder') }}"
+            :disabled="!$isOwner" />
 
         {{-- Site URL --}}
-        <x-modal.input-text label="{{ __('professional-profile.site-url') }}" id="site_url" name="form.site_url" placeholder="{{ __('professional-profile.site-url-placeholder') }}" :disabled="!$isOwner" />
+        <x-modal.input-text label="{{ __('professional-profile.site-url') }}" id="site_url" name="form.site_url"
+            placeholder="{{ __('professional-profile.site-url-placeholder') }}" :disabled="!$isOwner" />
 
         <x-input-label for="site_image" value="{{ __('professional-profile.site-image') }}" class="text-lg mt-4" />
 
@@ -39,7 +42,7 @@
                         class="w-full h-full object-cover">
                 @else
                     {{-- Fallback to the existing site image URL --}}
-                    <img src="{{ $form->site_image_path !== '' ? asset("/storage/{$form->site_image_path}") : '/storage/site_photos/default.jpg' }}"
+                    <img src="{{ asset('storage/' . ($form->site_image_path ?? 'site_photos/default.svg')) }}"
                         alt="Current site image" class="w-full h-full object-cover">
                 @endif
             </div>
@@ -58,12 +61,12 @@
         </div>
 
         {{-- Github URL --}}
-        <x-modal.input-text label="{{ __('professional-profile.github-url') }}" id="github_url" name="form.github_url" placeholder="{{ __('professional-profile.github-url-placeholder') }}"
-            :disabled="!$isOwner" />
+        <x-modal.input-text label="{{ __('professional-profile.github-url') }}" id="github_url" name="form.github_url"
+            placeholder="{{ __('professional-profile.github-url-placeholder') }}" :disabled="!$isOwner" />
 
         {{-- Comment --}}
-        <x-modal.input-textarea label="{{ __('professional-profile.comment') }}" id="comment" name="form.comment" placeholder="{{ __('professional-profile.portfolio-comment-placeholder') }}"
-            :disabled="!$isOwner" />
+        <x-modal.input-textarea label="{{ __('professional-profile.comment') }}" id="comment" name="form.comment"
+            placeholder="{{ __('professional-profile.portfolio-comment-placeholder') }}" :disabled="!$isOwner" />
 
         @if ($isOwner)
             {{-- Save/Update button --}}
