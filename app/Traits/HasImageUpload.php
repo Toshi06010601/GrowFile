@@ -11,7 +11,7 @@ trait HasImageUpload
     public function uploadNewImage(UploadedFile $file, string $folder, ?string $oldPath = null) : string
     {
         try {
-            $path = $file->store(path: $folder);
+            $path = $file->store($folder, 'public');
     
             if (!$path) {
                 throw new Exception('Failed to store new image');
