@@ -50,8 +50,9 @@
         <div class="flex flex-row gap-1">
             <div class="flex-1 flex flex-col">
                 {{-- Invoke updateSuggestion method on each input --}}
-                <input class="flex-1 mt-1 block w-auto  rounded-md" x-model="search" placeholder="{{ __('professional-profile.search') }}"
-                    x-on:input="updateSuggestion()" x-on:focus="open = true" x-on:keydown.escape.prevent="open = false">
+                <input class="flex-1 mt-1 block w-auto  rounded-md" x-model="search"
+                    placeholder="{{ __('professional-profile.search') }}" x-on:input="updateSuggestion()"
+                    x-on:focus="open = true" x-on:keydown.escape.prevent="open = false">
 
                 {{-- Show tags that match the search input --}}
                 <div x-show="open" x-transition:enter="transition ease-out duration-300"
@@ -79,7 +80,7 @@
             </div>
 
             {{-- Add a new tag --}}
-            <x-secondary-button x-on:click="addNewTag" class="max-w-20 max-h-10 mt-1 text-center flex justify-center"
+            <x-secondary-button x-on:click="addNewTag" class="max-w-24 max-h-10 mt-1 text-center flex justify-center"
                 ::disabled="tags.some(tag => tag.name.toLowerCase() === search.toLowerCase()) || search.trim() === ''">{{ __('professional-profile.add') }}</x-secondary-button>
         </div>
 
