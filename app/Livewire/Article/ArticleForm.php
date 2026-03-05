@@ -25,10 +25,10 @@ class ArticleForm extends Form
     #[Validate('nullable|string')]
     public $description = '';
 
-    #[Validate('nullable|string|url|max:500')]
+    #[Validate('nullable|string|url|max:500|starts_with:https://')]
     public $article_url = '';
 
-    #[Validate('nullable|string')]
+    #[Validate('nullable|string|regex:/^[a-zA-Z0-9\/\-_\.]+$/')]
     public $article_image_path = '';
 
     #[Validate('required|string|max:100')]

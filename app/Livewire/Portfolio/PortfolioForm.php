@@ -25,13 +25,13 @@ class PortfolioForm extends Form
     #[Validate('nullable|string')]
     public $description = '';
 
-    #[Validate('nullable|string|url|max:500')]
+    #[Validate('nullable|string|url|max:500|starts_with:https://')]
     public $site_url = '';
 
-    #[Validate('nullable|string')]
+    #[Validate('nullable|string|regex:/^[a-zA-Z0-9\/\-_\.]+$/')]
     public $site_image_path = '';
     
-    #[Validate('nullable|string|url|max:500')]
+    #[Validate('nullable|string|url|max:500|starts_with:https://github.com')]
     public $github_url = '';
 
     #[Validate('nullable|string')]

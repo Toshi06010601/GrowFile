@@ -25,10 +25,10 @@ class ReadingLogForm extends Form
     #[Validate('required|integer|min:1')]
     public $total_pages = 0;
 
-    #[Validate('required|url|string')]
+    #[Validate('required|url|string|starts_with:http://books.google.com/books/content')]
     public $cover_url = '';
 
-    #[Validate('required|url|string')]
+    #[Validate('required|url|string|starts_with:https://play.google.com/store/books/details?')]
     public $info_link = '';
 
     #[Validate('nullable|string')]

@@ -25,7 +25,7 @@ class ProfileForm extends Form
     #[Validate('nullable|mimes:jpg,jpeg,png,webp|max:1024')]
     public $profile_image;       // Holds the temporary uploaded file object
 
-    #[Validate('required|string|max:255')]
+    #[Validate('required|string|max:255|regex:/^[a-zA-Z0-9\/\-_\.]+$/')]
     public $profile_image_path = '';   // Holds the URL of the currently saved image
 
     #[Validate('required|string|max:100')]
@@ -40,10 +40,10 @@ class ProfileForm extends Form
     #[Validate('required|string|max:100')]
     public $location = '';
 
-    #[Validate('nullable|url|string|max:500')]
+    #[Validate('nullable|url|string|max:500|starts_with:https://github.com')]
     public $github_link = '';
 
-    #[Validate('nullable|url|string|max:500')]
+    #[Validate('nullable|url|string|max:500|starts_with:https://www.linkedin.com')]
     public $linkedin_link = '';
 
     /*

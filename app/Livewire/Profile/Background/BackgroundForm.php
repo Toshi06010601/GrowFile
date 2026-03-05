@@ -19,7 +19,7 @@ class BackgroundForm extends Form
     #[Validate('nullable|mimes:jpg,jpeg,png,webp|max:1024')]
     public $background_image = null;       // Holds the temporary uploaded file object
     
-    #[Validate('nullable|string')]
+    #[Validate('nullable|string|max:255|regex:/^[a-zA-Z0-9\/\-_\.]+$/')]
     public $background_image_path = '';  
 
     /*

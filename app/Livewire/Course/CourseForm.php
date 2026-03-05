@@ -22,13 +22,13 @@ class CourseForm extends Form
     #[Validate('nullable|string')]
     public $description = '';
     
-    #[Validate('nullable|string|url|max:500')]
+    #[Validate('nullable|string|url|max:500|starts_with:https://')]
     public $course_url = '';
 
    #[Validate('in:in_progress,completed')]
     public $progress_status = 'in_progress';
     
-    #[Validate('nullable|string|url|max:500')]
+    #[Validate('nullable|string|url|max:500|starts_with:https://')]
     public $certificate_url = '';
 
     #[Validate('date|nullable')]
