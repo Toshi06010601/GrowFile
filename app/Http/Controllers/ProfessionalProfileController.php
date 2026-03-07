@@ -101,7 +101,7 @@ class ProfessionalProfileController extends Controller
             'full_name' => $fullName,
             'slug' => $slug,
             'profile_image_path' => '/profile_photos/default.svg',
-            'background_image_path' => '/storage/background_photos/default.jpg',
+            'background_image_path' => '/background_photos/default.jpg',
             'headline' => 'Your role',
             'bio' => 'Your bio',
             'job_status' => 'exploring',
