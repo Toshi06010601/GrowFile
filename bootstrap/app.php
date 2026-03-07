@@ -7,6 +7,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use App\Http\Middleware\AccessLogging;
 use App\Http\Middleware\AddContext;
 use App\Http\Middleware\SetLocale;
+use App\Http\Middleware\ThrottleLivewireUpdates;
 
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -24,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             AddContext::class,
             AccessLogging::class,
             SetLocale::class,
+            ThrottleLivewireUpdates::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
