@@ -49,7 +49,7 @@
                         class="w-full h-full object-cover">
                 @else
                     {{-- Fallback to the existing article image URL --}}
-                    <img src="{{ asset('storage/' . ($form->article_image_path ?? 'article_photos/default.svg')) }}"
+                    <img src="{{ $form->article_image_path !== '' ? asset("storage/{$form->article_image_path}") : '/storage/article_photos/default.jpg' }}"
                         alt="Current article image" class="w-full h-full object-cover">
                 @endif
             </div>

@@ -20,7 +20,7 @@
                         class="w-full h-full object-cover">
                 @else
                     {{-- Fallback to the existing profile image URL --}}
-                    <img src="{{ asset('storage/' . ($form->profile_image_path ?? 'profile_photos/default.svg')) }}"
+                    <img src="{{ $form->profile_image_path ? asset("/storage/{$form->profile_image_path}") : '/storage/profile_photos/default.svg' }}"
                         alt="Current profile image" class="w-full h-full object-cover">
                 @endif
             </div>

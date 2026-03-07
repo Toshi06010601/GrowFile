@@ -16,7 +16,7 @@
                     class="w-full h-full object-cover">
             @else
                 {{-- Fallback to the existing background image URL --}}
-                <img src="{{ asset('storage/' . ($form->background_image_path ?? 'background_photos/default.svg')) }}"
+                <img src="{{ $form->background_image_path ? asset("/storage/{$form->background_image_path}") : '/storage/background_photos/default.jpg' }}"
                     alt="Current background image" class="w-full h-full object-cover">
             @endif
         </div>

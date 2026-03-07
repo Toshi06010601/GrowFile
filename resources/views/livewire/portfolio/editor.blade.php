@@ -42,7 +42,7 @@
                         class="w-full h-full object-cover">
                 @else
                     {{-- Fallback to the existing site image URL --}}
-                    <img src="{{ asset('storage/' . ($form->site_image_path ?? 'site_photos/default.svg')) }}"
+                    <img src="{{ $form->site_image_path !== '' ? asset("/storage/{$form->site_image_path}") : '/storage/site_photos/default.jpg' }}"
                         alt="Current site image" class="w-full h-full object-cover">
                 @endif
             </div>
