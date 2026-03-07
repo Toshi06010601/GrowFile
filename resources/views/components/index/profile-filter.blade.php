@@ -2,51 +2,58 @@
 <div class="flex flex-col pt-7 sm:pt-0">
     {{-- Navigation links --}}
     <div class="flex flex-col gap-1 mt-2 text-base text-brand-secondary-800">
-        <a href="{{ route('professional_profile.index') }}" 
-           class="hover:text-blue-600 transition" wire:navigate>{{ __('filter.all') }}</a>
+        <a href="{{ route('professional_profile.index') }}" class="hover:text-blue-600 transition"
+            wire:navigate>{{ __('filter.all') }}</a>
         @auth
-            <a href="{{ route('professional_profile.index', ['following' => true]) }}" 
-               class="hover:text-blue-600 transition" wire:navigate>{{ __('filter.following') }}</a>
-            <a href="{{ route('professional_profile.index', ['followed' => true]) }}" 
-               class="hover:text-blue-600 transition" wire:navigate>{{ __('filter.followers') }}</a>
+            <a href="{{ route('professional_profile.index', ['following' => true]) }}" class="hover:text-blue-600 transition"
+                wire:navigate>{{ __('filter.following') }}</a>
+            <a href="{{ route('professional_profile.index', ['followed' => true]) }}" class="hover:text-blue-600 transition"
+                wire:navigate>{{ __('filter.followers') }}</a>
         @endauth
     </div>
-    
+
     <hr class="bg-brand-secondary-300 h-px border-0 my-3">
 
     {{-- Filter section --}}
     <div>
         <div class="flex flex-row justify-between items-end mt-2">
             <h2 class="text-base text-brand-secondary-800 font-medium">{{ __('filter.filter') }}</h2>
-            <a class="text-base text-brand-secondary-400 hover:text-brand-secondary-600" 
-               href="{{ route('professional_profile.index') }}" wire:navigate>
+            <a class="text-base text-brand-secondary-400 hover:text-brand-secondary-600"
+                href="{{ route('professional_profile.index') }}" wire:navigate>
                 {{ __('filter.reset-filters') }}
             </a>
         </div>
-        
+
         <hr class="bg-brand-secondary-300 h-px border-0 my-2">
-        
+
         <form method="get" action="{{ route('professional_profile.index') }}">
             {{-- Skills --}}
             <h3 class="text-base text-brand-secondary-600 mt-2 mb-1 leading-4">{{ __('filter.skills') }}</h3>
             <div class="ml-2">
                 <input type="hidden" name="following" value="{{ $following }}">
                 <input type="hidden" name="followed" value="{{ $followed }}">
-                
                 @foreach ($groupedSkills as $categoryName => $skills)
-                    <div class="mb-2">
-                        <h4 class="text-base text-brand-secondary-500 mb-0.5">{{ $categoryName }}</h4>
-                        <div class="flex flex-row gap-1 flex-wrap">
+                    <div class="mb-2" x-data="{ open: false }">
+                        {{-- Category Header (clickable) --}}
+                        <button type="button" @click="open = !open"
+                            class="w-full flex justify-between items-center text-base text-brand-secondary-500 mb-0.5 hover:text-brand-secondary-700 transition">
+                            <h4>{{ $categoryName }}</h4>
+                            <svg class="w-4 h-4 transition-transform" :class="{ 'rotate-180': open }" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        {{-- Skills (collapsible) --}}
+                        <div x-show="open" x-collapse class="flex flex-row gap-1 flex-wrap">
                             @foreach ($skills as $skill)
                                 <div class="flex justify-center transition duration-150">
-                                    <input type="checkbox" 
-                                           name="skill[]" 
-                                           id="{{ $idPrefix }}-{{ $skill->name }}"
-                                           value="{{ $skill->id }}" 
-                                           class="hidden peer"
-                                           {{ in_array($skill->id, old('skill', $selectedSkills)) ? 'checked' : '' }}>
+                                    <input type="checkbox" name="skill[]" id="{{ $idPrefix }}-{{ $skill->name }}"
+                                        value="{{ $skill->id }}" class="hidden peer"
+                                        {{ in_array($skill->id, old('skill', $selectedSkills)) ? 'checked' : '' }}>
                                     <label for="{{ $idPrefix }}-{{ $skill->name }}"
-                                           class="px-1 rounded-lg border border-brand-secondary-400 text-brand-secondary-500 text-base py-0.5 cursor-pointer transition duration-150 hover:bg-brand-secondary-600 hover:text-white hover:scale-105 peer-checked:bg-brand-secondary-600 peer-checked:text-white peer-checked:font-medium">
+                                        class="px-1 rounded-lg border border-brand-secondary-400 text-brand-secondary-500 text-base py-0.5 cursor-pointer transition duration-150 hover:bg-brand-secondary-600 hover:text-white hover:scale-105 peer-checked:bg-brand-secondary-600 peer-checked:text-white peer-checked:font-medium">
                                         {{ $skill->name }}
                                     </label>
                                 </div>
@@ -54,26 +61,23 @@
                         </div>
                     </div>
                 @endforeach
+
             </div>
 
             {{-- Name --}}
             <div class="mt-2">
-                <label for="{{ $idPrefix }}-name" class="text-base text-brand-secondary-600 block mb-1">{{ __('filter.name') }}</label>
-                <x-text-input id="{{ $idPrefix }}-name" 
-                              name="name" 
-                              :placeholder="__('filter.name-placeholder')" 
-                              value="{{ old('name', $name) }}" 
-                              class="text-base leading-4 w-full" />
+                <label for="{{ $idPrefix }}-name"
+                    class="text-base text-brand-secondary-600 block mb-1">{{ __('filter.name') }}</label>
+                <x-text-input id="{{ $idPrefix }}-name" name="name" :placeholder="__('filter.name-placeholder')"
+                    value="{{ old('name', $name) }}" class="text-base leading-4 w-full" />
             </div>
 
             {{-- Location --}}
             <div class="mt-2">
-                <label for="{{ $idPrefix }}-location" class="text-base text-brand-secondary-600 block mb-1">{{ __('filter.location') }}</label>
-                <x-text-input id="{{ $idPrefix }}-location" 
-                              name="location" 
-                              :placeholder="__('filter.location-placeholder')"
-                              value="{{ old('location', $location) }}" 
-                              class="text-base leading-4 w-full" />
+                <label for="{{ $idPrefix }}-location"
+                    class="text-base text-brand-secondary-600 block mb-1">{{ __('filter.location') }}</label>
+                <x-text-input id="{{ $idPrefix }}-location" name="location" :placeholder="__('filter.location-placeholder')"
+                    value="{{ old('location', $location) }}" class="text-base leading-4 w-full" />
             </div>
 
             {{-- Submit button --}}
