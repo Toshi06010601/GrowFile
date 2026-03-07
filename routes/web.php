@@ -34,28 +34,7 @@ Route::controller(ProfessionalProfileController::class)->prefix('{locale}')->gro
 Route::get('/api/events', [EventController::class, 'index']
 );
 
-Route::get('locale/{lang}', function ($lang) {
-   if (in_array($lang, config('app.supported_locales'))) {
-        session(['locale' => $lang]);
-        App::setLocale($lang);
-
-        // Save locale preference if user is authenticated
-        if (Auth::check()) {
-            Auth::user()->update(['locale' => $lang]);
-        }
-        
-        // Get the previous URL
-        $previousUrl = url()->previous();
-        $path = parse_url($previousUrl, PHP_URL_PATH);
-        $segments = explode('/', trim($path, '/'));
-
-        // Replace the first segment (the locale) with the new lang
-        if (count($segments) > 0 && in_array($segments[0], config('app.supported_locales'))) {
-            $segments[0] = $lang;
-            return redirect()->to(implode('/', $segments));
-        }
-    }
-    return redirect()->back();
-})->name('locale.switch');
+// LocaleController Routes
+Route::middleware(['throttle:30,1'])->get('locale/{lang}', [LocaleController::class, 'update'])->name('locale.switch');
 
 require __DIR__.'/auth.php';
