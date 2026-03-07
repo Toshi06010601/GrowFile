@@ -22,9 +22,11 @@
                 <!-- Network button -->
                 <x-responsive-nav-link :href="route('professional_profile.index')" :isPcView="true" class="hidden md:flex">
                     @if (request()->routeIs('professional_profile.index'))
-                        <img src="{{ asset('/images/icons/network-selected.svg') }}" alt="profile" class="block h-8 w-auto mb-1" />
+                        <img src="{{ asset('/images/icons/network-selected.svg') }}" alt="profile"
+                            class="block h-8 w-auto mb-1" />
                     @else
-                        <img src="{{ asset('/images/icons/network-unselected.svg') }}" alt="profile" class="block h-8 w-auto mb-1" />
+                        <img src="{{ asset('/images/icons/network-unselected.svg') }}" alt="profile"
+                            class="block h-8 w-auto mb-1" />
                     @endif
                     <p>{{ __('navigation.network') }}</p>
                 </x-responsive-nav-link>
@@ -34,7 +36,8 @@
                     <!-- Profile button -->
                     <x-responsive-nav-link :href="route('professional_profile.show', $userProfile ? $userProfile->slug : '')" :isPcView="true" class="hidden md:flex">
                         @if (request()->routeIs('professional_profile.show'))
-                            <img src="{{ asset('/images/icons/edit-selected.svg') }}" alt="profile" class="block h-9 w-auto mb-1" />
+                            <img src="{{ asset('/images/icons/edit-selected.svg') }}" alt="profile"
+                                class="block h-9 w-auto mb-1" />
                         @else
                             <img src="{{ asset('/images/icons/edit-unselected.svg') }}" alt="profile"
                                 class="block h-9 w-auto mb-1" />
@@ -48,7 +51,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="flex flex-col justify-center items-center border border-transparent text-base leading-4 font-medium rounded-md text-brand-secondary-500 bg-secondary-background-50 hover:text-brand-secondary-800 hover:scale-105 focus:outline-none transition ease-in-out duration-150">
-                                    
+
                                     <div class="h-9 w-9 rounded-full overflow-hidden border-2 mb-1">
                                         <img :src="'/storage/' + profile_image_path" alt="profile image"
                                             class="w-full h-full object-cover">
@@ -89,7 +92,7 @@
                     {{-- For guest user --}}
                 @else
                     <!-- Login menu -->
-                    <div class="hidden lg:flex sm:items-center sm:ms-6 sm:gap-2">
+                    <div class="hidden md:flex sm:items-center sm:ms-6 sm:gap-2">
                         <x-primary-button :href="route('register')" wire:navigate.hover
                             class="hover:scale-105">{{ __('navigation.start-now') }}</x-primary-button>
                         <x-secondary-button :href="route('login')" wire:navigate
