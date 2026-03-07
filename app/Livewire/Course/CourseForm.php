@@ -31,7 +31,7 @@ class CourseForm extends Form
     #[Validate('nullable|string|url|max:500|starts_with:https://')]
     public $certificate_url = '';
 
-    #[Validate('date|nullable')]
+    #[Validate('date|nullable|required_if:progress_status,completed')]
     public $completion_date = null;
 
     /*
