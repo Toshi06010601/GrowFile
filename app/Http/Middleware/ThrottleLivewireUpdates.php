@@ -16,7 +16,7 @@ class ThrottleLivewireUpdates
         }
 
         $key = 'livewire-global:' . ($request->user()?->id ?: $request->ip());
-        $maxAttempts = 10;
+        $maxAttempts = 60;
 
         if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
             $retryAfter = RateLimiter::AvailableIn($key);
