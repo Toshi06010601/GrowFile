@@ -4,45 +4,38 @@ namespace App\Livewire\Navigation;
 
 use Livewire\Component;
 use App\Models\Profile;
+use Livewire\Attributes\Validate;
 
 class UserSearchField extends Component
 {
     /*
     Declare variables
     */
-    public $profiles = [];
+    #[Validate('required|string|max:100')]
     public $search = '';
     public $suggestions = [];
 
-    public function mount()
-    {
-        $this->loadProfiles();
-    }
-
-    public function loadProfiles()
-    {
-        // Get all the visible profiles 
-        $this->profiles = Profile::select('id', 'full_name', 'profile_image_path', 'headline', 'slug')
-                            ->where('visibility', true)
-                            ->orderBy('full_name')
-                            ->get();
-    }
-
     public function updatedSearch()
     {
-        // 1. Initialize filtered
-        $filtered = collect();
-
-        // 2. If search word exists, filter all the profiles based on search word
-        if($this->search) {
-            $filtered = $this->profiles
-                        ->filter(function ($profile) {
-                            return str_starts_with(strtolower($profile->full_name), strtolower($this->search));
-                        });
+        if($this->search === '' || strlen($this->search) > 1){
+            $this->suggestions = [];
+            return;
         }
 
-        // 3. Update suggestions with filtered values
-        $this->suggestions = $filtered->values()->all();
+        // 1. validate search word
+        $validated = $this->validate();
+
+        // 2. Sanitize search term
+        $searchTerm = str_replace(['%', '_'], ['\%', '\_'], strtolower($validated['search']));
+
+        // 3. Query database directly with LIMIT
+        $this->suggestions = Profile::select('full_name', 'profile_image_path', 'headline', 'slug')
+                            ->whereLike('full_name', $searchTerm . '%')
+                            ->where('visibility', true)
+                            ->orderBy('full_name')
+                            ->limit(10)
+                            ->get()
+                            ->toArray();
     }
 
     public function render()
