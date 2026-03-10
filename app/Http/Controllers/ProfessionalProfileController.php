@@ -20,17 +20,27 @@ class ProfessionalProfileController extends Controller
 
     public function index(Request $request)
     {
+        // 0. Validate input values
+        $validated = $request->validate([
+            'name' => 'nullable|string|max:100',
+            'location' => 'nullable|string|max:100',
+            'skill' => 'nullable|array|max:50',
+            'skill.*' => 'integer|exists:skills,id',
+            'following' => 'nullable|boolean',
+            'followed' => 'nullable|boolean',
+        ]);
+
         // 1. Get and sanitize input
-        $name = strtolower($request->input('name', ''));
-        $location = strtolower($request->input('location', ''));
-        $following = $request->input('following');
-        $followed = $request->input('followed');
-        $selectedSkills = $request->input('skill');
+        $name = str_replace(['%', '_'], ['\%', '\_'], strtolower($validated['name'] ?? ''));
+        $location = str_replace(['%', '_'], ['\%', '\_'], strtolower($validated['location'] ?? ''));
+        $following = $validated['following'] ?? false;
+        $followed = $validated['followed'] ?? false;
+        $selectedSkills = $validated['skill'] ?? [];
 
         // Start query on Profile model
         $profilesQuery = Profile::query();
 
-        // 2. Apply name and location filters
+        // 2. Apply name and location filters (wherelike automatically wrap with lower())
         $profilesQuery->whereLike('full_name', $name . '%')
                     ->whereLike('location', $location . '%');
                     
@@ -50,8 +60,7 @@ class ProfessionalProfileController extends Controller
         }
 
         // 4. Add following/followed filter if requested
-        $profilesQuery->with('user.authFollows')
-                      ->with('user.authFollowed');
+        $profilesQuery->with(['user.authFollows', 'user.authFollowed']);
 
         if($following) {
             $profilesQuery
@@ -81,32 +90,41 @@ class ProfessionalProfileController extends Controller
 
     public function create()
     {
+         // Check if user already has a profile
+        if (Auth::user()->profile()->exists()) {
+            return redirect()->route('professional_profile.show', Auth::user()->profile->slug);
+        }
+
         return view('professional_profile.create');
     }
 
     public function store(Request $request)
     {
+        // Check if user already has a profile
+        if (Auth::user()->profile()->exists()) {
+            return redirect()->route('professional_profile.show', Auth::user()->profile->slug);
+        }
+
         // 1. Validate name
-        $request->validate([
+        $validated = $request->validate([
             'full_name' => ['required', 'string', 'max:100'],
         ]);
 
         // 2. Construct full name and slug
-        $fullName = $request->full_name;
-        $slug = Str::slug($fullName) . "-" . Str::uuid();
+        $slug = Str::uuid();
 
         // 3. Create profile with default information in other columns
         Profile::create([
             'user_id' => Auth::id(),
-            'full_name' => $fullName,
+            'full_name' => $validated['full_name'],
             'slug' => $slug,
             'profile_image_path' => '/profile_photos/default.svg',
             'background_image_path' => '/background_photos/default.jpg',
-            'headline' => 'Your role',
-            'bio' => 'Your bio',
+            'headline' => '',
+            'bio' => '',
             'job_status' => 'exploring',
             'visibility' => false,
-            'location' => 'Location',
+            'location' => '',
             'github_link' => '',
             'linkedin_link' => '',
         ]);
