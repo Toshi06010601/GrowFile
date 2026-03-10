@@ -23,6 +23,10 @@ class LocaleController extends Controller
             $previousUrl = url()->previous();
             $path = parse_url($previousUrl, PHP_URL_PATH);
             $segments = explode('/', trim($path, '/'));
+
+            if (!str_starts_with($previousUrl, url('/'))) {
+                return redirect()->route('home'); // Safe fallback
+            }
     
             // Replace the first segment (the locale) with the new lang
             if (count($segments) > 0 && in_array($segments[0], config('app.supported_locales'))) {
