@@ -13,7 +13,7 @@
     mountCalendar() {
         // Guard: do nothing if already mounted
         if (this.calendar) {
-            console.log('calendar already mounted — skipping');
+            //console.log('calendar already mounted — skipping');
             return;
         }
 
