@@ -90,7 +90,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     ->where('followed_id', Auth::id());
     }
     
-    public function profiles()
+    public function profile()
     {
         return $this->hasOne(Profile::class);
     }
