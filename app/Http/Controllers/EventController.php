@@ -12,10 +12,16 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
+        $validated = $request->validate([
+            'start' => 'required|date',
+            'end' => 'required|date|after:start',
+            'userId' => 'required|integer|exists:users,id',
+        ]);
+
         // Get startDate, endDate and userId from request
-        $startDate = Carbon::parse($request->input('start'))->format('Y-m-d');
-        $endDate = Carbon::parse($request->input('end'))->format('Y-m-d');
-        $userId = $request->input('userId');
+        $startDate = Carbon::parse($validated['start'])->format('Y-m-d');
+        $endDate = Carbon::parse($validated['end'])->format('Y-m-d');
+        $userId = $validated['userId'];
 
         // Compuete date difference to find out viewType
         $diff = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate));
