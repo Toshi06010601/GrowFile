@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 
-Route::prefix('{locale}')->middleware(['throttle:100,1'])->get('/', function () {
+Route::prefix('{locale}')->middleware(['throttle:60,1'])->get('/', function () {
     return view('welcome');
 })->name('home');
 
