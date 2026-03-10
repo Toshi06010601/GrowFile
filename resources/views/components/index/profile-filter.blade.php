@@ -2,12 +2,15 @@
 <div class="flex flex-col pt-7 sm:pt-0">
     {{-- Navigation links --}}
     <div class="flex flex-col gap-1 mt-2 text-base text-brand-secondary-800">
-        <a href="{{ route('professional_profile.index') }}" class="hover:text-blue-600 transition"
+        <a href="{{ route('professional_profile.index') }}"
+            class="hover:text-blue-600 transition {{ !$following && !$followed ? 'text-blue-600' : '' }}"
             wire:navigate>{{ __('filter.all') }}</a>
         @auth
-            <a href="{{ route('professional_profile.index', ['following' => true]) }}" class="hover:text-blue-600 transition"
+            <a href="{{ route('professional_profile.index', ['following' => true]) }}"
+                class="hover:text-blue-600 transition {{ $following ? 'text-blue-600' : '' }}"
                 wire:navigate>{{ __('filter.following') }}</a>
-            <a href="{{ route('professional_profile.index', ['followed' => true]) }}" class="hover:text-blue-600 transition"
+            <a href="{{ route('professional_profile.index', ['followed' => true]) }}"
+                class="hover:text-blue-600 transition {{ $followed ? 'text-blue-600' : '' }}"
                 wire:navigate>{{ __('filter.followers') }}</a>
         @endauth
     </div>
@@ -71,6 +74,9 @@
                 <x-text-input id="{{ $idPrefix }}-name" name="name" :placeholder="__('filter.name-placeholder')"
                     value="{{ old('name', $name) }}" class="text-base leading-4 w-full" />
             </div>
+            @error('name')
+                <x-input-error :messages="$message" class="mt-2" />
+            @enderror
 
             {{-- Location --}}
             <div class="mt-2">
@@ -79,6 +85,9 @@
                 <x-text-input id="{{ $idPrefix }}-location" name="location" :placeholder="__('filter.location-placeholder')"
                     value="{{ old('location', $location) }}" class="text-base leading-4 w-full" />
             </div>
+            @error('location')
+                <x-input-error :messages="$message" class="mt-2" />
+            @enderror
 
             {{-- Submit button --}}
             <div>
