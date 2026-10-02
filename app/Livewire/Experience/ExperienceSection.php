@@ -28,7 +28,7 @@ class ExperienceSection extends Component
     {
         try {
             // throw new exception('error');
-            logger()->info('🔄 loading experiences', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading experiences', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             return Experience::where('user_id', $this->userId)
                             ->orderByDesc('start_month')
@@ -42,7 +42,7 @@ class ExperienceSection extends Component
     
     #[On('experiences-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching experiences', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching experiences', ['profileUserId' => $this->userId]);
         unset($this->experiences); // Refresh experiences
     }
 

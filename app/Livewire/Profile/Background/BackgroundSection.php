@@ -29,7 +29,7 @@ class BackgroundSection extends Component
     {
         try {
             // throw new exception('error');
-            logger()->info('🔄 loading background', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading background', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             // Get the profile with the background image
             return Profile::select('id', 'background_image_path', 'user_id')
@@ -43,7 +43,7 @@ class BackgroundSection extends Component
     
     #[On('background-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching background', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching background', ['profileUserId' => $this->userId]);
         unset($this->profile); // Refresh background
     }
 

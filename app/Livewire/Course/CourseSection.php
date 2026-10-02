@@ -28,7 +28,7 @@ class CourseSection extends Component
     {
         try {
             // throw new exception('error');
-            logger()->info('🔄 loading courses', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading courses', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             return Course::where('user_id', $this->userId)
                                 ->orderByDesc('updated_at')
@@ -42,7 +42,7 @@ class CourseSection extends Component
 
     #[On('courses-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching courses', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching courses', ['profileUserId' => $this->userId]);
         unset($this->courses); // Refresh courses
     }
 

@@ -49,7 +49,7 @@ class StudyRecordSection extends Component
         
         try {
             // throw new Exception('Testing error handling');
-            logger()->info('🔄 loading StudyRecords', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading StudyRecords', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             // Passing studyrecords with view method to use Pagination
             return view('livewire.study-record.section', [
@@ -59,7 +59,7 @@ class StudyRecordSection extends Component
                 ->paginate($this->perPage)
             ]);
         } catch (Exception $e) {
-            logger()->error('Failed to load study records', ['error' => $e->getMessage(), 'profileUserId' => $this->userId]);
+            // logger()->error('Failed to load study records', ['error' => $e->getMessage(), 'profileUserId' => $this->userId]);
              $this->hasError = true;
             return view('livewire.study-record.section', ['records' => collect()]);
         }

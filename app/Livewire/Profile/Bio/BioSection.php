@@ -29,7 +29,7 @@ class BioSection extends Component
     {
         try {
             // throw new exception('error');
-            logger()->info('🔄 loading bio', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading bio', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             // Get the profile with the bio image
             return Profile::select('id', 'user_id', 'bio')
@@ -43,7 +43,7 @@ class BioSection extends Component
     
     #[On('bio-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching bio', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching bio', ['profileUserId' => $this->userId]);
         unset($this->profile); 
     }
 

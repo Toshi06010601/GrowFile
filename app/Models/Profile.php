@@ -39,4 +39,14 @@ class Profile extends Model
     {
         return 'slug';
     }
+
+    // public function scopeVisible(Builder $query): Builder
+    // {
+    //     return $query->where('visibility', true);
+    // }
+
+    // public function scopeVisible(Builder $query): Builder
+    // {
+    //     return $query->where('visibility', true);
+    // }
 }

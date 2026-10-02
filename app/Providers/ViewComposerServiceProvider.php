@@ -24,7 +24,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Share with navigation layout
-        View::composer('layouts.navigation', function ($view) {
+        View::composer(['layouts.navigation', 'layouts.bottom-navigation', 'layouts.footer', 'welcome'], function ($view) {
             $userProfile = null;
             
             if (Auth::check()) {
@@ -37,42 +37,42 @@ class ViewComposerServiceProvider extends ServiceProvider
         });
 
         // Share with bottom navigation layout
-        View::composer('layouts.bottom-navigation', function ($view) {
-            $userProfile = null;
+        // View::composer('layouts.bottom-navigation', function ($view) {
+        //     $userProfile = null;
             
-            if (Auth::check()) {
-                $userProfile = Profile::where('user_id', Auth::id())
-                    ->select('slug', 'profile_image_path')
-                    ->first();
-            }
+        //     if (Auth::check()) {
+        //         $userProfile = Profile::where('user_id', Auth::id())
+        //             ->select('slug', 'profile_image_path')
+        //             ->first();
+        //     }
             
-            $view->with('userProfile', $userProfile);
-        });
+        //     $view->with('userProfile', $userProfile);
+        // });
 
          // Share with footer layout
-        View::composer('layouts.footer', function ($view) {
-            $userProfile = null;
+        // View::composer('layouts.footer', function ($view) {
+        //     $userProfile = null;
             
-            if (Auth::check()) {
-                $userProfile = Profile::where('user_id', Auth::id())
-                    ->select('slug')
-                    ->first();
-            }
+        //     if (Auth::check()) {
+        //         $userProfile = Profile::where('user_id', Auth::id())
+        //             ->select('slug')
+        //             ->first();
+        //     }
             
-            $view->with('userProfile', $userProfile);
-        });
+        //     $view->with('userProfile', $userProfile);
+        // });
 
         // Share with welcome page
-        View::composer('welcome', function ($view) {
-            $userProfile = null;
+        // View::composer('welcome', function ($view) {
+        //     $userProfile = null;
             
-            if (Auth::check()) {
-                $userProfile = Profile::where('user_id', Auth::id())
-                    ->select('slug')
-                    ->first();
-            }
+        //     if (Auth::check()) {
+        //         $userProfile = Profile::where('user_id', Auth::id())
+        //             ->select('slug')
+        //             ->first();
+        //     }
             
-            $view->with('userProfile', $userProfile);
-        });
+        //     $view->with('userProfile', $userProfile);
+        // });
     }
 }

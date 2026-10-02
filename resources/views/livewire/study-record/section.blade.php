@@ -20,7 +20,8 @@
                             </h2>
                             <h2>
                                 {{-- Display study hours --}}
-                                {{ round($record->start_datetime->diffInHours($record->end_datetime), 1) }} {{ __('professional-profile.hrs') }}
+                                {{ round($record->start_datetime->diffInHours($record->end_datetime), 1) }}
+                                {{ __('professional-profile.hrs') }}
                             </h2>
                         </div>
 
@@ -66,7 +67,8 @@
             </ul>
         @else
             {{-- Display if no article exists --}}
-            <x-no-data-to-display fileName="study.svg">{{ __('professional-profile.no-study-records') }}</x-no-data-to-display>
+            <x-no-data-to-display
+                fileName="study.svg">{{ __('professional-profile.no-study-records') }}</x-no-data-to-display>
         @endif
     @endif
 </div>

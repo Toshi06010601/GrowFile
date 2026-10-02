@@ -28,7 +28,7 @@ class ReadingLogSection extends Component
     {
         try {
             // throw new exception('error');
-            logger()->info('🔄 loading reading logs', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading reading logs', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             return ReadingLog::where('user_id', $this->userId)
                                 ->orderByDesc('updated_at')
@@ -42,7 +42,7 @@ class ReadingLogSection extends Component
 
     #[On('reading-logs-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching reading logs', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching reading logs', ['profileUserId' => $this->userId]);
         unset($this->readingLogs); // Refresh reaindLogs
     }
 

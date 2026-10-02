@@ -20,7 +20,7 @@ class UserSkillSection extends Component
     public $numOfSkills = 5;
 
     /*
-    Public function for the section area
+    * Public function for the section area
     */
     public function mount($userId)
     {
@@ -32,8 +32,7 @@ class UserSkillSection extends Component
     public function userSkills()
     {
         try {
-            // throw new exception('error');
-            logger()->info('🔄 loading user skills', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading user skills', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             return UserSkill::with('skill')
                             ->where('user_id', $this->userId)
@@ -47,7 +46,7 @@ class UserSkillSection extends Component
     
     #[On('user-skills-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching user skills', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching user skills', ['profileUserId' => $this->userId]);
         unset($this->userSkills); // Refresh userSkills
     }
 

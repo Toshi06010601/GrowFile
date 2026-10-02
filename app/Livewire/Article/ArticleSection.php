@@ -29,8 +29,7 @@ class ArticleSection extends Component
     public function articles()
     {
         try {
-            // throw new exception('error');
-            logger()->info('🔄 loading articles', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading articles', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             return Article::where('user_id', $this->userId)
                                 ->orderByDesc('updated_at')
@@ -44,14 +43,14 @@ class ArticleSection extends Component
     
     #[On('articles-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching articles', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching articles', ['profileUserId' => $this->userId]);
         $this->lastUpdated = now()->timestamp; // Refresh splide instance
         unset($this->articles); // Refresh articles
     }
 
     public function render()
     {
-        $this->articles;
+        $this->articles; // To enforce hasError value to view file
         return view('livewire.article.section');
     }
 }

@@ -30,7 +30,7 @@ class PortfolioSection extends Component
     {
         try {
             // throw new exception('error');
-            logger()->info('🔄 loading portfolios', ['profileUserId' => $this->userId]);
+            // logger()->info('🔄 loading portfolios', ['profileUserId' => $this->userId]);
             $this->hasError = false;
             return Portfolio::where('user_id', $this->userId)
                                 ->orderByDesc('updated_at')
@@ -44,7 +44,7 @@ class PortfolioSection extends Component
     
     #[On('portfolios-updated')]
     public function refetch() {
-        logger()->info('🔄 Refetching portfolios', ['profileUserId' => $this->userId]);
+        // logger()->info('🔄 Refetching portfolios', ['profileUserId' => $this->userId]);
         $this->lastUpdated = now()->timestamp; // Refresh splide instance
         unset($this->portfolios); // Refresh portfolios
     }

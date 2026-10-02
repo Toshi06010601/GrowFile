@@ -13,22 +13,17 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\ProfessionalProfile\IndexRequest;
+use App\Http\UseCases\ProfessionalProfile\IndexAction;
 
 class ProfessionalProfileController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index(Request $request)
+    public function index(IndexRequest $request)
     {
         // 0. Validate input values
-        $validated = $request->validate([
-            'name' => 'nullable|string|max:100',
-            'location' => 'nullable|string|max:100',
-            'skill' => 'nullable|array|max:50',
-            'skill.*' => 'integer|exists:skills,id',
-            'following' => 'nullable|boolean',
-            'followed' => 'nullable|boolean',
-        ]);
+        $validated = $request->validated();
 
         // 1. Get and sanitize input
         $name = str_replace(['%', '_'], ['\%', '\_'], strtolower($validated['name'] ?? ''));
