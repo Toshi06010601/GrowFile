@@ -100,7 +100,7 @@ class ProfileForm extends Form
         );
 
         // 2. Delete old image if successfull
-        DB::aftercommit(fn() => $this->deleteOldImage( $oldPath, '/default.jpg' ));
+        DB::aftercommit(fn() => $this->deleteOldImage( $oldPath, '/default.svg' ));
     }
 
 }
