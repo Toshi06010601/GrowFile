@@ -127,6 +127,8 @@ class ReadingLogEditor extends Component
     {
         $this->dispatch('reading-logs-updated')->to(component: ReadingLogSection::class);
         $this->form->reset();
+        $this->search = "";
+        $this->suggestions = [];
         $this->dispatch('close-modal', 'edit-reading-log');
         $this->dispatch('flash-message', type: 'success', message: __("flash.reading-log.{$actionName}"));
     }
