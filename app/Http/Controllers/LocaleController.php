@@ -3,12 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 
+/**
+ * Handles switching the application language.
+ */
 class LocaleController extends Controller
 {
-    public function update($lang) {
+    /**
+     * Switch the locale and send the user back to the page they were on.
+     *
+     * The locale is stored in the session and, for logged-in users, on their
+     * profile. URLs are locale-prefixed (/en/...), so the first path segment of
+     * the previous URL is swapped for the new language.
+     *
+     * @param  string  $lang  Must be listed in config('app.supported_locales'); otherwise ignored.
+     */
+    public function update(string $lang):RedirectResponse
+     {
         if (in_array($lang, config('app.supported_locales'))) {
             // Save the locale to session and app
             session(['locale' => $lang]);

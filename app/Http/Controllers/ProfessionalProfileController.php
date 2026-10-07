@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Skill;
@@ -16,11 +17,26 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\ProfessionalProfile\IndexRequest;
 use App\Http\UseCases\ProfessionalProfile\IndexAction;
 
+/**
+ * Lists, creates and displays professional profiles.
+ */
 class ProfessionalProfileController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index(IndexRequest $request)
+    /**
+     * Show a searchable, paginated list of public profiles.
+     *
+     * Filters (all optional, validated by IndexRequest):
+     * - name, location: prefix match, case-insensitive
+     * - skill[]:        profile's user must have ALL selected skills
+     * - following:      only users the current user follows
+     * - followed:       only users who follow the current user
+     *
+     * Hidden profiles and the current user's own profile are always excluded.
+     */
+
+    public function index(IndexRequest $request): View
     {
         // 0. Validate input values
         $validated = $request->validated();
@@ -83,7 +99,12 @@ class ProfessionalProfileController extends Controller
         return view('professional_profile.index', compact('profiles', 'groupedSkills', 'name', 'location', 'selectedSkills', 'following', 'followed'));
     }
 
-    public function create()
+    
+    /**
+     * Show the profile creation form, or redirect to the existing profile.
+     * Each user can have only one profile.
+     */
+    public function create(): View|RedirectResponse
     {
          // Check if user already has a profile
         if (Auth::user()->profile()->exists()) {
@@ -93,7 +114,14 @@ class ProfessionalProfileController extends Controller
         return view('professional_profile.create');
     }
 
-    public function store(Request $request)
+    /**
+     * Create the user's profile with placeholder values and redirect to it.
+     *
+     * Only the name is collected here. The profile starts hidden (visibility
+     * false) so it isn't public until the user fills it in and publishes it.
+     * The slug is a UUID, so profile URLs can't be guessed from the name.
+     */
+    public function store(Request $request): RedirectResponse
     {
         // Check if user already has a profile
         if (Auth::user()->profile()->exists()) {
@@ -124,11 +152,20 @@ class ProfessionalProfileController extends Controller
             'linkedin_link' => '',
         ]);
 
-        return redirect(route('professional_profile.show', ['slug' => $slug]));
+        return redirect(route('professional_profile.show', ['profile' => $slug]));
     }
 
-    // Get the selected profile based on slug
-    public function show($locale, Profile $slug)
+  /**
+     * Show a profile, resolved from its slug by route model binding.
+     *
+     * Visible only if the profile is public or belongs to the current user;
+     * otherwise the visitor is sent back to the index.
+     *
+     * @param  string   $locale  Locale URL prefix. Unused here, but it must stay
+     *                           in the signature because it is the first route parameter.
+     * @param  Profile  $slug    The profile matching the {slug} route parameter.
+     */
+    public function show(string $locale, Profile $slug): View|RedirectResponse
     {
         // Navigate to profile page if visibility is true or the user is profile owner
         if($slug->visibility || $slug->user_id === Auth::id()) {

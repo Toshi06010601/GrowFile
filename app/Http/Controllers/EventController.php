@@ -3,14 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Models\StudyRecord;
 use Carbon\Carbon;
 use DateInterval;
 use DatePeriod;
 
+/**
+ * Provides study record events as JSON for the calendar.
+ */
 class EventController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Return a user's study records for the requested date range.
+     *
+     * The shape of the response depends on the range length:
+     * - More than 7 days (monthly view): one all-day event per date, with the
+     *   title showing total hours studied that day (e.g. "2.5h").
+     * - 7 days or fewer (weekly/daily view): one event per record, with its own
+     *   start, end and duration as the title.
+     *
+     * Query parameters:
+     * - start:  range start (date)
+     * - end:    range end (date, after start)
+     * - userId: owner of the study records
+     */
+    public function index(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'start' => 'required|date',
