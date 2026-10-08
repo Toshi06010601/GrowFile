@@ -23,15 +23,6 @@ class AccessLogging
     public function handle(Request $request, Closure $next): Response
     {
 
-    // if (!$request->is('livewire/update')) {
-    //     logger()->info(
-    //         'access', [
-    //             'method' => $request->method(),
-    //             'uri' => $request->getRequestUri(),
-    //         ]
-    //     );
-    // }
-
     // Livewire sends an X-Livewire header on its update requests.
     if (! $request->hasHeader('X-Livewire')) {
         logger()->info('access', [
