@@ -4,11 +4,16 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Context;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Adds request-scoped context shared by every log entry.
+ *
+ * Records the authenticated user's ID (or "guest") and the client IP, so
+ * each log line written during the request can be traced back to its source.
+ */
 class AddContext
 {
     /**
