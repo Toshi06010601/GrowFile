@@ -4,41 +4,57 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\RateLimiter;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Rate-limits Livewire update requests per user (or IP for guests).
+ *
+ * Allows {@see self::MAX_ATTEMPTS} updates per {@see self::DECAY_SECONDS}
+ * seconds and returns a 429 JSON response once the limit is exceeded.
+ */
 class ThrottleLivewireUpdates
 {
-    public function handle(Request $request, Closure $next)
+    private const MAX_ATTEMPTS = 60;
+
+    private const DECAY_SECONDS = 60;
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->hasHeader('X-Livewire')) {
+        if (! $request->hasHeader('X-Livewire')) {
             return $next($request);
         }
 
-        $key = 'livewire-global:' . ($request->user()?->id ?: $request->ip());
-        $maxAttempts = 60;
+        $key = 'livewire-global:'.($request->user()?->id ?: $request->ip());
 
-        if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
-            $retryAfter = RateLimiter::AvailableIn($key);
+        if (RateLimiter::tooManyAttempts($key, self::MAX_ATTEMPTS)) {
+            $retryAfter = RateLimiter::availableIn($key);
 
             return response()->json([
                 'message' => "Too many requests. Please wait {$retryAfter} seconds.",
                 'retry_after' => $retryAfter,
-                'max-attempts' => $maxAttempts
-            ], 429)->withHeaders([
+                'max_attempts' => self::MAX_ATTEMPTS,
+            ], Response::HTTP_TOO_MANY_REQUESTS, [
                 'Retry-After' => $retryAfter,
-                'X-Rate-Limit' => $maxAttempts,
-                'X-RateLimit-Remaining' => 0
+                'X-RateLimit-Limit' => self::MAX_ATTEMPTS,
+                'X-RateLimit-Remaining' => 0,
             ]);
         }
 
-        RateLimiter::hit($key, $maxAttempts);
+        RateLimiter::hit($key, self::DECAY_SECONDS);
 
-        $remaining = RateLimiter::remaining($key, $maxAttempts);
+        $response = $next($request);
 
-        return $next($request)->withHeaders([
-            'X-Rate-Limit' => $maxAttempts,
-            'X-RateLimit-Remaining' => $remaining
+        $response->headers->add([
+            'X-RateLimit-Limit' => self::MAX_ATTEMPTS,
+            'X-RateLimit-Remaining' => RateLimiter::remaining($key, self::MAX_ATTEMPTS),
         ]);
+
+        return $response;
     }
 }
