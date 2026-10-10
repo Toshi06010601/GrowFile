@@ -68,7 +68,7 @@
 
                     @auth
                         <a class="text-brand-secondary-500 transition duration-100 hover:text-brand-primary-800 active:text-brand-primary-700"
-                            href={{ route('professional_profile.show', $userProfile->slug) }}>
+                            href="{{ $userProfile ? route('professional_profile.show', $userProfile->slug) : route('professional_profile.create') }}">
                             <p>{{ __('footer.profile') }}</p>
                         </a>
 

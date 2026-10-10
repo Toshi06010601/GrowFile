@@ -34,7 +34,7 @@
                 {{-- For Logged in user --}}
                 @auth
                     <!-- Profile button -->
-                    <x-responsive-nav-link :href="route('professional_profile.show', $userProfile ? $userProfile->slug : '')" :isPcView="true" class="hidden md:flex">
+                    <x-responsive-nav-link :href="$userProfile ? route('professional_profile.show', $userProfile->slug) : route('professional_profile.create')" :isPcView="true" class="hidden md:flex">
                         @if (request()->routeIs('professional_profile.show'))
                             <img src="{{ asset('/images/icons/edit-selected.svg') }}" alt="profile"
                                 class="block h-9 w-auto mb-1" />

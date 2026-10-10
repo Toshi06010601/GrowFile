@@ -74,7 +74,7 @@
             </x-welcome.section-subtitle>
             @auth
                 <div class="flex flex-row gap-2 items-center">
-                    <x-primary-button  :href="route('professional_profile.show', ['slug' => $userProfile->slug])">{{ __('welcome.go-to-profile') }}</x-primary-button>
+                    <x-primary-button  :href="$userProfile ? route('professional_profile.show', $userProfile->slug) : route('professional_profile.create')">{{ __('welcome.go-to-profile') }}</x-primary-button>
                 </div>
             @else
                 <div class="flex flex-row gap-2 items-center">
