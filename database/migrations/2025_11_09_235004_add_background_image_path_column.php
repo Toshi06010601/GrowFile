@@ -8,9 +8,16 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * The column is now also defined in the create_profiles_table migration, so it
+     * is only added here for databases created before that change.
      */
     public function up(): void
     {
+        if (Schema::hasColumn('profiles', 'background_image_path')) {
+            return;
+        }
+
         Schema::table('profiles', function (Blueprint $table) {
             $table->string('background_image_path', 255)->after('profile_image_path')->nullable();
         });
@@ -18,11 +25,12 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * Intentionally empty: the column belongs to the create_profiles_table migration,
+     * which drops it along with the table.
      */
     public function down(): void
     {
-        Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn('background_image_path');
-        });
+        //
     }
 };
